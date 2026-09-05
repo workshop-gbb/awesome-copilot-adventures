@@ -1,0 +1,15 @@
+{
+  "name": "context-mirrors-echo-chamber",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Starter application used to compare agent context strategies",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node --check server.js && node --check lib/patterns.js && node --check lib/history.js && node --check lib/logger.js",
+    "test": "node test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,11 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "node scripts/hook-session-context.js",
+        "timeout": 10
+      }
+    ]
+  }
+}

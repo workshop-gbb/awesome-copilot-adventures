@@ -1,0 +1,24 @@
+name: Curriculum or lab bug
+description: Report inaccurate guidance, a broken link, or a failing lab.
+title: "Bug: "
+labels: ["bug"]
+body:
+  - type: input
+    id: location
+    attributes:
+      label: Adventure or file
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Include commands, errors, screenshots, and documentation links when relevant.
+    validations:
+      required: true

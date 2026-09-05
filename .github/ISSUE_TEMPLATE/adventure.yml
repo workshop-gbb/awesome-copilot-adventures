@@ -1,0 +1,39 @@
+name: Adventure proposal
+description: Propose a new agentic learning adventure.
+title: "Adventure: "
+labels: ["adventure"]
+body:
+  - type: input
+    id: objective
+    attributes:
+      label: Learning objective
+      description: Name the single agentic capability this adventure teaches.
+    validations:
+      required: true
+  - type: dropdown
+    id: level
+    attributes:
+      label: Level
+      options:
+        - Foundations
+        - Basics
+        - Intermediate
+        - Advanced
+        - Surface specialization
+        - Capstone
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Completion evidence
+      description: What deterministic evidence proves the learner succeeded?
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Official sources
+      description: Link current GitHub or Microsoft documentation.
+    validations:
+      required: true

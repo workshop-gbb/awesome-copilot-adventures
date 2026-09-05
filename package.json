@@ -1,0 +1,32 @@
+{
+  "name": "awesome-copilot-adventures",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Evidence-first, fantasy-themed curriculum for agentic software engineering with GitHub Copilot",
+  "scripts": {
+    "build": "node scripts/check-content.js",
+    "test": "node scripts/check-links.js && node scripts/check-content.js && node scripts/verify-labs.js && node solutions/javascript/The-Gridlock-Arena-of-Mythos/The-Gridlock-Arena-of-Mythos.test.js"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulasilvatech/awesome-copilot-adventures.git"
+  },
+  "bugs": {
+    "url": "https://github.com/paulasilvatech/awesome-copilot-adventures/issues"
+  },
+  "homepage": "https://paulasilvatech.github.io/awesome-copilot-adventures/",
+  "keywords": [
+    "github-copilot",
+    "ai-agents",
+    "agentic-ai",
+    "vscode",
+    "copilot-cli",
+    "copilot-sdk",
+    "model-context-protocol",
+    "education"
+  ],
+  "license": "MIT"
+}

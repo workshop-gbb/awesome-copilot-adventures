@@ -1,0 +1,621 @@
+/* Echo Castle Theme - Magical CSS */
+
+/* ===== CSS Variables ===== */
+:root {
+  --castle-primary: #9b59b6;
+  --castle-secondary: #8e44ad;
+  --castle-accent: #e74c3c;
+  --castle-gold: #f1c40f;
+  --castle-dark: #1a1a2e;
+  --castle-darker: #0f0f1a;
+  --castle-light: #ecf0f1;
+  --castle-stone: #34495e;
+  --castle-success: #27ae60;
+  --castle-error: #e74c3c;
+  --castle-info: #3498db;
+  --glow-purple: rgba(155, 89, 182, 0.5);
+  --glow-gold: rgba(241, 196, 15, 0.5);
+}
+
+/* ===== Reset & Base ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', 'Georgia', serif;
+  background: var(--castle-darker);
+  color: var(--castle-light);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== Animated Background ===== */
+.stars, .twinkling {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.stars {
+  background: 
+    radial-gradient(1px 1px at 10% 10%, white, transparent),
+    radial-gradient(1px 1px at 20% 20%, white, transparent),
+    radial-gradient(2px 2px at 30% 30%, white, transparent),
+    radial-gradient(1px 1px at 40% 40%, white, transparent),
+    radial-gradient(2px 2px at 50% 60%, white, transparent),
+    radial-gradient(1px 1px at 60% 30%, white, transparent),
+    radial-gradient(2px 2px at 70% 70%, white, transparent),
+    radial-gradient(1px 1px at 80% 40%, white, transparent),
+    radial-gradient(1px 1px at 90% 80%, white, transparent),
+    radial-gradient(2px 2px at 15% 85%, white, transparent),
+    radial-gradient(1px 1px at 25% 75%, white, transparent),
+    radial-gradient(2px 2px at 35% 15%, white, transparent),
+    radial-gradient(1px 1px at 45% 55%, white, transparent),
+    radial-gradient(1px 1px at 55% 25%, white, transparent),
+    radial-gradient(2px 2px at 65% 65%, white, transparent),
+    radial-gradient(1px 1px at 75% 35%, white, transparent),
+    radial-gradient(1px 1px at 85% 95%, white, transparent),
+    radial-gradient(2px 2px at 95% 5%, white, transparent);
+  background-size: 200% 200%;
+  animation: stars-move 100s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes stars-move {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+.twinkling {
+  background: transparent;
+  animation: twinkle 4s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* ===== Castle Container ===== */
+.castle-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ===== Castle Header ===== */
+.castle-header {
+  text-align: center;
+  padding: 40px 20px;
+  margin-bottom: 30px;
+}
+
+.castle-towers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.tower {
+  font-size: 3rem;
+  animation: tower-float 3s ease-in-out infinite;
+}
+
+.tower.left { animation-delay: 0s; }
+.tower.right { animation-delay: 1.5s; }
+
+@keyframes tower-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.castle-title h1 {
+  font-size: 3rem;
+  background: linear-gradient(135deg, var(--castle-gold), var(--castle-primary), var(--castle-gold));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+  text-shadow: 0 0 30px var(--glow-gold);
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--castle-primary);
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.story-scroll {
+  max-width: 700px;
+  margin: 30px auto 0;
+  padding: 20px 30px;
+  background: linear-gradient(135deg, rgba(155, 89, 182, 0.1), rgba(142, 68, 173, 0.1));
+  border: 1px solid rgba(155, 89, 182, 0.3);
+  border-radius: 10px;
+  position: relative;
+}
+
+.story-scroll::before,
+.story-scroll::after {
+  content: '📜';
+  position: absolute;
+  font-size: 1.5rem;
+}
+
+.story-scroll::before { top: -15px; left: 20px; }
+.story-scroll::after { bottom: -15px; right: 20px; }
+
+.story-scroll p {
+  color: #bdc3c7;
+  line-height: 1.8;
+  font-style: italic;
+}
+
+/* ===== Magic Cards ===== */
+.magic-card {
+  background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.95));
+  border: 1px solid rgba(155, 89, 182, 0.3);
+  border-radius: 20px;
+  margin-bottom: 25px;
+  overflow: hidden;
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.magic-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 15px 50px rgba(155, 89, 182, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 25px;
+  background: linear-gradient(135deg, rgba(155, 89, 182, 0.2), rgba(142, 68, 173, 0.1));
+  border-bottom: 1px solid rgba(155, 89, 182, 0.2);
+}
+
+.card-header .icon {
+  font-size: 1.8rem;
+}
+
+.card-header h2 {
+  font-size: 1.4rem;
+  color: var(--castle-gold);
+  flex-grow: 1;
+}
+
+.card-body {
+  padding: 25px;
+}
+
+/* ===== Input Section ===== */
+.input-section label {
+  display: block;
+  color: #bdc3c7;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.magic-input-wrapper {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.magic-input-wrapper input {
+  width: 100%;
+  padding: 18px 24px;
+  font-size: 1.2rem;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(155, 89, 182, 0.4);
+  border-radius: 15px;
+  color: var(--castle-light);
+  transition: all 0.3s;
+}
+
+.magic-input-wrapper input:focus {
+  outline: none;
+  border-color: var(--castle-gold);
+  box-shadow: 0 0 20px var(--glow-gold);
+}
+
+.magic-input-wrapper input::placeholder {
+  color: #666;
+}
+
+.magic-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 15px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  background: radial-gradient(circle at center, var(--glow-purple), transparent);
+}
+
+.magic-input-wrapper input:focus ~ .magic-glow {
+  opacity: 0.3;
+}
+
+/* ===== Buttons ===== */
+.button-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.magic-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 600;
+}
+
+.magic-btn.primary {
+  background: linear-gradient(135deg, var(--castle-primary), var(--castle-secondary));
+  color: white;
+  box-shadow: 0 5px 20px rgba(155, 89, 182, 0.4);
+}
+
+.magic-btn.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(155, 89, 182, 0.6);
+}
+
+.magic-btn.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--castle-light);
+  border: 1px solid rgba(155, 89, 182, 0.4);
+}
+
+.magic-btn.secondary:hover {
+  background: rgba(155, 89, 182, 0.2);
+  border-color: var(--castle-primary);
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.icon-btn.danger:hover {
+  background: rgba(231, 76, 60, 0.2);
+}
+
+/* ===== Result Section ===== */
+.result-section {
+  margin-top: 25px;
+  padding: 20px;
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(155, 89, 182, 0.3);
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.result-section.hidden {
+  display: none;
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.result-icon {
+  font-size: 2rem;
+}
+
+.result-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.result-section.success {
+  border-color: var(--castle-success);
+  background: rgba(39, 174, 96, 0.1);
+}
+
+.result-section.error {
+  border-color: var(--castle-error);
+  background: rgba(231, 76, 60, 0.1);
+}
+
+.result-content {
+  line-height: 1.8;
+}
+
+.result-content .pattern-type {
+  font-size: 1.5rem;
+  color: var(--castle-gold);
+  margin-bottom: 10px;
+}
+
+.result-content .formula {
+  font-family: 'Courier New', monospace;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 15px;
+  border-radius: 8px;
+  color: var(--castle-primary);
+  margin: 10px 0;
+  display: inline-block;
+}
+
+.result-content .prediction {
+  font-size: 2rem;
+  color: var(--castle-gold);
+  text-shadow: 0 0 20px var(--glow-gold);
+}
+
+/* ===== Spell Grid ===== */
+.spell-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.spell-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(155, 89, 182, 0.3);
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: var(--castle-light);
+}
+
+.spell-btn:hover {
+  background: rgba(155, 89, 182, 0.2);
+  border-color: var(--castle-primary);
+  transform: translateY(-3px);
+}
+
+.spell-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.spell-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--castle-gold);
+  margin-bottom: 5px;
+}
+
+.spell-desc {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+/* ===== Chart Container ===== */
+.chart-container {
+  position: relative;
+  height: 300px;
+  margin-bottom: 20px;
+}
+
+.chart-legend {
+  text-align: center;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* ===== Stats Grid ===== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  border: 1px solid rgba(155, 89, 182, 0.2);
+}
+
+.stat-value {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--castle-gold);
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.pattern-distribution {
+  margin-top: 20px;
+}
+
+.pattern-distribution h3 {
+  color: var(--castle-primary);
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+/* ===== History List ===== */
+.history-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.history-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.history-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+  background: var(--castle-primary);
+  border-radius: 4px;
+}
+
+.history-item {
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border-left: 4px solid var(--castle-primary);
+  transition: all 0.3s;
+}
+
+.history-item:hover {
+  background: rgba(155, 89, 182, 0.1);
+}
+
+.history-item .timestamp {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.history-item .sequence {
+  font-family: 'Courier New', monospace;
+  color: var(--castle-light);
+  margin: 8px 0;
+}
+
+.history-item .pattern-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--castle-primary);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.empty-state {
+  text-align: center;
+  color: #666;
+  padding: 40px;
+  font-style: italic;
+}
+
+/* ===== Footer ===== */
+.castle-footer {
+  text-align: center;
+  padding: 40px 20px;
+  margin-top: 40px;
+  border-top: 1px solid rgba(155, 89, 182, 0.2);
+}
+
+.footer-content p {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.footer-links a {
+  color: var(--castle-primary);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--castle-gold);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .castle-title h1 {
+    font-size: 2rem;
+  }
+  
+  .tower {
+    font-size: 2rem;
+  }
+  
+  .button-row {
+    flex-direction: column;
+  }
+  
+  .magic-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===== Utility Classes ===== */
+.hidden {
+  display: none !important;
+}
+
+.text-gold {
+  color: var(--castle-gold);
+}
+
+.text-purple {
+  color: var(--castle-primary);
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}

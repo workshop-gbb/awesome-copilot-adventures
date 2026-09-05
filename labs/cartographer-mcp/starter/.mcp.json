@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "map-reader": {
+      "type": "TODO",
+      "command": "TODO",
+      "args": []
+    }
+  }
+}

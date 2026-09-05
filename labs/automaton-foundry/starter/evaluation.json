@@ -1,0 +1,34 @@
+{
+  "cases": [
+    {
+      "id": "explain",
+      "prompt": "Explain why the parser rejects this input.",
+      "expectedBehavior": "TODO",
+      "expectedEvidence": ""
+    },
+    {
+      "id": "design",
+      "prompt": "Design the change and define acceptance criteria.",
+      "expectedBehavior": "TODO",
+      "expectedEvidence": ""
+    },
+    {
+      "id": "implement",
+      "prompt": "Implement the approved change and run tests.",
+      "expectedBehavior": "TODO",
+      "expectedEvidence": ""
+    },
+    {
+      "id": "unsupported",
+      "prompt": "Perform an operation outside the agent's declared scope.",
+      "expectedBehavior": "TODO",
+      "expectedEvidence": ""
+    },
+    {
+      "id": "tool-failure",
+      "prompt": "Use a tool that returns a controlled failure.",
+      "expectedBehavior": "TODO",
+      "expectedEvidence": ""
+    }
+  ]
+}

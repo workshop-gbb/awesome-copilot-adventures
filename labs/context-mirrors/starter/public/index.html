@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🏰 El Castillo de Ecos - Santuario de Secuencias Mágicas</title>
+  <link rel="stylesheet" href="/css/castle.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="castle-container">
+    <!-- Animated Background -->
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <!-- Castle Header -->
+    <header class="castle-header">
+      <div class="castle-towers">
+        <div class="tower left">🏰</div>
+        <div class="castle-title">
+          <h1>El Castillo de Ecos</h1>
+          <p class="subtitle">Santuario de Secuencias Mágicas</p>
+        </div>
+        <div class="tower right">🏰</div>
+      </div>
+      <div class="story-scroll">
+        <p>
+          En lo alto de las Montañas de Numerica, el antiguo Castillo de Ecos guarda 
+          los secretos de todas las progresiones matemáticas. Los sabios del castillo 
+          pueden predecir el futuro analizando los patrones del pasado...
+        </p>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="castle-main">
+      <!-- Sequence Analyzer Card -->
+      <section class="magic-card analyzer">
+        <div class="card-header">
+          <span class="icon">🔮</span>
+          <h2>Analizador de Secuencias</h2>
+        </div>
+        <div class="card-body">
+          <div class="input-section">
+            <label for="sequence-input">Ingresa tu secuencia mágica:</label>
+            <div class="magic-input-wrapper">
+              <input type="text" id="sequence-input" placeholder="Ej: 2, 4, 8, 16 ó 1, 1, 2, 3, 5" />
+              <div class="magic-glow"></div>
+            </div>
+            <div class="button-row">
+              <button id="analyze-btn" class="magic-btn primary">
+                <span class="btn-icon">✨</span>
+                <span>Analizar Patrón</span>
+              </button>
+              <button id="predict-more-btn" class="magic-btn secondary">
+                <span class="btn-icon">🔮</span>
+                <span>Predecir +5</span>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Result Display -->
+          <div id="result-section" class="result-section hidden">
+            <div class="result-header">
+              <span id="result-icon" class="result-icon">✅</span>
+              <span id="result-title" class="result-title">Patrón Detectado</span>
+            </div>
+            <div id="result-content" class="result-content"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Spells (Examples) -->
+      <section class="magic-card spells">
+        <div class="card-header">
+          <span class="icon">📜</span>
+          <h2>Hechizos Rápidos</h2>
+        </div>
+        <div class="card-body">
+          <div class="spell-grid">
+            <button class="spell-btn" data-sequence="3,6,9,12,15">
+              <span class="spell-icon">➕</span>
+              <span class="spell-name">Aritmética</span>
+              <span class="spell-desc">3, 6, 9, 12...</span>
+            </button>
+            <button class="spell-btn" data-sequence="2,4,8,16,32">
+              <span class="spell-icon">✖️</span>
+              <span class="spell-name">Geométrica</span>
+              <span class="spell-desc">2, 4, 8, 16...</span>
+            </button>
+            <button class="spell-btn" data-sequence="1,4,9,16,25">
+              <span class="spell-icon">📐</span>
+              <span class="spell-name">Cuadrática</span>
+              <span class="spell-desc">1, 4, 9, 16...</span>
+            </button>
+            <button class="spell-btn" data-sequence="1,1,2,3,5,8,13">
+              <span class="spell-icon">🐚</span>
+              <span class="spell-name">Fibonacci</span>
+              <span class="spell-desc">1, 1, 2, 3, 5...</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Visualization Section -->
+      <section class="magic-card visualization">
+        <div class="card-header">
+          <span class="icon">📊</span>
+          <h2>Visión del Oráculo</h2>
+        </div>
+        <div class="card-body">
+          <div class="chart-container">
+            <canvas id="sequence-chart"></canvas>
+          </div>
+          <div id="chart-legend" class="chart-legend"></div>
+        </div>
+      </section>
+
+      <!-- Statistics Dashboard -->
+      <section class="magic-card dashboard">
+        <div class="card-header">
+          <span class="icon">📈</span>
+          <h2>Crónicas del Castillo</h2>
+        </div>
+        <div class="card-body">
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-value" id="stat-total">0</span>
+              <span class="stat-label">Secuencias Analizadas</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value" id="stat-success">0%</span>
+              <span class="stat-label">Tasa de Éxito</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value" id="stat-time">0ms</span>
+              <span class="stat-label">Tiempo Promedio</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value" id="stat-common">-</span>
+              <span class="stat-label">Patrón Más Común</span>
+            </div>
+          </div>
+          <div class="pattern-distribution">
+            <h3>Distribución de Patrones</h3>
+            <canvas id="pattern-chart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- History Section -->
+      <section class="magic-card history">
+        <div class="card-header">
+          <span class="icon">📚</span>
+          <h2>Pergaminos Antiguos</h2>
+          <button id="clear-history-btn" class="icon-btn danger" title="Limpiar historial">🗑️</button>
+        </div>
+        <div class="card-body">
+          <div id="history-list" class="history-list">
+            <p class="empty-state">Los pergaminos están vacíos. ¡Comienza a analizar secuencias!</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="castle-footer">
+      <div class="footer-content">
+        <p>🌟 CopilotAdventures - Echo Chamber v2.0 🌟</p>
+        <p class="footer-links">
+          <a href="/docs">📖 Documentación</a>
+          <a href="/api">🔧 API</a>
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+{
+  "stages": [
+    {
+      "phase": "ask",
+      "actor": "learner",
+      "agentRole": "TODO",
+      "harness": "TODO",
+      "target": "TODO",
+      "environment": "repository-folder",
+      "consumes": [],
+      "produces": "TODO",
+      "trustBoundary": "",
+      "evidence": []
+    },
+    {
+      "phase": "plan",
+      "actor": "learner",
+      "agentRole": "TODO",
+      "harness": "TODO",
+      "target": "TODO",
+      "environment": "repository-folder",
+      "consumes": [],
+      "produces": "TODO",
+      "trustBoundary": "",
+      "evidence": []
+    },
+    {
+      "phase": "implement",
+      "actor": "github-copilot",
+      "agentRole": "TODO",
+      "harness": "TODO",
+      "target": "TODO",
+      "environment": "worktree",
+      "consumes": [],
+      "produces": "TODO",
+      "trustBoundary": "",
+      "evidence": []
+    },
+    {
+      "phase": "cloud-implementation",
+      "actor": "github-copilot",
+      "agentRole": "TODO",
+      "harness": "TODO",
+      "target": "TODO",
+      "environment": "ephemeral-github-environment",
+      "consumes": [],
+      "produces": "TODO",
+      "trustBoundary": "",
+      "evidence": []
+    },
+    {
+      "phase": "runtime-evaluation",
+      "actor": "sdk-application",
+      "agentRole": "TODO",
+      "harness": "TODO",
+      "target": "TODO",
+      "environment": "application-runtime",
+      "consumes": [],
+      "produces": "TODO",
+      "trustBoundary": "",
+      "evidence": []
+    },
+    {
+      "phase": "review",
+      "actor": "maintainer",
+      "agentRole": null,
+      "harness": null,
+      "target": null,
+      "environment": null,
+      "reviewSurface": "github-pull-request",
+      "consumes": [],
+      "produces": "TODO",
+      "trustBoundary": "",
+      "evidence": []
+    }
+  ]
+}

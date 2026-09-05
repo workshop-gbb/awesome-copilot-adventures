@@ -1,0 +1,25 @@
+{
+  "routes": [
+    {
+      "task": "explain an unfamiliar module",
+      "role": "TODO",
+      "harness": "TODO",
+      "target": "TODO",
+      "environment": "TODO"
+    },
+    {
+      "task": "design an API migration",
+      "role": "TODO",
+      "harness": "TODO",
+      "target": "TODO",
+      "environment": "TODO"
+    },
+    {
+      "task": "implement and test the approved migration in isolation",
+      "role": "TODO",
+      "harness": "TODO",
+      "target": "TODO",
+      "environment": "TODO"
+    }
+  ]
+}

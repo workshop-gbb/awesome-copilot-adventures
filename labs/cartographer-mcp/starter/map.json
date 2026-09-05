@@ -1,0 +1,14 @@
+{
+  "realms": [
+    {
+      "id": "nexus",
+      "name": "Nexus",
+      "capability": "Choose a role, harness, target, and environment deliberately."
+    },
+    {
+      "id": "eldoria",
+      "name": "Eldoria",
+      "capability": "Apply durable and path-scoped repository instructions."
+    }
+  ]
+}

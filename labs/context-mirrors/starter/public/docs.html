@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📖 Documentación - El Castillo de Ecos</title>
+  <link rel="stylesheet" href="/css/castle.css">
+  <style>
+    .docs-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    
+    .docs-nav {
+      position: sticky;
+      top: 20px;
+      background: rgba(26, 26, 46, 0.95);
+      border: 1px solid rgba(155, 89, 182, 0.3);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .docs-nav h3 {
+      color: var(--castle-gold);
+      margin-bottom: 15px;
+    }
+    
+    .docs-nav ul {
+      list-style: none;
+    }
+    
+    .docs-nav li {
+      margin: 8px 0;
+    }
+    
+    .docs-nav a {
+      color: var(--castle-primary);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .docs-nav a:hover {
+      color: var(--castle-gold);
+    }
+    
+    .docs-section {
+      background: rgba(26, 26, 46, 0.8);
+      border: 1px solid rgba(155, 89, 182, 0.3);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .docs-section h2 {
+      color: var(--castle-gold);
+      border-bottom: 2px solid rgba(155, 89, 182, 0.3);
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .docs-section h3 {
+      color: var(--castle-primary);
+      margin: 25px 0 15px;
+    }
+    
+    .docs-section p {
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+    
+    .math-box {
+      background: rgba(0, 0, 0, 0.4);
+      border-left: 4px solid var(--castle-primary);
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 0 10px 10px 0;
+      font-family: 'Times New Roman', serif;
+      font-size: 1.1rem;
+    }
+    
+    .math-box .formula {
+      font-size: 1.3rem;
+      color: var(--castle-gold);
+      text-align: center;
+      margin: 15px 0;
+    }
+    
+    .code-block {
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 15px 0;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.95rem;
+      color: #e8e8e8;
+    }
+    
+    .code-block .keyword { color: #c792ea; }
+    .code-block .string { color: #c3e88d; }
+    .code-block .number { color: #f78c6c; }
+    .code-block .comment { color: #676e95; }
+    
+    .example-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    
+    .example-table th,
+    .example-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(155, 89, 182, 0.3);
+    }
+    
+    .example-table th {
+      background: rgba(155, 89, 182, 0.2);
+      color: var(--castle-gold);
+    }
+    
+    .api-endpoint {
+      background: rgba(155, 89, 182, 0.1);
+      border: 1px solid rgba(155, 89, 182, 0.3);
+      border-radius: 10px;
+      padding: 15px;
+      margin: 15px 0;
+    }
+    
+    .api-endpoint .method {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 5px;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    
+    .api-endpoint .method.get { background: #27ae60; }
+    .api-endpoint .method.post { background: #3498db; }
+    .api-endpoint .method.delete { background: #e74c3c; }
+    
+    .api-endpoint .path {
+      font-family: 'Courier New', monospace;
+      color: var(--castle-gold);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: var(--castle-primary);
+      text-decoration: none;
+    }
+    
+    .back-link:hover {
+      color: var(--castle-gold);
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="twinkling"></div>
+  
+  <div class="docs-container">
+    <a href="/" class="back-link">← Volver al Castillo</a>
+    
+    <header style="text-align: center; margin-bottom: 40px;">
+      <h1 style="color: var(--castle-gold); font-size: 2.5rem;">📖 Documentación</h1>
+      <p style="color: var(--castle-primary); font-size: 1.2rem;">El Castillo de Ecos - Guía Completa</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="docs-nav">
+      <h3>📑 Contenido</h3>
+      <ul>
+        <li><a href="#intro">1. Introducción</a></li>
+        <li><a href="#patterns">2. Tipos de Patrones</a></li>
+        <li><a href="#math">3. Fundamentos Matemáticos</a></li>
+        <li><a href="#api">4. Referencia de API</a></li>
+        <li><a href="#examples">5. Ejemplos de Uso</a></li>
+        <li><a href="#performance">6. Rendimiento</a></li>
+      </ul>
+    </nav>
+
+    <!-- Introduction -->
+    <section id="intro" class="docs-section">
+      <h2>🌟 1. Introducción</h2>
+      <p>
+        El Castillo de Ecos es una aplicación de análisis de secuencias numéricas que utiliza
+        algoritmos avanzados para detectar patrones matemáticos y predecir valores futuros.
+      </p>
+      <p>
+        La aplicación soporta múltiples tipos de progresiones y secuencias, incluyendo:
+      </p>
+      <ul style="margin-left: 20px; line-height: 2;">
+        <li>✅ Progresiones Aritméticas</li>
+        <li>✅ Progresiones Geométricas</li>
+        <li>✅ Secuencias Cuadráticas</li>
+        <li>✅ Secuencias Cúbicas</li>
+        <li>✅ Secuencias de Fibonacci</li>
+      </ul>
+    </section>
+
+    <!-- Pattern Types -->
+    <section id="patterns" class="docs-section">
+      <h2>🔮 2. Tipos de Patrones</h2>
+      
+      <h3>2.1 Progresión Aritmética</h3>
+      <p>
+        Una progresión aritmética es una secuencia donde cada término se obtiene sumando
+        una constante (diferencia común) al término anterior.
+      </p>
+      <div class="math-box">
+        <p><strong>Definición:</strong></p>
+        <p class="formula">aₙ = a₁ + (n-1)d</p>
+        <p>Donde <em>d</em> es la diferencia común.</p>
+      </div>
+      <table class="example-table">
+        <tr><th>Secuencia</th><th>Diferencia</th><th>Siguiente</th></tr>
+        <tr><td>3, 6, 9, 12</td><td>+3</td><td>15</td></tr>
+        <tr><td>10, 7, 4, 1</td><td>-3</td><td>-2</td></tr>
+        <tr><td>5, 5, 5, 5</td><td>0</td><td>5</td></tr>
+      </table>
+
+      <h3>2.2 Progresión Geométrica</h3>
+      <p>
+        Una progresión geométrica es una secuencia donde cada término se obtiene multiplicando
+        el término anterior por una constante (razón común).
+      </p>
+      <div class="math-box">
+        <p><strong>Definición:</strong></p>
+        <p class="formula">aₙ = a₁ × r^(n-1)</p>
+        <p>Donde <em>r</em> es la razón común.</p>
+      </div>
+      <table class="example-table">
+        <tr><th>Secuencia</th><th>Razón</th><th>Siguiente</th></tr>
+        <tr><td>2, 4, 8, 16</td><td>×2</td><td>32</td></tr>
+        <tr><td>1, 3, 9, 27</td><td>×3</td><td>81</td></tr>
+        <tr><td>16, 8, 4, 2</td><td>×0.5</td><td>1</td></tr>
+      </table>
+
+      <h3>2.3 Secuencia Cuadrática</h3>
+      <p>
+        Las secuencias cuadráticas siguen un patrón polinomial de segundo grado.
+        Se caracterizan por tener segundas diferencias constantes.
+      </p>
+      <div class="math-box">
+        <p><strong>Definición:</strong></p>
+        <p class="formula">aₙ = an² + bn + c</p>
+        <p>Las segundas diferencias son constantes e iguales a 2a.</p>
+      </div>
+      <table class="example-table">
+        <tr><th>Secuencia</th><th>Descripción</th><th>Siguiente</th></tr>
+        <tr><td>1, 4, 9, 16, 25</td><td>Cuadrados perfectos (n²)</td><td>36</td></tr>
+        <tr><td>1, 3, 6, 10, 15</td><td>Números triangulares</td><td>21</td></tr>
+      </table>
+
+      <h3>2.4 Secuencia de Fibonacci</h3>
+      <p>
+        En una secuencia de Fibonacci, cada término es la suma de los dos anteriores.
+      </p>
+      <div class="math-box">
+        <p><strong>Definición:</strong></p>
+        <p class="formula">Fₙ = Fₙ₋₁ + Fₙ₋₂</p>
+        <p>Con valores iniciales F₁ y F₂ definidos.</p>
+      </div>
+      <table class="example-table">
+        <tr><th>Secuencia</th><th>Descripción</th><th>Siguiente</th></tr>
+        <tr><td>1, 1, 2, 3, 5, 8</td><td>Fibonacci clásico</td><td>13</td></tr>
+        <tr><td>2, 1, 3, 4, 7, 11</td><td>Secuencia de Lucas</td><td>18</td></tr>
+      </table>
+    </section>
+
+    <!-- Mathematical Foundations -->
+    <section id="math" class="docs-section">
+      <h2>📐 3. Fundamentos Matemáticos</h2>
+      
+      <h3>3.1 Método de Diferencias</h3>
+      <p>
+        El algoritmo utiliza el método de diferencias sucesivas para identificar el tipo de secuencia:
+      </p>
+      <div class="math-box">
+        <p><strong>Primera diferencia:</strong> Δ¹aₙ = aₙ₊₁ - aₙ</p>
+        <p><strong>Segunda diferencia:</strong> Δ²aₙ = Δ¹aₙ₊₁ - Δ¹aₙ</p>
+        <p><strong>Tercera diferencia:</strong> Δ³aₙ = Δ²aₙ₊₁ - Δ²aₙ</p>
+      </div>
+      <ul style="margin-left: 20px; line-height: 2;">
+        <li>Si Δ¹ es constante → Progresión Aritmética</li>
+        <li>Si Δ² es constante → Secuencia Cuadrática</li>
+        <li>Si Δ³ es constante → Secuencia Cúbica</li>
+      </ul>
+
+      <h3>3.2 Detección de Razón Geométrica</h3>
+      <p>
+        Para secuencias geométricas, calculamos la razón entre términos consecutivos:
+      </p>
+      <div class="math-box">
+        <p class="formula">r = aₙ₊₁ / aₙ</p>
+        <p>Si todas las razones son iguales, es una progresión geométrica.</p>
+      </div>
+
+      <h3>3.3 Reconocimiento de Fibonacci</h3>
+      <p>
+        Para detectar secuencias tipo Fibonacci, verificamos si:
+      </p>
+      <div class="math-box">
+        <p class="formula">aₙ = aₙ₋₁ + aₙ₋₂ para todo n ≥ 3</p>
+      </div>
+    </section>
+
+    <!-- API Reference -->
+    <section id="api" class="docs-section">
+      <h2>🔧 4. Referencia de API</h2>
+      
+      <div class="api-endpoint">
+        <span class="method post">POST</span>
+        <span class="path">/api/analyze</span>
+        <p style="margin-top: 10px;">Analiza una secuencia y detecta su patrón.</p>
+        <div class="code-block">
+{
+  "sequence": [3, 6, 9, 12]
+}
+        </div>
+      </div>
+
+      <div class="api-endpoint">
+        <span class="method post">POST</span>
+        <span class="path">/api/predict-multiple</span>
+        <p style="margin-top: 10px;">Predice múltiples valores futuros.</p>
+        <div class="code-block">
+{
+  "sequence": [1, 2, 4, 8],
+  "count": 5
+}
+        </div>
+      </div>
+
+      <div class="api-endpoint">
+        <span class="method get">GET</span>
+        <span class="path">/api/statistics</span>
+        <p style="margin-top: 10px;">Obtiene estadísticas de uso.</p>
+      </div>
+
+      <div class="api-endpoint">
+        <span class="method get">GET</span>
+        <span class="path">/api/history</span>
+        <p style="margin-top: 10px;">Obtiene el historial de análisis.</p>
+      </div>
+
+      <div class="api-endpoint">
+        <span class="method delete">DELETE</span>
+        <span class="path">/api/history</span>
+        <p style="margin-top: 10px;">Limpia el historial de análisis.</p>
+      </div>
+
+      <div class="api-endpoint">
+        <span class="method get">GET</span>
+        <span class="path">/api/health</span>
+        <p style="margin-top: 10px;">Verifica el estado del servidor.</p>
+      </div>
+    </section>
+
+    <!-- Examples -->
+    <section id="examples" class="docs-section">
+      <h2>💡 5. Ejemplos de Uso</h2>
+      
+      <h3>5.1 Análisis Básico</h3>
+      <div class="code-block">
+<span class="keyword">const</span> response = <span class="keyword">await</span> fetch(<span class="string">'/api/analyze'</span>, {
+  method: <span class="string">'POST'</span>,
+  headers: { <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span> },
+  body: JSON.stringify({ sequence: [<span class="number">3</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">12</span>] })
+});
+
+<span class="keyword">const</span> result = <span class="keyword">await</span> response.json();
+<span class="comment">// { success: true, pattern: 'arithmetic', nextValue: 15 }</span>
+      </div>
+
+      <h3>5.2 Predicciones Múltiples</h3>
+      <div class="code-block">
+<span class="keyword">const</span> response = <span class="keyword">await</span> fetch(<span class="string">'/api/predict-multiple'</span>, {
+  method: <span class="string">'POST'</span>,
+  headers: { <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span> },
+  body: JSON.stringify({ sequence: [<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>], count: <span class="number">5</span> })
+});
+
+<span class="keyword">const</span> result = <span class="keyword">await</span> response.json();
+<span class="comment">// predictions: [8, 13, 21, 34, 55]</span>
+      </div>
+    </section>
+
+    <!-- Performance -->
+    <section id="performance" class="docs-section">
+      <h2>⚡ 6. Rendimiento</h2>
+      <p>
+        La aplicación está optimizada para manejar secuencias grandes de manera eficiente:
+      </p>
+      <table class="example-table">
+        <tr><th>Tamaño de Secuencia</th><th>Tiempo Típico</th></tr>
+        <tr><td>100 elementos</td><td>&lt; 1ms</td></tr>
+        <tr><td>1,000 elementos</td><td>&lt; 10ms</td></tr>
+        <tr><td>10,000 elementos</td><td>&lt; 100ms</td></tr>
+        <tr><td>100,000 elementos</td><td>&lt; 500ms</td></tr>
+      </table>
+      <p>
+        El algoritmo tiene complejidad O(n) para la mayoría de detecciones de patrones,
+        donde n es la longitud de la secuencia.
+      </p>
+    </section>
+
+    <footer style="text-align: center; padding: 40px; color: #666;">
+      <p>🏰 El Castillo de Ecos - CopilotAdventures v2.0</p>
+    </footer>
+  </div>
+</body>
+</html>
