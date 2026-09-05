@@ -48,31 +48,6 @@ public class GridlockArenaTests
             }
         }
 
-        public void AssertThrows<TException>(Action action, string expectedMessage, string testDescription)
-            where TException : Exception
-        {
-            try
-            {
-                action();
-                Console.WriteLine($"❌ FAIL: {testDescription} - Expected error but none was thrown");
-                Failed++;
-                Errors.Add($"{testDescription} - Expected error but none was thrown");
-            }
-            catch (TException ex)
-            {
-                if (ex.Message.Contains(expectedMessage))
-                {
-                    Console.WriteLine($"✅ PASS: {testDescription}");
-                    Passed++;
-                }
-                else
-                {
-                    Console.WriteLine($"❌ FAIL: {testDescription} - Expected \"{expectedMessage}\" but got \"{ex.Message}\"");
-                    Failed++;
-                    Errors.Add($"{testDescription} - Expected \"{expectedMessage}\" but got \"{ex.Message}\"");
-                }
-            }
-        }
     }
 
     private static T SuppressOutput<T>(Func<T> action)
@@ -92,46 +67,6 @@ public class GridlockArenaTests
             Console.SetOut(originalOut);
             Console.SetError(originalError);
         }
-    }
-
-    private static void SuppressOutput(Action action)
-    {
-        SuppressOutput(() => { action(); return 0; });
-    }
-
-    // ============================================================================
-    // VALIDATION TESTS
-    // ============================================================================
-
-    private static void TestValidateCreature(TestResults testResults)
-    {
-        Console.WriteLine("\n🧪 Testing creature validation...");
-
-        // Valid creature
-        var validCreature = new Creature("TestDragon", new Position(0, 0), 
-            new[] { Direction.Right, Direction.Down }, 5, "🐉");
-
-        testResults.AssertTrue(ValidateCreature(validCreature), 
-            "Valid creature should pass validation");
-
-        // Invalid creatures - we'll test the logic indirectly through BattleSimulator
-        var invalidCreatures = new List<Creature>
-        {
-            // These would normally cause issues, but we'll test via simulator behavior
-        };
-
-        Console.WriteLine("✅ All creature validation tests passed!");
-    }
-
-    private static bool ValidateCreature(Creature creature)
-    {
-        // Basic validation logic
-        return creature != null && 
-               !string.IsNullOrEmpty(creature.Name) && 
-               creature.Power > 0 && 
-               !string.IsNullOrEmpty(creature.Icon) &&
-               creature.Moves != null && 
-               creature.Moves.Length > 0;
     }
 
     // ============================================================================
@@ -157,7 +92,6 @@ public class GridlockArenaTests
         testResults.AssertTrue(IsValidPosition(7, 7, 10), "Valid position in larger grid");
         testResults.AssertTrue(!IsValidPosition(10, 7, 10), "Invalid position in larger grid");
 
-        Console.WriteLine("✅ All position validation tests passed!");
     }
 
     private static bool IsValidPosition(int x, int y, int gridSize = 5)
@@ -193,7 +127,6 @@ public class GridlockArenaTests
         testResults.AssertEquals(bottomRight.MoveBy(0, 1, 5), new Position(4, 4), 
             "RIGHT from right edge should clamp to boundary");
 
-        Console.WriteLine("✅ All movement calculation tests passed!");
     }
 
     // ============================================================================
@@ -215,7 +148,6 @@ public class GridlockArenaTests
         testResults.AssertEquals(results.GetValueOrDefault("Troll", 0), 0, "Troll should have 0 points");
         testResults.AssertEquals(results.GetValueOrDefault("Wizard", 0), 0, "Wizard should have 0 points");
 
-        Console.WriteLine("✅ Full battle simulation test passed!");
     }
 
     private static void TestCustomBattleScenarios(TestResults testResults)
@@ -260,7 +192,6 @@ public class GridlockArenaTests
         testResults.AssertEquals(results3.GetValueOrDefault("B", 0), 0, "Tied creature B should have 0 points");
         testResults.AssertEquals(results3.GetValueOrDefault("C", 0), 0, "Tied creature C should have 0 points");
 
-        Console.WriteLine("✅ All custom battle scenario tests passed!");
     }
 
     // ============================================================================
@@ -306,7 +237,6 @@ public class GridlockArenaTests
         testResults.AssertEquals(results3.GetValueOrDefault("A2", 0), 0, "A2 should lose");
         testResults.AssertEquals(results3.GetValueOrDefault("B2", 0), 0, "B2 should lose");
 
-        Console.WriteLine("✅ All edge case tests passed!");
     }
 
     // ============================================================================
@@ -338,9 +268,6 @@ public class GridlockArenaTests
 
         try
         {
-            // Validation tests
-            TestValidateCreature(testResults);
-
             // Utility function tests
             TestPositionValidation(testResults);
             TestMovementCalculation(testResults);
@@ -365,7 +292,6 @@ public class GridlockArenaTests
             Console.WriteLine("\n🎉 ALL TESTS PASSED! 🎉");
             Console.WriteLine("✅ Documented test cases passed");
             Console.WriteLine("✅ Documented battle scenarios validated");
-            Console.WriteLine("✅ Error handling verified");
             Console.WriteLine("✅ Edge cases covered");
             Console.WriteLine("\nThe Gridlock Arena battle simulation system is ready for epic battles!");
 

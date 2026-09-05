@@ -26,7 +26,6 @@ dotnet run -- mythos-test
 
 The runner exercises:
 
-- its documented creature preconditions;
 - position and movement calculations;
 - documented battle simulations;
 - boundary and tie scenarios.

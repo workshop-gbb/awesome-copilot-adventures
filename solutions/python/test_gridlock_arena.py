@@ -160,7 +160,6 @@ def test_validate_creature(test_results):
                               'non-empty string', 
                               'Empty icon should throw error')
     
-    print('✅ All validate_creature tests passed!')
 
 def test_validate_creatures(test_results):
     print('\n🧪 Testing validate_creatures function...')
@@ -203,7 +202,6 @@ def test_validate_creatures(test_results):
                               'same number of moves', 
                               'Different move counts should throw error')
     
-    print('✅ All validate_creatures tests passed!')
 
 # ============================================================================
 # UTILITY FUNCTION TESTS
@@ -227,7 +225,6 @@ def test_is_valid_position(test_results):
     test_results.assert_true(is_valid_position(7, 7, 10), 'Valid position in larger grid')
     test_results.assert_true(not is_valid_position(10, 7, 10), 'Invalid position in larger grid')
     
-    print('✅ All is_valid_position tests passed!')
 
 def test_calculate_new_position(test_results):
     print('\n🧪 Testing calculate_new_position function...')
@@ -252,7 +249,6 @@ def test_calculate_new_position(test_results):
     test_results.assert_equals(calculate_new_position([4, 4], 'RIGHT'), [4, 4], 
                              'RIGHT from right edge should clamp to boundary')
     
-    print('✅ All calculate_new_position tests passed!')
 
 # ============================================================================
 # INTEGRATION TESTS
@@ -271,7 +267,6 @@ def test_full_battle_simulation(test_results):
     test_results.assert_equals(results.get('Troll', 0), 0, 'Troll should have 0 points')
     test_results.assert_equals(results.get('Wizard', 0), 0, 'Wizard should have 0 points')
     
-    print('✅ Full battle simulation test passed!')
 
 def test_custom_battle_scenarios(test_results):
     print('\n🧪 Testing custom battle scenarios...')
@@ -308,7 +303,6 @@ def test_custom_battle_scenarios(test_results):
     test_results.assert_equals(results3.get('B', 0), 0, 'Tied creature B should have 0 points')
     test_results.assert_equals(results3.get('C', 0), 0, 'Tied creature C should have 0 points')
     
-    print('✅ All custom battle scenario tests passed!')
 
 # ============================================================================
 # EDGE CASE TESTS
@@ -346,7 +340,6 @@ def test_edge_cases(test_results):
     test_results.assert_equals(results3.get('A2', 0), 0, 'A2 should lose')
     test_results.assert_equals(results3.get('B2', 0), 0, 'B2 should lose')
     
-    print('✅ All edge case tests passed!')
 
 # ============================================================================
 # MAIN TEST RUNNER
