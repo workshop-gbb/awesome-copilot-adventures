@@ -2,6 +2,7 @@
 title: "The Cloud Citadel Rubric"
 layout: default
 nav_exclude: true
+permalink: /adventures/04-surfaces/cloud-citadel/rubric/
 status: "ready"
 last_verified: "2026-09-05"
 ---

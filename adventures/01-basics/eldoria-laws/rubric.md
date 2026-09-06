@@ -2,6 +2,7 @@
 title: "The Laws of Eldoria Rubric"
 layout: default
 nav_exclude: true
+permalink: /adventures/01-basics/eldoria-laws/rubric/
 status: "ready"
 last_verified: "2026-09-05"
 ---

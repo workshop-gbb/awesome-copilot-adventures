@@ -2,6 +2,7 @@
 title: "The Tempora Loop Rubric"
 layout: default
 nav_exclude: true
+permalink: /adventures/01-basics/tempora-loop/rubric/
 status: "ready"
 last_verified: "2026-09-05"
 ---

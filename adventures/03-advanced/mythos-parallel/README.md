@@ -4,6 +4,7 @@ layout: default
 parent: "Advanced"
 grand_parent: "Adventure Catalog"
 nav_order: 3
+permalink: /adventures/03-advanced/mythos-parallel/
 level: "03-advanced"
 slug: "mythos-parallel"
 status: "content-ready"

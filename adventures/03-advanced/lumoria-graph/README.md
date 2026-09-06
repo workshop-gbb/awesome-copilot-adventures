@@ -4,6 +4,7 @@ layout: default
 parent: "Advanced"
 grand_parent: "Adventure Catalog"
 nav_order: 2
+permalink: /adventures/03-advanced/lumoria-graph/
 level: "03-advanced"
 slug: "lumoria-graph"
 status: "content-ready"

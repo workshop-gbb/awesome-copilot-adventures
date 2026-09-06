@@ -2,6 +2,7 @@
 title: "The Parallel Trials of Mythos Rubric"
 layout: default
 nav_exclude: true
+permalink: /adventures/03-advanced/mythos-parallel/rubric/
 status: "ready"
 last_verified: "2026-09-05"
 ---

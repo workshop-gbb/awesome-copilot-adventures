@@ -4,6 +4,7 @@ layout: default
 parent: "Basics"
 grand_parent: "Adventure Catalog"
 nav_order: 2
+permalink: /adventures/01-basics/eldoria-laws/
 level: "01-basics"
 slug: "eldoria-laws"
 status: "content-ready"

@@ -4,6 +4,7 @@ layout: default
 parent: "Intermediate"
 grand_parent: "Adventure Catalog"
 nav_order: 1
+permalink: /adventures/02-intermediate/algora-skills/
 level: "02-intermediate"
 slug: "algora-skills"
 status: "content-ready"

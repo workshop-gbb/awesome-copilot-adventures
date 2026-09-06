@@ -4,6 +4,7 @@ layout: default
 parent: "Surfaces"
 grand_parent: "Adventure Catalog"
 nav_order: 3
+permalink: /adventures/04-surfaces/automaton-foundry/
 level: "04-surfaces"
 slug: "automaton-foundry"
 status: "content-ready"

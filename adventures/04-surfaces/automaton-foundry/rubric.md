@@ -2,6 +2,7 @@
 title: "The Automaton Foundry Rubric"
 layout: default
 nav_exclude: true
+permalink: /adventures/04-surfaces/automaton-foundry/rubric/
 status: "ready"
 last_verified: "2026-09-05"
 ---

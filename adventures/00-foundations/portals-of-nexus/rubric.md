@@ -2,6 +2,7 @@
 title: "The Portals of Nexus Rubric"
 layout: default
 nav_exclude: true
+permalink: /adventures/00-foundations/portals-of-nexus/rubric/
 status: "ready"
 last_verified: "2026-09-05"
 ---

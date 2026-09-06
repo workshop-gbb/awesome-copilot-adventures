@@ -2,6 +2,7 @@
 title: "The Guardrails of Stonevale Rubric"
 layout: default
 nav_exclude: true
+permalink: /adventures/02-intermediate/stonevale-guardrails/rubric/
 status: "ready"
 last_verified: "2026-09-05"
 ---

@@ -2,6 +2,7 @@
 title: "The Convergence of Three Realms Rubric"
 layout: default
 nav_exclude: true
+permalink: /adventures/99-capstone/convergence-of-three-realms/rubric/
 status: "ready"
 last_verified: "2026-09-05"
 ---

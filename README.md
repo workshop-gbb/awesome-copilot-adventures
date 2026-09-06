@@ -9,8 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/paulasilvatech/awesome-copilot-adventures/actions/workflows/quality.yml"><img alt="Quality workflow" src="https://github.com/paulasilvatech/awesome-copilot-adventures/actions/workflows/quality.yml/badge.svg"></a>
-  <a href="https://github.com/paulasilvatech/awesome-copilot-adventures/actions/workflows/pages.yml"><img alt="GitHub Pages workflow" src="https://github.com/paulasilvatech/awesome-copilot-adventures/actions/workflows/pages.yml/badge.svg"></a>
+  <a href="https://paulasilvatech.github.io/awesome-copilot-adventures/"><img alt="GitHub Pages availability" src="https://img.shields.io/website?url=https%3A%2F%2Fpaulasilvatech.github.io%2Fawesome-copilot-adventures%2F&label=Pages"></a>
   <a href="./LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-8250df"></a>
   <a href="./docs/feature-status.md"><img alt="Official documentation verified on 2026-09-05" src="https://img.shields.io/badge/official%20docs-verified%202026--09--05-0969da"></a>
 </p>

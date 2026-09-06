@@ -4,6 +4,7 @@ layout: default
 parent: "Surfaces"
 grand_parent: "Adventure Catalog"
 nav_order: 1
+permalink: /adventures/04-surfaces/cloud-citadel/
 level: "04-surfaces"
 slug: "cloud-citadel"
 status: "content-ready"

@@ -4,6 +4,7 @@ layout: default
 parent: "Intermediate"
 grand_parent: "Adventure Catalog"
 nav_order: 2
+permalink: /adventures/02-intermediate/stellaris-agents/
 level: "02-intermediate"
 slug: "stellaris-agents"
 status: "content-ready"

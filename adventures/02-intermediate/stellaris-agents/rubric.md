@@ -2,6 +2,7 @@
 title: "The Agents of Stellaris Rubric"
 layout: default
 nav_exclude: true
+permalink: /adventures/02-intermediate/stellaris-agents/rubric/
 status: "ready"
 last_verified: "2026-09-05"
 ---

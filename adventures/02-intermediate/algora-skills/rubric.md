@@ -2,6 +2,7 @@
 title: "The Skills of Algora Rubric"
 layout: default
 nav_exclude: true
+permalink: /adventures/02-intermediate/algora-skills/rubric/
 status: "ready"
 last_verified: "2026-09-05"
 ---

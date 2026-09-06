@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 
 const root = path.resolve(__dirname, '..');
 const ignored = new Set(['.git', 'node_modules', '_site']);
@@ -14,7 +15,20 @@ function walk(directory) {
   }
 }
 
-walk(root);
+try {
+  const tracked = execFileSync('git', ['ls-files', '-z', '*.md'], {
+    cwd: root,
+    encoding: 'utf8'
+  });
+  markdownFiles.push(
+    ...tracked
+      .split('\0')
+      .filter(Boolean)
+      .map(file => path.join(root, file))
+  );
+} catch {
+  walk(root);
+}
 
 const linkPatterns = [
   /!?\[[^\]]*]\(([^)]+)\)/g,

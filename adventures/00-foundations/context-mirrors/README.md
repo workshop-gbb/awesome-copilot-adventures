@@ -4,6 +4,7 @@ layout: default
 parent: "Foundations"
 grand_parent: "Adventure Catalog"
 nav_order: 2
+permalink: /adventures/00-foundations/context-mirrors/
 level: "00-foundations"
 slug: "context-mirrors"
 status: "content-ready"

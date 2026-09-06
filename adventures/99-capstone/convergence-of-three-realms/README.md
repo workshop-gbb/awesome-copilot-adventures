@@ -4,6 +4,7 @@ layout: default
 parent: "Capstone"
 grand_parent: "Adventure Catalog"
 nav_order: 1
+permalink: /adventures/99-capstone/convergence-of-three-realms/
 level: "99-capstone"
 slug: "convergence-of-three-realms"
 status: "content-ready"

@@ -2,6 +2,7 @@
 title: "The Knowledge Graph of Lumoria Rubric"
 layout: default
 nav_exclude: true
+permalink: /adventures/03-advanced/lumoria-graph/rubric/
 status: "ready"
 last_verified: "2026-09-05"
 ---

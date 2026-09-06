@@ -4,6 +4,7 @@ layout: default
 parent: "Intermediate"
 grand_parent: "Adventure Catalog"
 nav_order: 3
+permalink: /adventures/02-intermediate/stonevale-guardrails/
 level: "02-intermediate"
 slug: "stonevale-guardrails"
 status: "content-ready"

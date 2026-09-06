@@ -4,6 +4,7 @@ layout: default
 parent: "Basics"
 grand_parent: "Adventure Catalog"
 nav_order: 1
+permalink: /adventures/01-basics/tempora-loop/
 level: "01-basics"
 slug: "tempora-loop"
 status: "content-ready"

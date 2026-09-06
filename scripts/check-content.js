@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 
 const root = path.resolve(__dirname, '..');
 const curriculum = path.join(root, 'adventures');
@@ -119,25 +120,41 @@ const forbiddenPatterns = [
   ['Production-ready server', 'unsupported production-readiness claim']
 ];
 
-function scanActiveMarkdown(directory) {
-  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
-    if (entry.name === 'legacy' || entry.name === '.git' || entry.name === 'node_modules') continue;
-    const fullPath = path.join(directory, entry.name);
-    if (entry.isDirectory()) {
-      scanActiveMarkdown(fullPath);
-      continue;
-    }
-    if (!entry.name.endsWith('.md')) continue;
-    const content = fs.readFileSync(fullPath, 'utf8');
-    for (const [pattern, description] of forbiddenPatterns) {
-      if (content.includes(pattern)) {
-        failures.push(`${path.relative(root, fullPath)} contains ${description}: ${pattern}`);
-      }
-    }
+function activeMarkdownFiles() {
+  try {
+    return execFileSync('git', ['ls-files', '-z', '*.md'], {
+      cwd: root,
+      encoding: 'utf8'
+    })
+      .split('\0')
+      .filter(file => file && !file.startsWith('legacy/'))
+      .map(file => path.join(root, file));
+  } catch {
+    return [
+      path.join(root, 'README.md'),
+      ...['adventures', 'docs', 'labs', 'solutions', 'assets', '.github']
+        .filter(directory => fs.existsSync(path.join(root, directory)))
+        .flatMap(directory => collectMarkdown(path.join(root, directory)))
+    ];
   }
 }
 
-scanActiveMarkdown(root);
+function collectMarkdown(directory) {
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
+    const fullPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) return collectMarkdown(fullPath);
+    return entry.name.endsWith('.md') ? [fullPath] : [];
+  });
+}
+
+for (const fullPath of activeMarkdownFiles()) {
+  const content = fs.readFileSync(fullPath, 'utf8');
+  for (const [pattern, description] of forbiddenPatterns) {
+    if (content.includes(pattern)) {
+      failures.push(`${path.relative(root, fullPath)} contains ${description}: ${pattern}`);
+    }
+  }
+}
 
 for (const unsafeDefault of ['.mcp.json', '.vscode/mcp.json']) {
   if (fs.existsSync(path.join(root, unsafeDefault))) {

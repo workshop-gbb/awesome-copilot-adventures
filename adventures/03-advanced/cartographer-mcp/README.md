@@ -4,6 +4,7 @@ layout: default
 parent: "Advanced"
 grand_parent: "Adventure Catalog"
 nav_order: 1
+permalink: /adventures/03-advanced/cartographer-mcp/
 level: "03-advanced"
 slug: "cartographer-mcp"
 status: "content-ready"

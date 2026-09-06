@@ -2,6 +2,7 @@
 title: "The MCP Cartographer Rubric"
 layout: default
 nav_exclude: true
+permalink: /adventures/03-advanced/cartographer-mcp/rubric/
 status: "ready"
 last_verified: "2026-09-05"
 ---

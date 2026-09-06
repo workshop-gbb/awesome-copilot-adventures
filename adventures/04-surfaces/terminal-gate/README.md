@@ -4,6 +4,7 @@ layout: default
 parent: "Surfaces"
 grand_parent: "Adventure Catalog"
 nav_order: 2
+permalink: /adventures/04-surfaces/terminal-gate/
 level: "04-surfaces"
 slug: "terminal-gate"
 status: "content-ready"

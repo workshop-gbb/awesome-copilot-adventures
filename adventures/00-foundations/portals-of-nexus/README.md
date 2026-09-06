@@ -4,6 +4,7 @@ layout: default
 parent: "Foundations"
 grand_parent: "Adventure Catalog"
 nav_order: 1
+permalink: /adventures/00-foundations/portals-of-nexus/
 level: "00-foundations"
 slug: "portals-of-nexus"
 status: "content-ready"
