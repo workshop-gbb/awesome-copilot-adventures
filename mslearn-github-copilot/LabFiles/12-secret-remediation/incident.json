@@ -1,0 +1,8 @@
+{
+  "simulation": true,
+  "marker": "TRAINING_ONLY_NOT_A_CREDENTIAL",
+  "owner": "Example application team",
+  "consumer": "Local training service",
+  "exposure": "Hypothetical repository commit",
+  "providerContacted": false
+}

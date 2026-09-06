@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { execFileSync } = require('child_process');
+const { markdownFiles } = require('./repository-files');
 
 const root = path.resolve(__dirname, '..');
 const curriculum = path.join(root, 'adventures');
@@ -120,34 +120,7 @@ const forbiddenPatterns = [
   ['Production-ready server', 'unsupported production-readiness claim']
 ];
 
-function activeMarkdownFiles() {
-  try {
-    return execFileSync('git', ['ls-files', '-z', '*.md'], {
-      cwd: root,
-      encoding: 'utf8'
-    })
-      .split('\0')
-      .filter(file => file && !file.startsWith('legacy/'))
-      .map(file => path.join(root, file));
-  } catch {
-    return [
-      path.join(root, 'README.md'),
-      ...['adventures', 'docs', 'labs', 'solutions', 'assets', '.github']
-        .filter(directory => fs.existsSync(path.join(root, directory)))
-        .flatMap(directory => collectMarkdown(path.join(root, directory)))
-    ];
-  }
-}
-
-function collectMarkdown(directory) {
-  return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
-    const fullPath = path.join(directory, entry.name);
-    if (entry.isDirectory()) return collectMarkdown(fullPath);
-    return entry.name.endsWith('.md') ? [fullPath] : [];
-  });
-}
-
-for (const fullPath of activeMarkdownFiles()) {
+for (const fullPath of markdownFiles().filter(file => !path.relative(root, file).startsWith('legacy/'))) {
   const content = fs.readFileSync(fullPath, 'utf8');
   for (const [pattern, description] of forbiddenPatterns) {
     if (content.includes(pattern)) {

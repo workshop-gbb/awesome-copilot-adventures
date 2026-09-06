@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "lastVerified": "2026-09-06",
+  "labs": [
+    {"id":"setup-dotnet","file":"LAB_AK_00_configure_lab_environment.md","title":"Prepare the C# environment","group":"Preparation","stack":"C# / .NET 10","fixture":null},
+    {"id":"setup-python","file":"LAB_AK_00_configure_lab_environment_py.md","title":"Prepare the Python environment","group":"Preparation","stack":"Python / pytest","fixture":null},
+    {"id":"setup-copilot","file":"LAB_AK_00_enable_github_copilot_in_visual_studio_code.md","title":"Enable and verify Copilot access","group":"Preparation","stack":"VS Code","fixture":null},
+    {"id":"setup-speckit","file":"LAB_AK_00_configure_github_dev_kit_lab.md","title":"Prepare Spec Kit safely","group":"Preparation","stack":"Specify CLI / uv","fixture":null},
+    {"id":"setup-sdk","file":"LAB_AK_00_configure_github_copilot_sdk_lab.md","title":"Prepare the Copilot SDK environment","group":"Preparation","stack":"Node 24 / Copilot SDK","fixture":null},
+    {"id":"01-interface","file":"LAB_AK_01_examine_settings_interface.md","title":"Choose context, roles and permissions","group":"Core workflow","stack":"VS Code","fixture":"LabFiles/01-copilot-interface"},
+    {"id":"02-csharp","file":"LAB_AK_02_analyze_document_code.md","title":"Analyze and document the library in C#","group":"Core workflow","stack":"C# / xUnit","fixture":"LabFiles/02-analyze-document-code/AccelerateDevGHCopilot"},
+    {"id":"02-python","file":"LAB_AK_02_analyze_document_code_py.md","title":"Analyze and document the library in Python","group":"Core workflow","stack":"Python / pytest","fixture":"LabFiles/02-python-analyze-document-code/AccelerateDevGHCopilot"},
+    {"id":"03-csharp","file":"LAB_AK_03_develop_code_features.md","title":"Develop library search in C#","group":"Core workflow","stack":"C# / xUnit","fixture":"LabFiles/03-develop-code-features/AccelerateDevGHCopilot"},
+    {"id":"03-python","file":"LAB_AK_03_develop_code_features_py.md","title":"Develop library search in Python","group":"Core workflow","stack":"Python / pytest","fixture":"LabFiles/03-python-develop-code-features/AccelerateDevGHCopilot"},
+    {"id":"04-xunit","file":"LAB_AK_04_develop_unit_tests_xunit.md","title":"Develop discriminating xUnit tests","group":"Core workflow","stack":"C# / xUnit","fixture":"LabFiles/04-develop-unit-tests-xunit/AccelerateDevGHCopilot"},
+    {"id":"04-pytest","file":"LAB_AK_04_develop_unit_tests_pytest.md","title":"Develop discriminating pytest tests","group":"Core workflow","stack":"Python / pytest","fixture":"LabFiles/04-python-develop-unit-tests-pytest/AccelerateDevGHCopilot"},
+    {"id":"05-csharp","file":"LAB_AK_05_refactor_improve_existing_code.md","title":"Refactor library code in C#","group":"Core workflow","stack":"C# / xUnit","fixture":"LabFiles/05-refactor-improve-existing-code/AccelerateDevGHCopilot"},
+    {"id":"05-python","file":"LAB_AK_05_refactor_improve_existing_code_py.md","title":"Refactor library code in Python","group":"Core workflow","stack":"Python / pytest","fixture":"LabFiles/05-python-refactor-improve-existing-code/AccelerateDevGHCopilot"},
+    {"id":"06-prototype","file":"LAB_AK_06_vibe_coding_prototype_ecommerce_app.md","title":"Prototype an accessible shopping flow","group":"Engineering practice","stack":"HTML / CSS / JavaScript","fixture":"LabFiles/06-shopping-prototype"},
+    {"id":"07-duplication","file":"LAB_AK_07_consolidate_duplicate_code.md","title":"Consolidate duplication without merging business rules","group":"Engineering practice","stack":"C#","fixture":"LabFiles/07-consolidate-duplicate-code/ECommerceOrderAndReturn"},
+    {"id":"08-functions","file":"LAB_AK_08_refactor_large_functions.md","title":"Extract functions and preserve compensation","group":"Engineering practice","stack":"C#","fixture":"LabFiles/08-refactor-large-functions/ECommerceOrderProcessing"},
+    {"id":"09-conditionals","file":"LAB_AK_09_simplify_complex_conditionals.md","title":"Simplify decision rules with boundary tests","group":"Engineering practice","stack":"C#","fixture":"LabFiles/09-simplify-complex-conditionals/ECommercePricingEngine"},
+    {"id":"10-profiling","file":"LAB_AK_10_implement_performance_profiling.md","title":"Profile a bounded workload and verify a hypothesis","group":"Engineering practice","stack":"C# / diagnostics","fixture":"LabFiles/10-implement-performance-profiling/DataAnalyzerReporter"},
+    {"id":"11-issues","file":"LAB_AK_11_resolve_github_issues.md","title":"Turn an issue into a reviewed change","group":"Collaboration","stack":"GitHub / Node","fixture":"LabFiles/11-issue-workflow"},
+    {"id":"12-secrets","file":"LAB_AK_12_resolve_github_secret_scanning_alerts.md","title":"Rehearse secret-remediation decisions safely","group":"Collaboration","stack":"GitHub / offline incident exercise","fixture":"LabFiles/12-secret-remediation"},
+    {"id":"13-greenfield","file":"LAB_AK_13_get-started-spec-driven-development.md","title":"Specify a greenfield RSS reader","group":"Spec-driven development","stack":"Node / .NET / Python / Go options","fixture":"LabFiles/13-spec-driven-development"},
+    {"id":"14-brownfield","file":"LAB_AK_14_implement-spec-driven-development.md","title":"Add document metadata to an existing dashboard","group":"Spec-driven development","stack":"Node / TypeScript / .NET options","fixture":"LabFiles/14-spec-driven-feature"},
+    {"id":"15-customization","file":"LAB_AK_15_configure_customize_github_copilot_vscode.md","title":"Configure instructions, prompts, skills and agents","group":"Agent customization","stack":"VS Code / Node","fixture":"LabFiles/15-copilot-customization"},
+    {"id":"16-sdk","file":"LAB_AK_16_develop_ai_enabled_apps_github_copilot_sdk.md","title":"Build a bounded application with Copilot SDK","group":"Agent customization","stack":"Node / Copilot SDK; .NET extension","fixture":"LabFiles/16-copilot-sdk"},
+    {"id":"17-modernization","file":"LAB_AK_17_modernize_existing_app_spec_kit.md","title":"Modernize CSV storage to SQLite with Spec Kit","group":"Spec-driven development","stack":"Python / SQLite; .NET and TypeScript alternatives","fixture":"LabFiles/17-spec-kit-modernization"}
+  ]
+}

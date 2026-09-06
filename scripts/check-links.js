@@ -1,34 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const { execFileSync } = require('child_process');
-
-const root = path.resolve(__dirname, '..');
-const ignored = new Set(['.git', 'node_modules', '_site']);
-const markdownFiles = [];
-
-function walk(directory) {
-  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
-    if (ignored.has(entry.name)) continue;
-    const fullPath = path.join(directory, entry.name);
-    if (entry.isDirectory()) walk(fullPath);
-    else if (entry.name.endsWith('.md')) markdownFiles.push(fullPath);
-  }
-}
-
-try {
-  const tracked = execFileSync('git', ['ls-files', '-z', '*.md'], {
-    cwd: root,
-    encoding: 'utf8'
-  });
-  markdownFiles.push(
-    ...tracked
-      .split('\0')
-      .filter(Boolean)
-      .map(file => path.join(root, file))
-  );
-} catch {
-  walk(root);
-}
+const { root, markdownFiles: listMarkdownFiles } = require('./repository-files');
+const markdownFiles = listMarkdownFiles();
 
 const linkPatterns = [
   /!?\[[^\]]*]\(([^)]+)\)/g,

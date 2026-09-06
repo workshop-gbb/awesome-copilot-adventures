@@ -1,0 +1,4 @@
+id,customer,total_cents,status
+ORD-1001,C-01,1250,paid
+ORD-1002,C-02,2999,pending
+ORD-1003,C-01,2000,cancelled
