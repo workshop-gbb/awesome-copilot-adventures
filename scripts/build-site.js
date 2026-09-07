@@ -263,7 +263,11 @@ function buildArtifacts(selectedLocales = locales) {
       artifacts.set(`site-generated/content/${locale}/${sha256(page.source).slice(0, 16)}.md`,
         frontmatter(metadata) + markdown);
       const image = markdown.match(/!\[[^\]]*]\(([^)\n]*\/site-data\/media\/[^)\n]+)\)/)?.[1] || null;
-      catalog.push({ title, url, source: page.source, group: page.group, route: page.route, labId: page.labId, image });
+      catalog.push({
+        title, url, source: page.source, group: page.group, route: page.route, labId: page.labId, image,
+        navigationOrder: page.navigationOrder, navigationSection: page.navigationSection,
+        navigationHidden: page.navigationHidden
+      });
       const plain = withoutCodeBlocks(markdown).replace(/\{#[^}]*}/g, '').replace(/<[^>]*>/g, '')
         .replace(/!?\[([^\]]*)]\([^)]+\)/g, '$1').replace(/[#*`|>]/g, '').replace(/\s+/g, ' ').trim();
       search.push({ title, url, group: page.group, text: plain });

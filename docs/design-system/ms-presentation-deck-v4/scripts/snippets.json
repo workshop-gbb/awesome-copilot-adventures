@@ -1,0 +1,10 @@
+{
+ "instructions": "# AGENTS.md (org → repo → pasta)\n## Dinheiro\nCentavo inteiro. Nunca float.\nArredonde 1x, via fees.round_total()\n## Antes de commitar\npytest -q · referencie um FR em specs/",
+ "prompts": ".github/prompts/specify.prompt.md\n---\nmode: agent\ndescription: \"gera spec EARS + AC\"\n---\nEscreva FR-{{\"{{n}}\"}} com WHEN / SHALL\ne 3 a 5 critérios testáveis.",
+ "agents": ".github/agents/test-writer.agent.md\n---\nname: test-writer\nmodel: gpt-5-mini\ntools: [read, write:tests/**]\n---\nDerive um teste por AC. Não toque em src/.",
+ "skills": ".github/skills/fee-rounding/SKILL.md\n---\nname: fee-rounding\ndescription: \"regras de arredondamento\"\n---\nCarrega só quando a tarefa bate.\n+ references/drift-2026-03.md",
+ "hooks": "// .github/hooks/loop.json · lido pelo VS Code, GitHub Copilot CLI e cloud agent\n{ \"version\": 1, \"hooks\": {\n  \"preToolUse\":  [{ \"type\": \"command\", \"bash\": \"scripts/hooks/step-budget.sh\" }],\n  \"postToolUse\": [{ \"matcher\": \"edit|create\", \"bash\": \"pytest -q tests/\" }],\n  \"agentStop\":   [{ \"bash\": \"scripts/hooks/must-be-green.sh\" }],\n  \"preCompact\":  [{ \"bash\": \"scripts/hooks/save-state.sh\" }]\n} }",
+ "specs": ".specify/memory/constitution.md\n## Inegociáveis\n1. Testes antes de código\n2. Dinheiro em centavos inteiros\n3. Toda mudança → um FR\ntemplates/spec-template.md → /specify",
+ "mcp": ".vscode/mcp.json\n{{ \"servers\": {{\n  \"ledger\": {{ url: \"https://mcp.ledger.internal\",\n              tools: [\"get_positions\"] }} }} }}\n# só as tools que o agente usa: cada\n# definição pesa em todo passo",
+ "workflows": ".github/workflows/spec-gate.yml\non: pull_request\njobs:\n  gate:\n    - run: spec-trace --require 100%\n    - run: pytest -q --junit\n    # o hook que o humano não precisa lembrar"
+}

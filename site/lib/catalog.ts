@@ -12,6 +12,9 @@ export interface DocumentInfo {
   route: string;
   labId: string;
   image: string | null;
+  navigationOrder?: number;
+  navigationSection?: string;
+  navigationHidden?: boolean;
 }
 export interface Language {
   ui: Labels;

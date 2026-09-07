@@ -8,14 +8,17 @@ last_verified: "2026-09-07"
 
 ## Reference and evidence
 
-The visual reference is [Agentic DevOps Platform](https://agenticdevopsplatform.ai/en/),
-inspected on 2026-09-07 through its public HTML/CSS and a browser screenshot.
-Firecrawl was unavailable because its configured token was invalid; no Firecrawl
-branding result is claimed.
+The canonical visual reference is the supplied
+[Hub Editorial Studio](design-system/design-system/hub-editorial/README.md),
+inspected on 2026-09-07. Astro imports its framework-independent tokens and local
+fonts directly; site styles map existing names to those tokens instead of keeping
+a second palette. Both theme attributes stay synchronized.
 
-We implement an original learning-site layout inspired by those visual conventions.
-The reference's logo, portrait, illustrations, text and analytics code are not copied.
-Original curriculum content and monochrome diagrams remain the learning material.
+The standalone React showcase is reference material, not the site's runtime or a
+translated lesson. The Astro site uses native controls and small JavaScript
+modules. Product logos and the supplied icon-library cover are not repurposed as
+the curriculum's identity. Original curriculum illustrations and monochrome
+diagrams retain their aspect ratios and colors in both themes.
 
 ## Observed design tokens
 
@@ -23,7 +26,7 @@ Original curriculum content and monochrome diagrams remain the learning material
 | --- | --- |
 | Primary ink | `#1a1a1a` |
 | Secondary text | `#3a3a3a` |
-| Muted text | `#737373` |
+| Muted text | `#686864` |
 | Paper | `#ffffff` |
 | Page background | `#fcfcfb` |
 | Alternate surface | `#f7f7f5` |
@@ -128,3 +131,36 @@ Entrance animations, one-time section reveals, bounded count transitions, card
 feedback and a scroll progress indicator add motion without a canvas or animation
 framework. Reduced-motion preferences disable the effects. Essential content stays
 readable without JavaScript; native workflow disclosures still work.
+
+## Integrated practice studio
+
+The [practice studio](simulations.md) is available in all three languages, linked
+from the homepage, masthead, footer, learning navigation and related lessons.
+Its tabs use stable fragments, keyboard navigation and readable non-JavaScript
+fallbacks. Search and the sitemap include the page.
+
+- Workflow: explicit play, pause, single step, playback speed, reset and a review
+  failure that blocks the final evidence stage. Playback pauses on a hidden page
+  or when the learner leaves the workflow tab; nothing plays automatically.
+- Context: a bounded selection exercise with missing, over-budget, distracting
+  and focused states. The displayed units are synthetic, not model tokens.
+- Verification: three fixed JavaScript fixture checks run in the browser against
+  incomplete or corrected implementations. Changing the implementation invalidates
+  previous results. The module does not evaluate arbitrary code or call a service.
+
+Simulation state is temporary and is never stored as course completion. Reading
+marks remain separate, explicitly selected browser-local state and synchronize
+between tabs. No simulation claims that a real agent, terminal or course lab ran.
+
+## Image and icon handling
+
+The site's line icons are small original SVGs with a consistent stroke and
+decorative semantics; controls retain text or accessible names. Card illustrations
+are decorative beside their lesson titles. Article images keep their descriptive
+alternative text, can be enlarged in a keyboard-operable dialog, and retain an
+original-image link. Closing the dialog restores focus. No image is inverted,
+stretched or recolored to simulate dark mode.
+
+The narrow layout exposes learning navigation as a native disclosure instead of
+removing it. Primary controls use the design system's minimum touch target.
+Reduced-motion preferences disable movement without disabling the learning tools.

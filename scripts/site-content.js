@@ -4,6 +4,7 @@ const crypto = require('node:crypto');
 const { root, repositoryFiles } = require('./repository-files');
 const { fencedBlocks } = require('./markdown-helpers');
 const settings = require('../site.config.json');
+const handsOnOrder = new Map(require('../mslearn-github-copilot/catalog.json').labs.map((lab, index) => [lab.id, index]));
 
 const locales = settings.locales;
 const generatedRoots = ['site-generated/', 'site-pages/', 'site-data/', '.astro/'];
@@ -69,6 +70,8 @@ function translatable(file) {
   const name = relative(file);
   if (!name.toLowerCase().endsWith('.md')) return false;
   if (name.startsWith('legacy/') || name.startsWith('.github/') || name === 'AGENTS.md') return false;
+  // The supplied component kit is source reference material, not curriculum prose.
+  if (name.startsWith('docs/design-system/')) return false;
   if (/\/(?:starter\/)?\.github\//.test(name)) return false;
   if (/\/reference\/.*\.(?:agent|prompt)\.md$/.test(name)) return false;
   if (name === 'docs/404.md') return false;
@@ -142,6 +145,9 @@ function pages() {
       route,
       group: groupFor(name),
       labId: scalar(metadata, 'lab_id'),
+      navigationOrder: handsOnOrder.get(scalar(metadata, 'lab_id')) ?? (Number(scalar(metadata, 'nav_order')) || 1000),
+      navigationSection: name.startsWith('adventures/') ? name.split('/')[1] : '',
+      navigationHidden: scalar(metadata, 'nav_exclude') === 'true',
       verified: scalar(metadata, 'last_verified'),
       tokens: tokensFor(body),
       sourceHash: digest(original)

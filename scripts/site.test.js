@@ -100,6 +100,17 @@ test('learner archives resolve to direct downloads with the original ZIP bytes',
   assert.equal(manifest.find(entry => entry.path === file).mime, 'application/zip');
 });
 
+test('learning navigation uses curriculum order and leaves rubrics accessible through lessons', () => {
+  const documents = pages();
+  const nexus = documents.find(page => page.source === 'adventures/00-foundations/portals-of-nexus/README.md');
+  const mirrors = documents.find(page => page.source === 'adventures/00-foundations/context-mirrors/README.md');
+  assert.ok(nexus.navigationOrder < mirrors.navigationOrder);
+  assert.equal(nexus.navigationSection, mirrors.navigationSection);
+  assert.equal(documents.find(page => page.source === 'adventures/00-foundations/portals-of-nexus/rubric.md').navigationHidden, true);
+  assert.ok(documents.find(page => page.labId === 'setup-dotnet').navigationOrder
+    < documents.find(page => page.labId === 'setup-sdk').navigationOrder);
+});
+
 test('original binary and malformed UTF-8 are not misclassified as source text', () => {
   assert.equal(textPreview(Buffer.from('const example = "ação";\n')), true);
   assert.equal(textPreview(Buffer.from([0, 1, 2])), false);
@@ -152,6 +163,74 @@ test('library filters combine category, accented search and user-selected readin
   assert.deepEqual(filterLibrary(documents, { group: 'read', read: ['docs/context.md'] }), [documents[2]]);
 });
 
+test('simulation translations cover the same non-empty controls and descriptions in every locale', () => {
+  const copy = require('../site/simulations.json');
+  const paths = (object, prefix = '') => Object.entries(object).flatMap(([key, value]) =>
+    typeof value === 'object' ? paths(value, `${prefix}${key}.`) : [{ path: `${prefix}${key}`, value }]);
+  const expected = paths(copy.en).map(entry => entry.path).sort();
+  for (const [locale, dictionary] of Object.entries(copy)) {
+    const entries = paths(dictionary);
+    assert.deepEqual(entries.map(entry => entry.path).sort(), expected, locale);
+    assert.ok(entries.every(entry => typeof entry.value === 'string' && entry.value.trim()), locale);
+  }
+});
+
+test('workflow playback is explicit, bounded, pausable and stopped by a failed review', async () => {
+  const { createWorkflow, transitionWorkflow } = await import('../assets/site/simulation.mjs');
+  const initial = createWorkflow();
+  assert.deepEqual(initial, { scenario: 'passing', cursor: -1, status: 'ready' });
+  let state = transitionWorkflow(initial, 'play');
+  state = transitionWorkflow(state, 'next');
+  assert.equal(state.cursor, 0);
+  assert.equal(state.status, 'running');
+  state = transitionWorkflow(state, 'pause');
+  assert.equal(state.status, 'paused');
+  state = transitionWorkflow(state, 'next');
+  assert.equal(state.cursor, 1);
+  assert.equal(state.status, 'paused');
+  for (let index = 0; index < 3; index++) state = transitionWorkflow(state, 'next');
+  assert.equal(state.status, 'complete');
+  assert.equal(transitionWorkflow(state, 'next'), state);
+  assert.deepEqual(transitionWorkflow(state, 'reset'), initial);
+  state = createWorkflow('failing');
+  for (let index = 0; index < 4; index++) state = transitionWorkflow(state, 'next');
+  assert.equal(state.status, 'blocked');
+  assert.equal(state.cursor, 3);
+  assert.equal(transitionWorkflow(state, 'play'), state);
+  assert.equal(transitionWorkflow(state, 'next'), state);
+  assert.equal(transitionWorkflow(state, 'reset').scenario, 'failing');
+  assert.throws(() => createWorkflow('unknown'), /Unknown/);
+  assert.throws(() => transitionWorkflow(initial, 'unknown'), /Unknown/);
+  assert.throws(() => transitionWorkflow({ ...initial, cursor: 9 }, 'next'), /Invalid/);
+  assert.equal(initial.cursor, -1);
+});
+
+test('context workbench distinguishes missing, focused, distracting and over-budget selections', async () => {
+  const { evaluateContext } = await import('../assets/site/simulation.mjs');
+  const focused = ['task', 'code', 'tests'];
+  assert.equal(evaluateContext([]).status, 'missing');
+  assert.deepEqual(evaluateContext(['task', 'code']).missing, ['tests']);
+  assert.equal(evaluateContext(focused).status, 'ready');
+  assert.equal(evaluateContext(focused).units, 7);
+  assert.equal(evaluateContext([...focused, 'task']).units, 7);
+  assert.equal(evaluateContext([...focused, 'unrelated']).status, 'noisy');
+  assert.equal(evaluateContext([...focused, 'logs']).status, 'over');
+  assert.throws(() => evaluateContext(['unknown']), /Unknown/);
+});
+
+test('fixture verification executes bounded examples and exposes the failing implementation', async () => {
+  const { verifyPatch, fixtureCases } = await import('../assets/site/simulation.mjs');
+  const failing = verifyPatch('incomplete');
+  assert.equal(failing.length, 3);
+  assert.equal(failing.filter(result => result.passed).length, 1);
+  assert.equal(failing[0].actual, 'Ada');
+  assert.equal(failing[2].actual, 'RangeError');
+  assert.ok(verifyPatch('corrected').every(result => result.passed));
+  assert.equal(fixtureCases[0].expected, 'ada');
+  assert.throws(() => verifyPatch('constructor'), /Unknown/);
+  assert.throws(() => verifyPatch('unknown'), /Unknown/);
+});
+
 test('publication covers every source byte and every learning page without recursive copies', () => {
   const { artifacts, data, documents, manifest } = buildArtifacts(['en']);
   assert.equal(manifest.length, data.sourceCount);
@@ -164,6 +243,15 @@ test('publication covers every source byte and every learning page without recur
   assert.equal(data.handsOnCount, 26);
   assert.equal(data.documentCount, documents.length);
   assert.ok(manifest.some(entry => entry.path === 'site/lib/catalog.ts'));
+  assert.ok(manifest.some(entry => entry.path === 'docs/design-system/design-system/hub-editorial/tokens.css'));
+  assert.ok(!documents.some(document => document.source.startsWith('docs/design-system/')));
+  assert.ok(documents.some(document => document.route === '/simulations/'));
+  assert.equal(data.locales.en.href.simulations, '/awesome-copilot-adventures/en/simulations/');
+  const illustrated = data.locales.en.catalog.filter(document => document.image);
+  assert.ok(illustrated.length >= data.adventureCount);
+  for (const document of illustrated) {
+    assert.ok(artifacts.has(`site-generated/public${document.image.slice('/awesome-copilot-adventures'.length)}`), document.image);
+  }
   assert.ok(translationSegments(documents).length > 1000);
   for (const entry of manifest) {
     const object = JSON.parse(artifacts.get(`site-generated/public/site-data/objects/${entry.hash}.json`));

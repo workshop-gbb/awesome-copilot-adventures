@@ -159,7 +159,7 @@ async function diagrams() {
   });
   let mermaid;
   try {
-    ({ default: mermaid } = await import(`https://cdn.jsdelivr.net/npm/mermaid@${config.mermaidVersion}/dist/mermaid.esm.min.mjs`));
+    ({ default: mermaid } = await import(/* @vite-ignore */ `https://cdn.jsdelivr.net/npm/mermaid@${config.mermaidVersion}/dist/mermaid.esm.min.mjs`));
     mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', suppressErrorRendering: true, maxTextSize: 50000 });
   } catch (error) {
     for (const block of blocks) {

@@ -1,0 +1,158 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - progressbar "Page reading progress" [ref=e3]
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "Awesome Copilot Adventures · Home" [ref=e6] [cursor=pointer]:
+        - /url: /awesome-copilot-adventures/en/
+        - generic [ref=e12]:
+          - text: Awesome Copilot
+          - strong [ref=e13]: Adventures
+      - navigation "Main navigation" [ref=e14]:
+        - link "Adventures" [ref=e15] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/adventures/
+        - link "Hands-on labs" [ref=e16] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/hands-on/
+        - link "The practice studio" [ref=e17] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/simulations/
+        - link "Guides" [ref=e18] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/library/
+        - link "Repository" [ref=e19] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/repository/
+      - generic [ref=e20]:
+        - button "Search" [ref=e21] [cursor=pointer]
+        - generic [ref=e25]:
+          - generic [ref=e26]: Language
+          - navigation "Choose language" [ref=e27]:
+            - link "English" [ref=e28] [cursor=pointer]:
+              - /url: http://127.0.0.1:49832/awesome-copilot-adventures/en/simulations/
+              - text: EN
+            - link "Español" [ref=e29] [cursor=pointer]:
+              - /url: http://127.0.0.1:49832/awesome-copilot-adventures/es/simulations/
+              - text: ES
+            - link "Português do Brasil" [ref=e30] [cursor=pointer]:
+              - /url: http://127.0.0.1:49832/awesome-copilot-adventures/pt-br/simulations/
+              - text: PT-BR
+        - button "Dark theme" [ref=e31] [cursor=pointer]
+        - link "Start learning" [ref=e34] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/start-here/
+          - text: Start learning
+          - generic [aria-hidden] [ref=e35]: ↗
+  - main [ref=e36]:
+    - generic [ref=e37]:
+      - paragraph [ref=e38]: Interactive learning / local only
+      - article [ref=e39]:
+        - heading "The practice studio" [level=1] [ref=e40]
+        - paragraph [ref=e41]: Make a decision, observe the consequence, and try again. These local exercises connect the learning guides to a workflow you can inspect before running a real lab.
+        - paragraph [ref=e42]: "Choose a simulation below: step through a bounded workflow, select relevant context, or run a small JavaScript fixture with a failing and a corrected implementation."
+        - paragraph [ref=e43]: The workflow is an illustration, not a live agent. Context units are synthetic, not model tokens. Fixture checks execute only the fixed example in your browser; they do not establish that a course lab was completed.
+    - generic [ref=e44]:
+      - paragraph [ref=e48]: Educational simulations, not a live Copilot session. No AI model, account, terminal, file edit or external service is used.
+      - tablist "The practice studio" [ref=e49]:
+        - tab "01 / Agent workflow" [selected] [ref=e50] [cursor=pointer]
+        - tab "02 / Context workbench" [ref=e54] [cursor=pointer]
+        - tab "03 / Verification loop" [ref=e58] [cursor=pointer]
+      - tabpanel "01 / Agent workflow" [ref=e62]:
+        - generic [ref=e64]:
+          - paragraph [ref=e65]: 01 / Ask → Plan → Agent
+          - heading "Agent workflow" [level=2] [ref=e66]
+          - paragraph [ref=e67]: Walk through a bounded change and see why a failed review must stop the handoff.
+        - generic [ref=e70]:
+          - generic [ref=e71]:
+            - text: Scenario
+            - combobox "Scenario" [ref=e72]:
+              - option "Reviewed change" [selected]
+              - option "Missing edge case"
+          - generic [ref=e73]:
+            - text: Playback speed
+            - combobox "Playback speed" [ref=e74]:
+              - option "Normal" [selected]
+              - option "Slow"
+          - generic [ref=e75]:
+            - button "Play sequence" [ref=e76] [cursor=pointer]
+            - button "Next step" [ref=e81] [cursor=pointer]
+            - button "Reset" [ref=e84] [cursor=pointer]
+        - figure "Numbers show the handoff order. The outlined stage is current; visited stages are labeled. Playback is opt-in and pauses when this page is hidden." [ref=e87]:
+          - list "Agent workflow" [ref=e88]:
+            - listitem [ref=e89]:
+              - generic [ref=e90]: "01"
+              - strong [ref=e91]: Ask
+              - generic [ref=e92]: Pending
+            - listitem [ref=e93]:
+              - generic [ref=e94]: "02"
+              - strong [ref=e95]: Plan
+              - generic [ref=e96]: Pending
+            - listitem [ref=e97]:
+              - generic [ref=e98]: "03"
+              - strong [ref=e99]: Agent
+              - generic [ref=e100]: Pending
+            - listitem [ref=e101]:
+              - generic [ref=e102]: "04"
+              - strong [ref=e103]: Review
+              - generic [ref=e104]: Pending
+            - listitem [ref=e105]:
+              - generic [ref=e106]: "05"
+              - strong [ref=e107]: Evidence
+              - generic [ref=e108]: Pending
+        - generic [ref=e111]:
+          - heading "Ask" [level=3] [ref=e112]
+          - paragraph [ref=e113]: Investigate the repository, constraints and unknowns before requesting a change.
+          - paragraph [ref=e114]: Expected artifact
+          - paragraph [ref=e115]: A source-grounded map and open questions.
+        - generic [ref=e116]:
+          - generic [ref=e117]:
+            - generic [ref=e118]: Illustrative trace
+            - generic [ref=e119]: Ready
+          - status [ref=e120]: Select Next step or Play sequence to inspect each handoff.
+          - progressbar "Stages visited" [ref=e121]
+          - paragraph [ref=e122]: 0 / 5 Stages visited
+    - complementary [ref=e123]:
+      - heading "Continue with the real concepts" [level=2] [ref=e124]
+      - paragraph [ref=e125]: Official documentation checked on 2026-09-07. Capabilities depend on harness, account and organization policy; this studio does not reproduce a product interface.
+      - list [ref=e126]:
+        - listitem [ref=e127]:
+          - link "Agents, harnesses and execution environments" [ref=e128] [cursor=pointer]:
+            - /url: https://code.visualstudio.com/docs/agents/overview
+        - listitem [ref=e129]:
+          - link "Adding relevant context in VS Code" [ref=e130] [cursor=pointer]:
+            - /url: https://code.visualstudio.com/docs/chat/copilot-chat-context
+        - listitem [ref=e131]:
+          - link "Start learning" [ref=e132] [cursor=pointer]:
+            - /url: /awesome-copilot-adventures/en/start-here/
+          - text: ·
+          - link "Download a lab" [ref=e133] [cursor=pointer]:
+            - /url: /awesome-copilot-adventures/en/downloads/
+  - contentinfo [ref=e134]:
+    - generic [ref=e135]:
+      - generic [ref=e136]:
+        - paragraph [ref=e137]: Awesome Copilot Adventures
+        - heading "Build with intent. Verify with evidence." [level=2] [ref=e138]
+        - paragraph [ref=e139]: An open educational curriculum. Availability depends on the selected product, harness, account and policy.
+      - navigation "Guides" [ref=e140]:
+        - link "The practice studio" [ref=e141] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/simulations/
+        - link "Glossary" [ref=e142] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/glossary/
+        - link "Feature status" [ref=e143] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/feature-status/
+        - link "Design system" [ref=e144] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/design-system/
+        - link "Support" [ref=e145] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/read/support/
+        - link "Inter · Font licenses" [ref=e146] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/assets/site/fonts/OFL-Inter.txt
+        - link "JetBrains Mono · Font licenses" [ref=e147] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/assets/site/fonts/OFL-JetBrains-Mono.txt
+      - navigation "Choose language" [ref=e148]:
+        - link "English" [ref=e149] [cursor=pointer]:
+          - /url: http://127.0.0.1:49832/awesome-copilot-adventures/en/simulations/
+        - link "Español" [ref=e150] [cursor=pointer]:
+          - /url: http://127.0.0.1:49832/awesome-copilot-adventures/es/simulations/
+        - link "Português do Brasil" [ref=e151] [cursor=pointer]:
+          - /url: http://127.0.0.1:49832/awesome-copilot-adventures/pt-br/simulations/
+        - link "GitHub ↗" [ref=e152] [cursor=pointer]:
+          - /url: https://github.com/workshop-gbb/awesome-copilot-adventures
+    - generic [ref=e153]:
+      - generic [ref=e154]: MIT · Awesome Copilot Adventures
+      - generic [ref=e155]: 67b71ac660bf0596

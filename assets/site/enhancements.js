@@ -48,19 +48,6 @@ export function enhanceSite(config, locationChanged) {
         localStorage.setItem(storageKey, JSON.stringify(next));
         state = next;
         renderReading();
-        addEventListener('storage', event => {
-          if (!trackers.length || (event.key !== storageKey && event.key !== null)) return;
-          try {
-            state = readingState(localStorage.getItem(storageKey), sources);
-            storageAvailable = true;
-            for (const button of document.querySelectorAll('[data-mark-reading]')) button.disabled = false;
-            status('');
-            renderReading();
-          } catch (error) {
-            if (!(error instanceof DOMException || error instanceof SyntaxError || error instanceof TypeError)) throw error;
-            storageError(error);
-          }
-        });
         status(state.read.includes(button.dataset.markReading) ? ui.readingSaved : ui.readingRemoved);
       } catch (error) {
         storageError(error);
@@ -120,6 +107,23 @@ export function enhanceSite(config, locationChanged) {
     render();
   }
   renderReading();
+  const syncReading = () => {
+    if (!trackers.length) return;
+    try {
+      state = readingState(localStorage.getItem(storageKey), sources);
+      storageAvailable = true;
+      for (const button of document.querySelectorAll('[data-mark-reading]')) button.disabled = false;
+      status('');
+      renderReading();
+    } catch (error) {
+      if (!(error instanceof DOMException || error instanceof SyntaxError || error instanceof TypeError)) throw error;
+      storageError(error);
+    }
+  };
+  addEventListener('storage', event => {
+    if (event.key === storageKey || event.key === null) syncReading();
+  });
+  addEventListener('pageshow', event => { if (event.persisted) syncReading(); });
 
   const progress = document.getElementById('reading-progress');
   let scrollFrame;
