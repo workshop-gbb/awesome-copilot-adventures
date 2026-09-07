@@ -54,7 +54,23 @@ class ModernizationContract(unittest.TestCase):
         self.import_orders()
         with sqlite3.connect(self.target) as connection:
             self.assertEqual(connection.execute("PRAGMA user_version").fetchone(), (1,))
-            self.assertEqual(connection.execute("SELECT COUNT(*), SUM(total_cents) FROM orders").fetchone(), (3, 6249))
+            cents = [int(row[0]) for row in connection.execute("SELECT total_cents FROM orders")]
+            self.assertEqual((len(cents), sum(cents)), (3, 6249))
+
+    def test_large_integer_values_and_sum_preserve_python_precision(self):
+        self.source.write_text(
+            "id,customer,total_cents,status\n"
+            "A,C,5000000000000000000,paid\n"
+            "B,C,5000000000000000000,paid\n"
+            "C,C,100000000000000000000,paid\n",
+            encoding="utf-8",
+        )
+        self.import_orders()
+        before = self.run_cli("service.py", "--source", self.source)
+        after = self.run_cli("service.py", "--backend", "sqlite", "--source", self.target)
+        self.assertEqual(after.returncode, 0, after.stderr)
+        self.assertEqual(before.stdout, after.stdout)
+        self.assertEqual(json.loads(after.stdout)["total_cents"], 110000000000000000000)
 
     def test_existing_target_is_never_overwritten(self):
         self.target.write_bytes(b"existing target sentinel")

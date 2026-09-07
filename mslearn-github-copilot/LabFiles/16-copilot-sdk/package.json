@@ -1,0 +1,12 @@
+{
+  "name": "hands-on-copilot-sdk-support",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test --test-concurrency=1 app.test.mjs",
+    "start": "node live.mjs"
+  },
+  "engines": { "node": ">=24" },
+  "dependencies": { "@github/copilot-sdk": "1.0.13" }
+}

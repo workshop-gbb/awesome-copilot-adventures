@@ -1,0 +1,4 @@
+node_modules/
+.copilot-runtime/
+.env*
+*.log

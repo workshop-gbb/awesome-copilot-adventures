@@ -48,6 +48,10 @@ defaults:
     values:
       layout: default
       last_modified_date: 2026-09-05
+  - scope:
+      path: mslearn-github-copilot/Instructions
+    values:
+      layout: default
 exclude:
   - README.md
   - NOTICE.md
@@ -67,3 +71,11 @@ exclude:
   - CODE_OF_CONDUCT.md
   - SECURITY.md
   - SUPPORT.md
+  - mslearn-github-copilot/readme.md
+  - mslearn-github-copilot/catalog.json
+  - mslearn-github-copilot/LICENSE
+  - mslearn-github-copilot/LabFiles
+  - mslearn-github-copilot/Allfiles
+  - mslearn-github-copilot/.github
+  - mslearn-github-copilot/Instructions/readme.md
+  - mslearn-github-copilot/Instructions/Labs/Media

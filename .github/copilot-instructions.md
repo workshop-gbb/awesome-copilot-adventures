@@ -14,6 +14,7 @@ This repository is an educational curriculum for agentic development with GitHub
 - Write current adventures in `adventures/<level>/<slug>/`.
 - Put executable starters in `labs/<slug>/`.
 - Put current site pages in `docs/`.
+- Keep numbered hands-on exercises and their fixtures in `mslearn-github-copilot/`.
 - Put generated media in `assets/`.
 - Treat `legacy/` as read-only historical material unless the task explicitly targets it.
 
@@ -29,6 +30,8 @@ Each adventure must include metadata, official references, story, objectives, pr
 - Do not state that a tool, model, or target is universally available.
 - Do not claim performance or productivity improvements without executed evidence.
 - Never commit secrets or real API keys.
+- Use the canonical monochrome palette, accessible title/description, legend and
+  explanation for every Mermaid diagram. Do not add fantasy stories to the hands-on track.
 
 ## Validation
 

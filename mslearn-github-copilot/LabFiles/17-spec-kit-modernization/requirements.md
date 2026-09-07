@@ -21,5 +21,10 @@ separately from queries.
 - MOD-5: reading a missing SQLite database does not create one.
 - MOD-6: rollback to CSV works and its source hash is unchanged.
 
+Python's accepted integer range must not be silently narrowed to SQLite's signed
+64-bit `INTEGER`/`SUM` range. Store validated decimal text if needed, convert it to
+Python integers on read, and reconcile with exact integer arithmetic. Never switch
+to floating-point sums. The JSON contract still exposes integer cents.
+
 No accounts, payments, HTTP APIs, production records, external databases, or cloud
 deployment are part of this modernization.

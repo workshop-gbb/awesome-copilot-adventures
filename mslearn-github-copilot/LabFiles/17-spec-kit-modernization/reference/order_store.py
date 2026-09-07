@@ -14,6 +14,6 @@ def read_sqlite(source):
         rows = connection.execute(
             "SELECT id, customer, total_cents, status FROM orders ORDER BY id"
         ).fetchall()
-        return [dict(row) for row in rows]
+        return [{**dict(row), "total_cents": int(row["total_cents"])} for row in rows]
     finally:
         connection.close()

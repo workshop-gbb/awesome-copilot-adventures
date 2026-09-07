@@ -1,32 +1,14 @@
-# DataAnalyzerReporter
+# Bounded data-analysis fixture
 
-A C# console application that reads CSV data from a file, processes it by calculating sums for each record, and generates a report.
+The app reads a small text fixture, sums parseable numeric values per nonblank line,
+and replaces `output.txt` in its working directory.
 
-## Usage
-
-```
-DataAnalyzerReporter <input_file>
-```
-
-## Example
-
-```
-DataAnalyzerReporter data.txt
+```bash
+dotnet build DataAnalyzerReporter.csproj -c Release -m:1 -p:UseSharedCompilation=false
+dotnet run --no-build -c Release --project DataAnalyzerReporter.csproj -- data.txt
 ```
 
-This will read the data.txt file, process each line as comma-separated values, calculate the sum of numeric values in each line, and output the results to output.txt.
-
-## Performance Notes
-
-The application includes performance monitoring and reports:
-- Memory usage
-- Processing time
-- Number of records processed
-
-## Files
-
-- `Program.cs` - Main entry point
-- `FileLoader.cs` - File reading utilities
-- `DataAnalyzer.cs` - Data processing logic
-- `ReportGenerator.cs` - Report generation
-- `data.txt` - Sample input data
+Run only in a disposable copy. The stopwatch currently starts **after file loading**;
+the memory printout is a managed-memory estimate, not total allocations or peak
+working set. Preserve culture, parsing and output while comparing one I/O change.
+Do not use the historical `output.txt` as measured performance evidence.

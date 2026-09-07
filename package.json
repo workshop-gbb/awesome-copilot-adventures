@@ -5,7 +5,9 @@
   "description": "Evidence-first, fantasy-themed curriculum for agentic software engineering with GitHub Copilot",
   "scripts": {
     "build": "node scripts/check-content.js",
-    "test": "node scripts/check-links.js && node scripts/check-content.js && node scripts/verify-labs.js && node solutions/javascript/The-Gridlock-Arena-of-Mythos/The-Gridlock-Arena-of-Mythos.test.js"
+    "test": "node scripts/check-links.js && node scripts/check-content.js && node scripts/check-hands-on.js && node scripts/check-diagrams.js && node --test --test-concurrency=1 scripts/hands-on.test.js && node scripts/verify-labs.js && node solutions/javascript/The-Gridlock-Arena-of-Mythos/The-Gridlock-Arena-of-Mythos.test.js",
+    "format:diagrams": "node scripts/format-diagrams.js",
+    "test:hands-on": "node scripts/check-hands-on.js && node --test --test-concurrency=1 scripts/hands-on.test.js"
   },
   "engines": {
     "node": ">=24"

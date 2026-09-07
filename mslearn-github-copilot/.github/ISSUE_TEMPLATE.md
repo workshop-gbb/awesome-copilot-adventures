@@ -1,12 +1,5 @@
-# Module: 00
-## Lab/Demo: 00
-### Task: 00
-#### Step: 00
+# Report a hands-on issue
 
-Description of issue
-
-Repro steps:
-
-1.
-1.
-1.
+Use the root repository's issue template. Include the lab ID, task, source path,
+runtime, working directory, expected behavior and redacted observed output.
+Never attach credentials or private learner data.

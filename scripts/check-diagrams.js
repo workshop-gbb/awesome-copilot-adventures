@@ -24,7 +24,7 @@ function checkDiagram(block, markdown) {
   if (/\b(?:fill|stroke|color|background):\s*(?:red|blue|green|yellow|purple|orange|pink)\b/i.test(block.code)) {
     errors.push('named chromatic colors are not part of the palette');
   }
-  const following = markdown.split('\n').slice(block.end + 1).join('\n').split(/\n#{1,6} /, 1)[0];
+  const following = markdown.split('\n').slice(block.end + 1).join('\n').split(/\n#{1,6} |\n```mermaid/, 1)[0];
   if (!/\*\*Legend\.\*\*\s+\S/.test(following)) errors.push('add an adjacent Legend paragraph');
   if (!/\*\*Explanation\.\*\*\s+\S/.test(following)) errors.push('add an adjacent Explanation paragraph');
   return errors;

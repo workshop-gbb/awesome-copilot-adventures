@@ -26,10 +26,25 @@
   }
 
   .language-mermaid {
-    background: rgba(13, 17, 23, 0.45);
-    border: 1px solid rgba(139, 148, 158, 0.35);
+    background: #ffffff;
+    color: #111111;
+    border: 1px solid #999999;
     border-radius: 0.75rem;
     padding: 1rem;
+  }
+
+  pre.mermaid,
+  div.mermaid {
+    background: #ffffff;
+    color: #111111;
+    border: 1px solid #999999;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    overflow-x: auto;
+  }
+
+  .mermaid svg {
+    background: #ffffff;
   }
 }
 

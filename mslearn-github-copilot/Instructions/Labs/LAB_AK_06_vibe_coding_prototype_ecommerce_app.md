@@ -150,4 +150,4 @@ changed in the disposable copy. Do not remove or stop another project's server.
 - [Planning with agents](https://code.visualstudio.com/docs/agents/run/planning)
 - [Agent best practices](https://code.visualstudio.com/docs/agents/best-practices)
 - [Custom instructions](https://code.visualstudio.com/docs/agent-customization/custom-instructions)
-- [VS Code browser tools](https://code.visualstudio.com/docs/agents/browser)
+- [Accessibility testing with Edge DevTools](https://learn.microsoft.com/en-us/microsoft-edge/devtools/accessibility/reference)

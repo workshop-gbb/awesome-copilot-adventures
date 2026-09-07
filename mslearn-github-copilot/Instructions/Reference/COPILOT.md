@@ -83,9 +83,9 @@ it combines them. Inline completions are not the same instruction-aware chat wor
 
 > [!IMPORTANT]
 > VS Code Agent Host sessions do **not** use prompt files. For the Spec Kit slash
-> commands in this track, use a supported **Local** session or verify the generated
-> custom-agent integration explicitly. Do not assume copying a prompt into a skill
-> preserves Spec Kit's scripts, arguments, or workflow.
+> commands layout, use a supported **Local** session. The pinned Spec Kit v1.0.4
+> integration instead generates skills by default; see [the versioned reference](SPEC_KIT.md).
+> Do not assume copying an old prompt into a skill preserves its scripts or arguments.
 
 ## Features are not entitlements
 

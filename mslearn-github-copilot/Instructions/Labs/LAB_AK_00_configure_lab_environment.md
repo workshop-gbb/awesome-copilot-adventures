@@ -1,60 +1,101 @@
 ---
+layout: default
+title: Prepare the C# environment
+parent: Hands-on Labs
+nav_order: 4
+permalink: /hands-on/setup-dotnet/
+lab_id: setup-dotnet
+last_verified: "2026-09-07"
 lab:
-  title: Prepare - Configure your lab environment for GitHub Copilot exercises
-  description: Review lab requirements and configure resources before starting GitHub Copilot exercises.
-  duration: 15 minutes
-  level: 200
-  primarytopics:
-    - GitHub
-    - Visual Studio Code
+  title: Prepare - Configure the C# hands-on environment
+  description: Verify the SDK, project target, working directory and test discovery in an isolated library fixture.
+  duration: 20 minutes
+  level: 100
+  islab: true
+  primarytopics: [C#, .NET, VS Code]
 ---
 
-# Configure your lab environment for GitHub Copilot exercises
+# Prepare the C# hands-on environment
 
-Your lab environment must be configured for C# development using Visual Studio Code and GitHub Copilot. Access to a GitHub account with GitHub Copilot enabled is required.
+## Learning objectives
 
-Complete the following steps to verify that your lab environment is configured correctly:
+- Distinguish an installed SDK from the target runtime a project needs.
+- Build one copied project without touching other workspaces.
+- Verify test discovery rather than assuming compilation is testing.
 
-1. Verify that Git version 2.48 or later is installed in your lab environment.
+## Before you start
 
-    Run the following command in a terminal window to check the installed version of Git:
+Read [work-drive setup and resource limits](../Reference/SETUP.md).
+The integrated C# fixtures target .NET 10. C# Dev Kit is useful for editor test
+discovery; command-line builds and tests remain the reproducible baseline.
 
-    ```bash
-    git --version
-    ```
+## Concepts and use cases
 
-    If you're running Windows and you want to update Git, you can use the following command:
+`dotnet build` compiles a project. `dotnet test` discovers and executes its tests.
+`dotnet run` starts the application and may depend on the current working directory.
+A newer SDK alone does not mean every older runtime is installed.
 
-    ```bash
-    git update-git-for-windows
-    ```
+## Exercise scenario
 
-    If necessary, you can download Git using the following URL: <a href="https://git-scm.com/downloads" target="_blank">Download Git</a>.
+Prepare the library fixture for investigation, not a new console template or a
+global configuration change.
 
-1. Verify that the latest LTS or STS version of the .NET SDK is installed in your lab environment.
+## Task 1 - Verify the selected tools
 
-    Run the following command in a terminal window to check the installed version of the .NET SDK:
+1. Inspect the runtime required by the selected fixture's `.csproj`.
+2. Run `dotnet --list-sdks` and `dotnet --list-runtimes`.
+3. If the required runtime is missing, use your organization's approved installation
+   route or the repository Dev Container. Do not install every SDK.
+4. Verify Git and the VS Code C# extension if using editor features.
+5. For Copilot access, use [the account setup lab](LAB_AK_00_enable_github_copilot_in_visual_studio_code.md).
 
-    ```dotnetcli
-    dotnet --version
-    ```
+## Task 2 - Prepare and build one fixture
 
-    If necessary, you can download the .NET SDK using the following URL: <a href="https://dotnet.microsoft.com/download/dotnet" target="_blank">Download .NET SDK</a>.
+1. From the curriculum root:
 
-1. Verify that Visual Studio Code and the C# Dev Kit extension are installed in your lab environment.
+   ```bash
+   node scripts/prepare-hands-on.js --lab 02-csharp --destination /Volumes/T9/Dev/oss/workshop-runs/02-csharp
+   ```
 
-    If necessary, you can download Visual Studio Code using the following URL: <a href="https://code.visualstudio.com/download" target="_blank">Download Visual Studio Code</a>
+2. Open the printed directory alone.
+3. With the work-drive cache variables set, run from that copy's root:
 
-    You can install the C# Dev Kit extension using the Extensions view in Visual Studio Code.
+   ```bash
+   dotnet build src/Library.Console/Library.Console.csproj -m:1 -p:UseSharedCompilation=false
+   dotnet test tests/UnitTests/UnitTests.csproj -m:1 -p:UseSharedCompilation=false --list-tests
+   dotnet test tests/UnitTests/UnitTests.csproj -m:1 -p:UseSharedCompilation=false
+   ```
 
-1. Verify that you have access to a GitHub account and GitHub Copilot subscription.
+4. Record discovered tests, exit codes, and any warnings. A missing feed/network
+   dependency is an environment blocker, not evidence of a failed domain test.
+5. Do not add the same NuGet source repeatedly or change global feed configuration.
 
-    You can log in to your GitHub account using the following URL: <a href="https://github.com/login" target="_blank">GitHub login</a>.
+## Verify your work
 
-    If you don't have a GitHub account, you can create an individual account from the GitHub login page. On the login page, select **Create an account**.
+- [ ] The project target and installed runtime agree.
+- [ ] The console project builds and the test project discovers actual tests.
+- [ ] Test output is recorded separately from build output.
+- [ ] Caches and generated files remain on the selected work drive.
 
-    Open the settings/profile page of your GitHub account and verify that you have access to a GitHub Copilot subscription. If you have an active subscription for GitHub Copilot Pro, GitHub Copilot Pro+, GitHub Copilot Business, or GitHub Copilot Enterprise that you can use for training, you can use your existing GitHub Copilot subscription to complete the GitHub Copilot exercises.
+## Troubleshooting
 
-    If you have an individual GitHub account, but you don't have a GitHub Copilot subscription, you can set up a GitHub Copilot Free plan either from the GitHub settings page or Visual Studio Code during a training exercise.
+If `appSettings.json` is missing when running the console app, change to
+`src/Library.Console` in the disposable copy before running it. If tests are absent
+in the editor, select/build the test project and refresh discovery; do not equate
+“zero tests” with success.
 
-    > **IMPORTANT**: GitHub Copilot Free is a limited version of GitHub Copilot intended for learning and evaluation purposes. It includes up to 2,000 code completions per month and limited access to Copilot Chat and other AI-powered features. If you use GitHub Copilot Free outside of the training exercises, you may reach its usage limits before completing the course. GitHub Copilot billing and usage limits changed on June 1, 2026, and are now based on usage rather than Premium Requests. Usage limits and included capabilities may vary by plan and can change over time.
+## Independent practice
+
+Explain why `--no-restore` is appropriate after a successful restore but not on a
+fresh checkout. Demonstrate the difference without installing a new test framework.
+
+## Reset
+
+Close the fixture window. Keep shared SDKs intact. Remove only the inspected
+disposable copy if no evidence or changes need preservation.
+
+## Official references
+
+- [.NET CLI overview](https://learn.microsoft.com/en-us/dotnet/core/tools/)
+- [C# testing in VS Code](https://code.visualstudio.com/docs/csharp/testing)
+- [C# Dev Kit](https://code.visualstudio.com/docs/csharp/get-started)

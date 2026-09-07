@@ -1,935 +1,126 @@
 ---
+layout: default
+title: Develop book availability in C#
+parent: Hands-on Labs
+nav_order: 13
+permalink: /hands-on/03-csharp/
+lab_id: 03-csharp
+last_verified: "2026-09-07"
 lab:
-  title: Exercise - Develop new code features using GitHub Copilot
-  description: Learn how to accelerate the development of new code features using GitHub Copilot in Visual Studio Code.
-  duration: 30 minutes
+  title: Exercise - Develop a book-availability feature in C#
+  description: Add title search and physical-copy availability through the existing console workflow with regression tests.
+  duration: 70 minutes
   level: 200
   islab: true
-  primarytopics:
-    - GitHub
-    - Visual Studio Code
+  primarytopics: [C#, Feature development, Contracts]
 ---
 
-# Develop new code features using GitHub Copilot
+# Develop book availability in C#
 
-GitHub Copilot's code completion and interactive chat features help developers write code faster and with fewer errors. It provides suggestions for code snippets, functions, and even entire classes based on the context of the code being written. In this exercise, you use GitHub Copilot to accelerate the development of new code features in Visual Studio Code.
+Adding a feature spans input, data retrieval, domain interpretation and output.
+A helper that is never connected to the menu is not a completed feature.
 
-This exercise should take approximately **30** minutes to complete.
+## Learning objectives
 
-> **IMPORTANT**: To complete this exercise, you must provide your own GitHub account and GitHub Copilot subscription. If you don't have a GitHub account, you can <a href="https://github.com/" target="_blank">sign up</a> for a free individual account and use a GitHub Copilot Free plan to complete the exercise. If you have access to a GitHub Copilot Pro, GitHub Copilot Pro+, GitHub Copilot Business, or GitHub Copilot Enterprise subscription from within your lab environment, you can use your existing GitHub Copilot subscription to complete this exercise.
+- Turn a user request into explicit acceptance cases.
+- Model availability per physical copy rather than per title.
+- Connect the feature through the existing console workflow.
+- Preserve unrelated return and membership behavior.
 
 ## Before you start
 
-Your lab environment MUST include the following resources:
+Prepare `03-csharp` using [the common setup](../Reference/SETUP.md).
+Use the bundled
+[library feature fixture](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/03-develop-code-features/AccelerateDevGHCopilot).
+The C# setup lab describes SDK, caches and execution directories.
 
-- Git 2.48 or later.
-- The .NET SDK version 9.0 or later.
-- Access to a GitHub account with GitHub Copilot enabled.
-- Visual Studio Code (version 1.116 or later) with the C# Dev Kit extension.
+## Concepts and use cases
 
-If you're using a local PC as a lab environment for this exercise:
-
-- For help configuring your local PC as your lab environment, open the following link in a browser: <a href="https://go.microsoft.com/fwlink/?linkid=2320147" target="_blank">Configure your lab environment resources</a>.
-
-- For help enabling your GitHub Copilot subscription in Visual Studio Code, open the following link in a browser: <a href="https://go.microsoft.com/fwlink/?linkid=2320158" target="_blank">Enable GitHub Copilot within Visual Studio Code</a>.
-
-If you're using a hosted lab environment for this exercise:
-
-- For help enabling your GitHub Copilot subscription in Visual Studio Code, paste the following URL into a browser's site navigation bar: <a href="https://go.microsoft.com/fwlink/?linkid=2320158" target="_blank">Enable GitHub Copilot within Visual Studio Code</a>.
-
-- To ensure that the .NET SDK is configured to use the official NuGet.org repository as a source for downloading and restoring packages:
-
-    Open a command terminal and then run the following command:
-
-    ```bash
-
-    dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
-
-    ```
-
-- To ensure that Git is configured to use your name and email address:
-
-    Update the following commands with your information, and then run the commands:
-
-    ```bash
-
-    git config --global user.name "John Doe"
-
-    ```
-
-    ```bash
-
-    git config --global user.email johndoe@example.com
-
-    ```
+`Book` describes a title; `BookItem` identifies a physical copy; `Loan` records one
+copy's borrowing history. A returned loan does not make a copy unavailable.
+An overdue but unreturned loan remains active.
 
 ## Exercise scenario
 
-You're a developer working in the IT department of your local community. The backend systems that support the public library were lost in a fire. Your team needs to develop a temporary solution to help the library staff manage their operations until the system can be replaced. Your team chose GitHub Copilot to accelerate the development process.
+A librarian needs case-insensitive title search and a view of each physical copy's
+availability. Lending, reservations, database migration and authentication are not
+part of this feature.
 
-An initial version of your library application was tested by end users and several additional features are requested. Your team agreed to work on the following features:
+## Task 1 - Investigate and run the baseline
 
-- Book availability: Enable a librarian to determine the availability status of a book. This feature should display a message indicating that a book is available for loan or the return due date if the book is currently on loan to another patron.
+1. Inspect `CommonActions.cs`, `ConsoleApp.cs`, core entities and `JsonData`.
+2. Run from the copied project root:
 
-- Book loans: Enable a librarian to loan a book to a patron (if the book is available). This feature should display the option for a patron to receive a book on loan, update Loans.json with the new loan, and display updated loan details for the patron.
+   ```bash
+   dotnet test tests/UnitTests/UnitTests.csproj -m:1 -p:UseSharedCompilation=false
+   ```
 
-- Book reservations: Enable a librarian to reserve a book for a patron (unless the book is already reserved). This feature should implement a new book reservation process. This feature may require creating a new Reservations.json file along with the new classes and interfaces required to support the reservation process.
+3. In Ask, trace the existing patron-search menu path. Identify the equivalent
+   insertion points for book search without duplicating the input loop.
+4. Record active-loan semantics from `ReturnDate`, not a guess based on due date.
 
-Each team member will work on one of the new features and then regroup. You'll work on the feature to determine the availability status of a book. Your coworker will work on the feature to loan a book to a patron. The final feature, to reserve a book for a patron, will be developed after the other two features are completed.
+## Task 2 - Define acceptance before code
 
-This exercise includes the following tasks:
+| ID | Case | Expected observable |
+| --- | --- | --- |
+| BOOK-1 | Partial title, different case, surrounding whitespace | Matching titles after defined normalization |
+| BOOK-2 | Blank search | Clear prompt/error, no accidental full-catalog dump |
+| BOOK-3 | Unknown title | Explicit no-results message |
+| BOOK-4 | Two copies; one active loan | One unavailable copy and one available copy |
+| BOOK-5 | Returned historical loan | Copy remains available |
+| BOOK-6 | Active overdue loan | Still unavailable; due date shown as historical data |
 
-1. Set up the library application in Visual Studio Code.
+Use newly constructed synthetic records in tests rather than relying on stale
+dates in JSON files. Specify deterministic title/copy ordering.
 
-1. Use Visual Studio Code to create a GitHub repository for the library application.
+## Task 3 - Plan the complete path
 
-1. Create a "book availability" branch in the code repository.
+```text
+Plan title search and per-copy availability in the existing C# library.
+Map BOOK-1..6 to tests and source files. Reuse existing input handling and JSON
+loading. Add a distinct CommonActions flag without renumbering existing flags.
+Keep return, extension and membership behavior unchanged. Do not edit yet.
+```
 
-1. Develop a new "book availability" feature.
+Review repository/service boundaries. If using `JsonData` directly in the console
+to match the starter, explain the coupling; do not call it an ideal production design.
 
-    - Use GitHub Copilot suggestions to help implement the code more quickly and accurately.
-    - Sync your code updates to the "book availability" branch of your remote repository.
+## Task 4 - Implement with a failing regression first
 
-1. Merge your "book availability" updates into the main branch of the repository.
+1. Add a test for the two-copy case and confirm it fails for the absent feature.
+2. Ask Agent to implement only the reviewed feature slice.
+3. Inspect matching, whitespace handling, active loans and result ordering.
+4. Connect menu display, input mapping and dispatch. Preserve existing action values.
+5. Add remaining boundary cases and run the existing/new tests together.
+6. Start the app from `src/Library.Console` and manually exercise the menu.
+7. Record the actual output and confirm the feature performs no writes.
 
-## Set up the library application in Visual Studio Code
+## Verify your work
 
-You need to clone the training repository and then open the library solution in Visual Studio Code.
+- [ ] All BOOK cases have executable or clearly labeled manual evidence.
+- [ ] Two physical copies can have different availability.
+- [ ] Returned versus overdue-active loans are distinguished.
+- [ ] The menu reaches the implementation.
+- [ ] Existing tests remain green and JSON data is not modified by search.
 
-Use the following steps to set up the library application:
+## Troubleshooting
 
-> **NOTE**: If you already cloned the `mslearn-github-copilot-dev` repository for a previous exercise, skip the cloning steps below. Open the cloned repository in Visual Studio Code and continue with the verification step.
+If one active loan hides all copies, check joins by `BookItemId`.
+If a method passes unit tests but the menu never calls it, inspect action dispatch.
+If a due date is old, do not change fixture dates merely to hide a bug.
 
-1. Open a new Visual Studio Code window.
+## Independent practice
 
-1. On the Welcome page, select **Clone Git Repository...** (or open the Command Palette with **Ctrl+Shift+P** and run **Git: Clone**), and then enter the following URL:
+Design reservations as a separate feature: states, conflicting requests, expiration,
+and persistence. Do not add it opportunistically to this search change.
 
-    ```plaintext
-    https://github.com/MicrosoftLearning/mslearn-github-copilot-dev.git
-    ```
+## Reset
 
-1. When the file selection dialog appears, create a new folder in a convenient location to hold the repository (for example, `learn-github-copilot`), select it, and then click **Select as Repository Destination**.
+Preserve the acceptance table and output, then restore only feature/test files in
+the disposable copy. A remote branch or public repository is optional, not required.
 
-1. After the clone completes, select **Open** to open the cloned repository in Visual Studio Code.
+## Official references
 
-1. In the Visual Studio Code Explorer view, navigate to the `LabFiles\03-develop-code-features\AccelerateDevGHCopilot` folder and verify the following solution structure:
-
-    - AccelerateDevGHCopilot\
-        - src\
-            - Library.ApplicationCore\
-            - Library.Console\
-            - Library.Infrastructure\
-        - tests\
-            - UnitTests\
-
-1. Ensure that the solution builds successfully.
-
-    For example, in the Explorer view, right-click **LabFiles\03-develop-code-features\AccelerateDevGHCopilot\src\Library.Console\Library.Console.csproj**, and then select **Build**.
-
-    You'll see some Warnings, but there shouldn't be any Errors reported.
-
-## Create the GitHub repository for your code
-
-Creating the GitHub repository for your code will enable you to share your work with others and collaborate on the project.
-
-> **NOTE**: You use your own GitHub account to create a private GitHub repository for the library application.
-
-Use the following steps to complete this section of the exercise:
-
-1. Open a browser window and navigate to the GitHub login page.
-
-    The GitHub login page is: [https://github.com/login](https://github.com/login).
-
-1. Sign in to your GitHub account.
-
-    Your GitHub account must include a GitHub Copilot subscription.
-
-1. Open your GitHub account menu, and then select **Repositories**.
-
-1. Switch to the Visual Studio Code window.
-
-1. In Visual Studio Code, open the Source Control view.
-
-1. Select **Publish to GitHub**.
-
-1. Name for the repository **AccelerateDevGHCopilot**.
-
-    > **NOTE**: If you're not signed in to GitHub in Visual Studio Code, you'll be prompted to sign in. Once you're signed in, authorize Visual Studio Code with the requested permissions.
-
-1. Select **Publish to GitHub private repository**.
-
-1. Notice that Visual Studio Code displays status messages during the publish process.
-
-    When the publish process is finished, you'll see a message informing you that your code was successfully published to the GitHub repository that you specified.
-
-1. Switch to the browser window for your GitHub account.
-
-1. Open the new AccelerateDevGHCopilot repository in your GitHub account.
-
-    If you don't see your AccelerateDevGHCopilot repository, refresh the page. If you still don't see the repository, try the following steps:
-
-    1. Switch to Visual Studio Code.
-    1. Open your notifications (a notification was generated when the new repository was published).
-    1. Select **Open on GitHub** to open your repository.
-
-## Create a new branch in the repository
-
-Before you start developing the new "book availability" feature, you need to create a new branch in the repository. This enables you to work on the new feature without affecting the main branch of the repository. You can merge the new feature into the main branch when the code is ready.
-
-Use the following steps to complete this section of the exercise:
-
-1. Ensure that you have the AccelerateDevGHCopilot solution open in Visual Studio Code.
-
-1. Select the Source Control view and ensure that the local repository is synchronized with the remote repository (Pull or Sync).
-
-1. In the bottom-left corner of the window, select **main**.
-
-1. To create a new branch, type **book availability** and then select **+ Create new branch**.
-
-1. To push the new branch to the remote repository, select **Publish Branch**.
-
-    You don't need to create a Pull Request at this point. You can merge the new feature into the main branch when the code is ready.
-
-## Develop a new "book availability" feature
-
-In this section of the exercise, you use GitHub Copilot to develop a new feature for the library application. The requested feature will enable a librarian to check whether a book is available for loan, a common scenario that isn't currently supported by your library application.
-
-To implement the book availability feature, you'll need to complete the following updates:
-
-- Add a new **SearchBooks** action to the **CommonActions** enum in CommonActions.cs.
-
-- Update the **WriteInputOptions** method in ConsoleApp.cs.
-
-  - Add support for the new **CommonActions.SearchBooks** option.
-  - Display the option to check if a book is available for loan.
-
-- Update the **ReadInputOptions** method in ConsoleApp.cs.
-
-  - Add support for the new **CommonActions.SearchBooks** option.
-
-- Update the **PatronDetails** method in ConsoleApp.cs.
-
-  - Add **CommonActions.SearchBooks** to **options** before calling **ReadInputOptions**.
-  - Add an **else if** to handle the **SearchBooks** action.
-  - The **else if** block should call a new method named **SearchBooks**.
-
-- Create a new **SearchBooks** method in ConsoleApp.cs.
-
-  - The **SearchBooks** method should read a user provided book title.
-  - Check if a book is available for loan, and display a message stating either:
-
-    - "**book.title** is available for loan", or
-    - "**book.title** is on loan to another patron. The return due date is **loan.DueDate**."
-
-GitHub Copilot can help you implement the code updates needed to complete the new feature.
-
-The Chat view provides an easy way to develop new code features using GitHub Copilot. You can use the Chat view to ask questions about you codebase or development environment, to request code update suggestions, and get explanations for the code generated by GitHub Copilot.
-
-### Implement "book availability" updates using GitHub Copilot
-
-GitHub Copilot provides several options for developing new code features. When you want to stay in the editor, you can use code completion suggestions (ghost test suggestions), next edit suggestions, and the inline chat feature. When you want to interact with the AI AI-interactions, you can use agents in the Chat view. The Chat view provides three default agent modes (Ask, Plan, and Agent). Each mode supports a specific purpose:
-
-- Ask: The Ask mode works best for answering questions about your codebase, coding, and general technology concepts. Use Ask mode when you want to understand how something works, explore ideas, or get help with coding tasks.
-- Plan: The Plan mode is optimized for creating a structured implementation plan for a coding task. Use the plan agent when you want to break down a complex feature or change into smaller, manageable steps before implementation.
-- Agent: The Agent mode is optimized for complex coding tasks based on high-level requirements that might require running terminal commands and tools. The AI operates autonomously, determining the relevant context and files to edit, planning the work needed, and iterating to resolve problems as they arise.
-
-In this task, you use inline chat and agent modes to implement the "book availability" feature.
-
-Use the following steps to complete this section of the exercise:
-
-1. Open the Explorer view.
-
-1. Expand the **Library.Console** project.
-
-1. Open the CommonActions.cs file, and then select the **CommonActions** enum.
-
-    You need to add a new **SearchBooks** action to **CommonActions**.
-
-1. Set the chat mode to **Ask** and select the **Auto** model.
-
-    The Set Mode and Pick Model menus are in the bottom-left corner of the Chat view.
-
-    > **NOTE**: You can use a different model if your plan allows it, but responses may differ from those shown in this exercise. Free-plan users have a limited number of monthly chat requests, so each prompt counts against your quota.
-
-1. In the Chat view, enter the following prompt:
-
-    ```plaintext
-    How should I update the selected code to include a new `SearchBooks` action?
-    ```
-
-    GitHub Copilot should suggest a code update that adds the new **SearchBooks** action to the **CommonActions** enum.
-
-1. Review the suggested update.
-
-    Your updated code should look similar to the following code snippet: 
-
-    ```csharp
-
-    public enum CommonActions
-    {
-        Repeat = 0,
-        Select = 1,
-        Quit = 2,
-        SearchPatrons = 4,
-        RenewPatronMembership = 8,
-        ReturnLoanedBook = 16,
-        ExtendLoanedBook = 32,
-        SearchBooks = 64
-    }
-
-    ```
-
-1. In the Chat view, hover the mouse pointer over the suggested code, and then select **Apply in Editor**.
-
-    > **NOTE**: If prompted, select **Active editor src\\Library.Console\\CommonActions.cs**.
-    
-    The suggested code should be visible in the code editor, with options to **Keep** or **Undo**.
-
-1. To accept the suggested edits, select **Keep**.
-
-    The **Ask** mode enables you to explore potential updates outside the code editor, but you can still apply the suggestions. It's a good option for exploring different approaches for implementing a new feature. Working outside the editor keeps your codebase clean until you're ready to implement the changes.
-
-1. Open the ConsoleApp.cs file.
-
-1. Find and then select the **WriteInputOptions** method.
-
-    You need to add support for the new **CommonActions.SearchBooks** option. If the **SearchBooks** option is flagged, display the option to check if a book is available for loan.
-
-1. Open the inline chat (**Ctrl+I**) and then enter the following prompt:
-
-    ```plaintext
-    Update selection to include an option for the `CommonActions.SearchBooks` action. Use the letter "b" and the message "to check for book availability".
-    ```
-
-    GitHub Copilot should suggest a code update that adds a new **if** block for the **SearchBooks** action.
-
-1. Review the suggested update and then select **Keep**.
-
-    The updated method should be similar to the following code snippet:
-
-    ```csharp
-
-    static void WriteInputOptions(CommonActions options)
-    {
-        Console.WriteLine("Input Options:");
-        if (options.HasFlag(CommonActions.ReturnLoanedBook))
-        {
-            Console.WriteLine(" - \"r\" to mark as returned");
-        }
-        if (options.HasFlag(CommonActions.ExtendLoanedBook))
-        {
-            Console.WriteLine(" - \"e\" to extend the book loan");
-        }
-        if (options.HasFlag(CommonActions.RenewPatronMembership))
-        {
-            Console.WriteLine(" - \"m\" to extend patron's membership");
-        }
-        if (options.HasFlag(CommonActions.SearchPatrons))
-        {
-            Console.WriteLine(" - \"s\" for new search");
-        }
-        if (options.HasFlag(CommonActions.SearchBooks))
-        {
-            Console.WriteLine(" - \"b\" to check for book availability");
-        }
-        if (options.HasFlag(CommonActions.Quit))
-        {
-            Console.WriteLine(" - \"q\" to quit");
-        }
-        if (options.HasFlag(CommonActions.Select))
-        {
-            Console.WriteLine("Or type a number to select a list item.");
-        }
-    }
-
-    ```
-
-1. Scroll up slightly to find and then select the **ReadInputOptions** method.
-
-    Once again, you need to add support for the new **CommonActions.SearchBooks** option. Include a case that handles the user selecting the **SearchBooks** action.
-
-1. Open the inline chat and then enter the following prompt:
-
-    ```plaintext
-    Update selection to include an option for the `CommonActions.SearchBooks` action.
-    ```
-
-    GitHub Copilot should suggest an update that adds a new **case** that handles the user selecting the **SearchBooks** action.
-
-1. Review the suggested update and then select **Keep**.
-
-    The suggested update should be similar to the following code snippet:
-
-    ```csharp
-
-    static CommonActions ReadInputOptions(CommonActions options, out int optionNumber)
-    {
-        CommonActions action;
-        optionNumber = 0;
-        do
-        {
-            Console.WriteLine();
-            WriteInputOptions(options);
-            string? userInput = Console.ReadLine();
-
-            action = userInput switch
-            {
-                "q" when options.HasFlag(CommonActions.Quit) => CommonActions.Quit,
-                "s" when options.HasFlag(CommonActions.SearchPatrons) => CommonActions.SearchPatrons,
-                "b" when options.HasFlag(CommonActions.SearchBooks) => CommonActions.SearchBooks,
-                "m" when options.HasFlag(CommonActions.RenewPatronMembership) => CommonActions.RenewPatronMembership,
-                "e" when options.HasFlag(CommonActions.ExtendLoanedBook) => CommonActions.ExtendLoanedBook,
-                "r" when options.HasFlag(CommonActions.ReturnLoanedBook) => CommonActions.ReturnLoanedBook,
-                _ when int.TryParse(userInput, out optionNumber) => CommonActions.Select,
-                _ => CommonActions.Repeat
-            };
-
-            if (action == CommonActions.Repeat)
-            {
-                Console.WriteLine("Invalid input. Please try again.");
-            }
-        } while (action == CommonActions.Repeat);
-        return action;
-    }
-
-    ```
-
-1. Scroll down to find and then select the **PatronDetails** method.
-
-    There are two things that you need to accomplish:
-
-    - You need to add **CommonActions.SearchBooks** to **options** before calling **ReadInputOptions**.
-    - You also need to add an **else if** to handle the **SearchBooks** action. The **else if** block should call a new method named **SearchBooks**.
-
-    You can address both requirements with the same prompt.
-
-1. In the Chat view, switch to the **Agent* mode.
-
-1. In the Chat view, enter the following prompt:
-
-    ```plaintext
-    Update the selected PatronDetail method to add `CommonActions.SearchBooks` to `options` before calling `ReadInputOptions`. Add an `else if` block to handle the `SearchBooks` action. The `else if` block should call a new method named `SearchBooks`.
-    ```
-
-    GitHub Copilot should suggest a code update that adds **CommonActions.SearchBooks** to **options** before calling **ReadInputOptions**.
-
-1. Review the suggested updates.
-
-    The updated PatronDetails method should be similar to the following code snippet:
-
-    ```csharp
-
-    async Task<ConsoleState> PatronDetails()
-    {
-        Console.WriteLine($"Name: {selectedPatronDetails.Name}");
-        Console.WriteLine($"Membership Expiration: {selectedPatronDetails.MembershipEnd}");
-        Console.WriteLine();
-        Console.WriteLine("Book Loans:");
-        int loanNumber = 1;
-        foreach (Loan loan in selectedPatronDetails.Loans)
-        {
-            Console.WriteLine($"{loanNumber}) {loan.BookItem!.Book!.Title} - Due: {loan.DueDate} - Returned: {(loan.ReturnDate != null).ToString()}");
-            loanNumber++;
-        }
-
-        CommonActions options = CommonActions.SearchPatrons | CommonActions.Quit | CommonActions.Select | CommonActions.RenewPatronMembership | CommonActions.SearchBooks;
-        CommonActions action = ReadInputOptions(options, out int selectedLoanNumber);
-
-        if (action == CommonActions.Select)
-        {
-            if (selectedLoanNumber >= 1 && selectedLoanNumber <= selectedPatronDetails.Loans.Count())
-            {
-                var selectedLoan = selectedPatronDetails.Loans.ElementAt(selectedLoanNumber - 1);
-                selectedLoanDetails = selectedPatronDetails.Loans.Where(l => l.Id == selectedLoan.Id).Single();
-                return ConsoleState.LoanDetails;
-            }
-            else
-            {
-                Console.WriteLine("Invalid book loan number. Please try again.");
-                return ConsoleState.PatronDetails;
-            }
-        }
-        else if (action == CommonActions.Quit)
-        {
-            return ConsoleState.Quit;
-        }
-        else if (action == CommonActions.SearchPatrons)
-        {
-            return ConsoleState.PatronSearch;
-        }
-        else if (action == CommonActions.RenewPatronMembership)
-        {
-            var status = await _patronService.RenewMembership(selectedPatronDetails.Id);
-            Console.WriteLine(EnumHelper.GetDescription(status));
-            // reloading after renewing membership
-            selectedPatronDetails = (await _patronRepository.GetPatron(selectedPatronDetails.Id))!;
-            return ConsoleState.PatronDetails;
-        }
-        else if (action == CommonActions.SearchBooks)
-        {
-            return await SearchBooks();
-        }
-
-        throw new InvalidOperationException("An input option is not handled.");
-    }
-
-    ```
-
-    > **NOTE**: The suggested code updates may include stub code for the **SearchBooks** method. You can accept that code. You'll implement the **SearchBooks** method in the next section.
-
-1. In the Chat view, to accept all the suggested updates, select **Keep**.
-
-    Selecting **Keep** in the Chat view applies all the suggested updates to the code editor. You can also select **Keep** for each individual update in the code editor if you want to review and apply them one at a time.
-
-### Implement a SearchBooks method using the Chat view
-
-There's one step remaining to implement the "book availability" updates, create the **SearchBooks** method. The **SearchBooks** method will read a user provided book title, check if a book is available for loan, and display a message indicating the book's availability status. You'll use the Chat view to evaluate the requirements and implement the **SearchBooks** method.
-
-GitHub Copilot's Chat view provides a conversational and interactive environment that isn't available when using inline chat. You can use the Chat view to ask questions, request code suggestions, and get explanations for the code generated by GitHub Copilot. The Chat view supports the following three modes:
-
-You'll be using the Agent mode to implement the **SearchBooks** method.
-
-Use the following steps to complete this section of the exercise:
-
-1. Take a minute to consider the process requirements for the **SearchBooks** method.
-
-    What's the process that the method needs to complete? What's the return type for this method? Does it require parameters?
-
-    The **SearchBooks** method should implement the following process:
-
-    1. Prompt the user for a book title.
-    1. Read the user provided book title.
-    1. Check if a book is available for loan.
-    1. Display a message stating one of the following options:
-
-        - "**{book.title}** is available for loan"
-        - "**{book.title}** is on loan to another patron. The return due date is **{loan.DueDate}**."
-
-    To build the message options, your code will need to access the following JSON files:
-
-    - **Books.json** is needed to find the matching **Title** and **BookId**.
-    - **Loans.json** is needed to find the **ReturnDate** and **DueDate** for the matching **BookItemId**. The **BookItemId** is the same as the **BookId** in **Books.json**.
-
-1. Ensure that you have the following **SearchBooks** method created in the ConsoleApp.cs file:
-
-    ```csharp
-
-    async Task<ConsoleState> SearchBooks()
-    {
-
-        return ConsoleState.PatronDetails;
-    }
-
-    ```
-
-    > **NOTE**: Be sure to remove any code comments created by GitHub Copilot. Unnecessary and inaccurate comments can negatively influence GitHub Copilot's suggestions.
-
-1. Select the **SearchBooks** method.
-
-1. In the Chat view, enter the following prompt:
-
-    ```plaintext
-    I need to update the selected SearchBooks method to obtain a book title. The code should prompt the user to "Enter a book title to search for", and then read the user input and ensure the book title isn't null.
-    ```
-
-1. Review the suggested update.
-
-    The suggested update should be similar to the following code snippet:
-
-    ```csharp
-
-    async Task<ConsoleState> SearchBooks()
-    {
-        string? bookTitle = null;
-        while (string.IsNullOrWhiteSpace(bookTitle))
-        {
-            Console.Write("Enter a book title to search for: ");
-            bookTitle = Console.ReadLine();
-        }
-    
-        // Placeholder for further logic to search for the book
-        Console.WriteLine($"Searching for the book titled \"{bookTitle}\"...");
-    
-        return ConsoleState.PatronDetails;
-    }
-
-    ```
-
-1. In the code editor, to accept the suggested code, select **Keep**.
-
-1. In the Chat view, use the **Set Agent** dropdown to select **Ask** mode.
-
-1. Select the **SearchBooks** method.
-
-1. Use drag-and-drop operations to add the following files to the Chat context:
-
-    (from the Library.Console project)
-    - ConsoleApp.cs
-    - Program.cs
-    - Books.json
-    - Loans.json
-    - BookItems.json
-
-    (from the Library.Infrastructure project)
-    - JsonData.cs
-    - JsonLoanRepository.cs
-
-1. Enter the following prompt:
-
-    ```plaintext
-    Explain how to update the `SearchBooks` method and ConsoleApps class to find a matching book title in the `Books.json` file. Use the user supplied book title to find a matching book. If a book is found, use Loans.json to check if the book is available for loan. If the book has been returned, display a message stating "`book.title` is available for loan". If the book is on loan, display a message stating "`book.title` is on loan to another patron. The return due date is `loan.DueDate`".
-    ```
-
-1. Take a minute to review the suggested updates.
-
-    Notice the following:
-
-    - The response includes a detailed explanation of the suggested updates.
-    - The ConsoleApp class requires a JsonData object to access Books.json and Loans.json. The suggested code uses dependency injection to pass the JsonData object to the ConsoleApp class constructor.
-    - The SearchBooks method must be updated with logic that determines the availability of the book title and displays an appropriate message. The suggested code uses LINQ queries to check the loan status.
-    - The Program.cs file must be updated to pass the JsonData object to the ConsoleApp class.
-
-    The response should include the following information:
-
-    ```plaintext
-
-    1. Dependency Injection:
-    
-        Added JsonData as a dependency to the ConsoleApp constructor to access the JSON data files.
-
-    2. Book Search:
-    
-        Used FirstOrDefault to find a book in Books.json that matches the user-supplied title (case-insensitive).
-
-    3. Book Item Lookup:
-    
-        Retrieved the corresponding BookItem using the BookId from BookItems.json.
-
-    4. Loan Check:
-    
-        Checked Loans.json for an active loan (i.e., a loan with a null ReturnDate) for the BookItem.
-
-    5. Output Messages:
-    
-        Displayed whether the book is available for loan or currently on loan with the due date.
-
-    Integration in Program.cs
-
-        Ensure that JsonData is registered in the dependency injection container in Program.cs:
-
-    ```
-
-    You can use the Chat view's **Ask** mode to analyze code updates, then use the **Agent** mode to implement the code updates.
-
-1. Use GitHub Copilot's response to construct a new prompt.
-
-    For example, you can use the explanation section to create the following prompt:
-
-    ```plaintext
-
-    Add JsonData as a dependency to the ConsoleApp constructor to access the JSON data files. Use FirstOrDefault to find a book in Books.json that matches the user-supplied title (case-insensitive). Retrieve the corresponding BookItem using the BookId from BookItems.json. Check Loans.json for an active loan (loan.ReturnDate == null) for the BookItem. Display whether the book is available for loan or currently on loan with the due date. Ensure that JsonData is registered in the dependency injection container in Program.cs.
-
-    ```
-
-    You can adjust the prompt to achieve specific requirements. For example, if you want a specific message displayed to the end user, you could add your requirement to the prompt:
-
-    ```plaintext
-
-    Add JsonData as a dependency to the ConsoleApp constructor to access the JSON data files. Use FirstOrDefault to find a book in Books.json that matches the user-supplied title (case-insensitive). Retrieve the corresponding BookItem using the BookId from BookItems.json. Check Loans.json for an active loan (loan.ReturnDate == null) for the BookItem. Display whether the book is available for loan or currently on loan with the due date. Ensure that JsonData is registered in the dependency injection container in Program.cs. If the book has been returned, display a message stating "`book.title` is available for loan". If the book is on loan, display a message stating "`book.title` is on loan to another patron. The return due date is `loan.DueDate`".
-
-    ```
-
-1. In the Chat view, use the **Set Agent** dropdown to select **Agent** mode.
-
-1. Use drag-and-drop operations to add the following files to the Chat context:
-
-    (from the Library.Console project)
-    - ConsoleApp.cs
-    - Program.cs
-    - Books.json
-    - Loans.json
-    - BookItems.json
-
-    (from the Library.Infrastructure project)
-    - JsonData.cs
-    - JsonLoanRepository.cs
-
-1. Select the **SearchBooks** method.
-
-1. Enter the following prompt:
-
-    ```plaintext
-
-    Add JsonData as a dependency to the ConsoleApp constructor to access the JSON data files. Use FirstOrDefault to find a book in Books.json that matches the user-supplied title (case-insensitive). Retrieve the corresponding BookItem using the BookId from BookItems.json. Check Loans.json for an active loan (loan.ReturnDate == null) for the BookItem. Display whether the book is available for loan or currently on loan with the due date. Ensure that JsonData is registered in the dependency injection container in Program.cs. If the book has been returned, display a message stating "`book.title` is available for loan". If the book is on loan, display a message stating "`book.title` is on loan to another patron. The return due date is `loan.DueDate`".
-
-    ```
-
-1. Take a minute to review the suggested updates in the ConsoleApp.cs file.
-
-    You can use the **Go to Previous Chat Edit** and **Go to Next Chat Edit** buttons to navigate through the suggested code updates, or you can scroll manually through the file.
-
-    **ConsoleApp.cs**
-
-    Code updates that add the **JsonData** dependency to the **ConsoleApp** constructor can be found near the top of the ConsoleApp class.
-
-    ```csharp
-
-    JsonData _jsonData;
-
-    public ConsoleApp(ILoanService loanService, IPatronService patronService, IPatronRepository patronRepository, ILoanRepository loanRepository, JsonData jsonData)
-    {
-        _patronRepository = patronRepository;
-        _loanRepository = loanRepository;
-        _loanService = loanService;
-        _patronService = patronService;
-        _jsonData = jsonData;
-    }
-
-    ```
-
-    Code updates that check if a book is available for loan can be found in the **SearchBooks** method.
-
-    ```csharp
-
-    async Task<ConsoleState> SearchBooks()
-    {
-        string? bookTitle = null;
-        while (string.IsNullOrWhiteSpace(bookTitle))
-        {
-            Console.Write("Enter a book title to search for: ");
-            bookTitle = Console.ReadLine();
-        }
-
-        await _jsonData.EnsureDataLoaded();
-
-        var book = _jsonData.Books!.FirstOrDefault(b => string.Equals(b.Title, bookTitle, StringComparison.OrdinalIgnoreCase));
-        if (book == null)
-        {
-            Console.WriteLine($"No book found with the title \"{bookTitle}\".");
-            return ConsoleState.PatronDetails;
-        }
-
-        var bookItem = _jsonData.BookItems!.FirstOrDefault(bi => bi.BookId == book.Id);
-        if (bookItem == null)
-        {
-            Console.WriteLine($"No book item found for the title \"{book.Title}\".");
-            return ConsoleState.PatronDetails;
-        }
-
-        var loan = _jsonData.Loans!.FirstOrDefault(l => l.BookItemId == bookItem.Id && l.ReturnDate == null);
-        if (loan == null)
-        {
-            Console.WriteLine($"\"{book.Title}\" is available for loan.");
-        }
-        else
-        {
-            Console.WriteLine($"\"{book.Title}\" is on loan to another patron. The return due date is {loan.DueDate}.");
-        }
-
-        return ConsoleState.PatronDetails;
-    }
-
-    ```
-
-    **Program.cs**
-
-    Code to register JsonData and ConsoleApp for dependency injection was already available in the Program.cs file.
-
-    ```csharp
-
-    services.AddSingleton<JsonData>();
-    services.AddSingleton<ConsoleApp>();
-
-    ```
-
-1. In the Chat view, to keep all edits, select **Keep**.
-
-    Always review GitHub Copilot suggestions before accepting updates.
-
-    If you're unsure about the suggested updates, you can accept changes and then ask GitHub Copilot for an explanation. You can revert the edits if you decide against the updates.
-
-    > **NOTE**: If GitHub Copilot suggests formatting the return date using a culture-specific format, ensure that a `using System.Globalization;` statement is added to top of the ConsoleApp.cs file.
-
-1. Ensure that you've accepted updates in both the ConsoleApp.cs and Program.cs files.
-
-1. Scroll to the top of the ConsoleApp.cs file and locate the following code line:
-
-    ```csharp
-
-    JsonData _jsonData;
-
-    ```
-
-1. If JsonData isn't recognized in the ConsoleApp class, add the following using statement above the ConsoleApp class.
-
-    ```csharp
-    
-    using Library.Infrastructure.Data;
-    
-    ```
-
-1. Open Visual Studio Code's Explorer view.
-
-1. Build the solution and ensure that no errors were introduced by your code updates.
-
-    You'll see Warning messages, but there shouldn't be any errors.
-
-    To build the solution using the Explorer view, right-click **AccelerateDevGHCopilot**, and then select **Build**.
-
-## Merge your "book availability" updates into the main branch of the repository
-
-It's important to test your code before merging it into the main branch of the repository. Testing ensures that your code works as expected and doesn't introduce any new issues. In this exercise, you'll use manual testing to verify that the "book availability" feature works as expected.
-
-In this section of the exercise, you complete the following tasks:
-
-1. Test the "book availability" feature.
-1. Sync your changes with the remote repository.
-1. Create a pull request to merge your changes into the main branch of the repository.
-
-### Test the "book availability" feature
-
-Manual testing can be used to verify that the new feature works as expected. Using a data source that can be verified is important. In this case, you use the **Books.json** and **Loans.json** files to verify that the new feature reports the availability status of a book correctly.
-
-Use the following steps to complete this section of the exercise:
-
-1. To run the application, right-click **Library.Console**, select **Debug**, and then select **Start New Instance**.
-
-1. When prompted for a patron name, type **One** and then press Enter.
-
-    You should see a list of patrons that match the search query.
-
-1. At the "Input Options" prompt, type **2** and then press Enter.
-
-    Entering **2** selects the second patron in the list.
-
-    You should see the patron's name and membership status followed by book loan details.
-
-1. At the "Input Options" prompt, type **b** and then press Enter.
-
-    Entering **b** selects the option to search for a book's availability status.
-
-    You should see a prompt to enter a book title.
-
-1. Type **Book One** and then press Enter.
-
-    In the original data that you downloaded, **Book One** is currently on loan to **Patron Forty-Nine**, so it shouldn't be available.
-
-1. Verify that the application displays a message indicating that the book is on loan to another patron.
-
-1. At the "Input Options" prompt, type **b** and then press Enter.
-
-1. Type **Book Nineteen** and then press Enter.
-
-1. Verify that the application displays a message indicating that the book is available for loan.
-
-1. At the "Input Options" prompt, type **q** and then press Enter.
-
-1. Stop the debug session.
-
-1. Use the Explorer view to locate and then open the **Loans.json** file.
-
-    The Loans.json file is used to track the loan status of each book. You can use the Loans.json file to verify that the availability status for Book One and Book Nineteen is correct.
-
-    The updated Loans.json file should be located in either the **Library.Console\bin\Debug\net8.0\Json** folder or **Library.Console\Json** folder.
-
-    - If you're using the Visual Studio Code debugger to run the app, the updated Loans.json file should be located in the **Library.Console\bin\Debug\net8.0\Json** folder.
-
-    - If you're using a **dotnet run** command from the **AccelerateDevGHCopilot\src\Library.Console** folder to run the app, the updated Loans.json file should be located in the **Library.Console\Json** folder.
-
-1. Verify that loan ID 37 and loan ID 46 are both for Book One (**"BookItemId": 1**).
-
-    The loan IDs are listed sequentially in the Loans.json file.
-
-    - Loan ID 37 should have a **ReturnDate** value of **2024-01-17**, indicating that the book was returned on that date.
-    - Loan ID 46 should have a **ReturnDate** value **null**, indicating that the book is currently on loan (loaned on **2024-07-09** but not returned).
-
-    The **ReturnDate** value is used to determine whether the book is currently on loan. If the **ReturnDate** value is **null**, the book is currently on loan.
-
-1. Verify that loan ID 34 is for Book Nineteen (**"BookItemId": 19**) and that the **ReturnDate** has been assigned a value.
-
-### Sync your changes with the remote repository
-
-1. Select the Source Control view.
-
-1. Ensure that the files you updated are listed under **Changes**.
-
-    You should see the CommonActions.cs and ConsoleApp.cs files listed under **Changes**. The Program.cs file may also be listed.
-
-1. Use GitHub Copilot to generate a message for the **Commit**.
-
-    ![Screenshot showing the Generate Commit Message with Copilot button.](./Media/m03-github-copilot-commit-message.png)
-
-1. To stage and commit your changes, select **Commit** and then select **Yes**.
-
-1. To synchronize changes to the remote repository, select **Sync Changes**.
-
-### Create a pull request to merge your changes into the main branch
-
-You've implemented the feature that enables a librarian to determine the availability status of a book. Now you need to merge your changes into the main branch of the repository. You can create a pull request to merge your changes into the main branch.
-
-Use the following steps to complete this section of the exercise:
-
-1. Open your GitHub repository in a web browser.
-
-    To open your GitHub repository from Visual Studio Code:
-
-    1. In the bottom-left corner of of the Visual Studio Code window, select **book-availability**.
-    1. On the context menu, to the right of the **book-availability** branch, select the **Open in GitHub** icon.
-
-1. On your GitHub repository page, select the **Compare & pull request** button.
-
-1. Ensure that **Base** specifies **main**, **compare** specifies **book-availability**, and **Able to merge** is checked.
-
-1. Under **Add a description**, select the Copilot Actions button (the GitHub Copilot icon), and then select the option to generate a summary.
-
-    > **NOTE**: The GitHub Copilot Free plan doesn't support the pull request summary feature at this time.
-
-    If you're using the GitHub Copilot Free plan, you can write your own summary, or use the summary below to complete the pull request.
-
-    ```plaintext
-
-    This pull request introduces a new feature to the library console application: the ability to search for books and check their availability. It also includes updates to dependency injection and the CommonActions enumeration to support this functionality. Below are the most important changes grouped by theme.
-
-    New Feature: Book Search
-
-    Added a new SearchBooks action to the CommonActions enumeration (src/Library.Console/CommonActions.cs).
-
-    Updated PatronDetails method to handle the SearchBooks action, including a new SearchBooks method that allows users to search for a book by title and check its availability (src/Library.Console/ConsoleApp.cs).
-
-    Modified ReadInputOptions and WriteInputOptions methods to include the new SearchBooks option (src/Library.Console/ConsoleApp.cs).
-
-    Dependency Injection Updates
-
-    Added JsonData as a dependency in the ConsoleApp constructor and ensured it is registered in the DI container before ConsoleApp (src/Library.Console/ConsoleApp.cs, src/Library.Console/Program.cs).
-
-    ```
-
-1. Once the summary is generated, select **Preview**.
-
-1. Take a minute to review the summary.
-
-    The pull request summary generated by GitHub Copilot should be similar to the following example:
-
-    ![Screenshot showing a pull request summary generated using a GitHub Copilot Enterprise account.](./Media/m03-github-copilot-pull-request-summary.png)
-
-1. Select **Create pull request**.
-
-1. If all checks pass and there are no conflicts with the base branch, select **Merge pull request**, and then select **Confirm merge**.
-
-    Notice that you can delete the **book-availability** branch after merging the changes. To delete the branch, select **Delete branch**.
-
-1. Switch back to the Visual Studio Code window.
-
-1. Switch to the **main** branch of the repository.
-
-1. Open the Source Control view, and then **Pull** the changes from the remote repository.
-
-1. Verify that the book-availability feature is available in the **main** branch.
-
-## Summary
-
-In this exercise, you learned how to use GitHub Copilot to develop a new code feature for a C# application. You published the project to a private GitHub repository from within Visual Studio Code, created a feature branch, and used inline chat, Ask mode, and Agent mode to implement the "book availability" feature. You tested your changes, then used GitHub Copilot to generate a commit message and a pull request summary before merging the feature branch into main.
-
-## Clean up
-
-Now that you've finished the exercise, take a minute to ensure that you haven't made changes to your GitHub account or GitHub Copilot subscription that you don't want to keep. If you made any changes, revert them now.
+- [Agent planning](https://code.visualstudio.com/docs/agents/run/planning)
+- [C# test support](https://code.visualstudio.com/docs/csharp/testing)
+- [String comparison guidance](https://learn.microsoft.com/en-us/dotnet/standard/base-types/best-practices-strings)

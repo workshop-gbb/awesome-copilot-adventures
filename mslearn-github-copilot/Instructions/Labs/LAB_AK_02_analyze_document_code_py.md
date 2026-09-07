@@ -1,345 +1,190 @@
 ---
+layout: default
+title: Analyze and document the Python library
+parent: Hands-on Labs
+nav_order: 12
+permalink: /hands-on/02-python/
+lab_id: 02-python
+last_verified: "2026-09-07"
 lab:
-  title: Exercise - Analyze and document code using GitHub Copilot (Python)
-  description: Learn how to analyze new or unfamiliar code and how to generate documentation using GitHub Copilot in Visual Studio Code.
-  duration: 20 minutes
+  title: Exercise - Analyze and document a Python application
+  description: Trace import roots, service behavior and JSON persistence before writing verifiable onboarding guidance.
+  duration: 45 minutes
   level: 200
   islab: true
-  primarytopics:
-    - GitHub
-    - Visual Studio Code
+  primarytopics: [Python, Investigation, Documentation]
 ---
 
-# Analyze and document code using GitHub Copilot
+# Analyze and document the Python library
 
-GitHub Copilot can help you understand and document a codebase by generating explanations and documentation. In this exercise, you use GitHub Copilot to analyze a codebase and generate documentation for the project.
+Explain the implementation you have, not the application a model expects. Python
+and C# variants have similar concepts but are not guaranteed to have identical APIs,
+case sensitivity, or error handling.
 
-This exercise should take approximately **20** minutes to complete.
+## Learning objectives
 
-> **IMPORTANT**: To complete this exercise, you must provide your own GitHub account and GitHub Copilot subscription. If you don't have a GitHub account, you can sign up for a free individual account and use a GitHub Copilot Free plan to complete the exercise. If you have access to a GitHub Copilot Pro, GitHub Copilot Pro+, GitHub Copilot Business, or GitHub Copilot Enterprise subscription from within your lab environment, you can use your existing GitHub Copilot subscription to complete this exercise.
+- Identify the correct Python import and execution root.
+- Trace console actions through services to JSON storage.
+- Document tested behavior and limitations without invented guarantees.
 
 ## Before you start
 
-Your lab environment MUST include the following resources:
+Complete [Python setup](LAB_AK_00_configure_lab_environment_py.md) and prepare
+`02-python`. Use the bundled
+[Python library fixture](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/02-python-analyze-document-code/AccelerateDevGHCopilot).
+Run commands below from its `library` directory.
 
-- Git 2.48 or later.
-- Python 3.10 or later
-- Access to a GitHub account with GitHub Copilot enabled.
-- Visual Studio Code (version 1.116 or later) with the Python Extension for VS Code installed
+## Concepts and use cases
 
-If you're using a local PC as a lab environment for this exercise:
-
-- For help configuring your local PC as your lab environment, open the following link in a browser: <a href="https://microsoftlearning.github.io/mslearn-github-copilot-dev/Instructions/Labs/LAB_AK_00_configure_lab_environment_py.html" target="_blank">Configure your lab environment resources</a>.
-
-- For help enabling your GitHub Copilot subscription in Visual Studio Code, open the following link in a browser: <a href="https://go.microsoft.com/fwlink/?linkid=2320158" target="_blank">Enable GitHub Copilot within Visual Studio Code</a>.
-
-If you're using a hosted lab environment for this exercise:
-
-- For help enabling your GitHub Copilot subscription in Visual Studio Code, paste the following URL into a browser's site navigation bar: <a href="https://go.microsoft.com/fwlink/?linkid=2320158" target="_blank">Enable GitHub Copilot within Visual Studio Code</a>.
-
-- Open a command terminal and then run the following commands:
-
-    To ensure that Visual Studio Code is configured to use the correct version of Python, verify your Python installation is version 3.10 or later:
-
-    ```bash
-    python --version
-    ```
-
-    To ensure that Git is configured to use your name and email address, update the following commands with your information, and then run the commands:
-
-    ```bash
-
-    git config --global user.name "John Doe"
-
-    ```
-
-    ```bash
-
-    git config --global user.email johndoe@example.com
-
-    ```
+| Folder | Role |
+| --- | --- |
+| `console` | Build dependencies, read input and render results |
+| `application_core` | Entities, interfaces, service decisions |
+| `infrastructure` | JSON loading, reference population and persistence |
+| `tests` | Service scenarios using unittest and mocks |
 
 ## Exercise scenario
 
-You're a developer working in the IT department of your local community. The backend systems that support the public library were lost in a fire. Your team needs to develop a temporary project to help the library staff manage their operations until the system can be replaced. Your team chose GitHub Copilot to accelerate the development process.
+A teammate needs reliable onboarding instructions for the library. Document
+patron search, membership renewal, loan return/extension, and the limitations that
+the source actually exhibits.
+
+## Task 1 - Run and inspect the baseline
+
+```bash
+python -m unittest discover -s tests -p "test_*.py" -v
+python console/main.py
+```
+
+1. Record test names and exit codes.
+2. Read `console/main.py` and trace how `JsonData`, repositories and services are
+   constructed.
+3. Inspect the loader's paths relative to its module. Do not assume the C# settings
+   convention applies to Python.
+4. Use only the supplied synthetic records. Return/renew flows may persist changes.
+
+## Task 2 - Investigate one workflow
+
+```text
+Trace return_loan from the console into LoanService and JsonLoanRepository.
+Identify populated entities and when data is saved. Cite source paths.
+What happens when an ID is missing or a file cannot be loaded? Do not edit.
+```
+
+Verify with the code. A printed error from `JsonData` does not imply an exception
+was propagated or a partially loaded object is usable.
+
+## Task 3 - Model the data
+
+```mermaid
+---
+config:
+  theme: base
+  look: classic
+  themeVariables:
+    darkMode: false
+    background: "#ffffff"
+    primaryColor: "#f5f5f5"
+    primaryTextColor: "#111111"
+    primaryBorderColor: "#555555"
+    secondaryColor: "#e0e0e0"
+    secondaryTextColor: "#111111"
+    secondaryBorderColor: "#666666"
+    tertiaryColor: "#bdbdbd"
+    tertiaryTextColor: "#111111"
+    tertiaryBorderColor: "#444444"
+    lineColor: "#444444"
+    textColor: "#111111"
+    mainBkg: "#f5f5f5"
+    nodeBorder: "#555555"
+    clusterBkg: "#ffffff"
+    clusterBorder: "#999999"
+    edgeLabelBackground: "#ffffff"
+    actorBkg: "#e0e0e0"
+    actorBorder: "#555555"
+    actorTextColor: "#111111"
+    actorLineColor: "#777777"
+    signalColor: "#333333"
+    signalTextColor: "#111111"
+    labelBoxBkgColor: "#f5f5f5"
+    labelBoxBorderColor: "#777777"
+    labelTextColor: "#111111"
+    loopTextColor: "#111111"
+    activationBkgColor: "#bdbdbd"
+    activationBorderColor: "#555555"
+    noteBkgColor: "#f5f5f5"
+    noteTextColor: "#111111"
+    noteBorderColor: "#777777"
+    attributeBackgroundColorOdd: "#f5f5f5"
+    attributeBackgroundColorEven: "#e0e0e0"
+---
+erDiagram
+    accTitle: Library titles, physical copies and loans
+    accDescr: A book may have multiple physical book items; each loan associates one physical item with one patron.
+    BOOK ||--o{ BOOK_ITEM : has
+    BOOK_ITEM ||--o{ LOAN : appears_in
+    PATRON ||--o{ LOAN : borrows
+    BOOK {
+        int id
+        string title
+    }
+    BOOK_ITEM {
+        int id
+        int book_id
+    }
+    LOAN {
+        int id
+        int book_item_id
+        int patron_id
+    }
+    PATRON {
+        int id
+        string name
+    }
+```
+
+**Legend.** Boxes are conceptual record types; crow's feet mean multiple related
+records. Field names correspond to the Python entities.
+
+**Explanation.** Availability belongs to a physical copy and its active loan, not
+to every copy of a title. This model does not create foreign-key constraints in JSON.
 
-Your colleague has developed an initial version of the library application, but due to time constraints, they haven't had a chance to document the code. You need to analyze the codebase and create documentation for the project.
+## Task 4 - Produce documentation with a bounded edit
 
-This exercise includes the following tasks:
+1. Ask Plan for README sections with source references and exact commands.
+2. Review setup, import root, implemented workflows, JSON side effects, test scope
+   and reset.
+3. Ask Agent to edit the README only.
+4. Run its commands from the documented directory. Record errors rather than
+   silently altering the app during documentation.
+5. Compare the README with actual tests; avoid statements such as “fully covered.”
 
-- Set up the library application in Visual Studio Code.
-- Use GitHub Copilot to explain the library application codebase.
-- Use GitHub Copilot to create a README.md file for the library application.
+## Verify your work
 
-## Set up the library application in Visual Studio Code
+- [ ] Import root and console command are reproducible.
+- [ ] Data relationships are accurate.
+- [ ] Current behavior and proposed improvements are separated.
+- [ ] Loader/persistence limitations are explicit.
+- [ ] Only intended documentation/data-exploration changes appear in the diff.
 
-Your colleague has developed an initial version of the library application and made it available in the training repository. You need to clone the repository and then open the library project in Visual Studio Code.
+## Troubleshooting
 
-Use the following steps to set up the library application:
+If `application_core` cannot be imported, check that the working directory is
+`library`. If no tests are found, inspect the runner and file pattern. If a flow
+modifies JSON, restore only the copied fixture file after saving evidence.
 
-> **NOTE**: If you already cloned the `mslearn-github-copilot-dev` repository for a previous exercise, skip the cloning steps below. Open the cloned repository in Visual Studio Code and continue with the verification step.
+## Independent practice
 
-1. Open a new Visual Studio Code window.
+Compare one workflow with the C# variant. Name one actual implementation difference
+rather than claiming the two stacks are semantically identical.
 
-1. On the Welcome page, select **Clone Git Repository...** (or open the Command Palette with **Ctrl+Shift+P** and run **Git: Clone**), and then enter the following URL:
+## Reset
 
-    ```plaintext
-    https://github.com/MicrosoftLearning/mslearn-github-copilot-dev.git
-    ```
+Close the console, preserve the README and evidence, then restore only files changed
+in the disposable copy. Do not modify the source curriculum.
 
-1. When the file selection dialog appears, create a new folder in a convenient location to hold the repository (for example, `learn-github-copilot`), select it, and then click **Select as Repository Destination**.
+## Official references
 
-1. After the clone completes, select **Open** to open the cloned repository in Visual Studio Code.
-
-1. In the Visual Studio Code Explorer view, navigate to the `LabFiles/02-python-analyze-document-code/AccelerateDevGHCopilot` folder and verify the following project structure:
-
-    - AccelerateDevGHCopilot/library
-        ├── application_core
-        ├── console
-        ├── infrastructure
-        └── tests
-
-1. Ensure that the application runs successfully.
-
-    For example, open a terminal in Visual Studio Code, navigate to the **LabFiles/02-python-analyze-document-code/AccelerateDevGHCopilot/library** directory, and run the following command:
-
-    ```bash
-    python -m unittest discover tests
-    ```
-
-    You'll see some Warnings, but there shouldn't be any Errors.
-
-## Use GitHub Copilot to explain the library application codebase
-
-GitHub Copilot can help you to understand an unfamiliar codebase by generating explanations at the project, file, and code line levels.
-
-### Analyze code using prompts in the Chat view
-
-GitHub Copilot's Chat view includes a chat-based interface that allows you to interact with GitHub Copilot using natural language prompts. When evaluating an existing codebase for the first time, you can create prompts that generate an explanation at the workspace or project level, or at the code block or code line level. To assist you in specifying the context of your prompt, GitHub Copilot provides chat participants, chat variables, and slash commands.
-
-- Chat participants are used to scope your prompt to a specific domain.
-- Chat variables are used to include specific context in your prompt.
-- Slash commands are used to avoid writing complex prompts for common scenarios.
-
-Use the following steps to complete this section of the exercise:
-
-1. Ensure that the AccelerateDevGHCopilot/library project is open in Visual Studio Code.
-
-1. Open GitHub Copilot's Chat view.
-
-    To open the Chat view, select the **Toggle Chat** button at the top of the Visual Studio Code window.
-
-    ![Screenshot showing the GitHub Copilot status menu.](./Media/m02-github-copilot-toggle-chat.png)
-
-    You can also open the Chat view using the **Ctrl+Alt+I** keyboard shortcut.
-
-1. Set the chat mode to **Ask** and select the **Auto** model.
-
-    The Set Mode and Pick Model menus are in the bottom-left corner of the Chat view.
-
-    > **NOTE**: You can use a different model if your plan allows it, but responses may differ from those shown in this exercise. Free-plan users have a limited number of monthly chat requests, so each prompt counts against your quota.
-
-1. In the Chat view, enter a prompt that uses the **#codebase** chat variable to include the full context of the codebase when generating a description of your code.
-
-    For example, enter the following prompt in the Chat view:
-
-    ```plaintext
-    #codebase describe this project
-    ```
-
-    Use chat variables, such as **#codebase**, to include specific context in your prompt. Context helps GitHub Copilot generate more relevant responses.
-
-1. Take a minute to compare GitHub Copilot's response with the actual project files.
-
-    You should see a response that describes each of the projects in the project:
-
-    - **application_core**
-    - **infrastructure**
-    - **console**
-    - **tests**
-
-1. Use the Explorer view to expand the project folders.
-
-1. Locate and then open the **console_app.py** file.
-
-    The **console_app.py** file is located in the **application _core\console** folder.
-
-1. Take a moment to review the code file.
-
-1. Enter a prompt in the Chat view that generates a description of the **console_app.py** class.
-
-    For example, enter the following prompt in the Chat view:
-
-    ```plaintext
-    @workspace #usages How is the ConsoleApp class used?
-    ```
-
-    Use chat variables, such as **#usages**, to include specific context in your prompt. To see a list of the chat variables, type **#** in the chat prompt box.
-
-    > **NOTE**: GitHub Copilot considers your chat history and the code files you have open in Visual Studio Code when constructing a context for your prompt and generating a response.
-
-1. Take a minute to verify the accuracy of GitHub Copilot's response.
-
-    You should see a response that the describes where the **ConsoleApp** class is defined and how it's used in the codebase. The **console_app.py** and **main.py** files are referenced in the response, along with line numbers
-
-1. Open the **main.py** file from the root of the **application _core\console** folder and examine the code.
-
-1. Enter a prompt in the Chat view that generates an explanation of the **main.py** file.
-
-    For example, enter the following prompt in the Chat view:
-
-    ```plaintext
-    @workspace /explain Explain the main.py file
-    ```
-
-    Use Slash commands, such as **/explain**, to avoid writing complex prompts for common scenarios. To see a list of all available slash commands, type **/** in the chat prompt box. Available slash commands may vary, depending on your environment and the context of your chat.
-
-1. Take a minute to review the detailed response generated by GitHub Copilot.
-
-    You should see a response that includes an overview and a breakdown that explains how the file is used within the application.
-
-1. Close the **main.py** file.
-
-### Improve chat responses by adding context
-
-GitHub Copilot uses context to generate more relevant responses.
-
-Opening files in the code editor is one way to establish context, but you can also add files to the Chat context using drag-and-drop operations or by using the **Attach Context** button in the Chat view.
-
-Use the following steps to complete this section of the exercise:
-
-1. Expand the **Infrastructure** folder.
-
-1. Use a drag-and-drop operation to add the following files from the Explorer view to the Chat context: **json_data.py**, **json_loan_repository.py**, and **json_patron_repository.py**.
-
-    GitHub Copilot uses the Chat Context to understand the code files that are relevant to your prompt. You can add files to the Chat context using drag-and-drop operations, or you can use the **Attach Context** button in the Chat view.
-
-    Instead of adding individual files manually, you can let Copilot find the right files from your codebase automatically. This can be useful when you don't know which files are relevant to your question.
-
-    To let Copilot find the right files automatically, add #codebase in your prompt or select Codebase from the list of context types.
-
-1. Enter a prompt in the Chat view that generates an explanation of the data access classes.
-
-    For example, enter the following prompt in the Chat view:
-
-    ```plaintext
-    @workspace /explain Explain how the data access classes work
-    ```
-
-1. Take a couple minutes to read through the response.
-
-    You should see a response that describes each of the data access classes (**json_data.py**, **json_loan_repository.py**, and **json_patron_repository.py**) and how they work together to manage data access in the application. Key methods, such as **load_data**, **save_loans**, and **save_patrons**, should be mentioned in the response.
-
-1. Take a minute to examine the JSON data files that are used to simulate library records.
-
-    The JSON data files are located in the **infrastructure/json** folder.
-
-    The data files use ID properties to link entities. For example, a **loan** object has a **patron_id** property that links to a **patron** object with the same ID. The JSON files contain data for authors, books, book items, patrons, and loans.
-
-    > **NOTE**: Notice that Author names, book titles, and patron names have been anonymized for the purposes of this training.
-
-### Build and run the application
-
-Running the application helps you understand the user interface, key features of the application, and how app components interact.
-
-Use the following steps to complete this section of the exercise:
-
-1. Ensure that you have the **Explorer** view open.
-
-1. To run the application in Visual Studio Code using Python, open **console/main.py** in the editor, press **CTRL+Shift+D** to open the Run and Debug panel, choose **Python: Current File** or another debug configuration, and then **F5** to start debugging.
-
-    The following steps guide you through a simple use case.
-
-1. When prompted for a patron name, type **One** and then press Enter.
-
-    You should see a list of patrons that match the search query.
-
-    > **NOTE**: The application uses a case-sensitive search process.
-
-1. At the "Input Options" prompt, type **2** and then press Enter.
-
-    Entering **2** selects the second patron in the list.
-
-    You should see the patron's name and membership status followed by book loan details.
-
-1. At the "Input Options" prompt, type **1** and then press Enter.
-
-    Entering **1** selects the first book in the list.
-
-    You should see book details listed, including the due date and return status.
-
-1. At the "Input Options" prompt, type **r** and then press Enter.
-
-    Entering **r** returns the book.
-
-1. Verify that the message "Book was successfully returned." is displayed.
-
-    The message "Book was successfully returned." should be followed by the book details. Returned books are marked with **Returned: True**.
-
-1. To begin a new search, type **s** and then press Enter.
-
-1. When prompted for a patron name, type **One** and then press Enter.
-
-1. At the "Input Options" prompt, type **2** and then press Enter.
-
-1. Verify that first book loan is marked **Returned: True**.
-
-1. At the "Input Options" prompt, type **q** and then press Enter.
-
-1. Stop the debug session.
-
-## Create the project documentation for the README file
-
-Readme files provide project contributors and stakeholders with essential information about a code repository. They help users understand the purpose of the project, how to use it, and how to contribute. A well-structured README file can significantly improve the usability and maintainability of a project.
-
-You need a README file that includes the following sections:
-
-- **Project Title**: A brief, clear title for the project.
-- **Description**: A detailed explanation of what the project is and what it does.
-- **Project Structure**: A breakdown of the project structure, including key folders and files.
-- **Key Classes and Interfaces**: A list of key classes and interfaces in the project.
-- **Usage**: Instructions on how to use the project, often including code examples.
-- **License**: The license that the project is under.
-
-In this section of the exercise, you'll use GitHub Copilot to create project documentation and add it to a **README.md** file.
-
-Use the following steps to complete this section of the exercise:
-
-1. Add a new file named **README.md** to the root folder of the **AccelerateDevGHCopilot** project.
-
-1. Open the Chat view.
-
-1. To generate project documentation for your README file, enter the following prompt:
-
-    ```plaintext
-    @workspace Generate the contents of a README.md file for a code repository. 
-    Use "Library App" as the project title. The README file should include the 
-    following sections: Description, Project Structure, Key Classes and Interfaces, 
-    Usage, License. Format all sections as raw markdown. Use a bullet list with 
-    indents to represent the project structure. Do not include ".gitignore", ".
-    pyc", or the ".github", "__pycache__" folders.
-    ```
-
-    > **NOTE**: Using multiple prompts, one for each section of the README file would produce more detailed results. A single prompt is used in this exercise to simplify the process.
-
-1. Review the response to ensure each section is formatted as markdown.
-
-    You can update sections individually to provide more detailed information or if they aren't formatted correctly. You can also copy GitHub Copilot's response to the README file and then make corrections directly in the markdown file.
-
-1. Copy the suggested documentation, and then paste it into the README.md file.
-
-    To copy the entire response, scroll to the bottom of the response, right-click in the empty space to the right of the "thumbs-up" icon, and then select **Copy**
-
-1. Format the README.md file as needed.
-
-    You can update the settings for GitHub Copilot to enable markdown formatting, then use GitHub Copilot to help you update sections of the README.md file.
-
-    When you're finished, you should have a README.md file that includes each of the specified sections, with an appropriate level of detail.
-
-## Summary
-
-In this exercise, you learned how to use GitHub Copilot to analyze and document a codebase. You used GitHub Copilot to generate explanations for the project structure, key classes, and data access classes. You also used GitHub Copilot to create a README.md file for the project.
-
-## Clean up
-
-Now that you've finished the exercise, take a minute to ensure that you haven't made changes to your GitHub account or GitHub Copilot subscription that you don't want to keep. If you made any changes, revert them now.
+- [Python testing in VS Code](https://code.visualstudio.com/docs/python/testing)
+- [Context engineering](https://code.visualstudio.com/docs/agents/guides/context-engineering-guide)
+- [Agent planning](https://code.visualstudio.com/docs/agents/run/planning)

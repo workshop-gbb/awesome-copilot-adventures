@@ -10,7 +10,50 @@ permalink: /customization/
 Choose the smallest primitive that reliably supplies the missing behavior.
 
 ```mermaid
+---
+config:
+  theme: base
+  look: classic
+  themeVariables:
+    darkMode: false
+    background: "#ffffff"
+    primaryColor: "#f5f5f5"
+    primaryTextColor: "#111111"
+    primaryBorderColor: "#555555"
+    secondaryColor: "#e0e0e0"
+    secondaryTextColor: "#111111"
+    secondaryBorderColor: "#666666"
+    tertiaryColor: "#bdbdbd"
+    tertiaryTextColor: "#111111"
+    tertiaryBorderColor: "#444444"
+    lineColor: "#444444"
+    textColor: "#111111"
+    mainBkg: "#f5f5f5"
+    nodeBorder: "#555555"
+    clusterBkg: "#ffffff"
+    clusterBorder: "#999999"
+    edgeLabelBackground: "#ffffff"
+    actorBkg: "#e0e0e0"
+    actorBorder: "#555555"
+    actorTextColor: "#111111"
+    actorLineColor: "#777777"
+    signalColor: "#333333"
+    signalTextColor: "#111111"
+    labelBoxBkgColor: "#f5f5f5"
+    labelBoxBorderColor: "#777777"
+    labelTextColor: "#111111"
+    loopTextColor: "#111111"
+    activationBkgColor: "#bdbdbd"
+    activationBorderColor: "#555555"
+    noteBkgColor: "#f5f5f5"
+    noteTextColor: "#111111"
+    noteBorderColor: "#777777"
+    attributeBackgroundColorOdd: "#f5f5f5"
+    attributeBackgroundColorEven: "#e0e0e0"
+---
 flowchart TD
+    accTitle: Select the smallest customization primitive
+    accDescr: Decide whether context is automatic, then choose a task prompt, reusable skill, role profile, external capability or deterministic check.
     N["What is missing?"] --> A{"Apply automatically?"}
     A -- Yes --> I["Instructions"]
     A -- No --> K{"What kind of need?"}
@@ -20,6 +63,10 @@ flowchart TD
     K -- External capability --> M["MCP server"]
     K -- Deterministic enforcement --> H["Hook"]
 ```
+
+**Legend.** Diamonds are selection questions. Labeled arrows describe the need; rectangles are the customization primitives.
+
+**Explanation.** Choose based on responsibility and invocation, not perceived sophistication. A skill is not a permission boundary and a prompt is not automatically applied context.
 
 | Need | Primitive | Key boundary |
 | --- | --- | --- |

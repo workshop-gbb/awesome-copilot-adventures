@@ -22,14 +22,16 @@ def migrate(source, target):
             connection.execute(
                 "CREATE TABLE orders ("
                 "id TEXT PRIMARY KEY, customer TEXT NOT NULL, "
-                "total_cents INTEGER NOT NULL CHECK(total_cents >= 0), "
+                "total_cents TEXT NOT NULL CHECK(length(total_cents) > 0 AND total_cents NOT GLOB '*[^0-9]*'), "
                 "status TEXT NOT NULL CHECK(status IN ('paid','pending','cancelled')))"
             )
             connection.executemany(
                 "INSERT INTO orders (id, customer, total_cents, status) VALUES (?, ?, ?, ?)",
-                [(row["id"], row["customer"], row["total_cents"], row["status"]) for row in records],
+                [(row["id"], row["customer"], str(row["total_cents"]), row["status"]) for row in records],
             )
-            observed = connection.execute("SELECT COUNT(*), COALESCE(SUM(total_cents), 0) FROM orders").fetchone()
+            # Decimal text preserves Python's integer range; SQLite INTEGER/SUM are limited to 64 bits.
+            imported = [int(row[0]) for row in connection.execute("SELECT total_cents FROM orders")]
+            observed = (len(imported), sum(imported))
             expected = (len(records), sum(row["total_cents"] for row in records))
             if observed != expected:
                 raise ValueError("Imported count or integer total differs from the CSV.")

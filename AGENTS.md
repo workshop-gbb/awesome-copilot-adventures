@@ -11,6 +11,7 @@ Copilot Adventures teaches agentic software engineering with GitHub Copilot. Opt
 - Site: `docs/`
 - Shared customizations: `.github/`
 - Historical material: `legacy/`
+- Numbered non-fantasy hands-on track: `mslearn-github-copilot/`
 
 Do not copy guidance from `legacy/` into current adventures without revalidating it against official GitHub or Microsoft documentation.
 
@@ -48,6 +49,9 @@ Use one progressive workflow: Ask for investigation, Plan for design, Agent for 
 - Explain what evidence proves completion.
 - Use accessible language and meaningful alt text.
 - Keep fantasy storytelling subordinate to the learning objective.
+- Keep the hands-on track in its exercise/task format; do not convert it into adventures.
+- Every Mermaid diagram uses the canonical `scripts/mermaid-theme.json` palette,
+  `accTitle`, `accDescr`, and adjacent legend/explanation. White, ice, grays and black only.
 
 ## Code rules
 

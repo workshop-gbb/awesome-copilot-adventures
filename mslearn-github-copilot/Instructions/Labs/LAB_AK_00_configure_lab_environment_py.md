@@ -1,60 +1,98 @@
 ---
+layout: default
+title: Prepare the Python environment
+parent: Hands-on Labs
+nav_order: 5
+permalink: /hands-on/setup-python/
+lab_id: setup-python
+last_verified: "2026-09-07"
 lab:
-  title: Prepare - Configure your lab environment for GitHub Copilot exercises (Python)
-  description: Review lab requirements and configure resources before starting GitHub Copilot exercises.
+  title: Prepare - Configure the Python hands-on environment
+  description: Select an interpreter, isolate dependencies and discover the library tests from their correct working directory.
   duration: 20 minutes
-  level: 200
-  primarytopics:
-    - GitHub
-    - Visual Studio Code
+  level: 100
+  islab: true
+  primarytopics: [Python, Testing, VS Code]
 ---
 
-# Configure your lab environment for GitHub Copilot exercises
+# Prepare the Python hands-on environment
 
-Your lab environment must be configured for Python development using Visual Studio Code and GitHub Copilot. Access to a GitHub account with GitHub Copilot enabled is required.
+## Learning objectives
 
-Complete the following steps to verify that your lab environment is configured correctly:
+- Select the same interpreter in VS Code and the terminal.
+- Understand the fixture's import root and test runner.
+- Keep virtual environments and caches on the selected work drive.
 
-1. Verify that Git version 2.48 or later is installed in your lab environment.
+## Before you start
 
-    Run the following command in a terminal window to check the installed version of Git:
+Read [environment setup](../Reference/SETUP.md). Use a supported Python interpreter
+and VS Code's Python extension. The supplied library tests use `unittest.TestCase`;
+pytest can execute them in the pytest lab. Do not install packages for the standard-
+library baseline unless a command actually requires them.
 
-    ```bash
-    git --version
-    ```
+## Concepts and use cases
 
-    If you're running Windows and you want to update Git, you can use the following command:
+| Item | Purpose |
+| --- | --- |
+| Interpreter | Runs the code; its selection determines available packages |
+| Virtual environment | Keeps this fixture's dependencies separate |
+| Working directory | Determines top-level imports and relative files |
+| Test discovery | Finds cases; it is distinct from running them |
 
-    ```bash
-    git update-git-for-windows
-    ```
+## Exercise scenario
 
-    If necessary, you can download Git using the following URL: <a href="https://git-scm.com/downloads" target="_blank">Download Git</a>.
+The library lives under `AccelerateDevGHCopilot/library`. Its imports expect
+`application_core`, `console`, and `infrastructure` below the current import root.
 
-1. Verify that the latest version of Python is installed in your lab environment.
+## Task 1 - Prepare the isolated copy
 
-    Run the following command in a terminal window to check the installed version of Python:
+```bash
+node scripts/prepare-hands-on.js --lab 02-python --destination /Volumes/T9/Dev/oss/workshop-runs/02-python
+```
 
-    ```bash
-    python3 --version
-    ```
+Open the printed copy alone, select the Python interpreter, then change into
+`library` in its terminal. Record the interpreter and working directory.
 
-    If necessary, follow the steps to Configure Python in Visual Studio Code using the following URL: <a href="https://code.visualstudio.com/docs/python/python-tutorial" target="_blank">Getting Started with Python in VS Code</a>.
+## Task 2 - Discover and run the existing tests
 
-1. Verify that Visual Studio Code and the Python extension are installed in your lab environment.
+```bash
+python -m unittest discover -s tests -p "test_*.py" -v
+```
 
-    If necessary, you can download Visual Studio Code using the following URL: <a href="https://code.visualstudio.com/download" target="_blank">Download Visual Studio Code</a>
+1. Confirm actual test names appear.
+2. Record assertion results and the exit status.
+3. In the editor, use **Python: Configure Tests** and select unittest with `tests`
+   as the directory for this baseline.
+4. If the later pytest lab is selected, create `.venv` in the disposable copy,
+   install its declared pytest requirement there, and select that interpreter.
+5. Avoid automatic discovery across the entire curriculum; it contains independent
+   copies with different import roots.
 
-    You can install the Python extension using the Extensions view in Visual Studio Code.
+## Verify your work
 
-1. Verify that you have access to a GitHub account and GitHub Copilot subscription.
+- [ ] Terminal and editor use the intended interpreter.
+- [ ] Tests are discovered from `library`, not an unrelated directory.
+- [ ] No zero-test result is called a passing baseline.
+- [ ] No package, environment or cache was created on the OS disk for this workshop.
 
-    You can log in to your GitHub account using the following URL: <a href="https://github.com/login" target="_blank">GitHub login</a>.
+## Troubleshooting
 
-    If you don't have a GitHub account, you can create an individual account from the GitHub login page. On the login page, select **Create an account**.
+`ModuleNotFoundError: application_core` usually indicates the wrong working/import
+root. Do not scatter `sys.path` changes across tests. A missing pytest package in a
+unittest baseline is not a reason to install pytest globally.
 
-    Open the settings/profile page of your GitHub account and verify that you have access to a GitHub Copilot subscription. If you have an active subscription for GitHub Copilot Pro, GitHub Copilot Pro+, GitHub Copilot Business, or GitHub Copilot Enterprise that you can use for training, you can use your existing GitHub Copilot subscription to complete the GitHub Copilot exercises.
+## Independent practice
 
-    If you have an individual GitHub account, but you don't have a GitHub Copilot subscription, you can set up a GitHub Copilot Free plan either from the GitHub settings page or from Visual Studio Code during a training exercise.
+Compare unittest discovery with pytest collection on the same `TestCase` classes.
+Explain why selecting both frameworks in VS Code does not mean both ran.
 
-    > **IMPORTANT**: The GitHub Copilot Free plan is a limited version of GitHub Copilot, allowing up to 2,000 code completions and 50 chats or premium requests per month. If you use a GitHub Copilot Free plan outside training exercises, you may exceed the plan's resource limits before completing the training. The GitHub Copilot Free plan is not available for GitHub Copilot Pro, GitHub Copilot Pro+, GitHub Copilot Business, or GitHub Copilot Enterprise subscriptions.
+## Reset
+
+Close the copied workspace and restore only preferences changed for it. Keep shared
+interpreters and other projects' virtual environments intact.
+
+## Official references
+
+- [Python environments in VS Code](https://code.visualstudio.com/docs/python/environments)
+- [Python testing](https://code.visualstudio.com/docs/python/testing)
+- [Python tutorial in VS Code](https://code.visualstudio.com/docs/python/python-tutorial)

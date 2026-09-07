@@ -38,3 +38,8 @@ jobs:
         with:
           python-version: "3.14"
       - run: python solutions/python/test_gridlock_arena.py
+      - name: Verify the hands-on modernization reference
+        working-directory: mslearn-github-copilot/LabFiles/17-spec-kit-modernization
+        env:
+          HANDS_ON_REFERENCE: "1"
+        run: python -m unittest test_legacy test_modernization -v

@@ -10,7 +10,50 @@ permalink: /curriculum/
 The path moves from mental models to a governed end-to-end delivery.
 
 ```mermaid
+---
+config:
+  theme: base
+  look: classic
+  themeVariables:
+    darkMode: false
+    background: "#ffffff"
+    primaryColor: "#f5f5f5"
+    primaryTextColor: "#111111"
+    primaryBorderColor: "#555555"
+    secondaryColor: "#e0e0e0"
+    secondaryTextColor: "#111111"
+    secondaryBorderColor: "#666666"
+    tertiaryColor: "#bdbdbd"
+    tertiaryTextColor: "#111111"
+    tertiaryBorderColor: "#444444"
+    lineColor: "#444444"
+    textColor: "#111111"
+    mainBkg: "#f5f5f5"
+    nodeBorder: "#555555"
+    clusterBkg: "#ffffff"
+    clusterBorder: "#999999"
+    edgeLabelBackground: "#ffffff"
+    actorBkg: "#e0e0e0"
+    actorBorder: "#555555"
+    actorTextColor: "#111111"
+    actorLineColor: "#777777"
+    signalColor: "#333333"
+    signalTextColor: "#111111"
+    labelBoxBkgColor: "#f5f5f5"
+    labelBoxBorderColor: "#777777"
+    labelTextColor: "#111111"
+    loopTextColor: "#111111"
+    activationBkgColor: "#bdbdbd"
+    activationBorderColor: "#555555"
+    noteBkgColor: "#f5f5f5"
+    noteTextColor: "#111111"
+    noteBorderColor: "#777777"
+    attributeBackgroundColorOdd: "#f5f5f5"
+    attributeBackgroundColorEven: "#e0e0e0"
+---
 flowchart TB
+    accTitle: Progressive adventure curriculum
+    accDescr: Foundations, basics, intermediate customization, advanced coordination and execution surfaces lead to the capstone.
     subgraph F["00 · Foundations"]
         N["Portals of Nexus<br/>roles · harnesses · targets"]
         X["Context Mirrors<br/>context experiments"]
@@ -53,6 +96,10 @@ flowchart TB
     K --> Z
 ```
 
+**Legend.** Grouped boxes are curriculum levels; individual boxes are adventures. Solid arrows indicate the suggested first-pass learning order.
+
+**Explanation.** Later adventures build on earlier concepts. The hands-on companion track is separate and retains numbered professional exercises rather than adding fantasy adventures.
+
 | Level | Focus | Catalog | Source |
 | --- | --- | --- | --- |
 | **00 · Foundations** | Roles, harnesses, targets, context, and evidence | [Foundations](adventures/foundations.md) | [Adventure files](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/adventures/00-foundations) |
@@ -66,3 +113,11 @@ flowchart TB
 > Follow the levels in order on a first pass. On later passes, repeat one lab in a different harness and compare the evidence rather than the fluency of the response.
 
 Use the [Glossary](glossary.md) for terminology and the [Feature Status Matrix](feature-status.md) before relying on availability-sensitive capabilities.
+
+## A separate hands-on path
+
+The [Hands-on Labs](../mslearn-github-copilot/index.md) complement this adventure
+path without adding fantasy stories. Choose that catalog for C#/Python application
+work, engineering exercises, or Spec Kit greenfield, brownfield and modernization.
+Its [audit report](../mslearn-github-copilot/Instructions/Reference/AUDIT.md) records
+the source-level improvements and verification boundaries.
