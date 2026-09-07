@@ -1,4 +1,5 @@
 import { searchRecords, resultExcerpt } from './search.mjs';
+import { enhanceSite } from './enhancements.js';
 
 const config = JSON.parse(document.getElementById('site-config').textContent);
 const { ui, locale, base } = config;
@@ -22,7 +23,7 @@ function updateLanguageLinks() {
   document.querySelectorAll('a[data-locale]').forEach(link => {
     const url = new URL(link.href);
     url.hash = location.hash;
-    if (config.kind === 'repository') url.search = location.search;
+    url.search = location.search;
     link.href = url.href;
     if (link.dataset.locale === locale) link.setAttribute('aria-current', 'page');
   });
@@ -188,7 +189,7 @@ function search() {
     if (records) return render();
     if (loading) return loading;
     status.textContent = ui.loading;
-    loading = json(`${base}/site-data/search-${locale}.json`).then(value => {
+    loading = json(`${base}/site-data/search-${locale}.json?v=${config.revision}`).then(value => {
       if (!Array.isArray(value) || value.some(record => typeof record.title !== 'string'
         || typeof record.text !== 'string' || !record.url?.startsWith(`${base}/${locale}/`))) {
         throw new Error('Invalid search index.');
@@ -353,7 +354,7 @@ async function sourceExplorer() {
   const load = async () => {
     status.textContent = ui.loading;
     try {
-      const entries = await json(`${base}/site-data/sources.json`);
+      const entries = await json(`${base}/site-data/sources.json?v=${config.revision}`);
       if (!Array.isArray(entries) || entries.some(entry => typeof entry.path !== 'string'
         || !/^[a-f0-9]{64}$/.test(entry.hash) || !Number.isSafeInteger(entry.size) || entry.size < 0)) {
         throw new Error('Invalid source inventory.');
@@ -395,6 +396,7 @@ navigation();
 tableOfContents();
 alerts();
 search();
+enhanceSite(config, updateLanguageLinks);
 void sourceExplorer();
 void diagrams().then(codeCopy);
 

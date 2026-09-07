@@ -1,12 +1,20 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { translationSegments, pages } = require('./site-content');
+const { root, translationSegments, pages } = require('./site-content');
 
 const destination = process.argv[2];
-if (!destination || !path.isAbsolute(destination) || !destination.startsWith('/Volumes/T9/')) {
-  throw new Error('Provide an absolute T9 directory for translation work packets.');
+if (!destination || !path.isAbsolute(destination)) {
+  throw new Error('Provide an absolute directory on your selected work drive for translation packets.');
 }
 fs.mkdirSync(destination, { recursive: true });
+const resolved = fs.realpathSync(destination);
+const fromRoot = path.relative(root, resolved);
+if (!fromRoot.startsWith(`..${path.sep}`) && fromRoot !== '..' && !path.isAbsolute(fromRoot)) {
+  throw new Error('Translation work packets must be exported outside the repository.');
+}
+if (resolved === path.parse(resolved).root || fs.readdirSync(resolved).length) {
+  throw new Error('Use an empty output directory; existing translation work will not be overwritten.');
+}
 const documents = pages();
 const segments = translationSegments(documents);
 let bucket = [];

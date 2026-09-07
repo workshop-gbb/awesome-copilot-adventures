@@ -224,8 +224,8 @@ function buildArtifacts(selectedLocales = locales) {
     const object = { encoding: 'base64', content: bytes.toString('base64'), sha256: hash };
     artifacts.set(`site-generated/public/site-data/objects/${hash}.json`, JSON.stringify(object));
     const mime = sourceMime(name);
+    if (name.startsWith('assets/site/fonts/') && name.endsWith('.txt')) artifacts.set(`site-generated/public/${name}`, bytes);
     if (mime.startsWith('image/')) artifacts.set(`site-generated/public/site-data/media/${hash}${path.extname(name).toLowerCase()}`, bytes);
-    if (name.startsWith('assets/site/')) artifacts.set(`site-generated/public/${name}`, bytes);
     manifest.push({
       path: name, size: bytes.length, hash, text: textPreview(bytes), mime,
       legacy: name.startsWith('legacy/'),

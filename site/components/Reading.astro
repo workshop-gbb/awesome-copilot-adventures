@@ -1,0 +1,18 @@
+---
+import { languageFor, type Locale } from '../lib/catalog';
+interface Props { locale: Locale; source?: string; }
+const { locale, source } = Astro.props;
+const { ui } = languageFor(locale);
+---
+<aside class="reading-tracker" data-reading-tracker hidden>
+  <div>
+    <p class="eyebrow">{ui.readingTracker}</p>
+    <p class="reading-count"><strong data-reading-count>0</strong> {ui.markedCountLabel}</p>
+  </div>
+  <div class="reading-controls">
+    {source && <button type="button" class="button button-primary" data-mark-reading={source} aria-pressed="false">{ui.markRead}</button>}
+    <button type="button" class="quiet-button" data-reset-reading>{ui.clearReading}</button>
+  </div>
+  <p class="reading-note">{ui.readingNote}</p>
+  <p class="reading-status" data-reading-status role="status"></p>
+</aside>

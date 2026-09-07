@@ -1,10 +1,10 @@
 ---
-import { languageFor, type PageInfo } from '../lib/catalog';
+import { languageFor, labelFor, locales, type PageInfo } from '../lib/catalog';
 interface Props { page: PageInfo; }
 const { page } = Astro.props;
 const { ui, href } = languageFor(page.locale);
 ---
-<div class="identity-rule" aria-hidden="true"></div>
+<progress class="reading-progress" id="reading-progress" max="100" value="0" aria-label={ui.readingProgress}></progress>
 <header class="masthead">
   <div class="container masthead-inner">
     <a class="brand" href={href.home} aria-label={`Awesome Copilot Adventures · ${ui.home}`}>
@@ -20,11 +20,14 @@ const { ui, href } = languageFor(page.locale);
     </nav>
     <div class="masthead-tools">
       <button class="search-trigger quiet-button" type="button" aria-label={ui.search}><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m16 16 5 5"></path></svg></button>
-      <nav class="locale-switch" aria-label={ui.languages}>
-        {Object.entries(page.alternates).map(([locale, url]) => (
-          <a href={url} lang={locale} hreflang={locale} data-locale={locale} aria-current={locale === page.locale ? 'page' : undefined}>{locale.toUpperCase()}</a>
-        ))}
-      </nav>
+      <div class="locale-control">
+        <span class="locale-label">{ui.languageLabel}</span>
+        <nav class="locale-switch" aria-label={ui.languages}>
+          {locales.map(locale => (
+            <a href={page.alternates[locale]} lang={locale} hreflang={locale} data-locale={locale} aria-label={labelFor(locale, 'language')} aria-current={locale === page.locale ? 'page' : undefined}>{locale.toUpperCase()}</a>
+          ))}
+        </nav>
+      </div>
       <button class="theme-toggle quiet-button" type="button" aria-pressed="false" aria-label={ui.theme}><span aria-hidden="true">◐</span></button>
       <a class="header-cta" href={href.start}>{ui.start} <span aria-hidden="true">↗</span></a>
     </div>

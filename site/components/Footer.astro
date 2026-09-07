@@ -12,6 +12,8 @@ const { ui, href } = languageFor(page.locale);
       <a href={href.status}>{ui.status}</a>
       <a href={href.design}>{ui.design}</a>
       <a href={href.support}>{ui.support}</a>
+      <a href={`${settings.base}/assets/site/fonts/OFL-Inter.txt`}>Inter · {ui.fontLicenses}</a>
+      <a href={`${settings.base}/assets/site/fonts/OFL-JetBrains-Mono.txt`}>JetBrains Mono · {ui.fontLicenses}</a>
     </nav>
     <nav aria-label={ui.languages}>
       {locales.map(locale => (

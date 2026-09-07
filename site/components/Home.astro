@@ -1,7 +1,18 @@
 ---
-import { languageFor, counts, type Locale } from '../lib/catalog';
+import { languageFor, labelFor, alternateUrls, locales, counts, type Locale } from '../lib/catalog';
+import Discovery from './Discovery.astro';
+import Reading from './Reading.astro';
 interface Props { locale: Locale; }
-const { ui, href } = languageFor(Astro.props.locale);
+const { locale } = Astro.props;
+const { ui, href } = languageFor(locale);
+const alternates = alternateUrls('/');
+const stages = [
+  { id: 'ask', name: 'Ask', goal: ui.askGoal, artifact: ui.askArtifact },
+  { id: 'plan', name: 'Plan', goal: ui.planGoal, artifact: ui.planArtifact },
+  { id: 'agent', name: 'Agent', goal: ui.agentGoal, artifact: ui.agentArtifact },
+  { id: 'review', name: ui.reviewStage, goal: ui.reviewGoal, artifact: ui.reviewArtifact },
+  { id: 'evidence', name: ui.evidenceStage, goal: ui.evidenceGoal, artifact: ui.evidenceArtifact }
+];
 ---
 <section class="hero">
   <div class="container hero-grid">
@@ -14,25 +25,38 @@ const { ui, href } = languageFor(Astro.props.locale);
         <a class="button button-outline" href={href.repository}>{ui.heroSecondary} <span aria-hidden="true">→</span></a>
       </div>
       <p class="workflow-line">{ui.heroNote}</p>
+      <div class="hero-languages">
+        <span>{ui.languageAccess}</span>
+        <nav aria-label={ui.languages}>
+          {locales.map(language => <a href={alternates[language]} data-locale={language} lang={language} hreflang={language} aria-current={language === locale ? 'page' : undefined}>{labelFor(language, 'language')}</a>)}
+        </nav>
+      </div>
     </div>
     <aside class="hero-panel">
       <div class="panel-top"><span class="mono">ACA / 01</span><span class="panel-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
-      <div class="workflow-tiles" aria-hidden="true">
-        <span class="workflow-tile ask">Ask<small>01</small></span>
-        <span class="workflow-tile plan">Plan<small>02</small></span>
-        <span class="workflow-tile agent">Agent<small>03</small></span>
-        <span class="workflow-tile evidence">✓<small>04</small></span>
+      <h2>{ui.workflowExplore}</h2>
+      <div class="workflow-steps">
+        {stages.map((stage, index) => (
+          <details name="workflow" data-workflow-step={stage.id} open={index === 0}>
+            <summary><span class="stage-index">0{index + 1}</span><span>{stage.name}</span><span class="stage-toggle" aria-hidden="true">+</span></summary>
+            <div class="stage-content"><p>{stage.goal}</p><small>{ui.deliverable}</small><p class="stage-artifact">{stage.artifact}</p></div>
+          </details>
+        ))}
       </div>
-      <h2>{ui.heroPanelTitle}</h2>
-      <p>{ui.heroPanelText}</p>
+      <p class="workflow-disclaimer">{ui.workflowNote}</p>
     </aside>
   </div>
   <div class="container hero-stats">
-    <a href={href.adventures}><strong>{counts.adventureCount}</strong><span>{ui.adventures}</span></a>
-    <a href={href.handsOn}><strong>{counts.handsOnCount}</strong><span>{ui['hands-on']}</span></a>
-    <a href={href.library}><strong>{counts.documentCount}</strong><span>{ui.guides}</span></a>
-    <a href={href.repository}><strong>{counts.sourceCount}</strong><span>{ui.sourceCount}</span></a>
+    <a href={href.adventures} aria-label={`${counts.adventureCount} ${ui.adventures}`}><strong data-counter={counts.adventureCount}>{counts.adventureCount}</strong><span>{ui.adventures}</span></a>
+    <a href={href.handsOn} aria-label={`${counts.handsOnCount} ${ui['hands-on']}`}><strong data-counter={counts.handsOnCount}>{counts.handsOnCount}</strong><span>{ui['hands-on']}</span></a>
+    <a href={href.library} aria-label={`${counts.documentCount} ${ui.guides}`}><strong data-counter={counts.documentCount}>{counts.documentCount}</strong><span>{ui.guides}</span></a>
+    <a href={href.repository} aria-label={`${counts.sourceCount} ${ui.sourceCount}`}><strong data-counter={counts.sourceCount}>{counts.sourceCount}</strong><span>{ui.sourceCount}</span></a>
   </div>
+</section>
+<section class="section container discovery-section">
+  <div class="section-heading" data-reveal><p class="eyebrow">{ui.guides}</p><h2>{ui.libraryTitle}</h2><p>{ui.libraryDescription}</p></div>
+  <Reading locale={locale} />
+  <Discovery locale={locale} compact />
 </section>
 <section class="section container">
   <div class="section-heading"><p class="eyebrow">{ui.tracksEyebrow}</p><h2>{ui.tracksTitle}</h2></div>

@@ -6,12 +6,18 @@ import Sidebar from '../components/Sidebar.astro';
 import Home from '../components/Home.astro';
 import Library from '../components/Library.astro';
 import Repository from '../components/Repository.astro';
-import { languageFor, labelFor, settings, type PageInfo } from '../lib/catalog';
+import Reading from '../components/Reading.astro';
+import { languageFor, labelFor, settings, counts, type PageInfo } from '../lib/catalog';
+import '../../assets/site/site.css';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
+import themeScript from '../../assets/site/theme.js?raw';
+import mark from '../../assets/site/mark.svg?url';
 interface Props { page: PageInfo; }
 const { page } = Astro.props;
-const { ui, href } = languageFor(page.locale);
+const { ui, href, catalog } = languageFor(page.locale);
 const base = settings.base;
-const config = { locale: page.locale, base, mermaidVersion: settings.mermaidVersion, repository: settings.repository, kind: page.kind || 'document', ui };
+const config = { locale: page.locale, base, revision: counts.revision, mermaidVersion: settings.mermaidVersion, repository: settings.repository, kind: page.kind || 'document', source: page.source, sources: catalog.map(document => document.source), ui };
 const json = JSON.stringify(config).replace(/</g, '\\u003c');
 const canonical = settings.site + page.alternates[page.locale];
 const ogLocale = { en: 'en_US', es: 'es_ES', 'pt-br': 'pt_BR' }[page.locale];
@@ -33,11 +39,10 @@ const ogLocale = { en: 'en_US', es: 'es_ES', 'pt-br': 'pt_BR' }[page.locale];
     <meta property="og:description" content={ui.heroDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={ogLocale} />
-    <link rel="icon" href={`${base}/assets/site/mark.svg`} type="image/svg+xml" />
-    <link rel="stylesheet" href={`${base}/assets/site/site.css`} />
-    <script is:inline src={`${base}/assets/site/theme.js`}></script>
+    <link rel="icon" href={mark} type="image/svg+xml" />
+    <script is:inline set:html={themeScript}></script>
     <script is:inline id="site-config" type="application/json" set:html={json}></script>
-    <script is:inline type="module" src={`${base}/assets/site/site.js`}></script>
+    <script src="../../assets/site/site.js"></script>
   </head>
   <body id="top">
     <a class="skip-link" href="#main">{ui.skip}</a>
@@ -48,6 +53,7 @@ const ogLocale = { en: 'en_US', es: 'es_ES', 'pt-br': 'pt_BR' }[page.locale];
         <section class="section home-reading container">
           <div class="section-heading"><p class="eyebrow">{ui.curriculumEyebrow}</p><h2>{ui.libraryTitle}</h2><p>{ui.libraryDescription}</p></div>
           <article class="document"><slot /></article>
+          <Reading locale={page.locale} source={page.source} />
         </section>
       </main>
     ) : page.kind === 'repository' ? (

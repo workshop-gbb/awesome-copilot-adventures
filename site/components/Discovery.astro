@@ -1,0 +1,32 @@
+---
+import { languageFor, labelFor, type Locale } from '../lib/catalog';
+interface Props { locale: Locale; compact?: boolean; }
+const { locale, compact = false } = Astro.props;
+const { ui, href, catalog } = languageFor(locale);
+const id = compact ? 'home-library' : 'full-library';
+const groups = ['all', 'adventures', 'hands-on', 'guides', 'fixtures', 'solutions', 'media', 'read'];
+const groupLabel = (group: string) => group === 'all' ? ui.filterAll : group === 'read' ? ui.filterRead : labelFor(locale, group);
+const priority = (source: string) => source.includes('/portals-of-nexus/README.md') ? 0 : source.startsWith('adventures/') && source.endsWith('/README.md') ? 1 : 2;
+const documents = [...catalog].sort((left, right) => priority(left.source) - priority(right.source));
+---
+<div class="discovery" data-discovery data-compact={compact ? 'true' : 'false'}>
+  <div class="discovery-controls" data-enhanced-only hidden>
+    <label class="sr-only" for={`${id}-search`}>{ui.filterPlaceholder}</label>
+    <input id={`${id}-search`} type="search" placeholder={ui.filterPlaceholder} data-library-query autocomplete="off" />
+    <div class="filter-chips" role="group" aria-label={ui.filterTrack}>
+      {groups.map(group => <button type="button" data-library-filter={group} aria-pressed={group === 'all'}>{groupLabel(group)}</button>)}
+    </div>
+    <div class="discovery-summary"><p data-library-status role="status"></p><button class="quiet-button" type="button" data-clear-filters>{ui.clearFilters}</button></div>
+  </div>
+  <ul class="discovery-grid">
+    {documents.map((document, index) => (
+      <li class="discovery-card" data-library-card data-source={document.source} data-group={document.group} data-title={document.title} hidden={compact && index >= 6}>
+        <span class="card-index">{labelFor(locale, document.group)} <span data-read-badge hidden>✓</span></span>
+        <a href={document.url}>{document.title}<span aria-hidden="true">↗</span></a>
+        <small>{document.source}</small>
+      </li>
+    ))}
+  </ul>
+  <p data-library-empty hidden>{ui.searchEmpty}</p>
+  {compact && <a class="button" href={href.library} data-library-more>{ui.viewLibrary} <span aria-hidden="true">→</span></a>}
+</div>
