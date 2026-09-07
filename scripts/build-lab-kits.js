@@ -142,7 +142,7 @@ function kitEntries(recipe) {
   for (const file of fixtureFiles(source)) {
     entries.set(file, {
       data: readSource(path.join(source, file)),
-      executable: Boolean(fs.statSync(path.join(source, file)).mode & 0o111),
+      executable: file.endsWith('.sh'),
       original: `${recipe.source}/${file}`
     });
   }

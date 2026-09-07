@@ -11,6 +11,7 @@ export interface DocumentInfo {
   group: string;
   route: string;
   labId: string;
+  image: string | null;
 }
 export interface Language {
   ui: Labels;

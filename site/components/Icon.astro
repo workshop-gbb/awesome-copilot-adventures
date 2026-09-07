@@ -1,0 +1,28 @@
+---
+interface Props {
+  name: 'search' | 'menu' | 'theme' | 'close' | 'play' | 'pause' | 'step' | 'reset' | 'arrow' | 'workflow' | 'context' | 'check' | 'file' | 'expand' | 'book' | 'terminal';
+  size?: number;
+}
+const { name, size = 20 } = Astro.props;
+const paths = {
+  search: ['M21 21l-5-5', 'M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0'],
+  menu: ['M4 6h16M4 12h16M4 18h16'],
+  theme: ['M12 3a9 9 0 1 0 9 9A9 9 0 0 1 12 3Z'],
+  close: ['M6 6l12 12M18 6 6 18'],
+  play: ['M7 4l13 8-13 8Z'],
+  pause: ['M8 4v16M16 4v16'],
+  step: ['M5 4l11 8-11 8ZM20 4v16'],
+  reset: ['M3 10a9 9 0 1 1 1 7M3 4v6h6'],
+  arrow: ['M4 12h16M14 6l6 6-6 6'],
+  workflow: ['M3 3h6v6H3ZM15 15h6v6h-6ZM9 6h5a4 4 0 0 1 4 4v5M15 12l3 3 3-3'],
+  context: ['M4 3h12v14H4ZM8 7h4M8 11h4M8 21h12V7'],
+  check: ['M4 12l5 5L20 6'],
+  file: ['M5 3h9l5 5v13H5ZM14 3v6h5M9 13h6M9 17h6'],
+  expand: ['M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5'],
+  book: ['M12 5v16M3 3h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5v16h-5a4 4 0 0 0-4 2 4 4 0 0 0-4-2H3Z'],
+  terminal: ['M3 4h18v16H3ZM7 8l4 4-4 4M13 16h4']
+};
+---
+<svg class="he-icon" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  {paths[name].map(d => <path d={d} />)}
+</svg>

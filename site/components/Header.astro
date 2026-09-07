@@ -1,5 +1,7 @@
 ---
 import { languageFor, labelFor, locales, type PageInfo } from '../lib/catalog';
+import Icon from './Icon.astro';
+import simulationCopy from '../simulations.json';
 interface Props { page: PageInfo; }
 const { page } = Astro.props;
 const { ui, href } = languageFor(page.locale);
@@ -11,15 +13,16 @@ const { ui, href } = languageFor(page.locale);
       <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
       <span>Awesome Copilot<strong>Adventures</strong></span>
     </a>
-    <button class="menu-button quiet-button" type="button" aria-expanded="false" aria-controls="main-navigation">{ui.menu} <span aria-hidden="true">☰</span></button>
+    <button class="menu-button quiet-button" type="button" data-site-control hidden aria-expanded="false" aria-controls="main-navigation"><span class="menu-label">{ui.menu}</span><Icon name="menu" /></button>
     <nav id="main-navigation" class="main-navigation" aria-label={ui.navigation}>
       <a href={href.adventures} aria-current={page.group === 'adventures' ? 'true' : undefined}>{ui.adventures}</a>
       <a href={href.handsOn} aria-current={page.group === 'hands-on' ? 'true' : undefined}>{ui['hands-on']}</a>
-      <a href={href.library}>{ui.guides}</a>
+      <a href={href.simulations} aria-current={page.route === '/simulations/' ? 'page' : undefined}>{simulationCopy[page.locale].title}</a>
+      <a href={href.library} aria-current={page.kind === 'library' ? 'page' : undefined}>{ui.guides}</a>
       <a href={href.repository} aria-current={page.kind === 'repository' ? 'page' : undefined}>{ui.repository}</a>
     </nav>
     <div class="masthead-tools">
-      <button class="search-trigger quiet-button" type="button" aria-label={ui.search}><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m16 16 5 5"></path></svg></button>
+      <button class="search-trigger quiet-button" type="button" data-site-control hidden aria-label={ui.search}><Icon name="search" /></button>
       <div class="locale-control">
         <span class="locale-label">{ui.languageLabel}</span>
         <nav class="locale-switch" aria-label={ui.languages}>
@@ -28,7 +31,7 @@ const { ui, href } = languageFor(page.locale);
           ))}
         </nav>
       </div>
-      <button class="theme-toggle quiet-button" type="button" aria-pressed="false" aria-label={ui.theme}><span aria-hidden="true">◐</span></button>
+      <button class="theme-toggle quiet-button" type="button" data-site-control hidden aria-pressed="false" aria-label={ui.theme}><Icon name="theme" /></button>
       <a class="header-cta" href={href.start}>{ui.start} <span aria-hidden="true">↗</span></a>
     </div>
   </div>

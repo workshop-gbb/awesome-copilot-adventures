@@ -1,5 +1,6 @@
 import { searchRecords, resultExcerpt } from './search.mjs';
 import { enhanceSite } from './enhancements.js';
+import { enhanceMedia } from './media.js';
 
 const config = JSON.parse(document.getElementById('site-config').textContent);
 const { ui, locale, base } = config;
@@ -30,13 +31,29 @@ function updateLanguageLinks() {
 }
 
 function navigation() {
+  document.documentElement.dataset.enhanced = 'true';
+  document.querySelectorAll('[data-site-control]').forEach(control => { control.hidden = false; });
   const menu = document.querySelector('.menu-button');
   const masthead = document.querySelector('.masthead');
+  const mobile = matchMedia('(max-width: 1100px)');
   const setOpen = open => {
     masthead.dataset.menuOpen = String(open);
     menu.setAttribute('aria-expanded', String(open));
   };
   menu.addEventListener('click', () => setOpen(menu.getAttribute('aria-expanded') !== 'true'));
+  const mainNavigation = document.getElementById('main-navigation');
+  mainNavigation.addEventListener('click', event => { if (event.target.closest('a')) setOpen(false); });
+  document.addEventListener('click', event => {
+    if (mobile.matches && !masthead.contains(event.target) && menu.getAttribute('aria-expanded') === 'true') setOpen(false);
+  });
+  mobile.addEventListener('change', () => setOpen(false));
+  const learningMenu = document.querySelector('[data-learning-menu]');
+  if (learningMenu) {
+    const small = matchMedia('(max-width: 900px)');
+    const setLearningMenu = () => { learningMenu.open = !small.matches; };
+    setLearningMenu();
+    small.addEventListener('change', setLearningMenu);
+  }
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') {
       setOpen(false);
@@ -50,6 +67,7 @@ function navigation() {
   theme.addEventListener('click', () => {
     const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = next;
+    document.documentElement.dataset.heTheme = next;
     theme.setAttribute('aria-pressed', String(next === 'dark'));
     try {
       localStorage.setItem('aca-theme', next);
@@ -58,6 +76,13 @@ function navigation() {
       console.warn('Theme preference could not be saved.', error.name);
     }
   });
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(() => {
+      if (menu.getAttribute('aria-expanded') !== 'true') {
+        document.documentElement.style.setProperty('--header', `${masthead.offsetHeight}px`);
+      }
+    }).observe(masthead);
+  }
 }
 
 function tableOfContents() {
@@ -399,6 +424,7 @@ tableOfContents();
 alerts();
 search();
 enhanceSite(config, updateLanguageLinks);
+enhanceMedia(config.media);
 void sourceExplorer();
 void diagrams().then(codeCopy);
 

@@ -1,5 +1,6 @@
 ---
 import { languageFor, labelFor, locales, settings, counts, type PageInfo } from '../lib/catalog';
+import simulationCopy from '../simulations.json';
 interface Props { page: PageInfo; }
 const { page } = Astro.props;
 const { ui, href } = languageFor(page.locale);
@@ -8,6 +9,7 @@ const { ui, href } = languageFor(page.locale);
   <div class="container footer-grid">
     <div><p class="eyebrow">Awesome Copilot Adventures</p><h2>{ui.footerTitle}</h2><p>{ui.footerText}</p></div>
     <nav aria-label={ui.guides}>
+      <a href={href.simulations}>{simulationCopy[page.locale].title}</a>
       <a href={href.glossary}>{ui.glossary}</a>
       <a href={href.status}>{ui.status}</a>
       <a href={href.design}>{ui.design}</a>

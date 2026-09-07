@@ -1,0 +1,123 @@
+---
+import Icon from './Icon.astro';
+import copy from '../simulations.json';
+import { languageFor, type Locale } from '../lib/catalog';
+import { workflowStages, contextFiles, contextBudget, patches, fixtureCases } from '../../assets/site/simulation.mjs';
+import '../../assets/site/studio.css';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const text = copy[locale];
+const { ui, href } = languageFor(locale);
+const stages = [
+  { name: 'Ask', goal: ui.askGoal, artifact: ui.askArtifact, trace: text.traceAsk },
+  { name: 'Plan', goal: ui.planGoal, artifact: ui.planArtifact, trace: text.tracePlan },
+  { name: 'Agent', goal: ui.agentGoal, artifact: ui.agentArtifact, trace: text.traceAgent },
+  { name: ui.reviewStage, goal: ui.reviewGoal, artifact: ui.reviewArtifact, trace: text.traceReview },
+  { name: ui.evidenceStage, goal: ui.evidenceGoal, artifact: ui.evidenceArtifact, trace: text.traceEvidence }
+];
+const contextKeys = ['task', 'code', 'tests', 'logs', 'unrelated'] as const;
+const demos = [
+  { id: 'workflow', name: text.workflow, icon: 'workflow' },
+  { id: 'context', name: text.context, icon: 'context' },
+  { id: 'verification', name: text.verification, icon: 'terminal' }
+] as const;
+const config = JSON.stringify({ text, stages, locale }).replace(/</g, '\\u003c');
+---
+<div class="he-studio" data-studio>
+  <script is:inline type="application/json" data-studio-config set:html={config}></script>
+  <div class="he-studio-banner"><Icon name="book" /><p>{text.disclaimer}</p></div>
+  <div class="he-studio-tabs" data-studio-tabs hidden aria-label={text.title}>
+    {demos.map((demo, index) => <button type="button" id={`tab-${demo.id}`} data-studio-tab={demo.id}><Icon name={demo.icon} /><span>0{index + 1} / {demo.name}</span></button>)}
+  </div>
+  <noscript><p class="he-studio-note">{text.withoutScript}</p></noscript>
+
+  <section id="workflow" class="he-studio-panel" data-studio-panel="workflow">
+    <div class="he-panel-heading"><div><p class="eyebrow">01 / Ask → Plan → Agent</p><h2>{text.workflow}</h2><p>{text.workflowText}</p></div><Icon name="workflow" size={40} /></div>
+    <div class="he-studio-controls" data-workflow-controls hidden>
+      <label>{text.scenario}<select data-scenario><option value="passing">{text.passing}</option><option value="failing">{text.failing}</option></select></label>
+      <label>{text.speed}<select data-speed><option value="1600">{text.normal}</option><option value="3000">{text.slow}</option></select></label>
+      <div class="he-playback">
+        <button type="button" class="button button-primary" data-play><span data-play-icon><Icon name="play" /></span><span data-pause-icon hidden><Icon name="pause" /></span><span data-play-label>{text.play}</span></button>
+        <button type="button" class="button" data-step><Icon name="step" />{text.step}</button>
+        <button type="button" class="quiet-button" data-workflow-reset><Icon name="reset" />{text.reset}</button>
+      </div>
+    </div>
+    <figure class="he-workflow-figure">
+      <ol class="he-workflow-map" aria-label={text.workflow}>
+        {stages.map((stage, index) => (
+          <li data-stage={workflowStages[index]}><span class="he-node-index">0{index + 1}</span><strong>{stage.name}</strong><span class="he-node-state" data-stage-state>{text.pending}</span></li>
+        ))}
+      </ol>
+      <figcaption>{text.workflowLegend}</figcaption>
+    </figure>
+    <div class="he-workflow-details">
+      {stages.map((stage, index) => (
+        <div class="he-stage-detail" data-stage-detail={index}><h3>{stage.name}</h3><p>{stage.goal}</p><p class="eyebrow">{ui.deliverable}</p><p>{stage.artifact}</p></div>
+      ))}
+    </div>
+    <div class="he-trace" data-workflow-output hidden>
+      <div class="he-trace-heading"><span class="mono">{text.trace}</span><span class="he-status" data-workflow-status>{text.ready}</span></div>
+      <p data-workflow-message role="status" aria-live="polite">{text.traceEmpty}</p>
+      <progress data-workflow-progress max={stages.length} value="0" aria-label={text.stageCount}></progress>
+      <p class="he-studio-note"><span data-workflow-count>0 / {stages.length}</span> {text.stageCount}</p>
+      <button type="button" class="button" data-workflow-retry hidden><Icon name="reset" />{text.retry}</button>
+    </div>
+  </section>
+
+  <section id="context" class="he-studio-panel" data-studio-panel="context">
+    <div class="he-panel-heading"><div><p class="eyebrow">02 / {text.context}</p><h2>{text.context}</h2><p>{text.contextText}</p></div><Icon name="context" size={40} /></div>
+    <div class="he-context-layout">
+      <fieldset class="he-context-files" aria-describedby="context-help"><legend>{text.contextTask}</legend><p id="context-help">{text.contextHelp}</p>
+        {contextFiles.map((file, index) => (
+          <label class="he-context-file">
+            <input type="checkbox" value={file.id} data-context-file checked={file.id === 'task' || file.id === 'code'} disabled />
+            <Icon name="file" /><span><strong>{text.contextFiles[contextKeys[index]].title}</strong><small>{text.contextFiles[contextKeys[index]].detail}</small></span>
+            <span class="he-unit-badge">{file.units}<span class="sr-only"> {text.contextUnits}</span></span>
+          </label>
+        ))}
+      </fieldset>
+      <aside class="he-context-meter" aria-labelledby="context-budget-label">
+        <p class="eyebrow" id="context-budget-label">{text.contextBudget}</p>
+        <p class="he-budget-number"><strong data-context-used>5</strong><span>/ {contextBudget}</span></p>
+        <meter data-context-meter min="0" max={contextBudget} value="5" aria-labelledby="context-budget-label"></meter>
+        <p class="he-studio-note">{text.contextUnits}</p>
+        <p data-context-message role="status" aria-live="polite">{text.contextMissing}</p>
+        <button type="button" class="button" data-context-reset hidden><Icon name="reset" />{text.reset}</button>
+      </aside>
+    </div>
+    <p class="he-studio-note">{text.contextNote}</p>
+  </section>
+
+  <section id="verification" class="he-studio-panel" data-studio-panel="verification">
+    <div class="he-panel-heading"><div><p class="eyebrow">03 / {text.verification}</p><h2>{text.verification}</h2><p>{text.verificationText}</p></div><Icon name="terminal" size={40} /></div>
+    <div class="he-studio-controls" data-verification-controls hidden>
+      <label>{text.patch}<select data-patch><option value="incomplete">{text.incompletePatch}</option><option value="corrected">{text.correctedPatch}</option></select></label>
+      <button type="button" class="button button-primary" data-run-checks><Icon name="play" />{text.run}</button>
+      <button type="button" class="quiet-button" data-checks-reset><Icon name="reset" />{text.reset}</button>
+    </div>
+    <div class="he-fixture-layout">
+      <div class="he-code-panel"><p class="eyebrow">{text.source} / JavaScript</p><pre tabindex="0" aria-label={text.source}><code data-patch-code>{patches.incomplete}</code></pre></div>
+      <div class="he-check-results">
+        <div class="he-table-scroll" role="region" aria-label={text.result} tabindex="0">
+          <table><caption>{text.verification}</caption><thead><tr><th scope="col">{text.input}</th><th scope="col">{text.expected}</th><th scope="col">{text.actual}</th><th scope="col">{text.result}</th></tr></thead>
+            <tbody>{fixtureCases.map(row => <tr data-check-row><td><code>{JSON.stringify(row.input)}</code></td><td><code>{row.expected}</code></td><td data-check-actual>—</td><td data-check-result>{text.notRun}</td></tr>)}</tbody>
+          </table>
+        </div>
+        <p class="he-check-summary" data-checks-message role="status" aria-live="polite">{text.checksReady}</p>
+      </div>
+    </div>
+    <p class="he-studio-note">{text.checksNote}</p>
+  </section>
+</div>
+<aside class="he-studio-references">
+  <h2>{text.references}</h2><p>{text.referenceNote}</p>
+  <ul>
+    <li><a href="https://code.visualstudio.com/docs/agents/overview">{text.agentsReference}</a></li>
+    <li><a href="https://code.visualstudio.com/docs/chat/copilot-chat-context">{text.contextReference}</a></li>
+    <li><a href={href.start}>{ui.start}</a> · <a href={href.downloads}>{ui.learnerKits}</a></li>
+  </ul>
+</aside>
+<script>
+  import { enhanceStudios } from '../../assets/site/studio.js';
+  enhanceStudios();
+</script>

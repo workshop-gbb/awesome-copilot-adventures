@@ -1,15 +1,21 @@
 ---
 import { languageFor, labelFor, type PageInfo } from '../lib/catalog';
+import Icon from './Icon.astro';
+import simulationCopy from '../simulations.json';
 interface Props { page: PageInfo; }
 const { page } = Astro.props;
 const { ui, href, catalog } = languageFor(page.locale);
 const groups = ['adventures', 'hands-on', 'guides', 'fixtures', 'solutions', 'media'];
 ---
 <aside class="learning-sidebar" aria-label={ui.learningNavigation}>
+  <details class="he-learning-menu" data-learning-menu open>
+    <summary><Icon name="book" />{ui.learningNavigation}</summary>
+    <div class="he-learning-links">
   <a class="sidebar-start" href={href.start}>{ui.start} <span aria-hidden="true">↗</span></a>
   <a class="sidebar-start" href={href.learningPath}>{ui.learningOrder} <span aria-hidden="true">↗</span></a>
   <a class="sidebar-start" href={href.downloads}>{ui.learnerKits} <span aria-hidden="true">↓</span></a>
   <a class="sidebar-start" href={href.curriculum}>{ui.curriculum} <span aria-hidden="true">↗</span></a>
+  <a class="sidebar-start" href={href.simulations}>{simulationCopy[page.locale].title}<Icon name="workflow" size={16} /></a>
   {groups.map(group => (
     <details class="sidebar-group" open={page.group === group}>
       <summary>{labelFor(page.locale, group)}</summary>
@@ -21,4 +27,6 @@ const groups = ['adventures', 'hands-on', 'guides', 'fixtures', 'solutions', 'me
     </details>
   ))}
   <a class="sidebar-source" href={href.repository}>{ui.repository} <span aria-hidden="true">↗</span></a>
+    </div>
+  </details>
 </aside>

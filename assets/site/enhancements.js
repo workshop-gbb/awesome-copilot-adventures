@@ -48,6 +48,19 @@ export function enhanceSite(config, locationChanged) {
         localStorage.setItem(storageKey, JSON.stringify(next));
         state = next;
         renderReading();
+        addEventListener('storage', event => {
+          if (!trackers.length || (event.key !== storageKey && event.key !== null)) return;
+          try {
+            state = readingState(localStorage.getItem(storageKey), sources);
+            storageAvailable = true;
+            for (const button of document.querySelectorAll('[data-mark-reading]')) button.disabled = false;
+            status('');
+            renderReading();
+          } catch (error) {
+            if (!(error instanceof DOMException || error instanceof SyntaxError || error instanceof TypeError)) throw error;
+            storageError(error);
+          }
+        });
         status(state.read.includes(button.dataset.markReading) ? ui.readingSaved : ui.readingRemoved);
       } catch (error) {
         storageError(error);
@@ -135,7 +148,7 @@ export function enhanceSite(config, locationChanged) {
       }
     }, { rootMargin: '-120px 0px -55% 0px' });
     headings.forEach(heading => headingObserver.observe(heading));
-    const reveals = [...document.querySelectorAll('[data-reveal], .section-heading, .track-card, .progression-grid li')];
+    const reveals = [...document.querySelectorAll('[data-reveal], .section-heading, .track-card, .he-demo-card, .progression-grid li')];
     const revealObserver = new IntersectionObserver(entries => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;

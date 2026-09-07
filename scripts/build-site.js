@@ -262,14 +262,15 @@ function buildArtifacts(selectedLocales = locales) {
       };
       artifacts.set(`site-generated/content/${locale}/${sha256(page.source).slice(0, 16)}.md`,
         frontmatter(metadata) + markdown);
-      catalog.push({ title, url, source: page.source, group: page.group, route: page.route, labId: page.labId });
+      const image = markdown.match(/!\[[^\]]*]\(([^)\n]*\/site-data\/media\/[^)\n]+)\)/)?.[1] || null;
+      catalog.push({ title, url, source: page.source, group: page.group, route: page.route, labId: page.labId, image });
       const plain = withoutCodeBlocks(markdown).replace(/\{#[^}]*}/g, '').replace(/<[^>]*>/g, '')
         .replace(/!?\[([^\]]*)]\([^)]+\)/g, '$1').replace(/[#*`|>]/g, '').replace(/\s+/g, ' ').trim();
       search.push({ title, url, group: page.group, text: plain });
     }
     const href = Object.fromEntries([
       ['home', '/'], ['start', '/start-here/'], ['curriculum', '/curriculum/'],
-      ['learningPath', '/learning-path/'], ['downloads', '/downloads/'],
+      ['learningPath', '/learning-path/'], ['downloads', '/downloads/'], ['simulations', '/simulations/'],
       ['adventures', '/adventures/'], ['handsOn', '/hands-on/'], ['repository', '/repository/'],
       ['library', '/library/'], ['harness', '/harnesses/'], ['status', '/feature-status/'],
       ['glossary', '/glossary/'], ['design', '/design-system/'], ['support', '/read/support/']

@@ -1,0 +1,28 @@
+---
+import Icon from './Icon.astro';
+import copy from '../simulations.json';
+import { languageFor, type Locale } from '../lib/catalog';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const text = copy[locale];
+const { href } = languageFor(locale);
+const demos = [
+  { id: 'workflow', icon: 'workflow', title: text.workflow, description: text.workflowText },
+  { id: 'context', icon: 'context', title: text.context, description: text.contextText },
+  { id: 'verification', icon: 'terminal', title: text.verification, description: text.verificationText }
+] as const;
+---
+<section class="section he-studio-preview">
+  <div class="container">
+    <div class="section-heading"><p class="eyebrow">{text.eyebrow}</p><h2>{text.title}</h2><p>{text.description}</p></div>
+    <div class="he-demo-grid">
+      {demos.map((demo, index) => (
+        <a class="he-demo-card" href={`${href.simulations}#${demo.id}`}>
+          <div class="he-demo-top"><Icon name={demo.icon} size={28} /><span class="mono">0{index + 1}</span></div>
+          <h3>{demo.title}</h3><p>{demo.description}</p><span class="he-demo-link">{text.related}<Icon name="arrow" /></span>
+        </a>
+      ))}
+    </div>
+    <p class="he-studio-note">{text.disclaimer}</p>
+  </div>
+</section>

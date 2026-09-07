@@ -2,6 +2,7 @@
 import { languageFor, labelFor, alternateUrls, locales, counts, type Locale } from '../lib/catalog';
 import Discovery from './Discovery.astro';
 import Reading from './Reading.astro';
+import StudioPreview from './StudioPreview.astro';
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const { ui, href } = languageFor(locale);
@@ -61,6 +62,7 @@ const stages = [
     <a class="button" href={href.downloads}>03 / {ui.learnerKits}</a>
   </nav>
 </section>
+<StudioPreview locale={locale} />
 <section class="section container discovery-section">
   <div class="section-heading" data-reveal><p class="eyebrow">{ui.guides}</p><h2>{ui.libraryTitle}</h2><p>{ui.libraryDescription}</p></div>
   <Reading locale={locale} />
