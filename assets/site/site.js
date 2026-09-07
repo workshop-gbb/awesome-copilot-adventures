@@ -1,6 +1,7 @@
 import { searchRecords, resultExcerpt } from './search.mjs';
 import { enhanceSite } from './enhancements.js';
 import { enhanceMedia } from './media.js';
+import { closeOnEscape } from './dialog.mjs';
 
 const config = JSON.parse(document.getElementById('site-config').textContent);
 const { ui, locale, base } = config;
@@ -35,7 +36,7 @@ function navigation() {
   document.querySelectorAll('[data-site-control]').forEach(control => { control.hidden = false; });
   const menu = document.querySelector('.menu-button');
   const masthead = document.querySelector('.masthead');
-  const mobile = matchMedia('(max-width: 1100px)');
+  const mobile = matchMedia('(max-width: 1280px)');
   const setOpen = open => {
     masthead.dataset.menuOpen = String(open);
     menu.setAttribute('aria-expanded', String(open));
@@ -246,13 +247,7 @@ function search() {
     }
   });
   dialog.addEventListener('close', () => opener?.focus());
-  dialog.addEventListener('keydown', event => {
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      event.stopPropagation();
-      dialog.close();
-    }
-  });
+  closeOnEscape(dialog);
   dialog.addEventListener('click', event => {
     const bounds = dialog.getBoundingClientRect();
     if (event.target === dialog && (event.clientX < bounds.left || event.clientX > bounds.right

@@ -1,92 +1,60 @@
-# Hub Editorial Studio
+# Hub Editorial Studio: base CSS
 
-Design system independente em React e TypeScript, com Storybook, showcase, componentes, visualizações SVG e simulações didáticas. Derivado da linguagem editorial do hub de Paula Silva; não modifica o projeto Astro.
+Referência visual do Awesome Copilot Adventures, derivada do hub de Paula Silva.
+Esta cópia versionada contém a base estática usada pelo site Astro, não o projeto
+React/Storybook completo descrito no documento de origem.
 
-## Iniciar
+## Abrir a referência
 
-Requer Node.js 22.12 ou superior.
+Abra [index.html](./index.html), o [catálogo visual](./foundation.html) ou o
+[template](./starter.html) no navegador. Esses arquivos usam CSS, JavaScript e
+fontes locais; não precisam de instalação de pacotes nem de conexão com uma conta.
 
-```bash
-npm ci
-npm run dev
-```
+O catálogo apresenta exemplos de interface, não medições ou execuções de produtos.
+O formulário demonstrativo não envia dados.
 
-Showcase: `http://127.0.0.1:5177`.
+## Arquivos reutilizáveis
 
-Em outro terminal, inicie o Storybook:
+| Arquivo | Finalidade |
+| --- | --- |
+| [tokens.css](./tokens.css) | Paleta, temas, tipografia, espaçamento e acessibilidade |
+| [components.css](./components.css) | Componentes estáticos com prefixo `he-` |
+| [hub.js](./hub.js) | Tema, menu e interações locais do catálogo |
+| [showcase.css](./showcase.css) | Apresentação das amostras, dispensável no template |
+| [fonts/](./fonts/) | Fontes locais, licença e proveniência |
 
-```bash
-npm run storybook
-```
+O site importa `tokens.css` diretamente e implementa sua navegação e suas
+simulações em Astro e JavaScript. Não depende de uma biblioteca React publicada.
+Diretórios locais ignorados como `dist/`, `lib/` e `node_modules/`, quando presentes,
+não fazem parte da publicação e não substituem arquivos-fonte versionados.
 
-Storybook: `http://127.0.0.1:6006`. Os servidores são locais e falham se a porta estiver ocupada, em vez de substituir outro processo.
+Controle o tema com `data-he-theme="light"` ou `data-he-theme="dark"` no elemento
+`html`. O prefixo reduz colisões, mas não equivale a Shadow DOM; revise o escopo
+antes de importar estilos em outra aplicação.
 
-## Construir e verificar
+## Verificar a integração
 
-```bash
-npm run test
-npm run build:all
-npm run test:browser
-npm run preview
-```
-
-- `dist/`: showcase pronto para servir.
-- `dist/storybook/`: Storybook estático.
-- `lib/`: biblioteca ES module, CSS e declarações TypeScript.
-- `test-results/`: evidência gerada pela verificação no navegador.
-
-O preview do pacote construído usa `http://127.0.0.1:4177`; o Storybook está em `/storybook/`.
-
-`build:all` executa primeiro o showcase, depois o Storybook e por fim a biblioteca. Executar apenas `build` posteriormente recria o diretório `dist/`; execute novamente `build-storybook` para repor o Storybook nesse diretório.
-
-## Reutilizar componentes
-
-Construa a biblioteca e crie um pacote local:
+Na raiz do Awesome Copilot Adventures, com Node.js 24 ou superior:
 
 ```bash
-npm run build:library
-npm pack
+npm test
+npm run build:site
+npm run check:astro
+npm run check:site:rendered -- dist
 ```
 
-Instale o arquivo `.tgz` gerado na aplicação de destino. Não existe publicação automática nem dependência de um pacote público com esse nome.
-
-```tsx
-import { Button, ChartDemo } from "hub-editorial-studio";
-import "hub-editorial-studio/style.css";
-
-export function Example() {
-  return (
-    <main className="he">
-      <Button variant="primary">Continuar</Button>
-      <ChartDemo kind="line" />
-    </main>
-  );
-}
-```
-
-Controle o tema com `data-he-theme="light"` ou `data-he-theme="dark"` no elemento `html`. O prefixo `he-` reduz colisões; não equivale a Shadow DOM. Revise o escopo antes de importar o CSS em uma aplicação existente.
-
-Os assets públicos, incluindo ícones oficiais quando presentes, acompanham o pacote em `public/`. Copie-os para a área pública da aplicação de destino preservando os caminhos e as condições de uso. As simulações não devem ser conectadas a contas ou serviços reais sem uma implementação própria.
-
-## Organização
-
-- `tokens.css`, `components.css`: base visual independente de framework.
-- `src/foundations/`: cores, tipografia, espaço, layout e acessibilidade.
-- `src/components/`: peças de interface e estados.
-- `src/data/`: tabelas, listas e modelos de dados.
-- `src/charts/`: gráficos SVG.
-- `src/diagrams/`: diagramas de software e fontes editáveis.
-- `src/icons/`, `src/illustrations/`: biblioteca vetorial.
-- `src/motion/`, `src/simulations/`: movimento e jornadas didáticas.
-- `.storybook/`: configuração, temas, controles e documentação.
-- `foundation.html`, `starter.html`: kit CSS original, que ainda abre diretamente no navegador.
-
-O showcase React e o Storybook precisam ser servidos por HTTP, mesmo sem internet. Para consulta sem Node, use um servidor estático com o conteúdo construído de `dist/`; para o kit CSS básico, abra `foundation.html`.
+Não execute `npm ci`, `npm run storybook` ou os comandos do projeto React nesta
+pasta: seus manifestos e fontes não estão incluídos nesta cópia. Consulte o
+[guia CSS](../md/Hub_Editorial_Design_System_v1.0.0_2026-09-07.md) para composição e
+o [registro do Studio original](../md/Hub_Editorial_Studio_v2.0.0_2026-09-07.md)
+para o contexto da referência.
 
 ## Limites e licenças
 
-Os números são sintéticos e as interfaces de produto são simulações locais identificadas. Nenhum comando, implantação, autenticação, gravação em conta ou envio de formulário real é executado. O kit não declara equivalência exata com uma versão atual de VS Code, GitHub Copilot CLI, Azure Portal ou GitHub.
+Fontes Inter e JetBrains Mono: [SIL Open Font License 1.1](./fonts/OFL.txt), com
+[proveniência](./fonts/SOURCES.txt). Preserve esses arquivos ao redistribuí-las.
+Marcas de produto não são a identidade do currículo e não implicam endosso.
 
-Fontes locais Inter e JetBrains Mono: [SIL Open Font License 1.1](./fonts/OFL.txt), com [proveniência](./fonts/SOURCES.txt). Ícones de produto, quando incluídos, mantêm as condições dos fornecedores; não são a marca do kit e não implicam endosso. Consulte os registros em `public/brand/` e as licenças em `public/licenses/`.
-
-Nenhuma nova licença foi atribuída ao código do repositório original. Verificações automatizadas não são certificação WCAG completa nem substituem revisão visual, semântica e de marca.
+Nenhuma nova licença foi atribuída ao código do projeto de origem. Verificações
+automatizadas não são certificação WCAG completa nem substituem revisão visual,
+semântica e de marca.

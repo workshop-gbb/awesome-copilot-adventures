@@ -9,7 +9,7 @@ last_verified: "2026-09-07"
 ## Reference and evidence
 
 The canonical visual reference is the supplied
-[Hub Editorial Studio](design-system/design-system/hub-editorial/README.md),
+[Hub Editorial Studio](design-system/hub-editorial/README.md),
 inspected on 2026-09-07. Astro imports its framework-independent tokens and local
 fonts directly; site styles map existing names to those tokens instead of keeping
 a second palette. Both theme attributes stay synchronized.
@@ -54,6 +54,11 @@ request. Their [Inter license](../assets/site/fonts/OFL-Inter.txt) and
 - Square or subtly rounded cards, thin borders and minimal shadow.
 - Sidebar navigation for learning documents; on-page table of contents for long guides.
 - Responsive grids collapse into a single column without hiding essential content.
+
+Reading text stays at the 16 px body token on narrow screens. Navigation, filters,
+source actions and learning controls use the 44 px touch-target token. The masthead
+switches to its compact menu at 1280 px to leave room for translated labels; code
+blocks keep space above their first line for the copy control.
 
 Exact spacing outside the inspected reference CSS is an implementation choice,
 not a claim of pixel-perfect reproduction.

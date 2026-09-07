@@ -4,13 +4,53 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const { test } = require('node:test');
 const { pathToFileURL } = require('node:url');
-const { root, tokensFor, pages, translationSegments, siteSources, relative } = require('./site-content');
+const { root, locales, tokensFor, pages, translationSegments, loadTranslations, siteSources, relative } = require('./site-content');
 const {
   html, localizedUrl, explorerUrl, validateTranslations, headingSlug,
   retainHeadingAnchors, createLinkResolver, renderDocument,   textPreview, readSource, buildArtifacts
 } = require('./build-site');
 const ui = require('./site-ui.json');
 const { decodeHtml } = require('./check-rendered-site');
+const { markdownLinkTargets } = require('./markdown-helpers');
+
+test('source link checks include reference definitions but ignore literal code examples', () => {
+  const source = [
+    '[Lesson](./lesson.md#evidence)',
+    '![Illustration](./hero.svg)',
+    '[Guide][reference]',
+    '[reference]: <./guide with spaces.md> "Guide title"',
+    '<img src="./diagram.svg" alt="Diagram">',
+    '`[example](placeholder)` and ``a ` [example](nested-placeholder)``.',
+    '```md',
+    '[Example](fenced-placeholder)',
+    '```',
+    'An unmatched ` marker does not hide [a real link](./real.md).'
+  ].join('\n');
+  assert.deepEqual(markdownLinkTargets(source).sort(), [
+    './lesson.md#evidence', './hero.svg', '<./guide with spaces.md>',
+    './diagram.svg', './real.md'
+  ].sort());
+  assert.deepEqual(markdownLinkTargets('[Read the `guide`](./guide.md)'), ['./guide.md']);
+});
+
+test('the shared design tokens and static reference have no missing local dependencies', () => {
+  const directory = path.join(root, 'docs/design-system/hub-editorial');
+  const layout = path.join(root, 'site/layouts/Site.astro');
+  const imported = fs.readFileSync(layout, 'utf8').match(/import '([^']*\/tokens\.css)'/);
+  assert.ok(imported, 'The site must import the canonical design tokens.');
+  assert.equal(path.resolve(path.dirname(layout), imported[1]), path.join(directory, 'tokens.css'));
+  const tokens = fs.readFileSync(path.join(directory, 'tokens.css'), 'utf8');
+  for (const [, font] of tokens.matchAll(/url\("([^"]+)"\)/g)) {
+    assert.ok(fs.statSync(path.resolve(directory, font)).size > 0, font);
+  }
+  for (const filename of ['index.html', 'foundation.html', 'starter.html']) {
+    const source = fs.readFileSync(path.join(directory, filename), 'utf8');
+    for (const [, target] of source.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
+      if (/^(https?:|data:|#)/.test(target)) continue;
+      assert.ok(fs.existsSync(path.resolve(directory, target.split(/[?#]/)[0])), `${filename}: ${target}`);
+    }
+  }
+});
 
 test('locale dictionaries cover identical UI controls with real language tags', () => {
   const keys = Object.keys(ui.en).sort();
@@ -21,6 +61,31 @@ test('locale dictionaries cover identical UI controls with real language tags', 
   assert.equal(ui['pt-br'].languageTag, 'pt-BR');
   assert.notEqual(ui.en.heroTitle, ui.es.heroTitle);
   assert.notEqual(ui.en.heroTitle, ui['pt-br'].heroTitle);
+});
+
+test('every current learning segment has a structurally valid translation in each published language', () => {
+  const segments = translationSegments(pages());
+  for (const locale of locales.filter(locale => locale !== 'en')) {
+    assert.doesNotThrow(() => validateTranslations(segments, locale, loadTranslations(locale)), locale);
+  }
+});
+
+test('dialog Escape dismisses the dialog without propagating to surrounding navigation', async () => {
+  const { closeOnEscape } = await import('../assets/site/dialog.mjs');
+  const dialog = new EventTarget();
+  let closed = 0;
+  let propagationStopped = 0;
+  dialog.close = () => { closed++; };
+  closeOnEscape(dialog);
+  dialog.dispatchEvent(new Event('keydown'));
+  assert.equal(closed, 0);
+  const escape = new Event('keydown', { cancelable: true });
+  escape.key = 'Escape';
+  escape.stopPropagation = () => { propagationStopped++; };
+  assert.equal(dialog.dispatchEvent(escape), false);
+  assert.equal(escape.defaultPrevented, true);
+  assert.equal(closed, 1);
+  assert.equal(propagationStopped, 1);
 });
 
 test('prose extraction preserves executable fences and surrounding whitespace exactly', () => {
@@ -243,7 +308,7 @@ test('publication covers every source byte and every learning page without recur
   assert.equal(data.handsOnCount, 26);
   assert.equal(data.documentCount, documents.length);
   assert.ok(manifest.some(entry => entry.path === 'site/lib/catalog.ts'));
-  assert.ok(manifest.some(entry => entry.path === 'docs/design-system/design-system/hub-editorial/tokens.css'));
+  assert.ok(manifest.some(entry => entry.path === 'docs/design-system/hub-editorial/tokens.css'));
   assert.ok(!documents.some(document => document.source.startsWith('docs/design-system/')));
   assert.ok(documents.some(document => document.route === '/simulations/'));
   assert.equal(data.locales.en.href.simulations, '/awesome-copilot-adventures/en/simulations/');

@@ -12,6 +12,13 @@ tags: ["design-system", "storybook", "react", "svg", "arquitetura", "pt-br"]
 
 Uma biblioteca de componentes e narrativas visuais para criar experiências consistentes com o formato editorial do site de Paula Silva, sem alterar o site de produção.
 
+> [!NOTE]
+> Este documento descreve o projeto de origem. O Awesome Copilot Adventures
+> inclui apenas a [base CSS estática](../hub-editorial/README.md), não os manifestos,
+> fontes React, testes ou Storybook completos. Os comandos e famílias descritos
+> abaixo não representam funcionalidades instaladas nesta cópia. Para consultar
+> a referência local, abra o [catálogo CSS](../hub-editorial/foundation.html).
+
 ## Histórico de versões
 
 | Versão | Data | Autora | Alteração |
@@ -46,7 +53,9 @@ Consulte também o [guia da base CSS](./Hub_Editorial_Design_System_v1.0.0_2026-
 
 ## 2. Abrir o showcase e o Storybook
 
-Use o [projeto independente](../design-system/hub-editorial/). Requer Node.js 22.12 ou superior. A configuração foi isolada do manifesto de dependências do site Astro.
+No projeto de origem completo, os comandos abaixo requerem Node.js 22.12 ou superior.
+A configuração era independente do site Astro. Nesta cópia, siga as
+[instruções da base estática](../hub-editorial/README.md) em vez desses comandos.
 
 ```bash
 cd output/design-system/hub-editorial
@@ -78,7 +87,7 @@ O showcase construído fica em `http://127.0.0.1:4177` e o Storybook em `http://
 
 O conteúdo construído não precisa de internet para executar as demonstrações. Aplicações com módulos JavaScript precisam de um servidor HTTP local; não abra o novo showcase ou o Storybook por `file://`.
 
-A [base CSS](../design-system/hub-editorial/foundation.html) e o [template HTML](../design-system/hub-editorial/starter.html) anteriores continuam disponíveis para abertura direta.
+A [base CSS](../hub-editorial/foundation.html) e o [template HTML](../hub-editorial/starter.html) continuam disponíveis nesta cópia para abertura direta.
 
 ## 3. Famílias do catálogo
 
@@ -307,7 +316,7 @@ Antes de distribuir:
 
 ## Referências
 
-- [Projeto e comandos](../design-system/hub-editorial/README.md).
+- [Arquivos disponíveis e limites desta cópia](../hub-editorial/README.md).
 - [Base visual documentada](./Hub_Editorial_Design_System_v1.0.0_2026-09-07.md).
 - [Site de referência](https://agenticdevopsplatform.ai).
 - [Documentação do Storybook](https://storybook.js.org/docs).

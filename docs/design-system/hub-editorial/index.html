@@ -3,13 +3,30 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Hub Editorial Studio: componentes, gráficos, diagramas, SVGs e simulações em um design system independente.">
-    <title>Hub Editorial Studio — Showcase</title>
+    <meta name="description" content="Base CSS do Hub Editorial usada pelo site Awesome Copilot Adventures, com tokens, componentes e um template independente.">
+    <title>Hub Editorial — Base CSS</title>
     <link rel="icon" href="data:,">
     <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="./tokens.css">
+    <link rel="stylesheet" href="./components.css">
+    <script src="./hub.js" defer></script>
   </head>
   <body class="he">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <a class="he-skip" href="#main">Pular para o conteúdo</a>
+    <main id="main" tabindex="-1">
+      <section class="he-section">
+        <div class="he-container">
+          <p class="he-label">Awesome Copilot Adventures / referência visual</p>
+          <h1 class="he-section__title">Hub Editorial</h1>
+          <p class="he-section__lead">Consulte os tokens e componentes compartilhados com o site. Esta cópia contém a base estática; não requer React, Storybook ou instalação de pacotes.</p>
+          <nav class="he-actions" aria-label="Recursos do design system">
+            <a class="he-button he-button--primary" href="./foundation.html">Explorar a base visual</a>
+            <a class="he-button" href="./starter.html">Abrir o template</a>
+            <a class="he-button" href="./README.md">Ler os limites desta cópia</a>
+          </nav>
+          <div class="he-actions"><button class="he-button" type="button" data-he-theme-toggle aria-pressed="false" hidden>Tema escuro</button></div>
+        </div>
+      </section>
+    </main>
   </body>
 </html>

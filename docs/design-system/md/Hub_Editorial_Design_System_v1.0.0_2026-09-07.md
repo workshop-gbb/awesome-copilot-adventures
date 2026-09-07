@@ -354,15 +354,15 @@ Fora do escopo: biblioteca de componentes React publicada, arquivo Figma, backen
 
 As referências ao código apontam para o repositório original e podem evoluir. Os valores documentados representam a inspeção local e visual feita em 7 de setembro de 2026.
 
-[showcase]: ../design-system/hub-editorial/foundation.html
-[starter]: ../design-system/hub-editorial/starter.html
-[tokens]: ../design-system/hub-editorial/tokens.css
-[components]: ../design-system/hub-editorial/components.css
-[behavior]: ../design-system/hub-editorial/hub.js
-[showcase-css]: ../design-system/hub-editorial/showcase.css
-[fonts]: ../design-system/hub-editorial/fonts/
-[font-license]: ../design-system/hub-editorial/fonts/OFL.txt
-[font-sources]: ../design-system/hub-editorial/fonts/SOURCES.txt
+[showcase]: ../hub-editorial/foundation.html
+[starter]: ../hub-editorial/starter.html
+[tokens]: ../hub-editorial/tokens.css
+[components]: ../hub-editorial/components.css
+[behavior]: ../hub-editorial/hub.js
+[showcase-css]: ../hub-editorial/showcase.css
+[fonts]: ../hub-editorial/fonts/
+[font-license]: ../hub-editorial/fonts/OFL.txt
+[font-sources]: ../hub-editorial/fonts/SOURCES.txt
 [source-site]: https://agenticdevopsplatform.ai
 [source-css]: https://github.com/paulanunes85/paula-site/blob/main/src/styles/global.css
 [source-layout]: https://github.com/paulanunes85/paula-site/blob/main/src/layouts/Base.astro

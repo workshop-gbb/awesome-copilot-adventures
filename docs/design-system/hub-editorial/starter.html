@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR" data-he-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Template independente para criar um hub editorial com o design system Hub Editorial.">
+  <meta name="color-scheme" content="light dark">
+  <title>Seu projeto — Template Hub Editorial</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./tokens.css">
+  <link rel="stylesheet" href="./components.css">
+  <script src="./hub.js" defer></script>
+</head>
+<body class="he">
+  <a class="he-skip" href="#main">Pular para o conteúdo</a>
+  <header class="he-header" data-he-header>
+    <a class="he-brand" href="#main"><span class="he-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Seu projeto</a>
+    <span class="he-header__caption">TEMPLATE / CONTEÚDO DEMONSTRATIVO</span>
+    <button class="he-button" type="button" data-he-menu-toggle aria-controls="he-starter-navigation" aria-expanded="false" hidden>Menu</button>
+    <nav class="he-nav" id="he-starter-navigation" aria-label="Seções do projeto">
+      <a href="#proposito">Propósito</a>
+      <a href="#conteudos">Trilhas</a>
+      <a href="#recursos">Recursos</a>
+      <a href="./foundation.html">Design system</a>
+    </nav>
+    <div class="he-header__tools">
+      <button class="he-button" type="button" data-he-theme-toggle aria-pressed="false" hidden>Tema escuro</button>
+    </div>
+  </header>
+  <main id="main" tabindex="-1">
+    <section class="he-hero he-inverse" id="intro" aria-labelledby="intro-title">
+      <div class="he-container">
+        <div class="he-hero__layout">
+          <div>
+            <p class="he-eyebrow">Seu conhecimento, bem organizado.</p>
+            <h1 class="he-hero__title" id="intro-title">Boas ideias merecem uma base clara.</h1>
+            <p class="he-hero__lead">Transforme seu conteúdo em um lugar onde as pessoas entendem o contexto, encontram um caminho e sabem qual é o próximo passo.</p>
+            <div class="he-actions"><a class="he-button he-button--primary" href="#conteudos">Explorar as trilhas <span aria-hidden="true">&#8599;</span></a><a class="he-button" href="#proposito">Conhecer o propósito</a></div>
+          </div>
+          <figure class="he-hero__art">
+            <svg viewBox="0 0 400 390" role="img" aria-label="Ilustração abstrata de ideias conectadas">
+              <circle cx="200" cy="184" r="126" fill="#FFFFFF"/>
+              <circle cx="200" cy="184" r="139" fill="none" stroke="#2A2A2E"/>
+              <path d="M133 158 L200 119 L267 158 L267 229 L200 268 L133 229 Z M133 158 L200 198 L267 158 M200 198 V268" stroke="#1A1A1A" stroke-width="2" fill="none"/>
+              <circle cx="200" cy="119" r="10" fill="var(--he-red-500)"/>
+              <circle cx="133" cy="229" r="10" fill="var(--he-green-500)"/>
+              <circle cx="267" cy="229" r="10" fill="var(--he-blue-500)"/>
+              <circle cx="200" cy="198" r="10" fill="var(--he-yellow-500)"/>
+              <path d="M66 38 L40 64 L66 90" fill="none" stroke="var(--he-red-500)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="44" y="302" width="25" height="25" rx="5" fill="var(--he-green-500)"/>
+              <path d="M334 290 L360 316 L334 342" fill="none" stroke="var(--he-blue-500)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M341 63 L324 112" fill="none" stroke="var(--he-yellow-500)" stroke-width="12" stroke-linecap="round"/>
+            </svg>
+            <figcaption>ESPAÇO PARA A SUA IDENTIDADE</figcaption>
+          </figure>
+        </div>
+        <nav class="he-index" aria-label="Caminhos desta página">
+          <a class="he-index__item" href="#proposito"><strong>01</strong><span>Compreender</span></a>
+          <a class="he-index__item" href="#conteudos"><strong>02</strong><span>Explorar</span></a>
+          <a class="he-index__item" href="#recursos"><strong>03</strong><span>Aplicar</span></a>
+          <a class="he-index__item" href="#contato"><strong>04</strong><span>Continuar</span></a>
+        </nav>
+      </div>
+    </section>
+    <section class="he-section" id="proposito" aria-labelledby="purpose-title">
+      <div class="he-container">
+        <p class="he-label">O propósito</p>
+        <h2 class="he-section__title" id="purpose-title">Primeiro, dê contexto.<br>Depois, ofereça caminhos.</h2>
+        <p class="he-section__lead">Esta página é um ponto de partida, com textos demonstrativos. Substitua cada bloco pelo conteúdo do seu projeto, preservando a hierarquia e os padrões de interação.</p>
+        <div class="he-ledger">
+          <div class="he-ledger__row"><span class="he-ledger__number" aria-hidden="true">01</span><div><h3>Para quem é este espaço?</h3><p>Nomeie as pessoas que você quer ajudar e as necessidades que orientam o conteúdo.</p></div><a href="#conteudos">Encontrar uma trilha</a></div>
+          <div class="he-ledger__row"><span class="he-ledger__number" aria-hidden="true">02</span><div><h3>O que elas podem encontrar?</h3><p>Apresente recursos reais e explique o valor de cada um, sem promessas inventadas.</p></div><a href="#recursos">Explorar recursos</a></div>
+          <div class="he-ledger__row"><span class="he-ledger__number" aria-hidden="true">03</span><div><h3>Qual é a próxima ação?</h3><p>Escolha um convite coerente com o objetivo da página.</p></div><a href="#contato">Continuar</a></div>
+        </div>
+      </div>
+    </section>
+    <section class="he-section he-band" data-he-accent="green" id="conteudos" aria-labelledby="paths-title">
+      <div class="he-container">
+        <p class="he-label">Comece por aqui</p>
+        <h2 class="he-section__title" id="paths-title">Escolha o seu<br><span class="he-highlight">ponto de partida</span>.</h2>
+        <p class="he-section__lead">Agrupe o conteúdo por intenção de leitura, não apenas por formato de arquivo.</p>
+        <div class="he-grid">
+          <article class="he-path" data-he-accent="red"><p class="he-card__kicker">Entender</p><h3 class="he-card__title">Explore os fundamentos.</h3><p class="he-card__description">Use esta trilha para apresentar conceitos e vocabulário.</p><a href="#recurso-guia">Abrir o guia de referência</a></article>
+          <article class="he-path" data-he-accent="yellow"><p class="he-card__kicker">Planejar</p><h3 class="he-card__title">Dê forma à sua ideia.</h3><p class="he-card__description">Reúna critérios, exemplos e decisões de composição.</p><a href="#recurso-padroes">Abrir os padrões</a></article>
+          <article class="he-path" data-he-accent="blue"><p class="he-card__kicker">Aplicar</p><h3 class="he-card__title">Construa a primeira versão.</h3><p class="he-card__description">Ofereça materiais que a pessoa consiga reutilizar.</p><a href="#recurso-tokens">Abrir os tokens</a></article>
+        </div>
+      </div>
+    </section>
+    <section class="he-section" id="recursos" aria-labelledby="resources-title">
+      <div class="he-container">
+        <p class="he-label">Recursos para continuar</p>
+        <h2 class="he-section__title" id="resources-title">Conteúdo útil.<br>Estrutura previsível.</h2>
+        <p class="he-section__lead">Neste template, os cards apontam para arquivos reais do kit. Ao adaptar a página, substitua os destinos pelos seus próprios recursos.</p>
+        <div class="he-grid he-grid--ruled">
+          <a class="he-card" data-he-accent="red" id="recurso-guia" href="../md/Hub_Editorial_Design_System_v1.0.0_2026-09-07.md">
+            <p class="he-card__kicker">Guia</p><h3 class="he-card__title">A linguagem visual em detalhe.</h3><p class="he-card__description">Fundamentos, decisões de design, regras de uso e limites do kit.</p><div class="he-badges"><span class="he-badge">Markdown</span></div><div class="he-card__meta"><span>Abrir o guia</span><span class="he-card__arrow" aria-hidden="true">&#8599;</span></div>
+          </a>
+          <a class="he-card" data-he-accent="green" id="recurso-padroes" href="./foundation.html#composicao">
+            <p class="he-card__kicker">Padrões</p><h3 class="he-card__title">Peças que funcionam juntas.</h3><p class="he-card__description">Veja exemplos de cards, trilhas, listas pautadas e feedback.</p><div class="he-badges"><span class="he-badge">HTML</span></div><div class="he-card__meta"><span>Abrir os exemplos</span><span class="he-card__arrow" aria-hidden="true">&#8599;</span></div>
+          </a>
+          <a class="he-card" data-he-accent="blue" id="recurso-tokens" href="./tokens.css">
+            <p class="he-card__kicker">Implementação</p><h3 class="he-card__title">Tokens para começar.</h3><p class="he-card__description">A paleta e os papéis semânticos que mantêm o sistema consistente.</p><div class="he-badges"><span class="he-badge">CSS</span></div><div class="he-card__meta"><span>Abrir os tokens</span><span class="he-card__arrow" aria-hidden="true">&#8599;</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="he-footer he-inverse" id="contato">
+    <div class="he-container">
+      <p class="he-label">Seu próximo projeto</p>
+      <h2 class="he-section__title">Mude a história.<br>Mantenha a clareza.</h2>
+      <p class="he-hero__lead">Este fechamento demonstra uma chamada para ação. Na sua versão, conecte-a ao próximo passo real da pessoa.</p>
+      <div class="he-actions"><a class="he-button he-button--primary" href="./foundation.html#reutilizar">Personalizar este template <span aria-hidden="true">&#8599;</span></a><a class="he-button" href="#main">Voltar ao início</a></div>
+      <div class="he-footer__meta"><p>Conteúdo demonstrativo · Sem coleta de dados</p><a href="./foundation.html">Criado com Hub Editorial</a></div>
+    </div>
+  </footer>
+</body>
+</html>

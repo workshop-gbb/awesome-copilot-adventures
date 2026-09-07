@@ -29,4 +29,16 @@ function withoutCodeBlocks(markdown) {
   return lines.join('\n');
 }
 
-module.exports = { fencedBlocks, withoutCodeBlocks };
+function markdownLinkTargets(markdown) {
+  const content = withoutCodeBlocks(markdown).replace(
+    /(?<![\\`])(`+)(?!`)[\s\S]*?(?<!`)\1(?!`)/g,
+    span => span.replace(/[^\n]/g, ' ')
+  );
+  return [
+    /!?\[[^\]\n]*]\((<[^>\n]+>|[^)\n]+)\)/g,
+    /\b(?:src|href)="([^"]+)"/g,
+    /^[ \t]{0,3}\[[^\]\n]+]:[ \t]*(<[^>\n]+>|[^\s]+)/gm
+  ].flatMap(pattern => [...content.matchAll(pattern)].map(match => match[1]));
+}
+
+module.exports = { fencedBlocks, withoutCodeBlocks, markdownLinkTargets };

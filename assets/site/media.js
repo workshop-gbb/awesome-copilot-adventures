@@ -1,3 +1,5 @@
+import { closeOnEscape } from './dialog.mjs';
+
 export function enhanceMedia(labels) {
   const images = [...document.querySelectorAll('.document img')];
   if (!images.length) return;
@@ -27,6 +29,7 @@ export function enhanceMedia(labels) {
   document.body.append(dialog);
   close.addEventListener('click', () => dialog.close());
   dialog.addEventListener('close', () => opener?.focus());
+  closeOnEscape(dialog);
   dialog.addEventListener('click', event => {
     const bounds = dialog.getBoundingClientRect();
     if (event.target === dialog && (event.clientX < bounds.left || event.clientX > bounds.right
