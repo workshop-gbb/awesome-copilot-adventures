@@ -25,6 +25,24 @@ from history. The credential provider is the authority on validity.
 > publish an intentionally vulnerable repository, or paste secret values into Copilot.
 > The core lab is a simulation and contacts no provider.
 
+## Lab briefing
+
+![Rehearse incident decisions without a real credential.](../../../assets/images/hands-on/12-secrets.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 300; 45 minutes (facilitation estimate) |
+| Starting action | Use only the training marker and distinguish simulation from provider action. |
+| Learner materials | [Download 12-secrets.zip](../../../assets/lab-kits/hands-on/12-secrets.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The supplied baseline tests pass. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> Removing a literal does not revoke its authority.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---read-the-incident-and-establish-scope) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Separate triage, revocation, code remediation, exposure review, and prevention.

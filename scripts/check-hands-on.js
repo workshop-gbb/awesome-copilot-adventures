@@ -10,6 +10,10 @@ const requiredSections = [
   '## Exercise scenario', '## Task 1', '## Verify your work',
   '## Troubleshooting', '## Independent practice', '## Reset', '## Official references'
 ];
+const preparationKits = {
+  'setup-dotnet': '02-csharp', 'setup-python': '02-python',
+  'setup-copilot': '01-interface', 'setup-speckit': '13-greenfield', 'setup-sdk': '16-sdk'
+};
 
 function main() {
   const failures = [];
@@ -46,6 +50,14 @@ function main() {
     }
     for (const section of requiredSections) {
       if (!content.includes(section)) failures.push(`${lab.id}: missing ${section}`);
+    }
+    const image = `assets/images/hands-on/${lab.id}.svg`;
+    const kit = `assets/lab-kits/hands-on/${preparationKits[lab.id] || lab.id}.zip`;
+    if (!content.includes(image) || !fs.existsSync(path.join(root, image))) {
+      failures.push(`${lab.id}: missing linked instructional image`);
+    }
+    if (!content.includes(kit) || !fs.existsSync(path.join(root, kit))) {
+      failures.push(`${lab.id}: missing linked learner ZIP`);
     }
     if (!/https:\/\/(?:code\.visualstudio\.com|docs\.github\.com|learn\.microsoft\.com|github\.com\/github)\//.test(content)) {
       failures.push(`${lab.id}: add an official GitHub/Microsoft reference`);

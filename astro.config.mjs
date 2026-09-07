@@ -8,6 +8,7 @@ export default defineConfig({
   base: settings.base,
   srcDir: './site',
   publicDir: './site-generated/public',
+  cacheDir: './.astro/cache',
   outDir: process.env.SITE_OUTPUT_DIR || './dist',
   output: 'static',
   trailingSlash: 'always',

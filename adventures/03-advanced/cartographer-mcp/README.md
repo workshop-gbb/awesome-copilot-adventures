@@ -16,11 +16,14 @@ primary_capability: "Connecting tools with Model Context Protocol"
 
 
 > [!NOTE]
-> **Status:** Content ready · **Media:** Pending · **Last verified:** 2026-09-05  
+> **Status:** Content ready · **Media:** Original SVG illustration · **Last verified:** 2026-09-05  
 > **Primary capability:** Connecting tools with Model Context Protocol
 
+![MCP client, Read-only server, Verified map illustrated through The MCP Cartographer.](../../../assets/images/adventures/cartographer-mcp-hero.svg)
+
 > [!TIP]
-> Production hero media is intentionally pending. Use the specification in [Media Prompts](../../../docs/media-prompts.md) before adding a production hero asset.
+> [Download this learner kit](../../../assets/lab-kits/adventures/cartographer-mcp.zip) and use
+> [the extraction and setup guide](../../../docs/downloads.md). Keep the original starter untouched.
 
 ```mermaid
 ---
@@ -64,19 +67,22 @@ config:
     attributeBackgroundColorOdd: "#f5f5f5"
     attributeBackgroundColorEven: "#e0e0e0"
 ---
-flowchart LR
-    accTitle: Evidence-first development workflow
-    accDescr: Investigation leads to planning, implementation, review and evidence; unresolved gaps return to investigation.
-    A["Ask<br/>Investigate"] --> P["Plan<br/>Design"]
-    P --> G["Agent<br/>Implement"]
-    G --> R["Review<br/>Challenge"]
-    R --> E["Evidence<br/>Prove"]
-    E -. "gap found" .-> A
+sequenceDiagram
+    accTitle: The MCP Cartographer capability map
+    accDescr: Discovery is not verification of the returned fact. Compare the structured result with the bundled source and keep host trust decisions separate.
+    participant C as Local verifier
+    participant S as MCP server
+    C->>S: initialize
+    S-->>C: Server identity and capabilities
+    C->>S: tools/list
+    S-->>C: read_map schema
+    C->>S: tools/call read_map
+    S-->>C: Synthetic realm data
 ```
 
-**Legend.** Rectangles are workflow stages. Solid arrows show the normal progression; the dashed arrow returns unresolved evidence gaps to investigation.
+**Legend.** Solid arrows are requests; dashed arrows are protocol results over the local stdio connection.
 
-**Explanation.** A fluent response is not completion. The loop ends only when the reviewed result meets the acceptance criteria and the recorded checks support it.
+**Explanation.** Discovery is not verification of the returned fact. Compare the structured result with the bundled source and keep host trust decisions separate.
 
 ## Official references
 
@@ -94,26 +100,30 @@ The fantasy is a memory aid; the engineering lesson requires observable, reprodu
 
 ## Learning objectives
 
-By the end, you can:
-
-- Explain the primary capability in precise product language.
-- Separate role, harness, target, environment, and customization primitive.
-- Complete a bounded Ask → Plan → Agent workflow.
-- Review tool use, changes, and verification evidence independently.
-- State unavailable, Preview, experimental, or unverified behavior without guessing.
+- Describe MCP client, server, transport, discovery and tool call as separate parts.
+- Configure the bundled local server with no network or credential requirement.
+- Verify initialize, tools/list and the read_map result independently of host discovery.
 
 ## Prerequisites
 
-- Completion of the preceding adventure, or equivalent familiarity.
-- A disposable repository or authorized sandbox.
-- Access appropriate to the selected Copilot surface; availability is not assumed.
-- An existing test, build, lint, validation, or review mechanism where applicable.
+| Requirement | Why it matters |
+| --- | --- |
+| Complete the preceding adventure, or demonstrate its exit evidence | Keep this mission focused on its named capability |
+| Node 24 and the extracted kit | The local verifier uses the supplied runtime and files |
+| A disposable folder outside another project | Customizations and intentional failures must not leak into other work |
+| Authorized host access, only for live steps | Availability, tools and policies differ |
 
-Never use production secrets, customer data, or irreversible resources. Use the paper fallback when a named service is unavailable.
+**Evidence boundary:** The direct protocol check does not prove that a specific VS Code harness discovered this file. Use the supported host configuration only in this disposable workspace.
+
+Estimated session: 45–75 minutes after prerequisites; actual duration varies. Never use production secrets or customer data.
 
 ## Concept explanation
 
 Model Context Protocol standardizes how a host can discover capabilities exposed by servers. A host acts as an MCP client; servers may expose tools, resources, and prompts. MCP does not make a server trustworthy. Installation, authentication, network access, returned content, and side effects remain security decisions. Support varies by host and organization policy.
+
+### Concrete use case
+
+The cartographer reads a synthetic realm through a local process. The discovered read-only annotation is a hint; inspect the server code and returned data rather than trusting its name.
 
 ### Vocabulary checkpoint
 
@@ -165,23 +175,46 @@ Model Context Protocol standardizes how a host can discover capabilities exposed
 
 ## Guided mission
 
-Open the [MCP Cartographer lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/cartographer-mcp/README.md), complete its portable configuration, and verify `initialize`, `tools/list`, and the read-only `tools/call`.
+### 1. Prepare one isolated copy
 
-Confirm host support, choose a harmless read-only server, and map client, server, capability, data flow, authentication, and trust boundary. Record discovered capabilities, invoke one bounded read-only tool, and verify its answer independently rather than trusting the response alone.
+1. Download and extract the [cartographer-mcp kit](../../../assets/lab-kits/adventures/cartographer-mcp.zip) into a new work-drive directory.
+2. Read `KIT-START.md` at its root. Open `starter/` as the VS Code workspace when testing discovery, but run the verifier from the kit root.
+3. Inspect `starter/.mcp.json`, `starter/server.js`, `verify.js` before editing.
+4. From the extracted kit root, run `node verify.js`.
+5. Record the documented starter rejection. A missing runtime or unrelated crash is not the expected exercise result.
 
-Record each material step in this table:
+### 2. Investigate and plan
+
+In Ask, request a trace of the inspected files and what the verifier actually observes. Challenge any claim about live execution that is not supported by output.
+
+Use this planning prompt:
+
+```text
+Configure exactly one local stdio map-reader server using node and server.js. Review server code, transport and data before running the verifier. Do not add credentials or remote URLs.
+Do not implement yet. Identify affected files, the negative case and a safe reset.
+```
+
+### 3. Implement the reviewed slice
+
+1. Approve only the named starter artifact and necessary focused tests.
+2. Ask Agent to implement one slice; inspect proposed commands before execution.
+3. Run `node verify.js` again from the kit root, or `node ../verify.js` from `starter/`.
+4. Compare the exact result with the checkpoint below and review the complete diff.
+5. Record host discovery or live activity separately when available. Do not enable extra services to manufacture a passing result.
+
+> [!IMPORTANT]
+> **Checkpoint:** The protocol verifier receives the expected server identity, read_map discovery and the nexus structured result.
+> The direct protocol check does not prove that a specific VS Code harness discovered this file. Use the supported host configuration only in this disposable workspace.
+
+### 4. Prove a check can reject a mistake
+
+Change the configured argument to a different file and confirm configuration validation fails before a tool result is accepted. Restore server.js.
 
 | Observation | Decision | Action | Evidence | Limitation |
-|---|---|---|---|---|
-| What was inspected? | Why this next step? | What changed or ran? | What proves it? | What remains unknown? |
+| --- | --- | --- | --- | --- |
+| Initial state and exact diagnostic | Why this change is needed | Named file and bounded change | Command, exit code and observed result | What the local check does not prove |
 
-### Guided acceptance criteria
-
-- The initial state is supported by current evidence.
-- The plan is bounded and contains a reset path.
-- Agent work stays inside the declared scope.
-- Verification observes the requested behavior.
-- Review is independent from the implementation claim.
+Finish with the adventure-specific capability evidence in [the rubric](rubric.md), not just the presence of a file.
 
 ## Intentional failure: The Uncharted Server
 
@@ -217,12 +250,13 @@ Constraints:
 
 ## Reset instructions
 
-1. Stop a manually started MCP process with **Ctrl+C** in its own terminal.
-2. Restore `labs/cartographer-mcp/starter/.mcp.json` with `git restore`.
-3. Close the disposable starter workspace and start a new session so the server is no longer discovered.
-4. Confirm `git status --short -- labs/cartographer-mcp` is empty.
+1. Save your diff, command output and limitations from the disposable kit.
+2. Stop only the process or learning session you started. Do not stop other projects.
+3. If you initialized Git in the kit, inspect `git status --short` there and restore only your named exercise files from its local baseline.
+4. Otherwise, extract the original ZIP into a new unused directory for another attempt; do not overwrite your current work.
+5. Remove only exercise-owned configurations, worktrees or remote resources after reviewing anything worth preserving.
 
-Cleanup is part of completion. Do not leave billable resources, credentials, processes, branches, or worktrees behind.
+The curriculum source and other projects must remain unchanged. A reset of the copied kit is not a repository-wide hard reset.
 
 ## Next adventure
 

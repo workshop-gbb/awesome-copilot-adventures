@@ -16,11 +16,14 @@ primary_capability: "Building and validating minimal agent context"
 
 
 > [!NOTE]
-> **Status:** Content ready · **Media:** Pending · **Last verified:** 2026-09-05  
+> **Status:** Content ready · **Media:** Original SVG illustration · **Last verified:** 2026-09-05  
 > **Primary capability:** Building and validating minimal agent context
 
+![Goal, Relevant sources, Observed result illustrated through The Context Mirrors.](../../../assets/images/adventures/context-mirrors-hero.svg)
+
 > [!TIP]
-> Production hero media is intentionally pending. Use the specification in [Media Prompts](../../../docs/media-prompts.md) before adding a production hero asset.
+> [Download this learner kit](../../../assets/lab-kits/adventures/context-mirrors.zip) and use
+> [the extraction and setup guide](../../../docs/downloads.md). Keep the original starter untouched.
 
 ```mermaid
 ---
@@ -64,19 +67,21 @@ config:
     attributeBackgroundColorOdd: "#f5f5f5"
     attributeBackgroundColorEven: "#e0e0e0"
 ---
-flowchart LR
-    accTitle: Evidence-first development workflow
-    accDescr: Investigation leads to planning, implementation, review and evidence; unresolved gaps return to investigation.
-    A["Ask<br/>Investigate"] --> P["Plan<br/>Design"]
-    P --> G["Agent<br/>Implement"]
-    G --> R["Review<br/>Challenge"]
-    R --> E["Evidence<br/>Prove"]
-    E -. "gap found" .-> A
+flowchart TD
+    accTitle: The Context Mirrors capability map
+    accDescr: Changing the task, source and model together makes cause unclear. Fresh copies prevent one variant from inheriting another variant’s edits.
+    G["Fixed task and acceptance"] --> A["Fresh copy A: prompt only"]
+    G --> B["Fresh copy B: relevant files"]
+    G --> C["Fresh copy C: scoped instructions"]
+    A --> E["Same verification command"]
+    B --> E
+    C --> E
+    E --> O["Compare observed evidence"]
 ```
 
-**Legend.** Rectangles are workflow stages. Solid arrows show the normal progression; the dashed arrow returns unresolved evidence gaps to investigation.
+**Legend.** Branches are controlled experiment variants; the shared verification node keeps the output contract fixed.
 
-**Explanation.** A fluent response is not completion. The loop ends only when the reviewed result meets the acceptance criteria and the recorded checks support it.
+**Explanation.** Changing the task, source and model together makes cause unclear. Fresh copies prevent one variant from inheriting another variant’s edits.
 
 ## Official references
 
@@ -94,26 +99,30 @@ The fantasy is a memory aid; the engineering lesson requires observable, reprodu
 
 ## Learning objectives
 
-By the end, you can:
-
-- Explain the primary capability in precise product language.
-- Separate role, harness, target, environment, and customization primitive.
-- Complete a bounded Ask → Plan → Agent workflow.
-- Review tool use, changes, and verification evidence independently.
-- State unavailable, Preview, experimental, or unverified behavior without guessing.
+- Build a minimal packet of task intent, relevant paths, exclusions and a verification command.
+- Compare context variants while keeping the task, model and acceptance criteria fixed.
+- Record unsupported claims and out-of-scope edits without treating one trial as a productivity benchmark.
 
 ## Prerequisites
 
-- Completion of the preceding adventure, or equivalent familiarity.
-- A disposable repository or authorized sandbox.
-- Access appropriate to the selected Copilot surface; availability is not assumed.
-- An existing test, build, lint, validation, or review mechanism where applicable.
+| Requirement | Why it matters |
+| --- | --- |
+| Complete the preceding adventure, or demonstrate its exit evidence | Keep this mission focused on its named capability |
+| Node 24 and the extracted kit | The local verifier uses the supplied runtime and files |
+| A disposable folder outside another project | Customizations and intentional failures must not leak into other work |
+| Authorized host access, only for live steps | Availability, tools and policies differ |
 
-Never use production secrets, customer data, or irreversible resources. Use the paper fallback when a named service is unavailable.
+**Evidence boundary:** Local tests establish sequence behavior; the comparison is not a general ranking of models or workflows.
+
+Estimated session: 45–75 minutes after prerequisites; actual duration varies. Never use production secrets or customer data.
 
 ## Concept explanation
 
 Context includes the prompt, selected text, open files, repository instructions, retrieved sources, tool output, and conversation history. More context is not automatically better. Prefer current source and executable evidence over remembered explanations. Persistent memory, where available, is a separate capability whose availability and behavior must be verified; never treat memory as authoritative without revalidation.
+
+### Concrete use case
+
+Two explanations of the same sequence predictor can sound equally confident. The useful one cites the tested branch and identifies the missing new pattern instead of describing an imagined API.
 
 ### Vocabulary checkpoint
 
@@ -165,23 +174,46 @@ Context includes the prompt, selected text, open files, repository instructions,
 
 ## Guided mission
 
-Open the [Context Mirrors lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/context-mirrors/README.md) and use a fresh copy for every experiment variant.
+### 1. Prepare one isolated copy
 
-Choose a tiny behavior in a disposable repository. Ask for a source-grounded explanation with path citations. Define a minimal context packet containing the goal, two relevant paths, one explicit exclusion, acceptance criteria, and one verification command. Implement a reversible change and compare the initial assumptions with the final diff and check output.
+1. Download and extract the [context-mirrors kit](../../../assets/lab-kits/adventures/context-mirrors.zip) into a new work-drive directory.
+2. Read `KIT-START.md` at its root. Open `starter/` as the VS Code workspace when testing discovery, but run the verifier from the kit root.
+3. Inspect `starter/`, `verify.js` before editing.
+4. From the extracted kit root, run `node verify.js`.
+5. Record the passing sequence baseline. A missing runtime or unrelated crash is not the expected exercise result.
 
-Record each material step in this table:
+### 2. Investigate and plan
+
+In Ask, request a trace of the inspected files and what the verifier actually observes. Challenge any claim about live execution that is not supported by output.
+
+Use this planning prompt:
+
+```text
+Choose one new sequence pattern. Keep model and acceptance fixed, define fresh-copy context variants, and state how you will record files changed, checks actually run and unsupported claims.
+Do not implement yet. Identify affected files, the negative case and a safe reset.
+```
+
+### 3. Implement the reviewed slice
+
+1. Approve only the named starter artifact and necessary focused tests.
+2. Ask Agent to implement one slice; inspect proposed commands before execution.
+3. Run `node verify.js` again from the kit root, or `node ../verify.js` from `starter/`.
+4. Compare the exact result with the checkpoint below and review the complete diff.
+5. Record host discovery or live activity separately when available. Do not enable extra services to manufacture a passing result.
+
+> [!IMPORTANT]
+> **Checkpoint:** A fresh starter passes its existing checks; every variant begins from that same untouched source.
+> Local tests establish sequence behavior; the comparison is not a general ranking of models or workflows.
+
+### 4. Prove a check can reject a mistake
+
+Add an irrelevant design claim to one context packet, not to production code. Challenge whether the answer cites executable sources and record the unsupported assertion if it does not.
 
 | Observation | Decision | Action | Evidence | Limitation |
-|---|---|---|---|---|
-| What was inspected? | Why this next step? | What changed or ran? | What proves it? | What remains unknown? |
+| --- | --- | --- | --- | --- |
+| Initial state and exact diagnostic | Why this change is needed | Named file and bounded change | Command, exit code and observed result | What the local check does not prove |
 
-### Guided acceptance criteria
-
-- The initial state is supported by current evidence.
-- The plan is bounded and contains a reset path.
-- Agent work stays inside the declared scope.
-- Verification observes the requested behavior.
-- Review is independent from the implementation claim.
+Finish with the adventure-specific capability evidence in [the rubric](rubric.md), not just the presence of a file.
 
 ## Intentional failure: The Hall of Infinite Reflections
 
@@ -217,12 +249,13 @@ Constraints:
 
 ## Reset instructions
 
-1. Stop the Echo Chamber in the terminal that started it by pressing **Ctrl+C**.
-2. Preserve the evidence worksheet, then remove only the disposable copies created for the experiment.
-3. If you created worktrees, run `git worktree list` and remove only a resolved, clean exercise worktree.
-4. Run `git status --short` in the original repository and record the clean result.
+1. Save your diff, command output and limitations from the disposable kit.
+2. Stop only the process or learning session you started. Do not stop other projects.
+3. If you initialized Git in the kit, inspect `git status --short` there and restore only your named exercise files from its local baseline.
+4. Otherwise, extract the original ZIP into a new unused directory for another attempt; do not overwrite your current work.
+5. Remove only exercise-owned configurations, worktrees or remote resources after reviewing anything worth preserving.
 
-Cleanup is part of completion. Do not leave billable resources, credentials, processes, branches, or worktrees behind.
+The curriculum source and other projects must remain unchanged. A reset of the copied kit is not a repository-wide hard reset.
 
 ## Next adventure
 

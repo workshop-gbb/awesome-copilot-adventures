@@ -20,6 +20,24 @@ lab:
 This is a new feature in an existing application, not a request to regenerate the
 entire library. Track the change from menu input to observed result.
 
+## Lab briefing
+
+![Connect normalized search to copy-level availability.](../../../assets/images/hands-on/03-python.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 200; 70 minutes (facilitation estimate) |
+| Starting action | Use controlled dates and test one available and one borrowed copy. |
+| Learner materials | [Download 03-python.zip](../../../assets/lab-kits/hands-on/03-python.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `library` relative to that root |
+| Expected initial check | The existing unittest tests are discovered and pass. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> A passing helper is incomplete until the console menu reaches it.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---inspect-the-workflow-and-baseline) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Define search and availability semantics before implementation.

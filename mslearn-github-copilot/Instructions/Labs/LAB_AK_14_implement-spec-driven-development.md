@@ -20,6 +20,24 @@ lab:
 An existing project has behavior, consumers, tests and conventions. A new feature
 must integrate with those constraints instead of regenerating the project.
 
+## Lab briefing
+
+![Add owner-scoped metadata while preserving the dashboard.](../../../assets/images/hands-on/14-brownfield.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 300; 85 minutes (facilitation estimate) |
+| Starting action | Keep baseline tests green while the new feature starts red. |
+| Learner materials | [Download 14-brownfield.zip](../../../assets/lab-kits/hands-on/14-brownfield.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The supplied baseline tests pass. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> A trusted test actor is a seam, not production authentication.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---run-the-old-and-new-contracts-separately) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Characterize existing endpoints/module contracts before initializing scaffolding.

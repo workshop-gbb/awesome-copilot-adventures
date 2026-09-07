@@ -16,11 +16,14 @@ primary_capability: "Selecting roles, harnesses, targets, and environments"
 
 
 > [!NOTE]
-> **Status:** Content ready · **Media:** Pending · **Last verified:** 2026-09-05  
+> **Status:** Content ready · **Media:** Original SVG illustration · **Last verified:** 2026-09-05  
 > **Primary capability:** Selecting roles, harnesses, targets, and environments
 
+![Role, Harness, Environment illustrated through The Portals of Nexus.](../../../assets/images/adventures/portals-of-nexus-hero.svg)
+
 > [!TIP]
-> Production hero media is intentionally pending. Use the specification in [Media Prompts](../../../docs/media-prompts.md) before adding a production hero asset.
+> [Download this learner kit](../../../assets/lab-kits/adventures/portals-of-nexus.zip) and use
+> [the extraction and setup guide](../../../docs/downloads.md). Keep the original starter untouched.
 
 ```mermaid
 ---
@@ -65,18 +68,19 @@ config:
     attributeBackgroundColorEven: "#e0e0e0"
 ---
 flowchart LR
-    accTitle: Evidence-first development workflow
-    accDescr: Investigation leads to planning, implementation, review and evidence; unresolved gaps return to investigation.
-    A["Ask<br/>Investigate"] --> P["Plan<br/>Design"]
-    P --> G["Agent<br/>Implement"]
-    G --> R["Review<br/>Challenge"]
-    R --> E["Evidence<br/>Prove"]
-    E -. "gap found" .-> A
+    accTitle: The Portals of Nexus capability map
+    accDescr: A responsibility does not determine the runtime or location. Keep the dimensions distinct even when one UI presents them together.
+    T["Task outcome"] --> R["Role: responsibility"]
+    T --> H["Harness: runtime"]
+    H --> P["Target: destination"]
+    P --> E["Environment: files and processes"]
+    R --> V["Evidence for each choice"]
+    E --> V
 ```
 
-**Legend.** Rectangles are workflow stages. Solid arrows show the normal progression; the dashed arrow returns unresolved evidence gaps to investigation.
+**Legend.** Boxes name different dimensions; arrows show which decisions must be connected before execution.
 
-**Explanation.** A fluent response is not completion. The loop ends only when the reviewed result meets the acceptance criteria and the recorded checks support it.
+**Explanation.** A responsibility does not determine the runtime or location. Keep the dimensions distinct even when one UI presents them together.
 
 ## Official references
 
@@ -94,26 +98,30 @@ The fantasy is a memory aid; the engineering lesson requires observable, reprodu
 
 ## Learning objectives
 
-By the end, you can:
-
-- Explain the primary capability in precise product language.
-- Separate role, harness, target, environment, and customization primitive.
-- Complete a bounded Ask → Plan → Agent workflow.
-- Review tool use, changes, and verification evidence independently.
-- State unavailable, Preview, experimental, or unverified behavior without guessing.
+- Classify a task by agent role, harness, target and execution environment.
+- Explain why a worktree isolates source changes but does not supply a new identity.
+- Complete the portal map and distinguish its controlled choices from universal product rules.
 
 ## Prerequisites
 
-- Completion of the preceding adventure, or equivalent familiarity.
-- A disposable repository or authorized sandbox.
-- Access appropriate to the selected Copilot surface; availability is not assumed.
-- An existing test, build, lint, validation, or review mechanism where applicable.
+| Requirement | Why it matters |
+| --- | --- |
+| Complete [Start here](../../../docs/start-here.md), or be able to open a folder and run a Node command | Keep this mission focused on its named capability |
+| Node 24 and the extracted kit | The local verifier uses the supplied runtime and files |
+| A disposable folder outside another project | Customizations and intentional failures must not leak into other work |
+| Authorized host access, only for live steps | Availability, tools and policies differ |
 
-Never use production secrets, customer data, or irreversible resources. Use the paper fallback when a named service is unavailable.
+**Evidence boundary:** The verifier checks the map, not that any selected host or account is available.
+
+Estimated session: 45–75 minutes after prerequisites; actual duration varies. Never use production secrets or customer data.
 
 ## Concept explanation
 
 An agentic workflow has separate dimensions. A role is Ask, Plan, Agent, or a custom agent. A harness is the runtime, such as Local, Copilot, or another supported harness; Cloud is a remote session target. The environment is the folder, worktree, local machine, or remote workspace. Instructions, prompts, skills, custom agents, and MCP servers are distinct customization primitives. Naming each dimension prevents accidental authority and irreproducible results.
+
+### Concrete use case
+
+A maintainer asks for an explanation, then a change. Ask can inspect without editing; a later Agent session may use a worktree. Record those decisions separately rather than describing both as one agent mode.
 
 ### Vocabulary checkpoint
 
@@ -165,23 +173,46 @@ An agentic workflow has separate dimensions. A role is Ask, Plan, Agent, or a cu
 
 ## Guided mission
 
-Open the [Portals of Nexus lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/portals-of-nexus/README.md) and keep its verifier output as evidence.
+### 1. Prepare one isolated copy
 
-Create a five-column map for one task: role, harness, target, environment, and evidence. Investigate the repository with Ask, design a reversible change with Plan, let Agent make it in a disposable repository, then review the diff and existing checks.
+1. Download and extract the [portals-of-nexus kit](../../../assets/lab-kits/adventures/portals-of-nexus.zip) into a new work-drive directory.
+2. Read `KIT-START.md` at its root. Open `starter/` as the VS Code workspace when testing discovery, but run the verifier from the kit root.
+3. Inspect `starter/portal-map.json`, `verify.js` before editing.
+4. From the extracted kit root, run `node verify.js`.
+5. Record the documented starter rejection. A missing runtime or unrelated crash is not the expected exercise result.
 
-Record each material step in this table:
+### 2. Investigate and plan
+
+In Ask, request a trace of the inspected files and what the verifier actually observes. Challenge any claim about live execution that is not supported by output.
+
+Use this planning prompt:
+
+```text
+Map the three task rows to role, harness, target and environment. Justify each choice, identify which dimensions the verifier checks, and keep the task read-only until the map is reviewed.
+Do not implement yet. Identify affected files, the negative case and a safe reset.
+```
+
+### 3. Implement the reviewed slice
+
+1. Approve only the named starter artifact and necessary focused tests.
+2. Ask Agent to implement one slice; inspect proposed commands before execution.
+3. Run `node verify.js` again from the kit root, or `node ../verify.js` from `starter/`.
+4. Compare the exact result with the checkpoint below and review the complete diff.
+5. Record host discovery or live activity separately when available. Do not enable extra services to manufacture a passing result.
+
+> [!IMPORTANT]
+> **Checkpoint:** Each task row has four independent dimensions; a GitHub pull request is not mislabeled as an environment.
+> The verifier checks the map, not that any selected host or account is available.
+
+### 4. Prove a check can reject a mistake
+
+In the disposable map, temporarily swap one role with a harness value. The verifier must reject the mixed dimensions. Restore the correct row.
 
 | Observation | Decision | Action | Evidence | Limitation |
-|---|---|---|---|---|
-| What was inspected? | Why this next step? | What changed or ran? | What proves it? | What remains unknown? |
+| --- | --- | --- | --- | --- |
+| Initial state and exact diagnostic | Why this change is needed | Named file and bounded change | Command, exit code and observed result | What the local check does not prove |
 
-### Guided acceptance criteria
-
-- The initial state is supported by current evidence.
-- The plan is bounded and contains a reset path.
-- Agent work stays inside the declared scope.
-- Verification observes the requested behavior.
-- Review is independent from the implementation claim.
+Finish with the adventure-specific capability evidence in [the rubric](rubric.md), not just the presence of a file.
 
 ## Intentional failure: The Universal Portal Assumption
 
@@ -217,11 +248,13 @@ Constraints:
 
 ## Reset instructions
 
-1. Restore the exercise map with `git restore labs/portals-of-nexus/starter/portal-map.json`.
-2. Run `git status --short -- labs/portals-of-nexus`; it should print nothing.
-3. Close the exercise session so its role-selection context is not reused accidentally.
+1. Save your diff, command output and limitations from the disposable kit.
+2. Stop only the process or learning session you started. Do not stop other projects.
+3. If you initialized Git in the kit, inspect `git status --short` there and restore only your named exercise files from its local baseline.
+4. Otherwise, extract the original ZIP into a new unused directory for another attempt; do not overwrite your current work.
+5. Remove only exercise-owned configurations, worktrees or remote resources after reviewing anything worth preserving.
 
-Cleanup is part of completion. Do not leave billable resources, credentials, processes, branches, or worktrees behind.
+The curriculum source and other projects must remain unchanged. A reset of the copied kit is not a repository-wide hard reset.
 
 ## Next adventure
 

@@ -9,6 +9,11 @@ permalink: /curriculum/
 
 The path moves from mental models to a governed end-to-end delivery.
 
+> [!TIP]
+> **Need an explicit order rather than a map?** Use [Learning order and scope](learning-path.md).
+> It distinguishes the first required steps, optional language/scenario choices,
+> advanced prerequisites and the evidence needed before moving on.
+
 ```mermaid
 ---
 config:

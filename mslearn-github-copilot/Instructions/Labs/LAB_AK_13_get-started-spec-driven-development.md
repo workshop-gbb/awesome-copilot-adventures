@@ -21,6 +21,24 @@ Greenfield means there is no existing application behavior to preserve. It does 
 mean no constraints. You will implement only subscription management, not remote
 feed fetching or a production reader.
 
+## Lab briefing
+
+![Specify a small new RSS subscription capability.](../../../assets/images/hands-on/13-greenfield.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 300; 80 minutes (facilitation estimate) |
+| Starting action | Record the initial failure, then map every RSS criterion to a task. |
+| Learner materials | [Download 13-greenfield.zip](../../../assets/lab-kits/hands-on/13-greenfield.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The unfinished RSS store fails with the documented exercise error. A missing runtime or syntax error is not the expected failure. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> The starter is intentionally incomplete; do not replace its contract.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---review-stakeholder-intent-and-the-red-baseline) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Separate governance, user requirements, technical design and execution.

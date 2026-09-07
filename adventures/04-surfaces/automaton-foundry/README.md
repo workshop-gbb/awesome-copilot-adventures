@@ -16,11 +16,14 @@ primary_capability: "Building an application with the GitHub Copilot SDK"
 
 
 > [!NOTE]
-> **Status:** Content ready · **Media:** Pending · **Last verified:** 2026-09-05  
+> **Status:** Content ready · **Media:** Original SVG illustration · **Last verified:** 2026-09-05  
 > **Primary capability:** Building an application with the GitHub Copilot SDK
 
+![Application identity, SDK session, Evaluation evidence illustrated through The Automaton Foundry.](../../../assets/images/adventures/automaton-foundry-hero.svg)
+
 > [!TIP]
-> Production hero media is intentionally pending. Use the specification in [Media Prompts](../../../docs/media-prompts.md) before adding a production hero asset.
+> [Download this learner kit](../../../assets/lab-kits/adventures/automaton-foundry.zip) and use
+> [the extraction and setup guide](../../../docs/downloads.md). Keep the original starter untouched.
 
 ```mermaid
 ---
@@ -64,19 +67,23 @@ config:
     attributeBackgroundColorOdd: "#f5f5f5"
     attributeBackgroundColorEven: "#e0e0e0"
 ---
-flowchart LR
-    accTitle: Evidence-first development workflow
-    accDescr: Investigation leads to planning, implementation, review and evidence; unresolved gaps return to investigation.
-    A["Ask<br/>Investigate"] --> P["Plan<br/>Design"]
-    P --> G["Agent<br/>Implement"]
-    G --> R["Review<br/>Challenge"]
-    R --> E["Evidence<br/>Prove"]
-    E -. "gap found" .-> A
+sequenceDiagram
+    accTitle: The Automaton Foundry capability map
+    accDescr: Source structure and evaluation plans are prerequisites, not proof of a live model result. Record errors and cleanup observations explicitly.
+    participant U as Caller
+    participant A as Application
+    participant S as SDK session
+    U->>A: Prompt input
+    A->>S: Create SDK session
+    A->>S: sendAndWait
+    S-->>A: Content or explicit failure
+    A-->>U: Observed result
+    A->>S: Cleanup in lifecycle boundary
 ```
 
-**Legend.** Rectangles are workflow stages. Solid arrows show the normal progression; the dashed arrow returns unresolved evidence gaps to investigation.
+**Legend.** The application owns lifecycle and identity. The caller is not the same actor as the SDK runtime.
 
-**Explanation.** A fluent response is not completion. The loop ends only when the reviewed result meets the acceptance criteria and the recorded checks support it.
+**Explanation.** Source structure and evaluation plans are prerequisites, not proof of a live model result. Record errors and cleanup observations explicitly.
 
 ## Official references
 
@@ -94,26 +101,30 @@ The fantasy is a memory aid; the engineering lesson requires observable, reprodu
 
 ## Learning objectives
 
-By the end, you can:
-
-- Explain the primary capability in precise product language.
-- Separate role, harness, target, environment, and customization primitive.
-- Complete a bounded Ask → Plan → Agent workflow.
-- Review tool use, changes, and verification evidence independently.
-- State unavailable, Preview, experimental, or unverified behavior without guessing.
+- Build the pinned SDK application while keeping development and runtime agents distinct.
+- Handle prompt input, session output and client cleanup without success-shaped failure output.
+- Separate five declared evaluation cases from actual authenticated model observations.
 
 ## Prerequisites
 
-- Completion of the preceding adventure, or equivalent familiarity.
-- A disposable repository or authorized sandbox.
-- Access appropriate to the selected Copilot surface; availability is not assumed.
-- An existing test, build, lint, validation, or review mechanism where applicable.
+| Requirement | Why it matters |
+| --- | --- |
+| Complete the preceding adventure, or demonstrate its exit evidence | Keep this mission focused on its named capability |
+| Node 24 and the extracted kit | The local verifier uses the supplied runtime and files |
+| A disposable folder outside another project | Customizations and intentional failures must not leak into other work |
+| Authorized host access, only for live steps | Availability, tools and policies differ |
 
-Never use production secrets, customer data, or irreversible resources. Use the paper fallback when a named service is unavailable.
+**Evidence boundary:** The structural verifier does not measure model quality or authenticate the application. Follow the professional SDK lab for stronger offline tool and lifecycle tests.
+
+Estimated session: 45–75 minutes after prerequisites; actual duration varies. Never use production secrets or customer data.
 
 ## Concept explanation
 
 The GitHub Copilot SDK embeds the Copilot agent runtime in an application. The runtime agent is different from the GitHub Copilot role used to author it. Sessions, tools, permissions, authentication, custom agents, hooks, MCP, and observability are explicit application concerns. SDK feature availability varies by language and environment; MCP integration is documented as evolving, so verify the current feature page before depending on it.
+
+### Concrete use case
+
+An application can send a prompt and print a response yet still fail on timeout or unsupported requests. Its evaluation plan must ask what evidence distinguishes these paths.
 
 ### Vocabulary checkpoint
 
@@ -165,23 +176,46 @@ The GitHub Copilot SDK embeds the Copilot agent runtime in an application. The r
 
 ## Guided mission
 
-Open the [Automaton Foundry lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/automaton-foundry/README.md), complete the pinned Copilot SDK application, and define its local evaluation contract.
+### 1. Prepare one isolated copy
 
-Design a narrow documentation-answering agent. Separate input, output, instructions, model criteria, tools, identity, failure behavior, and evaluation. Complete five safe cases covering a grounded answer, bounded plan, verified change, unsupported request, and controlled tool failure. Execute in an authorized sandbox or provide an exact paper fallback, then revise one decision from actual evidence.
+1. Download and extract the [automaton-foundry kit](../../../assets/lab-kits/adventures/automaton-foundry.zip) into a new work-drive directory.
+2. Read `KIT-START.md` at its root. Open `starter/` as the VS Code workspace when testing discovery, but run the verifier from the kit root.
+3. Inspect `starter/index.ts`, `starter/package.json`, `starter/evaluation.json`, `verify.js` before editing.
+4. From the extracted kit root, run `node verify.js`.
+5. Record the documented starter rejection. A missing runtime or unrelated crash is not the expected exercise result.
 
-Record each material step in this table:
+### 2. Investigate and plan
+
+In Ask, request a trace of the inspected files and what the verifier actually observes. Challenge any claim about live execution that is not supported by output.
+
+Use this planning prompt:
+
+```text
+Complete the pinned TypeScript SDK lifecycle and CLI prompt input. Keep credentials out of source, stop the client in finally, and define five cases with expected evidence before any optional live request.
+Do not implement yet. Identify affected files, the negative case and a safe reset.
+```
+
+### 3. Implement the reviewed slice
+
+1. Approve only the named starter artifact and necessary focused tests.
+2. Ask Agent to implement one slice; inspect proposed commands before execution.
+3. Run `node verify.js` again from the kit root, or `node ../verify.js` from `starter/`.
+4. Compare the exact result with the checkpoint below and review the complete diff.
+5. Record host discovery or live activity separately when available. Do not enable extra services to manufacture a passing result.
+
+> [!IMPORTANT]
+> **Checkpoint:** The structural verifier accepts the source and five declared cases; live results, if any, are recorded separately.
+> The structural verifier does not measure model quality or authenticate the application. Follow the professional SDK lab for stronger offline tool and lifecycle tests.
+
+### 4. Prove a check can reject a mistake
+
+Remove the client cleanup from the copied application and confirm structural rejection. Restore it; do not infer runtime cleanup merely from this static test.
 
 | Observation | Decision | Action | Evidence | Limitation |
-|---|---|---|---|---|
-| What was inspected? | Why this next step? | What changed or ran? | What proves it? | What remains unknown? |
+| --- | --- | --- | --- | --- |
+| Initial state and exact diagnostic | Why this change is needed | Named file and bounded change | Command, exit code and observed result | What the local check does not prove |
 
-### Guided acceptance criteria
-
-- The initial state is supported by current evidence.
-- The plan is bounded and contains a reset path.
-- Agent work stays inside the declared scope.
-- Verification observes the requested behavior.
-- Review is independent from the implementation claim.
+Finish with the adventure-specific capability evidence in [the rubric](rubric.md), not just the presence of a file.
 
 ## Intentional failure: The Unmeasured Automaton
 
@@ -217,12 +251,13 @@ Constraints:
 
 ## Reset instructions
 
-1. Stop the SDK application with **Ctrl+C** in the terminal that started it.
-2. Remove the disposable lab copy, including its local `node_modules`, only after preserving required evidence.
-3. In the source repository, restore `labs/automaton-foundry/starter/index.ts` and `labs/automaton-foundry/starter/evaluation.json` with `git restore`.
-4. Confirm `git status --short -- labs/automaton-foundry` is empty and revoke any temporary authentication token.
+1. Save your diff, command output and limitations from the disposable kit.
+2. Stop only the process or learning session you started. Do not stop other projects.
+3. If you initialized Git in the kit, inspect `git status --short` there and restore only your named exercise files from its local baseline.
+4. Otherwise, extract the original ZIP into a new unused directory for another attempt; do not overwrite your current work.
+5. Remove only exercise-owned configurations, worktrees or remote resources after reviewing anything worth preserving.
 
-Cleanup is part of completion. Do not leave billable resources, credentials, processes, branches, or worktrees behind.
+The curriculum source and other projects must remain unchanged. A reset of the copied kit is not a repository-wide hard reset.
 
 ## Next adventure
 

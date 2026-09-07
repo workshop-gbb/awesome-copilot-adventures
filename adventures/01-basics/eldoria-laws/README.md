@@ -16,11 +16,14 @@ primary_capability: "Authoring scoped repository instructions"
 
 
 > [!NOTE]
-> **Status:** Content ready · **Media:** Pending · **Last verified:** 2026-09-05  
+> **Status:** Content ready · **Media:** Original SVG illustration · **Last verified:** 2026-09-05  
 > **Primary capability:** Authoring scoped repository instructions
 
+![Durable rule, Path scope, Observed change illustrated through The Laws of Eldoria.](../../../assets/images/adventures/eldoria-laws-hero.svg)
+
 > [!TIP]
-> Production hero media is intentionally pending. Use the specification in [Media Prompts](../../../docs/media-prompts.md) before adding a production hero asset.
+> [Download this learner kit](../../../assets/lab-kits/adventures/eldoria-laws.zip) and use
+> [the extraction and setup guide](../../../docs/downloads.md). Keep the original starter untouched.
 
 ```mermaid
 ---
@@ -64,19 +67,20 @@ config:
     attributeBackgroundColorOdd: "#f5f5f5"
     attributeBackgroundColorEven: "#e0e0e0"
 ---
-flowchart LR
-    accTitle: Evidence-first development workflow
-    accDescr: Investigation leads to planning, implementation, review and evidence; unresolved gaps return to investigation.
-    A["Ask<br/>Investigate"] --> P["Plan<br/>Design"]
-    P --> G["Agent<br/>Implement"]
-    G --> R["Review<br/>Challenge"]
-    R --> E["Evidence<br/>Prove"]
-    E -. "gap found" .-> A
+flowchart TD
+    accTitle: The Laws of Eldoria capability map
+    accDescr: Verify both discovery and the resulting behavior. Resolve contradictory guidance rather than assuming a hidden precedence rule.
+    R["Repository instructions"] --> C["Applicable context"]
+    P["Path-specific instructions"] --> C
+    T["Task request"] --> C
+    C --> A["Agent proposal"]
+    M["Permissions and tools"] --> A
+    A --> D["Review diff and tests"]
 ```
 
-**Legend.** Rectangles are workflow stages. Solid arrows show the normal progression; the dashed arrow returns unresolved evidence gaps to investigation.
+**Legend.** Instruction and task boxes feed context; the separate permissions branch shows authority is not supplied by prose.
 
-**Explanation.** A fluent response is not completion. The loop ends only when the reviewed result meets the acceptance criteria and the recorded checks support it.
+**Explanation.** Verify both discovery and the resulting behavior. Resolve contradictory guidance rather than assuming a hidden precedence rule.
 
 ## Official references
 
@@ -94,26 +98,30 @@ The fantasy is a memory aid; the engineering lesson requires observable, reprodu
 
 ## Learning objectives
 
-By the end, you can:
-
-- Explain the primary capability in precise product language.
-- Separate role, harness, target, environment, and customization primitive.
-- Complete a bounded Ask → Plan → Agent workflow.
-- Review tool use, changes, and verification evidence independently.
-- State unavailable, Preview, experimental, or unverified behavior without guessing.
+- Write concise repository instructions tied to a real validation command.
+- Separate durable conventions from task-specific requests and permission enforcement.
+- Check host discovery independently of a content verifier.
 
 ## Prerequisites
 
-- Completion of the preceding adventure, or equivalent familiarity.
-- A disposable repository or authorized sandbox.
-- Access appropriate to the selected Copilot surface; availability is not assumed.
-- An existing test, build, lint, validation, or review mechanism where applicable.
+| Requirement | Why it matters |
+| --- | --- |
+| Complete the preceding adventure, or demonstrate its exit evidence | Keep this mission focused on its named capability |
+| Node 24 and the extracted kit | The local verifier uses the supplied runtime and files |
+| A disposable folder outside another project | Customizations and intentional failures must not leak into other work |
+| Authorized host access, only for live steps | Availability, tools and policies differ |
 
-Never use production secrets, customer data, or irreversible resources. Use the paper fallback when a named service is unavailable.
+**Evidence boundary:** A text check cannot prove instruction compliance or define precedence between conflicting natural-language files.
+
+Estimated session: 45–75 minutes after prerequisites; actual duration varies. Never use production secrets or customer data.
 
 ## Concept explanation
 
 Repository instructions automatically provide durable conventions and constraints. Prompts are manually invoked task templates, not instructions. Path-specific instructions narrow guidance to matching files. Prefer testable rules such as “run command X after changing Y.” Instruction discovery and precedence can differ by Copilot feature, so verify the surface against official documentation.
+
+### Concrete use case
+
+A repository convention can require deterministic tests and prohibit credentials. It cannot grant filesystem isolation; the allowed source paths and available tools remain separate controls.
 
 ### Vocabulary checkpoint
 
@@ -165,23 +173,46 @@ Repository instructions automatically provide durable conventions and constraint
 
 ## Guided mission
 
-Open the [Laws of Eldoria lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/eldoria-laws/README.md) and complete the scoped repository instructions.
+### 1. Prepare one isolated copy
 
-In a disposable repository, inventory existing instruction files and one verifiable convention. Add a concise global instruction naming the real test command and prohibiting secrets, plus one path-specific rule. Request reversible changes inside and outside the scope; review prompts, diffs, and checks to prove the effect.
+1. Download and extract the [eldoria-laws kit](../../../assets/lab-kits/adventures/eldoria-laws.zip) into a new work-drive directory.
+2. Read `KIT-START.md` at its root. Open `starter/` as the VS Code workspace when testing discovery, but run the verifier from the kit root.
+3. Inspect `starter/.github/copilot-instructions.md`, `verify.js` before editing.
+4. From the extracted kit root, run `node verify.js`.
+5. Record the documented starter rejection. A missing runtime or unrelated crash is not the expected exercise result.
 
-Record each material step in this table:
+### 2. Investigate and plan
+
+In Ask, request a trace of the inspected files and what the verifier actually observes. Challenge any claim about live execution that is not supported by output.
+
+Use this planning prompt:
+
+```text
+Write four concise rules covering deterministic tests, no credentials, source-path scope and verification before completion. Explain which rules are guidance rather than enforced permissions.
+Do not implement yet. Identify affected files, the negative case and a safe reset.
+```
+
+### 3. Implement the reviewed slice
+
+1. Approve only the named starter artifact and necessary focused tests.
+2. Ask Agent to implement one slice; inspect proposed commands before execution.
+3. Run `node verify.js` again from the kit root, or `node ../verify.js` from `starter/`.
+4. Compare the exact result with the checkpoint below and review the complete diff.
+5. Record host discovery or live activity separately when available. Do not enable extra services to manufacture a passing result.
+
+> [!IMPORTANT]
+> **Checkpoint:** The instruction file names actionable constraints and the host discovery result is recorded separately.
+> A text check cannot prove instruction compliance or define precedence between conflicting natural-language files.
+
+### 4. Prove a check can reject a mistake
+
+Remove the test requirement from the disposable file and observe the verifier reject the missing rule. Restore it before asking for a bounded change.
 
 | Observation | Decision | Action | Evidence | Limitation |
-|---|---|---|---|---|
-| What was inspected? | Why this next step? | What changed or ran? | What proves it? | What remains unknown? |
+| --- | --- | --- | --- | --- |
+| Initial state and exact diagnostic | Why this change is needed | Named file and bounded change | Command, exit code and observed result | What the local check does not prove |
 
-### Guided acceptance criteria
-
-- The initial state is supported by current evidence.
-- The plan is bounded and contains a reset path.
-- Agent work stays inside the declared scope.
-- Verification observes the requested behavior.
-- Review is independent from the implementation claim.
+Finish with the adventure-specific capability evidence in [the rubric](rubric.md), not just the presence of a file.
 
 ## Intentional failure: The Contradictory Tablets
 
@@ -217,12 +248,13 @@ Constraints:
 
 ## Reset instructions
 
-1. Restore `labs/eldoria-laws/starter/.github/copilot-instructions.md` with `git restore`.
-2. Close the disposable starter workspace and reopen the repository root.
-3. Start a new agent session so the exercise instructions are no longer loaded.
-4. Confirm `git status --short -- labs/eldoria-laws` is empty.
+1. Save your diff, command output and limitations from the disposable kit.
+2. Stop only the process or learning session you started. Do not stop other projects.
+3. If you initialized Git in the kit, inspect `git status --short` there and restore only your named exercise files from its local baseline.
+4. Otherwise, extract the original ZIP into a new unused directory for another attempt; do not overwrite your current work.
+5. Remove only exercise-owned configurations, worktrees or remote resources after reviewing anything worth preserving.
 
-Cleanup is part of completion. Do not leave billable resources, credentials, processes, branches, or worktrees behind.
+The curriculum source and other projects must remain unchanged. A reset of the copied kit is not a repository-wide hard reset.
 
 ## Next adventure
 

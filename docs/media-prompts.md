@@ -9,6 +9,12 @@ permalink: /media/
 
 These specifications are production prompts, not claims that media has already been generated. Keep all artwork text-free, watermark-free, and suitable for cropping. Adventure heroes use **1456 × 832 px**, landscape, exported as **PNG or WebP**. Site illustrations use the dimensions stated below.
 
+> [!NOTE]
+> The learning guides include original accessible SVG illustrations. Those shipped
+> vector assets are distinct from the optional cinematic PNG/WebP and video briefs
+> below. See [the adventure image inventory](../assets/images/adventures/README.md).
+> Do not label a prompt, an old screenshot or an unrendered idea as a finished asset.
+
 ## Shared visual direction
 
 Use an accessible cinematic fantasy-tech style: clear focal subject, readable silhouette, restrained detail behind likely text areas, deep indigo and teal with warm gold accents, broad tonal separation, no logos, no copyrighted characters, no UI text, no tiny glyphs, and no flashing imagery.

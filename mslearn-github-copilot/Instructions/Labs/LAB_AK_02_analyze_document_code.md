@@ -21,6 +21,24 @@ Copilot can propose an explanation, but the code and observed behavior are the
 authority. `#codebase` performs retrieval; it does not guarantee every source file
 was inspected or every claim is correct.
 
+## Lab briefing
+
+![Trace an existing library workflow before documenting it.](../../../assets/images/hands-on/02-csharp.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 200; 45 minutes (facilitation estimate) |
+| Starting action | Follow one loan operation from the console to storage and its tests. |
+| Learner materials | [Download 02-csharp.zip](../../../assets/lab-kits/hands-on/02-csharp.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The supplied tests pass. New feature requirements still need their own tests. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> Source references must name real types, registrations and working directories.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---establish-the-source-and-baseline) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Trace behavior through the console, application core and infrastructure.

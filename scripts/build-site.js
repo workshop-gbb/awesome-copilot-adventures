@@ -139,6 +139,9 @@ function createLinkResolver(documents, sources) {
     const document = bySource.get(cleanSource) || ['index.md', 'README.md', 'readme.md']
       .map(name => bySource.get(`${cleanSource}/${name}`)).find(Boolean);
     if (document && !image) return localizedUrl(locale, document.route) + query + fragment + title;
+    if (!image && cleanSource.startsWith('assets/lab-kits/') && sourceSet.has(cleanSource)) {
+      return `${basePath}/${cleanSource}${title}`;
+    }
     if (image && sourceSet.has(cleanSource)) {
       // Media keeps a real extension for native image rendering; original bytes are also in the archive.
       return `${basePath}/site-data/media/${sha256(readSource(path.join(root, cleanSource)))}${path.extname(cleanSource).toLowerCase()}` + title;
@@ -183,7 +186,7 @@ function sourceMime(name) {
     '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
     '.gif': 'image/gif', '.webp': 'image/webp', '.svg': 'image/svg+xml',
     '.mp4': 'video/mp4', '.webm': 'video/webm', '.mp3': 'audio/mpeg',
-    '.wav': 'audio/wav', '.pdf': 'application/pdf'
+    '.wav': 'audio/wav', '.pdf': 'application/pdf', '.zip': 'application/zip'
   })[path.extname(name).toLowerCase()] || 'application/octet-stream';
 }
 
@@ -226,6 +229,7 @@ function buildArtifacts(selectedLocales = locales) {
     const mime = sourceMime(name);
     if (name.startsWith('assets/site/fonts/') && name.endsWith('.txt')) artifacts.set(`site-generated/public/${name}`, bytes);
     if (mime.startsWith('image/')) artifacts.set(`site-generated/public/site-data/media/${hash}${path.extname(name).toLowerCase()}`, bytes);
+    if (name.startsWith('assets/lab-kits/')) artifacts.set(`site-generated/public/${name}`, bytes);
     manifest.push({
       path: name, size: bytes.length, hash, text: textPreview(bytes), mime,
       legacy: name.startsWith('legacy/'),
@@ -265,6 +269,7 @@ function buildArtifacts(selectedLocales = locales) {
     }
     const href = Object.fromEntries([
       ['home', '/'], ['start', '/start-here/'], ['curriculum', '/curriculum/'],
+      ['learningPath', '/learning-path/'], ['downloads', '/downloads/'],
       ['adventures', '/adventures/'], ['handsOn', '/hands-on/'], ['repository', '/repository/'],
       ['library', '/library/'], ['harness', '/harnesses/'], ['status', '/feature-status/'],
       ['glossary', '/glossary/'], ['design', '/design-system/'], ['support', '/read/support/']
@@ -336,5 +341,5 @@ if (require.main === module) {
 module.exports = {
   html, localizedUrl, explorerUrl, linkTargets, inlineCode, structureTokens, validateTranslations,
   headingSlug, retainHeadingAnchors, createLinkResolver, renderDocument,
-  textPreview, readSource, buildArtifacts
+  textPreview, readSource, rewriteLinks, buildArtifacts
 };

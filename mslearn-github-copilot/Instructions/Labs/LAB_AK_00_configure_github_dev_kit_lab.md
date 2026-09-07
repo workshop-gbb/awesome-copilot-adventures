@@ -20,6 +20,24 @@ lab:
 The filename is retained for incoming links. The product is **GitHub Spec Kit**,
 not “GitHub Dev Kit.” C# Dev Kit is a separate VS Code extension.
 
+## Lab briefing
+
+![Initialize workflow scaffolding without replacing the application.](../../../assets/images/hands-on/setup-speckit.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 200; 25 minutes (facilitation estimate) |
+| Starting action | Keep the untouched project and inspect every initialization change. |
+| Learner materials | [Download 13-greenfield.zip](../../../assets/lab-kits/hands-on/13-greenfield.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The unfinished RSS store fails with the documented exercise error. A missing runtime or syntax error is not the expected failure. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> An installed CLI is not evidence that the selected host discovered its skills.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---verify-tools-before-installing) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Pin and verify the Specify CLI and its integration.

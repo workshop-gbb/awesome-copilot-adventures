@@ -16,11 +16,14 @@ primary_capability: "Modeling source-grounded repository relationships"
 
 
 > [!NOTE]
-> **Status:** Content ready · **Media:** Pending · **Last verified:** 2026-09-05  
+> **Status:** Content ready · **Media:** Original SVG illustration · **Last verified:** 2026-09-05  
 > **Primary capability:** Modeling source-grounded repository relationships
 
+![Changed node, Reverse dependencies, Affected set illustrated through The Knowledge Graph of Lumoria.](../../../assets/images/adventures/lumoria-graph-hero.svg)
+
 > [!TIP]
-> Production hero media is intentionally pending. Use the specification in [Media Prompts](../../../docs/media-prompts.md) before adding a production hero asset.
+> [Download this learner kit](../../../assets/lab-kits/adventures/lumoria-graph.zip) and use
+> [the extraction and setup guide](../../../docs/downloads.md). Keep the original starter untouched.
 
 ```mermaid
 ---
@@ -65,18 +68,19 @@ config:
     attributeBackgroundColorEven: "#e0e0e0"
 ---
 flowchart LR
-    accTitle: Evidence-first development workflow
-    accDescr: Investigation leads to planning, implementation, review and evidence; unresolved gaps return to investigation.
-    A["Ask<br/>Investigate"] --> P["Plan<br/>Design"]
-    P --> G["Agent<br/>Implement"]
-    G --> R["Review<br/>Challenge"]
-    R --> E["Evidence<br/>Prove"]
-    E -. "gap found" .-> A
+    accTitle: The Knowledge Graph of Lumoria capability map
+    accDescr: Source-backed edges and a cycle-safe visited set prevent decorative but misleading graphs.
+    T["types changed"] --> C["core affected"]
+    C --> A["api affected"]
+    C --> L["cli affected"]
+    A --> D["docs affected"]
+    D --> S["Unique sorted impact set"]
+    L --> S
 ```
 
-**Legend.** Rectangles are workflow stages. Solid arrows show the normal progression; the dashed arrow returns unresolved evidence gaps to investigation.
+**Legend.** Arrows show change impact, the reverse of the dependency lists supplied to the function.
 
-**Explanation.** A fluent response is not completion. The loop ends only when the reviewed result meets the acceptance criteria and the recorded checks support it.
+**Explanation.** Source-backed edges and a cycle-safe visited set prevent decorative but misleading graphs.
 
 ## Official references
 
@@ -94,26 +98,30 @@ The fantasy is a memory aid; the engineering lesson requires observable, reprodu
 
 ## Learning objectives
 
-By the end, you can:
-
-- Explain the primary capability in precise product language.
-- Separate role, harness, target, environment, and customization primitive.
-- Complete a bounded Ask → Plan → Agent workflow.
-- Review tool use, changes, and verification evidence independently.
-- State unavailable, Preview, experimental, or unverified behavior without guessing.
+- Interpret graph edges as dependencies and traverse impact in the reverse direction.
+- Return a sorted, unique affected set including the starting node.
+- Handle cycles and reject unknown nodes without confusing filenames with verified relationships.
 
 ## Prerequisites
 
-- Completion of the preceding adventure, or equivalent familiarity.
-- A disposable repository or authorized sandbox.
-- Access appropriate to the selected Copilot surface; availability is not assumed.
-- An existing test, build, lint, validation, or review mechanism where applicable.
+| Requirement | Why it matters |
+| --- | --- |
+| Complete the preceding adventure, or demonstrate its exit evidence | Keep this mission focused on its named capability |
+| Node 24 and the extracted kit | The local verifier uses the supplied runtime and files |
+| A disposable folder outside another project | Customizations and intentional failures must not leak into other work |
+| Authorized host access, only for live steps | Availability, tools and policies differ |
 
-Never use production secrets, customer data, or irreversible resources. Use the paper fallback when a named service is unavailable.
+**Evidence boundary:** The fixture validates traversal, not automatic discovery of every real repository dependency.
+
+Estimated session: 45–75 minutes after prerequisites; actual duration varies. Never use production secrets or customer data.
 
 ## Concept explanation
 
 A repository knowledge graph models files, symbols, tests, services, owners, and requirements with typed edges. Imports are not runtime calls, and co-location is not ownership. Graphs help only when bounded, current, and source-anchored. Generated relationships can become stale, so planning decisions must be confirmed against current files and executable checks.
+
+### Concrete use case
+
+If api depends on core and core depends on types, a change to types can affect api. A change to api does not automatically affect its dependency types.
 
 ### Vocabulary checkpoint
 
@@ -165,23 +173,46 @@ A repository knowledge graph models files, symbols, tests, services, owners, and
 
 ## Guided mission
 
-Open the [Lumoria Graph lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/lumoria-graph/README.md) and implement cycle-safe dependency traversal.
+### 1. Prepare one isolated copy
 
-Choose one behavior and trace its entry point, definitions, references, tests, configuration, and external boundaries. Create a small typed Mermaid or text graph with source evidence for every node and edge. Predict impact, make a reversible change, rerun discovery and tests, then update the graph from observations.
+1. Download and extract the [lumoria-graph kit](../../../assets/lab-kits/adventures/lumoria-graph.zip) into a new work-drive directory.
+2. Read `KIT-START.md` at its root. Open `starter/` as the VS Code workspace when testing discovery, but run the verifier from the kit root.
+3. Inspect `starter/graph.js`, `verify.js` before editing.
+4. From the extracted kit root, run `node verify.js`.
+5. Record the documented starter rejection. A missing runtime or unrelated crash is not the expected exercise result.
 
-Record each material step in this table:
+### 2. Investigate and plan
+
+In Ask, request a trace of the inspected files and what the verifier actually observes. Challenge any claim about live execution that is not supported by output.
+
+Use this planning prompt:
+
+```text
+Specify affectedBy for the provided dependency direction. Include the changed node, visit reverse dependants once, handle cycles and sort the final unique names. Explain an unknown-start error.
+Do not implement yet. Identify affected files, the negative case and a safe reset.
+```
+
+### 3. Implement the reviewed slice
+
+1. Approve only the named starter artifact and necessary focused tests.
+2. Ask Agent to implement one slice; inspect proposed commands before execution.
+3. Run `node verify.js` again from the kit root, or `node ../verify.js` from `starter/`.
+4. Compare the exact result with the checkpoint below and review the complete diff.
+5. Record host discovery or live activity separately when available. Do not enable extra services to manufacture a passing result.
+
+> [!IMPORTANT]
+> **Checkpoint:** Changing types reaches all five supplied nodes; changing api reaches api and docs only.
+> The fixture validates traversal, not automatic discovery of every real repository dependency.
+
+### 4. Prove a check can reject a mistake
+
+Reverse the traversal direction deliberately in the disposable implementation. Confirm the types impact case detects the mistake, then restore it.
 
 | Observation | Decision | Action | Evidence | Limitation |
-|---|---|---|---|---|
-| What was inspected? | Why this next step? | What changed or ran? | What proves it? | What remains unknown? |
+| --- | --- | --- | --- | --- |
+| Initial state and exact diagnostic | Why this change is needed | Named file and bounded change | Command, exit code and observed result | What the local check does not prove |
 
-### Guided acceptance criteria
-
-- The initial state is supported by current evidence.
-- The plan is bounded and contains a reset path.
-- Agent work stays inside the declared scope.
-- Verification observes the requested behavior.
-- Review is independent from the implementation claim.
+Finish with the adventure-specific capability evidence in [the rubric](rubric.md), not just the presence of a file.
 
 ## Intentional failure: The Decorative Constellation
 
@@ -217,11 +248,13 @@ Constraints:
 
 ## Reset instructions
 
-1. Restore the starter with `git restore labs/lumoria-graph/starter/graph.js`.
-2. Remove only generated graph artifacts named by your plan.
-3. Confirm `git status --short -- labs/lumoria-graph` is empty.
+1. Save your diff, command output and limitations from the disposable kit.
+2. Stop only the process or learning session you started. Do not stop other projects.
+3. If you initialized Git in the kit, inspect `git status --short` there and restore only your named exercise files from its local baseline.
+4. Otherwise, extract the original ZIP into a new unused directory for another attempt; do not overwrite your current work.
+5. Remove only exercise-owned configurations, worktrees or remote resources after reviewing anything worth preserving.
 
-Cleanup is part of completion. Do not leave billable resources, credentials, processes, branches, or worktrees behind.
+The curriculum source and other projects must remain unchanged. A reset of the copied kit is not a repository-wide hard reset.
 
 ## Next adventure
 

@@ -16,11 +16,14 @@ primary_capability: "Using GitHub Copilot CLI safely"
 
 
 > [!NOTE]
-> **Status:** Content ready · **Media:** Pending · **Last verified:** 2026-09-05  
+> **Status:** Content ready · **Media:** Original SVG illustration · **Last verified:** 2026-09-05  
 > **Primary capability:** Using GitHub Copilot CLI safely
 
+![Command text, Safe parser, Named action illustrated through The Terminal Gate.](../../../assets/images/adventures/terminal-gate-hero.svg)
+
 > [!TIP]
-> Production hero media is intentionally pending. Use the specification in [Media Prompts](../../../docs/media-prompts.md) before adding a production hero asset.
+> [Download this learner kit](../../../assets/lab-kits/adventures/terminal-gate.zip) and use
+> [the extraction and setup guide](../../../docs/downloads.md). Keep the original starter untouched.
 
 ```mermaid
 ---
@@ -65,18 +68,18 @@ config:
     attributeBackgroundColorEven: "#e0e0e0"
 ---
 flowchart LR
-    accTitle: Evidence-first development workflow
-    accDescr: Investigation leads to planning, implementation, review and evidence; unresolved gaps return to investigation.
-    A["Ask<br/>Investigate"] --> P["Plan<br/>Design"]
-    P --> G["Agent<br/>Implement"]
-    G --> R["Review<br/>Challenge"]
-    R --> E["Evidence<br/>Prove"]
-    E -. "gap found" .-> A
+    accTitle: The Terminal Gate capability map
+    accDescr: A parser can make a small interface predictable. It is not a replacement for runtime permissions or a complete CLI integration.
+    S["Input string"] --> T["Token count and action"]
+    T --> P["Relative path validation"]
+    P --> Q{"Allowed request?"}
+    Q -->|Yes| O["Return action and target"]
+    Q -->|No| E["Explicit error"]
 ```
 
-**Legend.** Rectangles are workflow stages. Solid arrows show the normal progression; the dashed arrow returns unresolved evidence gaps to investigation.
+**Legend.** Validation boxes describe parsing stages; neither successful nor rejected input is executed as shell code.
 
-**Explanation.** A fluent response is not completion. The loop ends only when the reviewed result meets the acceptance criteria and the recorded checks support it.
+**Explanation.** A parser can make a small interface predictable. It is not a replacement for runtime permissions or a complete CLI integration.
 
 ## Official references
 
@@ -94,26 +97,30 @@ The fantasy is a memory aid; the engineering lesson requires observable, reprodu
 
 ## Learning objectives
 
-By the end, you can:
-
-- Explain the primary capability in precise product language.
-- Separate role, harness, target, environment, and customization primitive.
-- Complete a bounded Ask → Plan → Agent workflow.
-- Review tool use, changes, and verification evidence independently.
-- State unavailable, Preview, experimental, or unverified behavior without guessing.
+- Parse only inspect and verify actions with one relative path.
+- Reject unsupported arguments, traversal and shell syntax without evaluating input.
+- Record working-directory assumptions and separate the local parser from Copilot CLI authentication.
 
 ## Prerequisites
 
-- Completion of the preceding adventure, or equivalent familiarity.
-- A disposable repository or authorized sandbox.
-- Access appropriate to the selected Copilot surface; availability is not assumed.
-- An existing test, build, lint, validation, or review mechanism where applicable.
+| Requirement | Why it matters |
+| --- | --- |
+| Complete the preceding adventure, or demonstrate its exit evidence | Keep this mission focused on its named capability |
+| Node 24 and the extracted kit | The local verifier uses the supplied runtime and files |
+| A disposable folder outside another project | Customizations and intentional failures must not leak into other work |
+| Authorized host access, only for live steps | Availability, tools and policies differ |
 
-Never use production secrets, customer data, or irreversible resources. Use the paper fallback when a named service is unavailable.
+**Evidence boundary:** No shell command is executed by the parser exercise. Using the real Copilot CLI is a separate live workflow with its own setup and permissions.
+
+Estimated session: 45–75 minutes after prerequisites; actual duration varies. Never use production secrets or customer data.
 
 ## Concept explanation
 
 Copilot CLI is a terminal agent harness. Commands inherit the current directory, user permissions, environment variables, and network configuration. Ask and Plan should establish scope before Agent executes. Read commands before approval, avoid exposing secrets, prefer existing project tasks, preserve output and exit codes, and do not assume feature or model availability across plans or platforms.
+
+### Concrete use case
+
+The same relative file name means something different from another working directory. A safe command contract states both its permitted action and where the target is resolved.
 
 ### Vocabulary checkpoint
 
@@ -165,23 +172,46 @@ Copilot CLI is a terminal agent harness. Commands inherit the current directory,
 
 ## Guided mission
 
-Open the [Terminal Gate lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/terminal-gate/README.md) and implement its safe command parser.
+### 1. Prepare one isolated copy
 
-In a disposable repository, record the working directory, repository status, project instructions, available tools, and existing checks. Ask for a source-grounded explanation, plan one reversible change, implement it, run the narrowest validation, and capture commands, exit codes, status, and diff.
+1. Download and extract the [terminal-gate kit](../../../assets/lab-kits/adventures/terminal-gate.zip) into a new work-drive directory.
+2. Read `KIT-START.md` at its root. Open `starter/` as the VS Code workspace when testing discovery, but run the verifier from the kit root.
+3. Inspect `starter/command.js`, `verify.js` before editing.
+4. From the extracted kit root, run `node verify.js`.
+5. Record the documented starter rejection. A missing runtime or unrelated crash is not the expected exercise result.
 
-Record each material step in this table:
+### 2. Investigate and plan
+
+In Ask, request a trace of the inspected files and what the verifier actually observes. Challenge any claim about live execution that is not supported by output.
+
+Use this planning prompt:
+
+```text
+Define parseCommand output for the two allowed actions. Require exactly one relative target and reject absolute paths, traversal, quotes and shell operators as untrusted strings.
+Do not implement yet. Identify affected files, the negative case and a safe reset.
+```
+
+### 3. Implement the reviewed slice
+
+1. Approve only the named starter artifact and necessary focused tests.
+2. Ask Agent to implement one slice; inspect proposed commands before execution.
+3. Run `node verify.js` again from the kit root, or `node ../verify.js` from `starter/`.
+4. Compare the exact result with the checkpoint below and review the complete diff.
+5. Record host discovery or live activity separately when available. Do not enable extra services to manufacture a passing result.
+
+> [!IMPORTANT]
+> **Checkpoint:** Valid requests return action and target; every supplied invalid form is rejected.
+> No shell command is executed by the parser exercise. Using the real Copilot CLI is a separate live workflow with its own setup and permissions.
+
+### 4. Prove a check can reject a mistake
+
+Temporarily accept an extra argument and confirm the invalid-input case fails. Restore the strict parser.
 
 | Observation | Decision | Action | Evidence | Limitation |
-|---|---|---|---|---|
-| What was inspected? | Why this next step? | What changed or ran? | What proves it? | What remains unknown? |
+| --- | --- | --- | --- | --- |
+| Initial state and exact diagnostic | Why this change is needed | Named file and bounded change | Command, exit code and observed result | What the local check does not prove |
 
-### Guided acceptance criteria
-
-- The initial state is supported by current evidence.
-- The plan is bounded and contains a reset path.
-- Agent work stays inside the declared scope.
-- Verification observes the requested behavior.
-- Review is independent from the implementation claim.
+Finish with the adventure-specific capability evidence in [the rubric](rubric.md), not just the presence of a file.
 
 ## Intentional failure: The Wrong-Side Command
 
@@ -217,11 +247,13 @@ Constraints:
 
 ## Reset instructions
 
-1. Restore the starter with `git restore labs/terminal-gate/starter/command.js`.
-2. Remove only command-output files created by the exercise.
-3. Confirm `git status --short -- labs/terminal-gate` is empty.
+1. Save your diff, command output and limitations from the disposable kit.
+2. Stop only the process or learning session you started. Do not stop other projects.
+3. If you initialized Git in the kit, inspect `git status --short` there and restore only your named exercise files from its local baseline.
+4. Otherwise, extract the original ZIP into a new unused directory for another attempt; do not overwrite your current work.
+5. Remove only exercise-owned configurations, worktrees or remote resources after reviewing anything worth preserving.
 
-Cleanup is part of completion. Do not leave billable resources, credentials, processes, branches, or worktrees behind.
+The curriculum source and other projects must remain unchanged. A reset of the copied kit is not a repository-wide hard reset.
 
 ## Next adventure
 

@@ -1,0 +1,54 @@
+{
+  "name": "hub-editorial-studio",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./lib/hub-editorial-studio.js",
+  "types": "./lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "import": "./lib/hub-editorial-studio.js"
+    },
+    "./style.css": "./lib/hub-editorial-studio.css",
+    "./tokens.css": "./tokens.css",
+    "./components.css": "./components.css"
+  },
+  "files": ["lib", "public", "fonts", "tokens.css", "components.css", "README.md"],
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5177 --strictPort",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 4177 --strictPort",
+    "storybook": "storybook dev --host 127.0.0.1 --port 6006 --exact-port --no-open --no-version-updates --disable-telemetry",
+    "build-storybook": "storybook build --output-dir dist/storybook --disable-telemetry",
+    "build:library": "vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json",
+    "build:all": "npm run build && npm run build-storybook && npm run build:library",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:browser": "node scripts/verify-showcase.mjs"
+  },
+  "dependencies": {
+    "lucide-react": "1.38.0",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "10.5.10",
+    "@storybook/addon-docs": "10.5.10",
+    "@storybook/react-vite": "10.5.10",
+    "@types/node": "^24.0.0",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.1.1",
+    "fast-xml-parser": "5.11.1",
+    "parse5": "8.0.0",
+    "playwright": "1.61.1",
+    "storybook": "10.5.10",
+    "typescript": "5.9.3",
+    "vite": "8.2.2",
+    "vitest": "4.1.9"
+  }
+}

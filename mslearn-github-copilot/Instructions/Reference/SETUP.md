@@ -4,7 +4,7 @@ title: Hands-on environment and resource limits
 parent: Hands-on Labs
 nav_order: 1
 permalink: /hands-on/environment/
-last_verified: "2026-09-06"
+last_verified: "2026-09-07"
 ---
 
 # Hands-on environment and resource limits
@@ -13,23 +13,58 @@ These exercises are a **non-fantasy companion track** to Awesome Copilot Adventu
 They retain the exercise/task format of the imported learning material.
 You do not need to complete the adventures first.
 
+> [!TIP]
+> **Starting without a clone?** Use [the learner ZIP catalog](../../../docs/downloads.md).
+> Each kit includes a complete lesson, local images, an integrity manifest and
+> `KIT-START.md` with the exact workspace root and baseline. The instructions below
+> are the alternative for learners who already have the curriculum checkout.
+
 ## Work in a disposable copy
 
 1. Start in the root of `awesome-copilot-adventures`.
 2. Select a lab in the [catalog](../../index.md). Use its `lab_id`, not its displayed title.
-3. Choose an **unused absolute directory outside this repository**. On the workshop Mac,
-   use the T9 drive. Do not use Desktop, Downloads, the home directory, or `/tmp`.
-4. Run the preparation command documented by the lab, for example:
+3. Choose an **unused absolute directory outside this repository** on an existing
+   work drive. Create and inspect its parent first. The following examples use
+   `02-csharp`; replace the lab ID with your selection. Do not install .NET if you
+   are taking a Node or Python exercise.
 
-   ```bash
-   node scripts/prepare-hands-on.js --lab 02-csharp --destination /Volumes/T9/Dev/oss/workshop-runs/02-csharp
-   ```
+### macOS: Bash or zsh
 
-   Preparation copies only the named fixture. It refuses an existing destination;
-   it does not install dependencies, run generated code, initialize Git, or overwrite a project.
-5. Open the printed directory as the **only root in a new VS Code window**.
+On the workshop Mac, the T9 drive is the selected work drive:
+
+```bash
+mkdir -p /Volumes/T9/Dev/oss/workshop-runs
+node scripts/prepare-hands-on.js --lab 02-csharp --destination /Volumes/T9/Dev/oss/workshop-runs/02-csharp
+```
+
+### Windows: PowerShell
+
+Replace `D:\WorkshopRuns` with a directory on your existing approved work drive;
+the example does not create or assume that a D: drive exists.
+
+```powershell
+New-Item -ItemType Directory -Force -Path 'D:\WorkshopRuns'
+node scripts/prepare-hands-on.js --lab 02-csharp --destination 'D:\WorkshopRuns\02-csharp'
+```
+
+### Linux: Bash
+
+Replace `/mnt/work` with your existing work-drive mount before running the example:
+
+```bash
+mkdir -p /mnt/work/workshop-runs
+node scripts/prepare-hands-on.js --lab 02-csharp --destination /mnt/work/workshop-runs/02-csharp
+```
+
+Preparation copies only the named fixture. It refuses an existing destination;
+it does not install dependencies, run generated code, initialize Git, or overwrite a project.
+
+### Continue from the prepared copy
+
+1. Open the printed directory as the **only root in a new VS Code window**.
    A multi-root workspace can inherit instructions from the wrong project.
-6. If the lab needs version control, initialize only that copy and make a baseline:
+2. Run the selected lab's baseline from its documented working directory.
+3. If the lab needs version control, initialize only that copy and make a baseline:
 
    ```bash
    git init -b training
@@ -41,6 +76,10 @@ You do not need to complete the adventures first.
    Inspect files before staging. Use a repository-local Git identity if one is
    required; do not replace the learner's global identity. A GitHub repository,
    public visibility, and a push are **not** prerequisites for a local lab.
+
+For first-time Git users, the [download and repository walkthrough](../../../docs/downloads.md)
+covers local identity, file review, the first commit, creating an empty private
+GitHub repository, adding its remote and pushing without force.
 
 ## Keep temporary files and caches on the work drive
 
@@ -69,6 +108,32 @@ mkdir -p "$TMPDIR" "$UV_TOOL_BIN_DIR" "$DOTNET_CLI_HOME" "$NUGET_PACKAGES"
 For another OS, choose an equivalent external/project drive and set these variables
 using that shell's environment syntax. `C:\` itself is not a workspace.
 The scripts use Node's path APIs; do not paste Bash syntax into PowerShell.
+
+On Linux, use the same Bash variable names with your work-drive path. For PowerShell,
+the equivalent cache setup is:
+
+```powershell
+$env:HANDS_ON_HOME = 'D:\WorkshopRuns'
+$env:TMP = Join-Path $env:HANDS_ON_HOME '.cache\tmp'
+$env:TEMP = $env:TMP
+$env:npm_config_cache = Join-Path $env:HANDS_ON_HOME '.cache\npm'
+$env:PIP_CACHE_DIR = Join-Path $env:HANDS_ON_HOME '.cache\pip'
+$env:UV_CACHE_DIR = Join-Path $env:HANDS_ON_HOME '.cache\uv'
+$env:UV_TOOL_DIR = Join-Path $env:HANDS_ON_HOME '.tools\uv'
+$env:UV_TOOL_BIN_DIR = Join-Path $env:HANDS_ON_HOME '.tools\bin'
+$env:UV_PYTHON_INSTALL_DIR = Join-Path $env:HANDS_ON_HOME '.tools\python'
+$env:DOTNET_CLI_HOME = Join-Path $env:HANDS_ON_HOME '.cache\dotnet'
+$env:NUGET_PACKAGES = Join-Path $env:HANDS_ON_HOME '.cache\nuget'
+$env:PYTHONDONTWRITEBYTECODE = '1'
+$env:DOTNET_CLI_TELEMETRY_OPTOUT = '1'
+$env:DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE = 'true'
+$env:DOTNET_GENERATE_ASPNET_CERTIFICATE = 'false'
+New-Item -ItemType Directory -Force -Path $env:TMP,$env:UV_TOOL_BIN_DIR,$env:DOTNET_CLI_HOME,$env:NUGET_PACKAGES
+```
+
+Replace the drive path first and repeat the variables in each new terminal.
+These examples describe shell syntax; they are not a claim that the Windows
+or Linux walkthrough was executed on the workshop Mac.
 
 > [!IMPORTANT]
 > A worktree isolates source changes, **not** CPU, memory, network, or credentials.

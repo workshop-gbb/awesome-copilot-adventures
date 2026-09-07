@@ -21,6 +21,24 @@ Modernization changes technical structure while preserving a declared business
 contract. Unlike greenfield work, success is not “the new application runs.”
 Unlike a brownfield feature, the goal here is **not** new business behavior.
 
+## Lab briefing
+
+![Change storage without changing consumer behavior.](../../../assets/images/hands-on/17-modernization.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 400; 100 minutes (facilitation estimate) |
+| Starting action | Verify counts, exact integers, non-overwrite and CSV rollback. |
+| Learner materials | [Download 17-modernization.zip](../../../assets/lab-kits/hands-on/17-modernization.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The CSV characterization tests pass. The separate modernization suite intentionally fails until implementation. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> A created database is not proof of complete, compatible migration.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---characterize-before-changing-anything) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Freeze a public contract before changing storage.

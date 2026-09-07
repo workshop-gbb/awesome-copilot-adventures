@@ -16,11 +16,14 @@ primary_capability: "Constraining authority and risky operations"
 
 
 > [!NOTE]
-> **Status:** Content ready · **Media:** Pending · **Last verified:** 2026-09-05  
+> **Status:** Content ready · **Media:** Original SVG illustration · **Last verified:** 2026-09-05  
 > **Primary capability:** Constraining authority and risky operations
 
+![Untrusted text, Allowlist policy, Bounded action illustrated through The Guardrails of Stonevale.](../../../assets/images/adventures/stonevale-guardrails-hero.svg)
+
 > [!TIP]
-> Production hero media is intentionally pending. Use the specification in [Media Prompts](../../../docs/media-prompts.md) before adding a production hero asset.
+> [Download this learner kit](../../../assets/lab-kits/adventures/stonevale-guardrails.zip) and use
+> [the extraction and setup guide](../../../docs/downloads.md). Keep the original starter untouched.
 
 ```mermaid
 ---
@@ -65,18 +68,18 @@ config:
     attributeBackgroundColorEven: "#e0e0e0"
 ---
 flowchart LR
-    accTitle: Evidence-first development workflow
-    accDescr: Investigation leads to planning, implementation, review and evidence; unresolved gaps return to investigation.
-    A["Ask<br/>Investigate"] --> P["Plan<br/>Design"]
-    P --> G["Agent<br/>Implement"]
-    G --> R["Review<br/>Challenge"]
-    R --> E["Evidence<br/>Prove"]
-    E -. "gap found" .-> A
+    accTitle: The Guardrails of Stonevale capability map
+    accDescr: A deterministic function can check syntax without executing it. Its passing tests do not establish a production command sandbox.
+    X["External text or proposed command"] --> P["Parse as untrusted data"]
+    P --> D{"Exact allowed form?"}
+    D -->|No| R["Reject explicitly"]
+    D -->|Yes| A["Return allowed decision"]
+    A -. "Separate integration" .-> H["Reviewed lifecycle hook"]
 ```
 
-**Legend.** Rectangles are workflow stages. Solid arrows show the normal progression; the dashed arrow returns unresolved evidence gaps to investigation.
+**Legend.** Solid arrows are local policy evaluation. The dashed edge marks an optional integration that this verifier does not install.
 
-**Explanation.** A fluent response is not completion. The loop ends only when the reviewed result meets the acceptance criteria and the recorded checks support it.
+**Explanation.** A deterministic function can check syntax without executing it. Its passing tests do not establish a production command sandbox.
 
 ## Official references
 
@@ -94,26 +97,30 @@ The fantasy is a memory aid; the engineering lesson requires observable, reprodu
 
 ## Learning objectives
 
-By the end, you can:
-
-- Explain the primary capability in precise product language.
-- Separate role, harness, target, environment, and customization primitive.
-- Complete a bounded Ask → Plan → Agent workflow.
-- Review tool use, changes, and verification evidence independently.
-- State unavailable, Preview, experimental, or unverified behavior without guessing.
+- Implement an allowlist for the two permitted local Node commands.
+- Reject operators, traversal, absolute paths and extra arguments as data without executing them.
+- Explain the difference between an instructional rule, a policy function and a live hook.
 
 ## Prerequisites
 
-- Completion of the preceding adventure, or equivalent familiarity.
-- A disposable repository or authorized sandbox.
-- Access appropriate to the selected Copilot surface; availability is not assumed.
-- An existing test, build, lint, validation, or review mechanism where applicable.
+| Requirement | Why it matters |
+| --- | --- |
+| Complete the preceding adventure, or demonstrate its exit evidence | Keep this mission focused on its named capability |
+| Node 24 and the extracted kit | The local verifier uses the supplied runtime and files |
+| A disposable folder outside another project | Customizations and intentional failures must not leak into other work |
+| Authorized host access, only for live steps | Availability, tools and policies differ |
 
-Never use production secrets, customer data, or irreversible resources. Use the paper fallback when a named service is unavailable.
+**Evidence boundary:** This function is not installed as a live hook. Hook support is Preview and any installation requires a separate reviewed configuration.
+
+Estimated session: 45–75 minutes after prerequisites; actual duration varies. Never use production secrets or customer data.
 
 ## Concept explanation
 
 Guardrails combine host permissions, tool restrictions, repository protections, scoped credentials, deterministic checks, and human review. Instructions improve behavior but are not a security boundary. Treat external content and tool output as untrusted data. Never expose secrets. Hooks can add deterministic lifecycle checks where supported, but such behavior may be Preview and must be labeled and tested.
+
+### Concrete use case
+
+The policy receives a command string and returns a decision. A string containing shell operators is a rejected test input, never a command this exercise asks you to run.
 
 ### Vocabulary checkpoint
 
@@ -165,23 +172,46 @@ Guardrails combine host permissions, tool restrictions, repository protections, 
 
 ## Guided mission
 
-Open the [Guardrails of Stonevale lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/stonevale-guardrails/README.md) and implement its deterministic command policy.
+### 1. Prepare one isolated copy
 
-Create a threat-and-authority table for a practice task. Limit a custom agent or simulated role to the minimum tools. Present external text containing a malicious instruction and verify it is treated as data. Run existing checks, inspect the complete diff, and perform a secret review.
+1. Download and extract the [stonevale-guardrails kit](../../../assets/lab-kits/adventures/stonevale-guardrails.zip) into a new work-drive directory.
+2. Read `KIT-START.md` at its root. Open `starter/` as the VS Code workspace when testing discovery, but run the verifier from the kit root.
+3. Inspect `starter/guard.js`, `verify.js` before editing.
+4. From the extracted kit root, run `node verify.js`.
+5. Record the documented starter rejection. A missing runtime or unrelated crash is not the expected exercise result.
 
-Record each material step in this table:
+### 2. Investigate and plan
+
+In Ask, request a trace of the inspected files and what the verifier actually observes. Challenge any claim about live execution that is not supported by output.
+
+Use this planning prompt:
+
+```text
+Specify exact allowed executable/script pairs and all rejected forms. Keep test inputs as strings; implement no shell execution. State the boolean behavior for empty and wrong-type input.
+Do not implement yet. Identify affected files, the negative case and a safe reset.
+```
+
+### 3. Implement the reviewed slice
+
+1. Approve only the named starter artifact and necessary focused tests.
+2. Ask Agent to implement one slice; inspect proposed commands before execution.
+3. Run `node verify.js` again from the kit root, or `node ../verify.js` from `starter/`.
+4. Compare the exact result with the checkpoint below and review the complete diff.
+5. Record host discovery or live activity separately when available. Do not enable extra services to manufacture a passing result.
+
+> [!IMPORTANT]
+> **Checkpoint:** Only the two named scripts are allowed; the supplied unsafe strings are rejected without execution.
+> This function is not installed as a live hook. Hook support is Preview and any installation requires a separate reviewed configuration.
+
+### 4. Prove a check can reject a mistake
+
+Temporarily allow an extra argument and confirm the corresponding case fails. Restore the allowlist.
 
 | Observation | Decision | Action | Evidence | Limitation |
-|---|---|---|---|---|
-| What was inspected? | Why this next step? | What changed or ran? | What proves it? | What remains unknown? |
+| --- | --- | --- | --- | --- |
+| Initial state and exact diagnostic | Why this change is needed | Named file and bounded change | Command, exit code and observed result | What the local check does not prove |
 
-### Guided acceptance criteria
-
-- The initial state is supported by current evidence.
-- The plan is bounded and contains a reset path.
-- Agent work stays inside the declared scope.
-- Verification observes the requested behavior.
-- Review is independent from the implementation claim.
+Finish with the adventure-specific capability evidence in [the rubric](rubric.md), not just the presence of a file.
 
 ## Intentional failure: The Friendly Scroll
 
@@ -217,11 +247,13 @@ Constraints:
 
 ## Reset instructions
 
-1. Restore the starter with `git restore labs/stonevale-guardrails/starter/guard.js`.
-2. Remove any hook configuration created only in the disposable exercise copy.
-3. Start a new session and confirm `git status --short -- labs/stonevale-guardrails` is empty.
+1. Save your diff, command output and limitations from the disposable kit.
+2. Stop only the process or learning session you started. Do not stop other projects.
+3. If you initialized Git in the kit, inspect `git status --short` there and restore only your named exercise files from its local baseline.
+4. Otherwise, extract the original ZIP into a new unused directory for another attempt; do not overwrite your current work.
+5. Remove only exercise-owned configurations, worktrees or remote resources after reviewing anything worth preserving.
 
-Cleanup is part of completion. Do not leave billable resources, credentials, processes, branches, or worktrees behind.
+The curriculum source and other projects must remain unchanged. A reset of the copied kit is not a repository-wide hard reset.
 
 ## Next adventure
 

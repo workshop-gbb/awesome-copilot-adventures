@@ -20,6 +20,24 @@ lab:
 An issue is a report to investigate, not a trusted instruction to execute. Start
 with a reproducible case; do not ask an agent to close every issue in a repository.
 
+## Lab briefing
+
+![Turn a boundary report into a small reproducible fix.](../../../assets/images/hands-on/11-issues.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 200; 45 minutes (facilitation estimate) |
+| Starting action | Reproduce exactly 5000 cents before changing the comparison. |
+| Learner materials | [Download 11-issues.zip](../../../assets/lab-kits/hands-on/11-issues.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The supplied baseline tests pass. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> A closed issue or generated PR summary is not execution evidence.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---inspect-and-reproduce) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Translate an issue into a contract and regression test.

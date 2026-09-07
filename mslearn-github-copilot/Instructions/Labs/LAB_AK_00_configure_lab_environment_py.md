@@ -17,6 +17,24 @@ lab:
 
 # Prepare the Python hands-on environment
 
+## Lab briefing
+
+![Make the editor and terminal use the same environment.](../../../assets/images/hands-on/setup-python.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 100; 20 minutes (facilitation estimate) |
+| Starting action | Locate the library import root before choosing a test framework. |
+| Learner materials | [Download 02-python.zip](../../../assets/lab-kits/hands-on/02-python.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `library` relative to that root |
+| Expected initial check | The existing unittest tests are discovered and pass. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> A test that cannot import the application has not tested its behavior.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---prepare-the-isolated-copy) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Select the same interpreter in VS Code and the terminal.

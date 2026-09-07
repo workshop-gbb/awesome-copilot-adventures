@@ -17,6 +17,24 @@ lab:
 
 # Prepare the C# hands-on environment
 
+## Lab briefing
+
+![Match the project and runtime before trusting a build.](../../../assets/images/hands-on/setup-dotnet.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 100; 20 minutes (facilitation estimate) |
+| Starting action | Open one C# fixture and compare its target framework with the installed runtimes. |
+| Learner materials | [Download 02-csharp.zip](../../../assets/lab-kits/hands-on/02-csharp.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The supplied tests pass. New feature requirements still need their own tests. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> A compiled project and an executed test suite are different evidence.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---verify-the-selected-tools) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Distinguish an installed SDK from the target runtime a project needs.

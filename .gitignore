@@ -32,6 +32,10 @@ downloads/
 eggs/
 .eggs/
 lib/
+!labs/context-mirrors/starter/lib/
+!labs/context-mirrors/starter/lib/*.js
+!site/lib/
+!site/lib/*.ts
 lib64/
 parts/
 sdist/

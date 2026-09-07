@@ -1,12 +1,13 @@
-# Adventure hero images
+# Original adventure illustrations
 
-Production hero images are intentionally not committed yet.
+The 14 current adventures each include an original, text-free SVG hero with a matching title, description and meaningful alternative text in the lesson. The monochrome vector compositions use distinct motifs: portals, mirrors, tablets, a bounded clock, skill books, constellations, a shield, a map, dependency nodes, parallel paths, a citadel, a terminal gate, an automaton and connecting bridges.
 
-Generate each asset from [the reviewed media specifications](../../../docs/media-prompts.md), then add:
+These assets are learning illustrations, not product screenshots, AI execution evidence or generated cinematic media. The [optional media briefs](../../../docs/media-prompts.md) remain separate specifications for PNG/WebP and video production.
 
-- `<slug>-hero.webp` as the preferred optimized image;
-- `<slug>-hero.png` only when a lossless source is useful;
-- meaningful alt text in the consuming adventure;
-- no embedded text, watermark, personal data, or copyrighted character.
+## Review checklist
 
-Do not reuse an unrelated image under a different alt description.
+- [ ] The illustration matches the concept and the consuming lesson's alternative text.
+- [ ] It remains legible at desktop and narrow reading widths.
+- [ ] The SVG has a viewBox, title and description, with no remote resource or script.
+- [ ] Meaning is not conveyed by color alone.
+- [ ] Updated media is included when regenerating [learner kits](../../../docs/downloads.md).

@@ -1,0 +1,7 @@
+node_modules/
+dist/
+lib/
+storybook-static/
+test-results/
+*.log
+.DS_Store

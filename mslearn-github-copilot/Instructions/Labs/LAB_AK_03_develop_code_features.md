@@ -20,6 +20,24 @@ lab:
 Adding a feature spans input, data retrieval, domain interpretation and output.
 A helper that is never connected to the menu is not a completed feature.
 
+## Lab briefing
+
+![Show availability for each physical copy, not the entire title.](../../../assets/images/hands-on/03-csharp.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 200; 70 minutes (facilitation estimate) |
+| Starting action | Specify the two-copy case before wiring the new console action. |
+| Learner materials | [Download 03-csharp.zip](../../../assets/lab-kits/hands-on/03-csharp.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The supplied tests pass. New feature requirements still need their own tests. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> An overdue unreturned loan still makes that copy unavailable.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---investigate-and-run-the-baseline) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Turn a user request into explicit acceptance cases.

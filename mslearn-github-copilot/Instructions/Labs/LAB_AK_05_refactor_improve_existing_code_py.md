@@ -20,6 +20,24 @@ lab:
 Python's `sorted`, comprehensions and `next` can express intent clearly, but they
 have different copying and mutation semantics. Preserve the behavior users depend on.
 
+## Lab briefing
+
+![Preserve whether callers observe mutation or a new list.](../../../assets/images/hands-on/05-python.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 300; 60 minutes (facilitation estimate) |
+| Starting action | Test duplicates, ties and mutation before simplifying iteration. |
+| Learner materials | [Download 05-python.zip](../../../assets/lab-kits/hands-on/05-python.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `library` relative to that root |
+| Expected initial check | The existing unittest tests are discovered and pass. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> sorted and list.sort are not interchangeable contracts.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---establish-tests-and-current-behavior) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Identify what filtering/sorting actually returns and mutates.

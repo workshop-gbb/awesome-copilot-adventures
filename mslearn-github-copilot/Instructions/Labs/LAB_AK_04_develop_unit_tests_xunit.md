@@ -20,6 +20,24 @@ lab:
 A test can pass while proving very little. Verify behavior of the production
 repository instead of testing a helper defined only inside the test.
 
+## Lab briefing
+
+![Test storage behavior through the production repository.](../../../assets/images/hands-on/04-xunit.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 300; 65 minutes (facilitation estimate) |
+| Starting action | Add one found-ID component test and assert populated entities. |
+| Learner materials | [Download 04-xunit.zip](../../../assets/lab-kits/hands-on/04-xunit.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The supplied tests pass. New feature requirements still need their own tests. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> Mocking the method under test cannot prove its implementation works.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---inspect-and-discover-the-baseline) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Distinguish unit, component and UI tests.

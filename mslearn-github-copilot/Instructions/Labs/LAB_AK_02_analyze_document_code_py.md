@@ -21,6 +21,24 @@ Explain the implementation you have, not the application a model expects. Python
 and C# variants have similar concepts but are not guaranteed to have identical APIs,
 case sensitivity, or error handling.
 
+## Lab briefing
+
+![Explain the actual import root and data flow.](../../../assets/images/hands-on/02-python.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 200; 45 minutes (facilitation estimate) |
+| Starting action | Trace return_loan and distinguish logged errors from propagated exceptions. |
+| Learner materials | [Download 02-python.zip](../../../assets/lab-kits/hands-on/02-python.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `library` relative to that root |
+| Expected initial check | The existing unittest tests are discovered and pass. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> The Python and C# fixtures share a domain, not necessarily identical behavior.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---run-and-inspect-the-baseline) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Identify the correct Python import and execution root.

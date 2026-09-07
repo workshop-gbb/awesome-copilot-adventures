@@ -6,6 +6,9 @@ const { ui, href, catalog } = languageFor(page.locale);
 const groups = ['adventures', 'hands-on', 'guides', 'fixtures', 'solutions', 'media'];
 ---
 <aside class="learning-sidebar" aria-label={ui.learningNavigation}>
+  <a class="sidebar-start" href={href.start}>{ui.start} <span aria-hidden="true">↗</span></a>
+  <a class="sidebar-start" href={href.learningPath}>{ui.learningOrder} <span aria-hidden="true">↗</span></a>
+  <a class="sidebar-start" href={href.downloads}>{ui.learnerKits} <span aria-hidden="true">↓</span></a>
   <a class="sidebar-start" href={href.curriculum}>{ui.curriculum} <span aria-hidden="true">↗</span></a>
   {groups.map(group => (
     <details class="sidebar-group" open={page.group === group}>

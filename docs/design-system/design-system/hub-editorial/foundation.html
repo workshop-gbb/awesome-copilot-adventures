@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="pt-BR" data-he-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hub Editorial: um design system independente com a linguagem visual do site de Paula Silva.">
+  <meta name="color-scheme" content="light dark">
+  <title>Hub Editorial — Design system</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./tokens.css">
+  <link rel="stylesheet" href="./components.css">
+  <link rel="stylesheet" href="./showcase.css">
+  <script src="./hub.js" defer></script>
+</head>
+<body class="he">
+  <a class="he-skip" href="#main">Pular para o conteúdo</a>
+  <header class="he-header" data-he-header>
+    <a class="he-brand" href="./foundation.html">
+      <span class="he-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      Hub Editorial
+    </a>
+    <span class="he-header__caption">DESIGN SYSTEM / 1.0.0</span>
+    <button class="he-button" type="button" data-he-menu-toggle aria-controls="he-navigation" aria-expanded="false" hidden>Menu</button>
+    <nav class="he-nav" id="he-navigation" aria-label="Seções do design system">
+      <a href="#cores">Cores</a>
+      <a href="#tipografia">Tipografia</a>
+      <a href="#componentes">Componentes</a>
+      <a href="#reutilizar">Reutilizar</a>
+    </nav>
+    <div class="he-header__tools">
+      <button class="he-button" type="button" data-he-theme-toggle aria-pressed="false" hidden>Tema escuro</button>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="he-hero he-inverse" aria-labelledby="hero-title">
+      <div class="he-container">
+        <div class="he-hero__layout">
+          <div>
+            <p class="he-eyebrow">Editorial por natureza. Técnico por intenção.</p>
+            <h1 class="he-hero__title" id="hero-title">Um formato.<br>Muitas possibilidades.</h1>
+            <p class="he-hero__lead">A linguagem visual do hub de Paula Silva, organizada para você criar novos sites: tipografia clara, linhas finas, espaço generoso e cor com propósito.</p>
+            <div class="he-actions">
+              <a class="he-button he-button--primary" href="./starter.html">Abrir template <span aria-hidden="true">&#8599;</span></a>
+              <a class="he-button" href="../../md/Hub_Editorial_Design_System_v1.0.0_2026-09-07.md" download>Baixar guia em português</a>
+            </div>
+          </div>
+          <figure class="he-hero__art" aria-label="Composição tipográfica com as quatro cores de destaque">
+            <svg viewBox="0 0 400 390" aria-hidden="true">
+              <circle cx="200" cy="184" r="126" fill="#FFFFFF"/>
+              <circle cx="200" cy="184" r="139" fill="none" stroke="#2A2A2E"/>
+              <text x="200" y="210" text-anchor="middle" fill="#101012" class="he-hero__glyph">Aa</text>
+              <text x="200" y="252" text-anchor="middle" fill="#686864" class="he-hero__art-label">SANS + MONO</text>
+              <path d="M66 38 L40 64 L66 90" fill="none" stroke="var(--he-red-500)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="44" y="302" width="25" height="25" rx="5" fill="var(--he-green-500)" transform="rotate(-8 56 314)"/>
+              <path d="M334 290 L360 316 L334 342" fill="none" stroke="var(--he-blue-500)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M341 63 L324 112" fill="none" stroke="var(--he-yellow-500)" stroke-width="12" stroke-linecap="round"/>
+            </svg>
+            <figcaption>INTER + JETBRAINS MONO</figcaption>
+          </figure>
+        </div>
+        <nav class="he-index" aria-label="Explore o kit">
+          <a class="he-index__item" href="#cores"><strong>01</strong><span>Fundamentos</span></a>
+          <a class="he-index__item" href="#tipografia"><strong>02</strong><span>Tipografia &amp; ritmo</span></a>
+          <a class="he-index__item" href="#componentes"><strong>03</strong><span>Componentes</span></a>
+          <a class="he-index__item" href="#composicao"><strong>04</strong><span>Composição</span></a>
+        </nav>
+      </div>
+    </section>
+
+    <section class="he-section" id="cores" aria-labelledby="colors-title">
+      <div class="he-container">
+        <p class="he-label">01 / Fundamentos</p>
+        <h2 class="he-section__title" id="colors-title">Cor para orientar.<br>Não para competir.</h2>
+        <p class="he-section__lead">A paleta abaixo foi extraída do site. Use uma cor por categoria ou bloco; deixe o conteúdo respirar sobre neutros. Não é a paleta oficial do Fluent UI.</p>
+        <div class="he-swatches">
+          <article class="he-swatch">
+            <div class="he-swatch__color" style="--he-swatch: var(--he-red-500)" data-he-token="--he-red-500" data-he-hex="#FF3133"></div>
+            <div class="he-swatch__info"><h3>Vermelho</h3><code>#FF3133</code><p>Destaques e categorias.</p></div>
+          </article>
+          <article class="he-swatch">
+            <div class="he-swatch__color" style="--he-swatch: var(--he-green-500)" data-he-token="--he-green-500" data-he-hex="#7ED956"></div>
+            <div class="he-swatch__info"><h3>Verde</h3><code>#7ED956</code><p>Trilhas e pontos de partida.</p></div>
+          </article>
+          <article class="he-swatch">
+            <div class="he-swatch__color" style="--he-swatch: var(--he-blue-500)" data-he-token="--he-blue-500" data-he-hex="#39B8FF"></div>
+            <div class="he-swatch__info"><h3>Azul</h3><code>#39B8FF</code><p>Navegação e conexão.</p></div>
+          </article>
+          <article class="he-swatch">
+            <div class="he-swatch__color" style="--he-swatch: var(--he-yellow-500)" data-he-token="--he-yellow-500" data-he-hex="#FFDE59"></div>
+            <div class="he-swatch__info"><h3>Amarelo</h3><code>#FFDE59</code><p>Ênfase e marca-texto.</p></div>
+          </article>
+        </div>
+        <div class="he-neutrals">
+          <div class="he-neutral"><div class="he-neutral__sample" style="--he-swatch: var(--he-bg)"></div><strong>Fundo</strong><code>--he-bg</code><p class="he-small he-muted">Claro #FCFCFB / escuro #141414</p></div>
+          <div class="he-neutral"><div class="he-neutral__sample" style="--he-swatch: var(--he-paper)"></div><strong>Superfície</strong><code>--he-paper</code><p class="he-small he-muted">Claro #FFFFFF / escuro #1C1C1A</p></div>
+          <div class="he-neutral"><div class="he-neutral__sample" style="--he-swatch: var(--he-ink)"></div><strong>Texto principal</strong><code>--he-ink</code><p class="he-small he-muted">Claro #1A1A1A / escuro #F0F0F0</p></div>
+        </div>
+        <p class="he-feedback">As cores vivas são acentos, não cores universais de texto. O kit adiciona papéis de texto com mais contraste, como <code>--he-green-ink</code> e <code>--he-yellow-ink</code>. O guia distingue esses ajustes dos valores originais.</p>
+        <div class="he-actions"><a class="he-button" href="./tokens.css" download>Baixar tokens CSS</a><a class="he-button he-button--quiet" href="./components.css" download>Baixar componentes CSS</a></div>
+      </div>
+    </section>
+
+    <section class="he-section he-section--alt" id="tipografia" aria-labelledby="type-title">
+      <div class="he-container">
+        <p class="he-label">02 / Tipografia &amp; ritmo</p>
+        <h2 class="he-section__title" id="type-title">A hierarquia faz<br>o trabalho pesado.</h2>
+        <p class="he-section__lead">Inter organiza a narrativa. JetBrains Mono identifica categorias, navegação e metadados. Títulos leves e grandes; corpo confortável; rótulos curtos.</p>
+        <dl>
+          <div class="he-type-row"><dt>Display <span>Inter / 300</span><span>40–74 px no desktop</span></dt><dd class="he-type-display">Ideias com espaço.</dd></div>
+          <div class="he-type-row"><dt>Seção <span>Inter / 400</span><span>28–42 px no desktop</span></dt><dd class="he-type-heading">Clareza antes do efeito.</dd></div>
+          <div class="he-type-row"><dt>Corpo <span>Inter / 400 / 16 px</span><span>Entrelinha 1.6 no kit</span></dt><dd>Escreva para pessoas que querem compreender, decidir e agir. Limite a largura de leitura e use parágrafos curtos.</dd></div>
+          <div class="he-type-row"><dt>Rótulo <span>JetBrains Mono / 500 / 12 px</span><span>Tamanho normalizado no kit</span></dt><dd class="he-type-label">Guia / Plataforma / Recursos</dd></div>
+        </dl>
+        <h3 class="he-subtitle">Um ritmo que se repete.</h3>
+        <p class="he-copy he-muted">A escala de espaçamento organiza medidas recorrentes do site em múltiplos de 4 px. Os tokens são uma normalização nova; o CSS original não tinha essa escala nomeada.</p>
+        <div class="he-spacing" aria-label="Exemplos da escala de espaçamento">
+          <div class="he-spacing__item"><div class="he-spacing__bar" style="--he-sample: var(--he-space-1)"></div><code>4 px</code></div>
+          <div class="he-spacing__item"><div class="he-spacing__bar" style="--he-sample: var(--he-space-2)"></div><code>8 px</code></div>
+          <div class="he-spacing__item"><div class="he-spacing__bar" style="--he-sample: var(--he-space-4)"></div><code>16 px</code></div>
+          <div class="he-spacing__item"><div class="he-spacing__bar" style="--he-sample: var(--he-space-6)"></div><code>24 px</code></div>
+          <div class="he-spacing__item"><div class="he-spacing__bar" style="--he-sample: var(--he-space-8)"></div><code>32 px</code></div>
+          <div class="he-spacing__item"><div class="he-spacing__bar" style="--he-sample: var(--he-space-12)"></div><code>48 px</code></div>
+          <div class="he-spacing__item"><div class="he-spacing__bar" style="--he-sample: var(--he-space-18)"></div><code>72 px</code></div>
+          <div class="he-spacing__item"><div class="he-spacing__bar" style="--he-sample: var(--he-space-28)"></div><code>112 px</code></div>
+        </div>
+        <div class="he-ruler"><p>CONTAINER 1240 px · GUTTERS 72 / 32 / 20 px<br>SEÇÕES 112 / 72 px · FILETES 1 px · TRILHAS radius 12 px</p></div>
+        <p class="he-help">As divisões acima são uma régua ilustrativa, não um grid obrigatório de 12 colunas. O site usa CSS Grid com colunas fluidas.</p>
+      </div>
+    </section>
+
+    <section class="he-section" id="componentes" aria-labelledby="components-title">
+      <div class="he-container">
+        <p class="he-label">03 / Componentes</p>
+        <h2 class="he-section__title" id="components-title">Poucas peças.<br>Uma linguagem consistente.</h2>
+        <p class="he-section__lead">Cards editoriais sem cantos arredondados, divisórias de 1 px e acentos discretos. Estes exemplos são composições demonstrativas, não produtos ou resultados reais.</p>
+        <div data-he-catalog>
+          <div data-he-catalog-controls hidden>
+            <label class="he-field-label" for="he-search">Buscar exemplos</label>
+            <input class="he-field" type="search" id="he-search" placeholder="Ex.: guia, hub ou ferramenta" data-he-search aria-controls="he-example-cards">
+            <fieldset class="he-filter">
+              <legend>Filtrar por formato</legend>
+              <button class="he-button he-filter__chip" type="button" data-he-filter="all" aria-pressed="true">Todos</button>
+              <button class="he-button he-filter__chip" type="button" data-he-filter="guia" aria-pressed="false">Guias</button>
+              <button class="he-button he-filter__chip" type="button" data-he-filter="hub" aria-pressed="false">Hubs</button>
+              <button class="he-button he-filter__chip" type="button" data-he-filter="ferramenta" aria-pressed="false">Ferramentas</button>
+              <button class="he-button he-button--quiet" type="button" data-he-clear>Limpar filtros</button>
+            </fieldset>
+            <p class="he-results" role="status" aria-live="polite" aria-atomic="true" data-he-count></p>
+          </div>
+          <div class="he-grid he-grid--ruled" id="he-example-cards">
+            <a class="he-card" data-he-accent="red" data-he-category="guia" href="./starter.html#proposito">
+              <span class="he-card__kicker">Guia editorial</span>
+              <h3 class="he-card__title">Do contexto à compreensão.</h3>
+              <p class="he-card__description">Uma abertura direta, uma sequência de ideias e links que ajudam a continuar a leitura.</p>
+              <div class="he-badges"><span class="he-badge">Artigo</span><span class="he-badge">Guia</span></div>
+              <div class="he-card__meta"><span>Ver no template</span><span class="he-card__arrow" aria-hidden="true">&#8599;</span></div>
+            </a>
+            <a class="he-card" data-he-accent="green" data-he-category="hub" href="./starter.html#conteudos">
+              <span class="he-card__kicker">Hub de conteúdos</span>
+              <h3 class="he-card__title">Um ponto de partida claro.</h3>
+              <p class="he-card__description">Organize recursos em trilhas de leitura e mantenha a estrutura dos cards previsível.</p>
+              <div class="he-badges"><span class="he-badge">Trilhas</span><span class="he-badge">Catálogo</span></div>
+              <div class="he-card__meta"><span>Ver no template</span><span class="he-card__arrow" aria-hidden="true">&#8599;</span></div>
+            </a>
+            <a class="he-card" data-he-accent="blue" data-he-category="ferramenta" href="./starter.html#recursos">
+              <span class="he-card__kicker">Ferramenta</span>
+              <h3 class="he-card__title">Uma interface para agir.</h3>
+              <p class="he-card__description">Use rótulos explícitos, ações reconhecíveis e feedback que explique o que aconteceu.</p>
+              <div class="he-badges"><span class="he-badge">Interface</span><span class="he-badge">Recursos</span></div>
+              <div class="he-card__meta"><span>Ver no template</span><span class="he-card__arrow" aria-hidden="true">&#8599;</span></div>
+            </a>
+          </div>
+          <p class="he-empty" data-he-empty hidden>Nenhum exemplo encontrado. Tente outro termo ou use “Limpar filtros”.</p>
+        </div>
+        <div class="he-demo-block">
+          <h3 class="he-subtitle">Ações e estados</h3>
+          <p class="he-muted he-small">Links navegam; botões executam ações. O foco aparece ao usar Tab. Os estados desabilitado e ocupado abaixo são amostras estáticas.</p>
+          <div class="he-actions">
+            <a class="he-button he-button--primary" href="./starter.html">Ação principal <span aria-hidden="true">&#8599;</span></a>
+            <a class="he-button" href="#composicao">Ação secundária</a>
+            <button class="he-button" type="button" disabled>Indisponível</button>
+            <button class="he-button" type="button" aria-busy="true" disabled>Processando — exemplo</button>
+          </div>
+          <div class="he-state-grid">
+            <p class="he-feedback he-feedback--success">Exemplo de confirmação: a alteração foi aplicada. Use apenas após confirmação real da operação.</p>
+            <p class="he-feedback he-feedback--error">Exemplo de erro: não foi possível concluir. Explique a causa conhecida e a próxima ação.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="he-section he-band" data-he-accent="green" id="composicao" aria-labelledby="composition-title">
+      <div class="he-container">
+        <p class="he-label">04 / Padrões de composição</p>
+        <h2 class="he-section__title" id="composition-title">Ajude a pessoa a encontrar<br>o seu <span class="he-highlight">próximo passo</span>.</h2>
+        <p class="he-section__lead">Uma faixa de cor suave sinaliza uma mudança de assunto. Os cards de trilha recebem 12 px de raio; o grid editorial continua reto.</p>
+        <div class="he-grid">
+          <article class="he-path" data-he-accent="green"><p class="he-card__kicker">Para começar</p><h3 class="he-card__title">Defina a intenção.</h3><p class="he-card__description">Escolha a pessoa, a necessidade e uma ação principal.</p><a href="./starter.html#proposito">Ver a abertura no template</a></article>
+          <article class="he-path" data-he-accent="yellow"><p class="he-card__kicker">Para estruturar</p><h3 class="he-card__title">Organize a leitura.</h3><p class="he-card__description">Alterne blocos narrativos, trilhas e recursos relacionados.</p><a href="./starter.html#conteudos">Ver as trilhas no template</a></article>
+          <article class="he-path" data-he-accent="blue"><p class="he-card__kicker">Para publicar</p><h3 class="he-card__title">Verifique os estados.</h3><p class="he-card__description">Teste navegação, contraste, conteúdo e responsividade.</p><a href="#formulario">Testar feedback do formulário</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="he-section" aria-labelledby="sequence-title">
+      <div class="he-container">
+        <p class="he-label">O esqueleto de uma página</p>
+        <h2 class="he-section__title" id="sequence-title">Repita a estrutura.<br>Mude a história.</h2>
+        <p class="he-section__lead">A lista pautada é outro elemento recorrente do site. Os números esmaecidos são decorativos; os títulos carregam o significado.</p>
+        <div class="he-ledger">
+          <div class="he-ledger__row"><span class="he-ledger__number" aria-hidden="true">01</span><div><h3>Apresente o propósito</h3><p>Cabeçalho compacto, abertura escura e uma mensagem central.</p></div><a href="./starter.html#intro">Ver abertura</a></div>
+          <div class="he-ledger__row"><span class="he-ledger__number" aria-hidden="true">02</span><div><h3>Crie caminhos de leitura</h3><p>Uma faixa temática e cards de trilha para necessidades diferentes.</p></div><a href="./starter.html#conteudos">Ver trilhas</a></div>
+          <div class="he-ledger__row"><span class="he-ledger__number" aria-hidden="true">03</span><div><h3>Convide para continuar</h3><p>Uma ação honesta, seguida de um fechamento escuro e simples.</p></div><a href="./starter.html#contato">Ver fechamento</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="he-section he-band" data-he-accent="blue" id="formulario" aria-labelledby="form-title">
+      <div class="he-container he-newsletter">
+        <div>
+          <p class="he-label">Formulário / demonstração local</p>
+          <h2 class="he-section__title" id="form-title">Feedback também<br>é <span class="he-highlight">design</span>.</h2>
+          <p class="he-section__lead">Teste um campo vazio, um email inválido e um formato válido. O exemplo valida apenas no navegador: não há inscrição, envio, armazenamento ou integração com o site.</p>
+        </div>
+        <div class="he-newsletter__form">
+          <form data-he-demo-form>
+            <fieldset class="he-fieldset" disabled>
+              <legend class="he-subtitle">Teste a validação</legend>
+              <div>
+                <label class="he-field-label" for="he-demo-email">Email de exemplo (obrigatório)</label>
+                <input class="he-field" id="he-demo-email" type="email" inputmode="email" autocomplete="off" maxlength="254" required aria-describedby="he-email-help he-email-error" data-he-demo-email>
+                <p class="he-help" id="he-email-help">Use um endereço fictício, como nome@exemplo.com.</p>
+                <p class="he-error" id="he-email-error" role="alert" data-he-demo-error hidden></p>
+              </div>
+              <div class="he-actions">
+                <button class="he-button he-button--primary" type="submit">Validar exemplo</button>
+                <button class="he-button" type="reset">Limpar</button>
+              </div>
+            </fieldset>
+            <p class="he-feedback" role="status" aria-live="polite" aria-atomic="true" data-he-demo-status></p>
+            <noscript><p class="he-help">O teste de validação requer JavaScript. O restante do guia e os exemplos continuam disponíveis.</p></noscript>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="he-section" id="reutilizar" aria-labelledby="reuse-title">
+      <div class="he-container">
+        <p class="he-label">05 / Reutilização</p>
+        <h2 class="he-section__title" id="reuse-title">Uma base para copiar.<br>Não uma dependência.</h2>
+        <p class="he-section__lead">O template usa HTML, CSS e JavaScript sem framework. As fontes são locais. Copie a pasta inteira, preserve as licenças e substitua conteúdo e identidade.</p>
+        <div class="he-copy">
+          <h3 class="he-subtitle">Comece pelo template</h3>
+          <ol>
+            <li>Duplique <a href="./starter.html">starter.html</a> e abra a cópia no navegador.</li>
+            <li>Mantenha <code>tokens.css</code>, <code>components.css</code>, <code>hub.js</code> e a pasta <code>fonts/</code> nos caminhos relativos indicados.</li>
+            <li>Troque o nome do projeto, os textos e os destinos dos links. Não copie métricas, fotos ou marcas de terceiros.</li>
+            <li>Ajuste os tokens sem remover os estados de foco, erro e tema escuro.</li>
+          </ol>
+        </div>
+        <h3 class="he-subtitle">Contrato mínimo de uma página</h3>
+        <pre class="he-code"><code>&lt;html lang="pt-BR" data-he-theme="light"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;title&gt;Meu projeto&lt;/title&gt;
+    &lt;link rel="stylesheet" href="./tokens.css"&gt;
+    &lt;link rel="stylesheet" href="./components.css"&gt;
+    &lt;script src="./hub.js" defer&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body class="he"&gt;
+    &lt;main&gt;
+      &lt;section class="he-section"&gt;
+        &lt;div class="he-container"&gt;
+          &lt;h1 class="he-section__title"&gt;Meu projeto&lt;/h1&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <details class="he-details">
+          <summary>Briefing reutilizável para GitHub Copilot ou outra ferramenta</summary>
+          <label class="he-field-label" for="he-briefing">Copie este briefing junto com os arquivos do kit</label>
+          <textarea class="he-field he-prompt" id="he-briefing" readonly>Crie uma página usando o kit Hub Editorial fornecido. Reutilize tokens.css e components.css; não substitua por outro design system.
+
+Preserve: Inter para conteúdo, JetBrains Mono para rótulos, abertura escura #101012, neutros claros, acentos #FF3133 / #7ED956 / #39B8FF / #FFDE59, container de 1240 px, divisórias de 1 px, cards editoriais retos e cards de trilha com raio de 12 px.
+
+Componha: cabeçalho compacto, hero com uma mensagem principal, seção narrativa, trilhas, catálogo e fechamento escuro. Use uma cor por categoria, títulos leves, espaço generoso e metadados discretos.
+
+Use os papéis semânticos de texto do kit, não as cores vivas como texto pequeno. Preserve temas claro/escuro, foco visível, alvos de 44 px, menu acessível, responsividade e movimento reduzido.
+
+Troque a marca e o conteúdo pela identidade do novo projeto. Não invente métricas, depoimentos ou integrações. Identifique demonstrações locais como demonstrações. Teste estados padrão, hover, foco, ativo, desabilitado, vazio, erro e confirmação, quando aplicáveis.</textarea>
+          <div class="he-actions"><button class="he-button" type="button" data-he-select="he-briefing" hidden>Selecionar briefing</button><span class="he-help">Depois de selecionar, use Ctrl+C ou ⌘C.</span></div>
+        </details>
+        <div class="he-actions"><a class="he-button he-button--primary" href="./starter.html">Abrir template completo <span aria-hidden="true">&#8599;</span></a><a class="he-button" href="../../md/Hub_Editorial_Design_System_v1.0.0_2026-09-07.md" download>Ler o guia completo</a></div>
+        <p class="he-help">Este é um kit independente, não uma alteração no site atual. A navegação permanece disponível sem JavaScript; os controles interativos são aprimoramentos opcionais.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="he-footer he-inverse">
+    <div class="he-container">
+      <p class="he-label">Hub Editorial / 1.0.0</p>
+      <h2 class="he-section__title">Consistência no formato.<br>Liberdade no conteúdo.</h2>
+      <div class="he-actions"><a class="he-button" href="#main">Voltar ao início <span aria-hidden="true">&#8593;</span></a></div>
+      <div class="he-footer__meta"><p>Nome proposto para o kit · Extraído em 07.09.2026</p><a href="https://agenticdevopsplatform.ai">Visitar o site de referência <span aria-hidden="true">&#8599;</span></a></div>
+    </div>
+  </footer>
+</body>
+</html>

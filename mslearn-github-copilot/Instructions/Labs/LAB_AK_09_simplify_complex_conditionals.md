@@ -20,6 +20,24 @@ lab:
 Flattening nested conditions can broaden eligibility accidentally. A coupon that
 applies only inside a premium/high-value branch must not become a global rule.
 
+## Lab briefing
+
+![Simplify the structure while preserving the decisions.](../../../assets/images/hands-on/09-conditionals.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 300; 55 minutes (facilitation estimate) |
+| Starting action | Choose rows that distinguish equality, overlap and cap behavior. |
+| Learner materials | [Download 09-conditionals.zip](../../../assets/lab-kits/hands-on/09-conditionals.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The selected project builds. Compilation alone does not prove behavior. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> Moving a condition outside its parent can broaden eligibility.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---establish-the-decision-surface) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Derive a decision table before rewriting conditions.

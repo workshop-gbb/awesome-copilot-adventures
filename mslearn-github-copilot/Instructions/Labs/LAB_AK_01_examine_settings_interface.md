@@ -20,6 +20,24 @@ lab:
 Do not memorize the position of a button. Learn which control changes the role,
 which changes the runtime, and which changes permission to act.
 
+## Lab briefing
+
+![Make a greeting trim whitespace without weakening input errors.](../../../assets/images/hands-on/01-interface.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 100; 35 minutes (facilitation estimate) |
+| Starting action | Run the two original tests before asking Copilot to change the function. |
+| Learner materials | [Download 01-interface.zip](../../../assets/lab-kits/hands-on/01-interface.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The supplied baseline tests pass. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> Approving an answer is not the same as reviewing a change.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---establish-the-starting-behavior) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Identify role, harness/target, model, context, and permissions independently.

@@ -21,6 +21,24 @@ Natural-language development still requires engineering decisions. This exercise
 uses the original shopping prototype scenario, but replaces open-ended generation
 with a small contract, a working domain module, and observable UI checks.
 
+## Lab briefing
+
+![Build an accessible interface over the tested cart domain.](../../../assets/images/hands-on/06-prototype.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 200; 50 minutes (facilitation estimate) |
+| Starting action | Write a small PRD and test the UI with only the keyboard. |
+| Learner materials | [Download 06-prototype.zip](../../../assets/lab-kits/hands-on/06-prototype.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The supplied baseline tests pass. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> Domain tests do not establish usable focus, labels or viewport behavior.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---establish-the-domain-baseline) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Write an achievable PRD with exclusions and acceptance criteria.

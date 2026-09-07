@@ -16,11 +16,14 @@ primary_capability: "Integrating local, cloud, and runtime agents"
 
 
 > [!NOTE]
-> **Status:** Content ready · **Media:** Pending · **Last verified:** 2026-09-05  
+> **Status:** Content ready · **Media:** Original SVG illustration · **Last verified:** 2026-09-05  
 > **Primary capability:** Integrating local, cloud, and runtime agents
 
+![Local development, Cloud review, Runtime evaluation illustrated through The Convergence of Three Realms.](../../../assets/images/adventures/convergence-of-three-realms-hero.svg)
+
 > [!TIP]
-> Production hero media is intentionally pending. Use the specification in [Media Prompts](../../../docs/media-prompts.md) before adding a production hero asset.
+> [Download this learner kit](../../../assets/lab-kits/adventures/convergence-of-three-realms.zip) and use
+> [the extraction and setup guide](../../../docs/downloads.md). Keep the original starter untouched.
 
 ```mermaid
 ---
@@ -65,18 +68,20 @@ config:
     attributeBackgroundColorEven: "#e0e0e0"
 ---
 flowchart LR
-    accTitle: Evidence-first development workflow
-    accDescr: Investigation leads to planning, implementation, review and evidence; unresolved gaps return to investigation.
-    A["Ask<br/>Investigate"] --> P["Plan<br/>Design"]
-    P --> G["Agent<br/>Implement"]
-    G --> R["Review<br/>Challenge"]
-    R --> E["Evidence<br/>Prove"]
-    E -. "gap found" .-> A
+    accTitle: The Convergence of Three Realms capability map
+    accDescr: Traceability requires both implementation and runtime evidence. Label unavailable stages so the reviewer can see exactly what was and was not executed.
+    A["Ask: findings"] --> P["Plan: design"]
+    P --> L["Local implementation: verification"]
+    L --> C["Cloud work: pull request"]
+    C --> S["SDK: evaluation report"]
+    C --> R["Human review"]
+    S --> R
+    R --> D["Decision with evidence"]
 ```
 
-**Legend.** Rectangles are workflow stages. Solid arrows show the normal progression; the dashed arrow returns unresolved evidence gaps to investigation.
+**Legend.** Boxes are accountable stages; arrows carry named artifacts, not shared identity or automatic approval.
 
-**Explanation.** A fluent response is not completion. The loop ends only when the reviewed result meets the acceptance criteria and the recorded checks support it.
+**Explanation.** Traceability requires both implementation and runtime evidence. Label unavailable stages so the reviewer can see exactly what was and was not executed.
 
 ## Official references
 
@@ -95,26 +100,30 @@ The fantasy is a memory aid; the engineering lesson requires observable, reprodu
 
 ## Learning objectives
 
-By the end, you can:
-
-- Explain the primary capability in precise product language.
-- Separate role, harness, target, environment, and customization primitive.
-- Complete a bounded Ask → Plan → Agent workflow.
-- Review tool use, changes, and verification evidence independently.
-- State unavailable, Preview, experimental, or unverified behavior without guessing.
+- Map six ordered stages to actors, roles, harnesses, environments and consumed artifacts.
+- Keep human review distinct from agent execution and preserve evidence across handoffs.
+- Deliver a traceable local workflow with explicitly labeled optional cloud and SDK observations.
 
 ## Prerequisites
 
-- Completion of the preceding adventure, or equivalent familiarity.
-- A disposable repository or authorized sandbox.
-- Access appropriate to the selected Copilot surface; availability is not assumed.
-- An existing test, build, lint, validation, or review mechanism where applicable.
+| Requirement | Why it matters |
+| --- | --- |
+| Complete the preceding adventure, or demonstrate its exit evidence | Keep this mission focused on its named capability |
+| Node 24 and the extracted kit | The local verifier uses the supplied runtime and files |
+| A disposable folder outside another project | Customizations and intentional failures must not leak into other work |
+| Authorized host access, only for live steps | Availability, tools and policies differ |
 
-Never use production secrets, customer data, or irreversible resources. Use the paper fallback when a named service is unavailable.
+**Evidence boundary:** Completing the workflow contract is not a production delivery. Record unexecuted cloud and SDK stages as paper alternatives, never fabricated observations.
+
+Estimated session: 45–75 minutes after prerequisites; actual duration varies. Never use production secrets or customer data.
 
 ## Concept explanation
 
 The capstone treats agentic engineering as a governed system. Realm one is a local harness such as VS Code or Copilot CLI. Realm two is GitHub Copilot cloud agent. Realm three is a runtime application built with the GitHub Copilot SDK. Each has different identities, tools, environments, and evidence. Boundaries must be explicit, authority minimal, Preview capabilities labeled, and claims grounded.
+
+### Concrete use case
+
+A local developer, a cloud worker and an embedded runtime agent have different identities and outputs. The final maintainer needs both the implementation evidence and the runtime evaluation before deciding.
 
 ### Vocabulary checkpoint
 
@@ -166,23 +175,46 @@ The capstone treats agentic engineering as a governed system. Realm one is a loc
 
 ## Guided mission
 
-Open the [Convergence lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/convergence-of-three-realms/README.md) and complete the cross-realm workflow contract.
+### 1. Prepare one isolated copy
 
-Choose a small end-to-end scenario. Map at least three requirements to actors, agent roles, harnesses, targets, environments, tools, trust boundaries, implementation artifacts, checks, cloud review criteria, and runtime-agent evaluation cases. Complete local Ask → Plan → Agent, prepare or execute one cloud issue, design or execute the runtime evaluation, and assemble an independent evidence bundle.
+1. Download and extract the [convergence-of-three-realms kit](../../../assets/lab-kits/adventures/convergence-of-three-realms.zip) into a new work-drive directory.
+2. Read `KIT-START.md` at its root. Open `starter/` as the VS Code workspace when testing discovery, but run the verifier from the kit root.
+3. Inspect `starter/workflow.json`, `verify.js` before editing.
+4. From the extracted kit root, run `node verify.js`.
+5. Record the documented starter rejection. A missing runtime or unrelated crash is not the expected exercise result.
 
-Record each material step in this table:
+### 2. Investigate and plan
+
+In Ask, request a trace of the inspected files and what the verifier actually observes. Challenge any claim about live execution that is not supported by output.
+
+Use this planning prompt:
+
+```text
+Complete the six-stage contract using the supplied actor and artifact dimensions. Explain every consumes/produces edge, trust boundary and evidence item. Keep agent-only fields null for human review.
+Do not implement yet. Identify affected files, the negative case and a safe reset.
+```
+
+### 3. Implement the reviewed slice
+
+1. Approve only the named starter artifact and necessary focused tests.
+2. Ask Agent to implement one slice; inspect proposed commands before execution.
+3. Run `node verify.js` again from the kit root, or `node ../verify.js` from `starter/`.
+4. Compare the exact result with the checkpoint below and review the complete diff.
+5. Record host discovery or live activity separately when available. Do not enable extra services to manufacture a passing result.
+
+> [!IMPORTANT]
+> **Checkpoint:** The graph preserves findings, design, verification, pull request, evaluation report and human decision in order.
+> Completing the workflow contract is not a production delivery. Record unexecuted cloud and SDK stages as paper alternatives, never fabricated observations.
+
+### 4. Prove a check can reject a mistake
+
+Give the human-review stage an agent harness and confirm the verifier rejects the conflation. Restore the distinct review boundary.
 
 | Observation | Decision | Action | Evidence | Limitation |
-|---|---|---|---|---|
-| What was inspected? | Why this next step? | What changed or ran? | What proves it? | What remains unknown? |
+| --- | --- | --- | --- | --- |
+| Initial state and exact diagnostic | Why this change is needed | Named file and bounded change | Command, exit code and observed result | What the local check does not prove |
 
-### Guided acceptance criteria
-
-- The initial state is supported by current evidence.
-- The plan is bounded and contains a reset path.
-- Agent work stays inside the declared scope.
-- Verification observes the requested behavior.
-- Review is independent from the implementation claim.
+Finish with the adventure-specific capability evidence in [the rubric](rubric.md), not just the presence of a file.
 
 ## Intentional failure: The Collapsed Realms
 
@@ -218,13 +250,13 @@ Constraints:
 
 ## Reset instructions
 
-1. Stop local MCP, server, or SDK processes in the terminals that started them.
-2. Review and close exercise-only cloud pull requests before deleting their branches.
-3. Inspect `git worktree list`, then remove only clean, explicitly named exercise worktrees.
-4. Revoke temporary credentials and remove disposable copies.
-5. Restore `labs/convergence-of-three-realms/starter/workflow.json` and record a clean `git status --short`.
+1. Save your diff, command output and limitations from the disposable kit.
+2. Stop only the process or learning session you started. Do not stop other projects.
+3. If you initialized Git in the kit, inspect `git status --short` there and restore only your named exercise files from its local baseline.
+4. Otherwise, extract the original ZIP into a new unused directory for another attempt; do not overwrite your current work.
+5. Remove only exercise-owned configurations, worktrees or remote resources after reviewing anything worth preserving.
 
-Cleanup is part of completion. Do not leave billable resources, credentials, processes, branches, or worktrees behind.
+The curriculum source and other projects must remain unchanged. A reset of the copied kit is not a repository-wide hard reset.
 
 ## Next adventure
 

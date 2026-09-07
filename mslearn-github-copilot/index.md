@@ -9,6 +9,12 @@ last_verified: "2026-09-07"
 
 # Hands-on GitHub Copilot labs
 
+> [!TIP]
+> **Download only what you need:** the [learner-kit catalog](../docs/downloads.md)
+> includes a ZIP for each of the 21 exercise variants, with instructions, images,
+> tests, synthetic data, licenses and integrity checks. Preparation guides reuse
+> the associated exercise kit rather than duplicating it.
+
 Use these numbered exercises for focused professional scenarios. They share the
 repository's evidence-first approach but **are not fantasy adventures**.
 Durations are facilitation estimates, not measured completion guarantees.

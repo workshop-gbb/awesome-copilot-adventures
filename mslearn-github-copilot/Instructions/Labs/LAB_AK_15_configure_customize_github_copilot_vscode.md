@@ -21,6 +21,24 @@ Instructions influence responses; they do not enforce permissions. A custom agen
 defines a role/tool profile; its `target` metadata does not mean “run in the cloud.”
 Select execution through the actual session target control.
 
+## Lab briefing
+
+![Match each need to the smallest customization primitive.](../../../assets/images/hands-on/15-customization.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 300; 80 minutes (facilitation estimate) |
+| Starting action | Verify discovery and test the inventory change separately. |
+| Learner materials | [Download 15-customization.zip](../../../assets/lab-kits/hands-on/15-customization.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The supplied baseline tests pass. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> A file existing on disk is not proof that the host loaded it.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---establish-the-baseline-and-workspace-boundary) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Use the smallest customization primitive for each need.

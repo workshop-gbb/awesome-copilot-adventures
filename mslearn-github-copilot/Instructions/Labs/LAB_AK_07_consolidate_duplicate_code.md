@@ -21,6 +21,24 @@ Two similar methods are not necessarily one rule. The order and return processor
 share validation mechanics but use different prefixes, shipping thresholds, and
 inventory directions. Removing those differences would be a behavior change.
 
+## Lab briefing
+
+![Reuse mechanics while preserving distinct business rules.](../../../assets/images/hands-on/07-duplication.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 200; 55 minutes (facilitation estimate) |
+| Starting action | Capture equality thresholds before extracting one helper. |
+| Learner materials | [Download 07-duplication.zip](../../../assets/lab-kits/hands-on/07-duplication.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The selected project builds. Compilation alone does not prove behavior. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> Similar code does not mean the same shipping or inventory policy.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---capture-a-real-baseline) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Identify exact versus semantic duplication using real code.

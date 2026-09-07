@@ -53,7 +53,6 @@ const ogLocale = { en: 'en_US', es: 'es_ES', 'pt-br': 'pt_BR' }[page.locale];
         <section class="section home-reading container">
           <div class="section-heading"><p class="eyebrow">{ui.curriculumEyebrow}</p><h2>{ui.libraryTitle}</h2><p>{ui.libraryDescription}</p></div>
           <article class="document"><slot /></article>
-          <Reading locale={page.locale} source={page.source} />
         </section>
       </main>
     ) : page.kind === 'repository' ? (
@@ -69,6 +68,7 @@ const ogLocale = { en: 'en_US', es: 'es_ES', 'pt-br': 'pt_BR' }[page.locale];
           <nav class="breadcrumb" aria-label={ui.navigation}><a href={href.home}>{ui.home}</a><span aria-hidden="true">/</span><a href={href.library}>{labelFor(page.locale, page.group || 'guides')}</a></nav>
           {page.verified && <p class="verification">{ui.verified} <time datetime={page.verified}>{page.verified}</time></p>}
           <article class="document"><slot /></article>
+          <Reading locale={page.locale} source={page.source} />
           <aside class="original-note">{ui.originalNotice}</aside>
           <nav class="document-actions" aria-label={ui.source}>
             <a href={`${href.repository}?path=${encodeURIComponent(page.source || '')}`}>{ui.source}</a>

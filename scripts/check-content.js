@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { markdownFiles } = require('./repository-files');
+const { fencedBlocks } = require('./markdown-helpers');
 
 const root = path.resolve(__dirname, '..');
 const curriculum = path.join(root, 'adventures');
@@ -23,6 +24,8 @@ const expectedAdventures = {
 
 const failures = [];
 let adventureCount = 0;
+const adventureDiagrams = new Set();
+const adventureObjectives = new Set();
 
 if (!fs.existsSync(curriculum)) {
   failures.push('adventures/ does not exist');
@@ -54,6 +57,18 @@ if (!fs.existsSync(curriculum)) {
       const readmePath = path.join(adventurePath, 'README.md');
       if (fs.existsSync(readmePath)) {
         const content = fs.readFileSync(readmePath, 'utf8');
+        const hero = `assets/images/adventures/${slug}-hero.svg`;
+        const kit = `assets/lab-kits/adventures/${slug}.zip`;
+        if (!content.includes(hero) || !fs.existsSync(path.join(root, hero))) {
+          failures.push(`Missing linked original hero for ${slug}`);
+        }
+        if (!content.includes(kit) || !fs.existsSync(path.join(root, kit))) {
+          failures.push(`Missing linked learner ZIP for ${slug}`);
+        }
+        for (const block of fencedBlocks(content).filter(block => block.language === 'mermaid')) {
+          adventureDiagrams.add(block.code);
+        }
+        adventureObjectives.add(content.match(/## Learning objectives\n([\s\S]*?)(?=\n## )/)?.[1]?.trim());
         const requiredSections = [
           '## Official references',
           '## Story',
@@ -79,6 +94,8 @@ if (!fs.existsSync(curriculum)) {
 }
 
 if (adventureCount !== 14) failures.push(`Expected 14 adventures, found ${adventureCount}`);
+if (adventureDiagrams.size < 14) failures.push('Each adventure needs a capability-specific diagram, not the same generic workflow.');
+if (adventureObjectives.size < 14) failures.push('Each adventure needs specific learning objectives.');
 if (!fs.existsSync(path.join(root, 'assets/images/adventures/README.md'))) {
   failures.push('Missing adventure media generation guidance');
 }

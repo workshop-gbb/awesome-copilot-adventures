@@ -385,9 +385,11 @@ async function sourceExplorer() {
     link.download = selected.path.split('/').at(-1);
     link.click();
   });
-  window.addEventListener('pagehide', () => {
-    controller?.abort();
-    if (objectUrl) URL.revokeObjectURL(objectUrl);
+  window.addEventListener('pagehide', event => {
+    if (!event.persisted) {
+      controller?.abort();
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+    }
   });
   await load();
 }

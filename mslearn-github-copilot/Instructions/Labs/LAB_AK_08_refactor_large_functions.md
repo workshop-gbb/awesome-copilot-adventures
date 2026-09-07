@@ -21,6 +21,24 @@ A shorter method is not automatically safer. Extracting a payment step can move
 inventory cleanup out of the failure path. Your evidence must cover failure and
 side effects, not just the successful order.
 
+## Lab briefing
+
+![Extract responsibilities without losing compensation.](../../../assets/images/hands-on/08-functions.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 300; 60 minutes (facilitation estimate) |
+| Starting action | Trace success and failure before choosing the extraction boundary. |
+| Learner materials | [Download 08-functions.zip](../../../assets/lab-kits/hands-on/08-functions.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The console entry project builds; compensation behavior needs separate assertions. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> A payment rejection must not leave inventory incorrectly reserved.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---trace-the-existing-method) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Map a long method into responsibilities and state transitions.

@@ -16,11 +16,14 @@ primary_capability: "Packaging reusable agent expertise"
 
 
 > [!NOTE]
-> **Status:** Content ready · **Media:** Pending · **Last verified:** 2026-09-05  
+> **Status:** Content ready · **Media:** Original SVG illustration · **Last verified:** 2026-09-05  
 > **Primary capability:** Packaging reusable agent expertise
 
+![Relevant trigger, Focused procedure, Evidence report illustrated through The Skills of Algora.](../../../assets/images/adventures/algora-skills-hero.svg)
+
 > [!TIP]
-> Production hero media is intentionally pending. Use the specification in [Media Prompts](../../../docs/media-prompts.md) before adding a production hero asset.
+> [Download this learner kit](../../../assets/lab-kits/adventures/algora-skills.zip) and use
+> [the extraction and setup guide](../../../docs/downloads.md). Keep the original starter untouched.
 
 ```mermaid
 ---
@@ -65,18 +68,18 @@ config:
     attributeBackgroundColorEven: "#e0e0e0"
 ---
 flowchart LR
-    accTitle: Evidence-first development workflow
-    accDescr: Investigation leads to planning, implementation, review and evidence; unresolved gaps return to investigation.
-    A["Ask<br/>Investigate"] --> P["Plan<br/>Design"]
-    P --> G["Agent<br/>Implement"]
-    G --> R["Review<br/>Challenge"]
-    R --> E["Evidence<br/>Prove"]
-    E -. "gap found" .-> A
+    accTitle: The Skills of Algora capability map
+    accDescr: A skill is a reusable procedure, not always-on instructions or a deterministic lifecycle hook.
+    T["Task arrives"] --> Q{"Skill relevant?"}
+    Q -->|No| N["Do not load unrelated expertise"]
+    Q -->|Yes| S["Load focused procedure"]
+    S --> V["Run the existing check"]
+    V --> E["Report command, result and limits"]
 ```
 
-**Legend.** Rectangles are workflow stages. Solid arrows show the normal progression; the dashed arrow returns unresolved evidence gaps to investigation.
+**Legend.** The relevance decision separates loading expertise from running its prescribed verification.
 
-**Explanation.** A fluent response is not completion. The loop ends only when the reviewed result meets the acceptance criteria and the recorded checks support it.
+**Explanation.** A skill is a reusable procedure, not always-on instructions or a deterministic lifecycle hook.
 
 ## Official references
 
@@ -94,26 +97,30 @@ The fantasy is a memory aid; the engineering lesson requires observable, reprodu
 
 ## Learning objectives
 
-By the end, you can:
-
-- Explain the primary capability in precise product language.
-- Separate role, harness, target, environment, and customization primitive.
-- Complete a bounded Ask → Plan → Agent workflow.
-- Review tool use, changes, and verification evidence independently.
-- State unavailable, Preview, experimental, or unverified behavior without guessing.
+- Define a reusable skill with a specific trigger and explicit non-goals.
+- Require an executed check, command, exit code and observed result in its procedure.
+- Test relevant and irrelevant requests without claiming universal automatic activation.
 
 ## Prerequisites
 
-- Completion of the preceding adventure, or equivalent familiarity.
-- A disposable repository or authorized sandbox.
-- Access appropriate to the selected Copilot surface; availability is not assumed.
-- An existing test, build, lint, validation, or review mechanism where applicable.
+| Requirement | Why it matters |
+| --- | --- |
+| Complete the preceding adventure, or demonstrate its exit evidence | Keep this mission focused on its named capability |
+| Node 24 and the extracted kit | The local verifier uses the supplied runtime and files |
+| A disposable folder outside another project | Customizations and intentional failures must not leak into other work |
+| Authorized host access, only for live steps | Availability, tools and policies differ |
 
-Never use production secrets, customer data, or irreversible resources. Use the paper fallback when a named service is unavailable.
+**Evidence boundary:** The verifier checks skill content; actual discovery and invocation depend on the selected harness.
+
+Estimated session: 45–75 minutes after prerequisites; actual duration varies. Never use production secrets or customer data.
 
 ## Concept explanation
 
 A skill packages reusable expertise an agent can load when relevant. Instructions apply automatically, prompts are manually invoked, and custom agents define roles and tools. A good skill has narrow triggers, non-goals, an ordered safe procedure, and evidence requirements. Availability and discovery behavior are surface-dependent; record the exact host used and do not claim universal activation.
+
+### Concrete use case
+
+An evidence-report skill is useful after a code change with a test command. A request to brainstorm a name should not trigger a fake verification report just because the skill exists.
 
 ### Vocabulary checkpoint
 
@@ -165,23 +172,46 @@ A skill packages reusable expertise an agent can load when relevant. Instruction
 
 ## Guided mission
 
-Open the [Skills of Algora lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/algora-skills/README.md) and complete the reusable skill.
+### 1. Prepare one isolated copy
 
-Design a skill for a deterministic task such as updating documentation links or adding a unit test. Include purpose, use-when, do-not-use-when, procedure, guardrails, and verification. Exercise one positive and one negative scenario, then record actual discovery behavior and limitations.
+1. Download and extract the [algora-skills kit](../../../assets/lab-kits/adventures/algora-skills.zip) into a new work-drive directory.
+2. Read `KIT-START.md` at its root. Open `starter/` as the VS Code workspace when testing discovery, but run the verifier from the kit root.
+3. Inspect `starter/.github/skills/evidence-report/SKILL.md`, `verify.js` before editing.
+4. From the extracted kit root, run `node verify.js`.
+5. Record the documented starter rejection. A missing runtime or unrelated crash is not the expected exercise result.
 
-Record each material step in this table:
+### 2. Investigate and plan
+
+In Ask, request a trace of the inspected files and what the verifier actually observes. Challenge any claim about live execution that is not supported by output.
+
+Use this planning prompt:
+
+```text
+Define when evidence-report is relevant and when it is not. Specify the procedure for running an existing check and reporting real output, including blocked or failed checks.
+Do not implement yet. Identify affected files, the negative case and a safe reset.
+```
+
+### 3. Implement the reviewed slice
+
+1. Approve only the named starter artifact and necessary focused tests.
+2. Ask Agent to implement one slice; inspect proposed commands before execution.
+3. Run `node verify.js` again from the kit root, or `node ../verify.js` from `starter/`.
+4. Compare the exact result with the checkpoint below and review the complete diff.
+5. Record host discovery or live activity separately when available. Do not enable extra services to manufacture a passing result.
+
+> [!IMPORTANT]
+> **Checkpoint:** The file has valid metadata, a narrow use case and no instruction to invent successful results.
+> The verifier checks skill content; actual discovery and invocation depend on the selected harness.
+
+### 4. Prove a check can reject a mistake
+
+Remove the observed-result requirement and confirm the structural check rejects it. Restore the rule and compare one in-scope and one out-of-scope request.
 
 | Observation | Decision | Action | Evidence | Limitation |
-|---|---|---|---|---|
-| What was inspected? | Why this next step? | What changed or ran? | What proves it? | What remains unknown? |
+| --- | --- | --- | --- | --- |
+| Initial state and exact diagnostic | Why this change is needed | Named file and bounded change | Command, exit code and observed result | What the local check does not prove |
 
-### Guided acceptance criteria
-
-- The initial state is supported by current evidence.
-- The plan is bounded and contains a reset path.
-- Agent work stays inside the declared scope.
-- Verification observes the requested behavior.
-- Review is independent from the implementation claim.
+Finish with the adventure-specific capability evidence in [the rubric](rubric.md), not just the presence of a file.
 
 ## Intentional failure: The Skill That Answers Everything
 
@@ -217,11 +247,13 @@ Constraints:
 
 ## Reset instructions
 
-1. Restore `labs/algora-skills/starter/.github/skills/evidence-report/SKILL.md` with `git restore`.
-2. Close the disposable starter workspace and start a new session outside it.
-3. Confirm `git status --short -- labs/algora-skills` is empty.
+1. Save your diff, command output and limitations from the disposable kit.
+2. Stop only the process or learning session you started. Do not stop other projects.
+3. If you initialized Git in the kit, inspect `git status --short` there and restore only your named exercise files from its local baseline.
+4. Otherwise, extract the original ZIP into a new unused directory for another attempt; do not overwrite your current work.
+5. Remove only exercise-owned configurations, worktrees or remote resources after reviewing anything worth preserving.
 
-Cleanup is part of completion. Do not leave billable resources, credentials, processes, branches, or worktrees behind.
+The curriculum source and other projects must remain unchanged. A reset of the copied kit is not a repository-wide hard reset.
 
 ## Next adventure
 

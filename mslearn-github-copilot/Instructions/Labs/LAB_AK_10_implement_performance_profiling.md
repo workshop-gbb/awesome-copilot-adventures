@@ -20,6 +20,24 @@ lab:
 An agent can suggest a bottleneck. Only a measurement can show what happened on
 your workload. A valid result may be **no measurable improvement**.
 
+## Lab briefing
+
+![Measure one bounded change without promising a speedup.](../../../assets/images/hands-on/10-profiling.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 300; 60 minutes (facilitation estimate) |
+| Starting action | Keep the measurement boundary and functional output unchanged. |
+| Learner materials | [Download 10-profiling.zip](../../../assets/lab-kits/hands-on/10-profiling.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The selected project builds. Compilation alone does not prove behavior. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> An inconclusive result is better than fabricated timing.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---bound-and-inspect-the-workload) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Define a measurement boundary before optimizing.

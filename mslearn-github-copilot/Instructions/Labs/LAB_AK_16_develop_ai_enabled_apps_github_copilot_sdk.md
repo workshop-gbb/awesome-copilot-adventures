@@ -21,6 +21,24 @@ An agent embedded in an application is different from the development assistant
 used to author it. Tool arguments, identity, permissions, timeout, cleanup and
 error handling are application contracts, not prompt-writing details.
 
+## Lab briefing
+
+![Bound a support assistant by identity, tools and lifecycle.](../../../assets/images/hands-on/16-sdk.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 300; 90 minutes (facilitation estimate) |
+| Starting action | Keep actor identity outside model-supplied tool arguments. |
+| Learner materials | [Download 16-sdk.zip](../../../assets/lab-kits/hands-on/16-sdk.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The supplied baseline tests pass. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> Offline doubles test the application; they do not evaluate a model.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---inspect-and-run-the-offline-baseline) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Test a real tool handler and session orchestration without a model.

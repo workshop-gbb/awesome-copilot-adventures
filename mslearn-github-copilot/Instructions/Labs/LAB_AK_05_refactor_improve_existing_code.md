@@ -20,6 +20,24 @@ lab:
 Replacing a loop with LINQ is not automatically an improvement. The refactor must
 preserve comparison, ordering, null behavior, populated references and side effects.
 
+## Lab briefing
+
+![Refactor without changing case, ordering or populated references.](../../../assets/images/hands-on/05-csharp.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 300; 60 minutes (facilitation estimate) |
+| Starting action | Characterize one method before replacing its loop. |
+| Learner materials | [Download 05-csharp.zip](../../../assets/lab-kits/hands-on/05-csharp.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The supplied tests pass. New feature requirements still need their own tests. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> Shorter code is not evidence of semantic equivalence.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---inspect-and-characterize) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Derive current behavior from the repository methods.

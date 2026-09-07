@@ -1,0 +1,670 @@
+{
+  "formatVersion": 1,
+  "kits": [
+    {
+      "id": "algora-skills",
+      "track": "adventures",
+      "title": "The Skills of Algora",
+      "path": "adventures/algora-skills.zip",
+      "bytes": 21081,
+      "sha256": "33a010813f1962ed9702f63ace02cdc9f58e103b7949c1fe93c324682fa9c370",
+      "files": 14,
+      "source": "labs/algora-skills",
+      "lesson": "adventures/02-intermediate/algora-skills/README.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node verify.js"
+        ],
+        "expected": "intentional-failure",
+        "message": "The verifier rejects the unfinished starter. Record its specific diagnostics before implementing the mission."
+      }
+    },
+    {
+      "id": "automaton-foundry",
+      "track": "adventures",
+      "title": "The Automaton Foundry",
+      "path": "adventures/automaton-foundry.zip",
+      "bytes": 23216,
+      "sha256": "9c13f1b2e7ca1002897e19ca26301f8effd4e2bcc5c4cb5f7b366baff45a081d",
+      "files": 16,
+      "source": "labs/automaton-foundry",
+      "lesson": "adventures/04-surfaces/automaton-foundry/README.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node verify.js"
+        ],
+        "expected": "intentional-failure",
+        "message": "The verifier rejects the unfinished starter. Record its specific diagnostics before implementing the mission."
+      }
+    },
+    {
+      "id": "cartographer-mcp",
+      "track": "adventures",
+      "title": "The MCP Cartographer",
+      "path": "adventures/cartographer-mcp.zip",
+      "bytes": 23726,
+      "sha256": "ff13f25a7b47b018e241cf66d8bd8a8bb74960f11cc7d5d1ef58248d5ccf93ba",
+      "files": 16,
+      "source": "labs/cartographer-mcp",
+      "lesson": "adventures/03-advanced/cartographer-mcp/README.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node verify.js"
+        ],
+        "expected": "intentional-failure",
+        "message": "The verifier rejects the unfinished starter. Record its specific diagnostics before implementing the mission."
+      }
+    },
+    {
+      "id": "cloud-citadel",
+      "track": "adventures",
+      "title": "The Cloud Citadel",
+      "path": "adventures/cloud-citadel.zip",
+      "bytes": 21196,
+      "sha256": "e494e927b9a654a6b807adcd041d7847df3956bf554e8862fe4d4379260ae768",
+      "files": 14,
+      "source": "labs/cloud-citadel",
+      "lesson": "adventures/04-surfaces/cloud-citadel/README.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node verify.js"
+        ],
+        "expected": "intentional-failure",
+        "message": "The verifier rejects the unfinished starter. Record its specific diagnostics before implementing the mission."
+      }
+    },
+    {
+      "id": "context-mirrors",
+      "track": "adventures",
+      "title": "The Context Mirrors",
+      "path": "adventures/context-mirrors.zip",
+      "bytes": 44426,
+      "sha256": "826e1b7cb204b2ee7ffc19d466d2ba1a4c37c2127ad5f1aff4b4bb30fb8a7a87",
+      "files": 25,
+      "source": "labs/context-mirrors",
+      "lesson": "adventures/00-foundations/context-mirrors/README.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node verify.js"
+        ],
+        "expected": "pass",
+        "message": "The supplied sequence baseline passes. Run a fresh copy for each context experiment."
+      }
+    },
+    {
+      "id": "convergence-of-three-realms",
+      "track": "adventures",
+      "title": "The Convergence of Three Realms",
+      "path": "adventures/convergence-of-three-realms.zip",
+      "bytes": 22497,
+      "sha256": "13e8977a65c03dbfb0f30c91e310f4cd2c84c33e61312156d5b420ee027ed436",
+      "files": 14,
+      "source": "labs/convergence-of-three-realms",
+      "lesson": "adventures/99-capstone/convergence-of-three-realms/README.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node verify.js"
+        ],
+        "expected": "intentional-failure",
+        "message": "The verifier rejects the unfinished starter. Record its specific diagnostics before implementing the mission."
+      }
+    },
+    {
+      "id": "eldoria-laws",
+      "track": "adventures",
+      "title": "The Laws of Eldoria",
+      "path": "adventures/eldoria-laws.zip",
+      "bytes": 20876,
+      "sha256": "9724209e2fc9da00aee008caacfd077a5c9c043c975a783f72cab5d4df2eef7d",
+      "files": 14,
+      "source": "labs/eldoria-laws",
+      "lesson": "adventures/01-basics/eldoria-laws/README.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node verify.js"
+        ],
+        "expected": "intentional-failure",
+        "message": "The verifier rejects the unfinished starter. Record its specific diagnostics before implementing the mission."
+      }
+    },
+    {
+      "id": "lumoria-graph",
+      "track": "adventures",
+      "title": "The Knowledge Graph of Lumoria",
+      "path": "adventures/lumoria-graph.zip",
+      "bytes": 20753,
+      "sha256": "07b5453c8cc7b1218819202abb532fce2a3e77262440473251ddc5e8e47b4a8c",
+      "files": 14,
+      "source": "labs/lumoria-graph",
+      "lesson": "adventures/03-advanced/lumoria-graph/README.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node verify.js"
+        ],
+        "expected": "intentional-failure",
+        "message": "The verifier rejects the unfinished starter. Record its specific diagnostics before implementing the mission."
+      }
+    },
+    {
+      "id": "mythos-parallel",
+      "track": "adventures",
+      "title": "The Parallel Trials of Mythos",
+      "path": "adventures/mythos-parallel.zip",
+      "bytes": 21085,
+      "sha256": "af1bfa0e4cf303993b877a11d24a2cdb3ef5216eeb8247d1f5ceef4584bace36",
+      "files": 14,
+      "source": "labs/mythos-parallel",
+      "lesson": "adventures/03-advanced/mythos-parallel/README.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node verify.js"
+        ],
+        "expected": "intentional-failure",
+        "message": "The verifier rejects the unfinished starter. Record its specific diagnostics before implementing the mission."
+      }
+    },
+    {
+      "id": "portals-of-nexus",
+      "track": "adventures",
+      "title": "The Portals of Nexus",
+      "path": "adventures/portals-of-nexus.zip",
+      "bytes": 21257,
+      "sha256": "a10ae1da2b31e8dd113b50dec8ba85567f180908d291517284dbd4c7d994d152",
+      "files": 14,
+      "source": "labs/portals-of-nexus",
+      "lesson": "adventures/00-foundations/portals-of-nexus/README.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node verify.js"
+        ],
+        "expected": "intentional-failure",
+        "message": "The verifier rejects the unfinished starter. Record its specific diagnostics before implementing the mission."
+      }
+    },
+    {
+      "id": "stellaris-agents",
+      "track": "adventures",
+      "title": "The Agents of Stellaris",
+      "path": "adventures/stellaris-agents.zip",
+      "bytes": 21540,
+      "sha256": "46bae1e48e7de29c2a148f35a4bf4dc2dc2b96381e6e655134b59a72b6f5ed6a",
+      "files": 14,
+      "source": "labs/stellaris-agents",
+      "lesson": "adventures/02-intermediate/stellaris-agents/README.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node verify.js"
+        ],
+        "expected": "intentional-failure",
+        "message": "The verifier rejects the unfinished starter. Record its specific diagnostics before implementing the mission."
+      }
+    },
+    {
+      "id": "stonevale-guardrails",
+      "track": "adventures",
+      "title": "The Guardrails of Stonevale",
+      "path": "adventures/stonevale-guardrails.zip",
+      "bytes": 21148,
+      "sha256": "2833c64f0c4ce16dd1004988eb552d39c75e788bb784ca36e4bbdc8aee643360",
+      "files": 14,
+      "source": "labs/stonevale-guardrails",
+      "lesson": "adventures/02-intermediate/stonevale-guardrails/README.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node verify.js"
+        ],
+        "expected": "intentional-failure",
+        "message": "The verifier rejects the unfinished starter. Record its specific diagnostics before implementing the mission."
+      }
+    },
+    {
+      "id": "tempora-loop",
+      "track": "adventures",
+      "title": "The Tempora Loop",
+      "path": "adventures/tempora-loop.zip",
+      "bytes": 20944,
+      "sha256": "cae5740c78967890e37e44fb3ce3965f0cad545f6f1d442b2ab021e5022513e6",
+      "files": 14,
+      "source": "labs/tempora-loop",
+      "lesson": "adventures/01-basics/tempora-loop/README.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node verify.js"
+        ],
+        "expected": "intentional-failure",
+        "message": "The verifier rejects the unfinished starter. Record its specific diagnostics before implementing the mission."
+      }
+    },
+    {
+      "id": "terminal-gate",
+      "track": "adventures",
+      "title": "The Terminal Gate",
+      "path": "adventures/terminal-gate.zip",
+      "bytes": 20863,
+      "sha256": "1457c40c11d4e351ee291c851459cc8ee36fbe5aed3e502df04134cbb48ad49b",
+      "files": 14,
+      "source": "labs/terminal-gate",
+      "lesson": "adventures/04-surfaces/terminal-gate/README.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node verify.js"
+        ],
+        "expected": "intentional-failure",
+        "message": "The verifier rejects the unfinished starter. Record its specific diagnostics before implementing the mission."
+      }
+    },
+    {
+      "id": "01-interface",
+      "track": "hands-on",
+      "title": "Choose context, roles and permissions",
+      "path": "hands-on/01-interface.zip",
+      "bytes": 22720,
+      "sha256": "47d115ede61ac8ba1f77035c03102165c1b6309150903a8209d659e229b51052",
+      "files": 14,
+      "source": "mslearn-github-copilot/LabFiles/01-copilot-interface",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_01_examine_settings_interface.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node --test --test-concurrency=1 greeting.test.mjs"
+        ],
+        "expected": "pass",
+        "message": "The supplied baseline tests pass."
+      }
+    },
+    {
+      "id": "02-csharp",
+      "track": "hands-on",
+      "title": "Analyze and document the library in C#",
+      "path": "hands-on/02-csharp.zip",
+      "bytes": 46385,
+      "sha256": "bbdb0f9faf0206a0adfee29511fa3692718bfc2dac60e7bf8931568ba81b2570",
+      "files": 49,
+      "source": "mslearn-github-copilot/LabFiles/02-analyze-document-code/AccelerateDevGHCopilot",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_02_analyze_document_code.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "dotnet test tests/UnitTests/UnitTests.csproj -m:1 -p:UseSharedCompilation=false"
+        ],
+        "expected": "pass",
+        "message": "The supplied tests pass. New feature requirements still need their own tests."
+      }
+    },
+    {
+      "id": "02-python",
+      "track": "hands-on",
+      "title": "Analyze and document the library in Python",
+      "path": "hands-on/02-python.zip",
+      "bytes": 39451,
+      "sha256": "f82b184653757257f77e276836651f2a522b19828b6111f45b9704a6cef2563f",
+      "files": 40,
+      "source": "mslearn-github-copilot/LabFiles/02-python-analyze-document-code/AccelerateDevGHCopilot",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_02_analyze_document_code_py.md",
+      "baseline": {
+        "workingDirectory": "library",
+        "commands": [
+          "python -m unittest discover -s tests -p \"test_*.py\" -v"
+        ],
+        "expected": "pass",
+        "message": "The existing unittest tests are discovered and pass."
+      }
+    },
+    {
+      "id": "03-csharp",
+      "track": "hands-on",
+      "title": "Develop library search in C#",
+      "path": "hands-on/03-csharp.zip",
+      "bytes": 46612,
+      "sha256": "1c22479969caceb1b082ed06cce78c6c559f9fc137a11a263759cf4d5c97f9a3",
+      "files": 50,
+      "source": "mslearn-github-copilot/LabFiles/03-develop-code-features/AccelerateDevGHCopilot",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_03_develop_code_features.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "dotnet test tests/UnitTests/UnitTests.csproj -m:1 -p:UseSharedCompilation=false"
+        ],
+        "expected": "pass",
+        "message": "The supplied tests pass. New feature requirements still need their own tests."
+      }
+    },
+    {
+      "id": "03-python",
+      "track": "hands-on",
+      "title": "Develop library search in Python",
+      "path": "hands-on/03-python.zip",
+      "bytes": 41330,
+      "sha256": "806026888c2acd15c5afe6485d32893b08cf5553ed7fffe442d8f55684f353c9",
+      "files": 43,
+      "source": "mslearn-github-copilot/LabFiles/03-python-develop-code-features/AccelerateDevGHCopilot",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_03_develop_code_features_py.md",
+      "baseline": {
+        "workingDirectory": "library",
+        "commands": [
+          "python -m unittest discover -s tests -p \"test_*.py\" -v"
+        ],
+        "expected": "pass",
+        "message": "The existing unittest tests are discovered and pass."
+      }
+    },
+    {
+      "id": "04-pytest",
+      "track": "hands-on",
+      "title": "Develop discriminating pytest tests",
+      "path": "hands-on/04-pytest.zip",
+      "bytes": 42605,
+      "sha256": "d58fd8bc27fec9572c1339e30b6b253ce52e27c3b7623703d3dac72346f1c5e5",
+      "files": 44,
+      "source": "mslearn-github-copilot/LabFiles/04-python-develop-unit-tests-pytest/AccelerateDevGHCopilot",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_04_develop_unit_tests_pytest.md",
+      "baseline": {
+        "workingDirectory": "library",
+        "commands": [
+          "python -m unittest discover -s tests -p \"test_*.py\" -v"
+        ],
+        "expected": "pass",
+        "message": "The existing unittest tests are discovered and pass."
+      }
+    },
+    {
+      "id": "04-xunit",
+      "track": "hands-on",
+      "title": "Develop discriminating xUnit tests",
+      "path": "hands-on/04-xunit.zip",
+      "bytes": 46972,
+      "sha256": "82c0a48277292c8678ad089a02bf32e8d4e0709136b77f14efc510db9abd88ce",
+      "files": 50,
+      "source": "mslearn-github-copilot/LabFiles/04-develop-unit-tests-xunit/AccelerateDevGHCopilot",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_04_develop_unit_tests_xunit.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "dotnet test tests/UnitTests/UnitTests.csproj -m:1 -p:UseSharedCompilation=false"
+        ],
+        "expected": "pass",
+        "message": "The supplied tests pass. New feature requirements still need their own tests."
+      }
+    },
+    {
+      "id": "05-csharp",
+      "track": "hands-on",
+      "title": "Refactor library code in C#",
+      "path": "hands-on/05-csharp.zip",
+      "bytes": 47828,
+      "sha256": "88be6258da85191d7284c36d66d3ecd87d23d997737757a513c1b22f7ff19978",
+      "files": 51,
+      "source": "mslearn-github-copilot/LabFiles/05-refactor-improve-existing-code/AccelerateDevGHCopilot",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_05_refactor_improve_existing_code.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "dotnet test tests/UnitTests/UnitTests.csproj -m:1 -p:UseSharedCompilation=false"
+        ],
+        "expected": "pass",
+        "message": "The supplied tests pass. New feature requirements still need their own tests."
+      }
+    },
+    {
+      "id": "05-python",
+      "track": "hands-on",
+      "title": "Refactor library code in Python",
+      "path": "hands-on/05-python.zip",
+      "bytes": 44613,
+      "sha256": "6686dfa10c0a08113de9634979566075773ff8c1609a4d4babe198e3b6588857",
+      "files": 44,
+      "source": "mslearn-github-copilot/LabFiles/05-python-refactor-improve-existing-code/AccelerateDevGHCopilot",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_05_refactor_improve_existing_code_py.md",
+      "baseline": {
+        "workingDirectory": "library",
+        "commands": [
+          "python -m unittest discover -s tests -p \"test_*.py\" -v"
+        ],
+        "expected": "pass",
+        "message": "The existing unittest tests are discovered and pass."
+      }
+    },
+    {
+      "id": "06-prototype",
+      "track": "hands-on",
+      "title": "Prototype an accessible shopping flow",
+      "path": "hands-on/06-prototype.zip",
+      "bytes": 24729,
+      "sha256": "1bbbe78bef501071e5e1f26f60f353488d70d2d4b026f1e57cc5414881db9f94",
+      "files": 16,
+      "source": "mslearn-github-copilot/LabFiles/06-shopping-prototype",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_06_vibe_coding_prototype_ecommerce_app.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node --test --test-concurrency=1 cart.test.mjs"
+        ],
+        "expected": "pass",
+        "message": "The supplied baseline tests pass."
+      }
+    },
+    {
+      "id": "07-duplication",
+      "track": "hands-on",
+      "title": "Consolidate duplication without merging business rules",
+      "path": "hands-on/07-duplication.zip",
+      "bytes": 37542,
+      "sha256": "949958b5fb0e38615b8b2b0baf0b684feb4f94184373609283e7ce6f1c3221bb",
+      "files": 25,
+      "source": "mslearn-github-copilot/LabFiles/07-consolidate-duplicate-code/ECommerceOrderAndReturn",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_07_consolidate_duplicate_code.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "dotnet build ECommerceOrderAndReturn.csproj -m:1 -p:UseSharedCompilation=false"
+        ],
+        "expected": "pass",
+        "message": "The selected project builds. Compilation alone does not prove behavior."
+      }
+    },
+    {
+      "id": "08-functions",
+      "track": "hands-on",
+      "title": "Extract functions and preserve compensation",
+      "path": "hands-on/08-functions.zip",
+      "bytes": 43818,
+      "sha256": "574726683f45e05f785f4dc477c786fe59c46791183ccf77a59613ec34dd3e97",
+      "files": 38,
+      "source": "mslearn-github-copilot/LabFiles/08-refactor-large-functions/ECommerceOrderProcessing",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_08_refactor_large_functions.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "dotnet build src/ECommerce.Console/ECommerce.Console.csproj -m:1 -p:UseSharedCompilation=false"
+        ],
+        "expected": "pass",
+        "message": "The console entry project builds; compensation behavior needs separate assertions."
+      }
+    },
+    {
+      "id": "09-conditionals",
+      "track": "hands-on",
+      "title": "Simplify decision rules with boundary tests",
+      "path": "hands-on/09-conditionals.zip",
+      "bytes": 32207,
+      "sha256": "720ab3ff31ac998b0028eacf0bcaf09749958638b504a4c576b962dbf049fc56",
+      "files": 16,
+      "source": "mslearn-github-copilot/LabFiles/09-simplify-complex-conditionals/ECommercePricingEngine",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_09_simplify_complex_conditionals.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "dotnet build ECommercePricingEngine.csproj -m:1 -p:UseSharedCompilation=false"
+        ],
+        "expected": "pass",
+        "message": "The selected project builds. Compilation alone does not prove behavior."
+      }
+    },
+    {
+      "id": "10-profiling",
+      "track": "hands-on",
+      "title": "Profile a bounded workload and verify a hypothesis",
+      "path": "hands-on/10-profiling.zip",
+      "bytes": 25752,
+      "sha256": "d5c317346d7fa8899a3eb25acb167895e3106e6f203c6fad4927fa0d742d45b8",
+      "files": 20,
+      "source": "mslearn-github-copilot/LabFiles/10-implement-performance-profiling/DataAnalyzerReporter",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_10_implement_performance_profiling.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "dotnet build DataAnalyzerReporter.csproj -m:1 -p:UseSharedCompilation=false"
+        ],
+        "expected": "pass",
+        "message": "The selected project builds. Compilation alone does not prove behavior."
+      }
+    },
+    {
+      "id": "11-issues",
+      "track": "hands-on",
+      "title": "Turn an issue into a reviewed change",
+      "path": "hands-on/11-issues.zip",
+      "bytes": 23055,
+      "sha256": "40c2c88c81337992a92390932538a37a8733c4fc623d775dbfc7752e163b4b3d",
+      "files": 16,
+      "source": "mslearn-github-copilot/LabFiles/11-issue-workflow",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_11_resolve_github_issues.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node --test --test-concurrency=1 pricing.test.mjs"
+        ],
+        "expected": "pass",
+        "message": "The supplied baseline tests pass."
+      }
+    },
+    {
+      "id": "12-secrets",
+      "track": "hands-on",
+      "title": "Rehearse secret-remediation decisions safely",
+      "path": "hands-on/12-secrets.zip",
+      "bytes": 24479,
+      "sha256": "c9008e4cb4aefeb8d0b01aaf460fdb1dfd975019172d6aa7522ae7334d2e83c6",
+      "files": 17,
+      "source": "mslearn-github-copilot/LabFiles/12-secret-remediation",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_12_resolve_github_secret_scanning_alerts.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node --test --test-concurrency=1 policy.test.mjs"
+        ],
+        "expected": "pass",
+        "message": "The supplied baseline tests pass."
+      }
+    },
+    {
+      "id": "13-greenfield",
+      "track": "hands-on",
+      "title": "Specify a greenfield RSS reader",
+      "path": "hands-on/13-greenfield.zip",
+      "bytes": 32959,
+      "sha256": "22dfcc414cbdc58a688a49cc2bfeaced8a4864afa9d00024597a364c9ea75ce5",
+      "files": 20,
+      "source": "mslearn-github-copilot/LabFiles/13-spec-driven-development",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_13_get-started-spec-driven-development.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node --test --test-concurrency=1 contract.test.mjs"
+        ],
+        "expected": "intentional-failure",
+        "message": "The unfinished RSS store fails with the documented exercise error. A missing runtime or syntax error is not the expected failure."
+      }
+    },
+    {
+      "id": "14-brownfield",
+      "track": "hands-on",
+      "title": "Add document metadata to an existing dashboard",
+      "path": "hands-on/14-brownfield.zip",
+      "bytes": 31718,
+      "sha256": "249b5e0a45c4dcb394f0232ea918a598b79a5201f42698c22c61fdb765e801dc",
+      "files": 20,
+      "source": "mslearn-github-copilot/LabFiles/14-spec-driven-feature",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_14_implement-spec-driven-development.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node --test --test-concurrency=1 baseline.test.mjs"
+        ],
+        "expected": "pass",
+        "message": "The supplied baseline tests pass."
+      }
+    },
+    {
+      "id": "15-customization",
+      "track": "hands-on",
+      "title": "Configure instructions, prompts, skills and agents",
+      "path": "hands-on/15-customization.zip",
+      "bytes": 23312,
+      "sha256": "42f55842229d7acb105ded1b79522ee7b9f473348a95888a912d075a8edcdf7f",
+      "files": 14,
+      "source": "mslearn-github-copilot/LabFiles/15-copilot-customization",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_15_configure_customize_github_copilot_vscode.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node --test --test-concurrency=1 inventory.test.mjs"
+        ],
+        "expected": "pass",
+        "message": "The supplied baseline tests pass."
+      }
+    },
+    {
+      "id": "16-sdk",
+      "track": "hands-on",
+      "title": "Build a bounded application with Copilot SDK",
+      "path": "hands-on/16-sdk.zip",
+      "bytes": 27198,
+      "sha256": "6f11e90e717ae6b13265ec7ae522f3424d67f5648cd03425a24b23f031a324e5",
+      "files": 18,
+      "source": "mslearn-github-copilot/LabFiles/16-copilot-sdk",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_16_develop_ai_enabled_apps_github_copilot_sdk.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "node --test --test-concurrency=1 app.test.mjs"
+        ],
+        "expected": "pass",
+        "message": "The supplied baseline tests pass."
+      }
+    },
+    {
+      "id": "17-modernization",
+      "track": "hands-on",
+      "title": "Modernize CSV storage to SQLite with Spec Kit",
+      "path": "hands-on/17-modernization.zip",
+      "bytes": 37754,
+      "sha256": "5cba965948d4de023496102ec337bd1ee297d66c52fab2b8e48efc0eec43578d",
+      "files": 24,
+      "source": "mslearn-github-copilot/LabFiles/17-spec-kit-modernization",
+      "lesson": "mslearn-github-copilot/Instructions/Labs/LAB_AK_17_modernize_existing_app_spec_kit.md",
+      "baseline": {
+        "workingDirectory": ".",
+        "commands": [
+          "python -m unittest test_legacy -v"
+        ],
+        "expected": "pass",
+        "message": "The CSV characterization tests pass. The separate modernization suite intentionally fails until implementation."
+      }
+    }
+  ]
+}

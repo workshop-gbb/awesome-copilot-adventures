@@ -20,6 +20,24 @@ lab:
 Setup is complete when an authorized account can perform a small, observable task.
 Two installed extensions or an old screenshot are not proof of access.
 
+## Lab briefing
+
+![Verify actual access without changing billing or global settings.](../../../assets/images/hands-on/setup-copilot.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 100; 15 minutes (facilitation estimate) |
+| Starting action | Record the active account alias and a harmless request result. |
+| Learner materials | [Download 01-interface.zip](../../../assets/lab-kits/hands-on/01-interface.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The supplied baseline tests pass. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> A successful Git login is not proof that the editor uses that identity.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---sign-in-through-the-editor) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Distinguish GitHub authentication from Copilot entitlement.

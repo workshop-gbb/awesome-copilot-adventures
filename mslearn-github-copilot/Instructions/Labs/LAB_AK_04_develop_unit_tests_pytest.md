@@ -20,6 +20,24 @@ lab:
 Pytest can collect the fixture's existing `unittest.TestCase` tests and new pytest
 functions. A green collection UI is not proof that a regression assertion executed.
 
+## Lab briefing
+
+![Distinguish test collection from useful assertions.](../../../assets/images/hands-on/04-pytest.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 300; 60 minutes (facilitation estimate) |
+| Starting action | Collect existing tests before adding found, missing and non-mutation cases. |
+| Learner materials | [Download 04-pytest.zip](../../../assets/lab-kits/hands-on/04-pytest.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `library` relative to that root |
+| Expected initial check | The existing unittest tests are discovered and pass. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> A lightweight data object isolates repository search, not JSON loading.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---inspect-and-collect) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Use the existing test conventions and a selected interpreter.

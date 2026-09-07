@@ -59,6 +59,10 @@ test('Astro Markdown plugin applies stable anchors without leaving visible marke
   const result = await renderer.render('## Evidência {#evidence}\n\nTexto.');
   assert.match(result.code, /<h2 id="evidence">Evidência<\/h2>/);
   assert.ok(!result.code.includes('{#'));
+  const taskHeading = await renderer.render('## Task 1 - Inspect {#task-1---inspect}\n\n## Ask → Plan {#ask--plan}');
+  assert.match(taskHeading.code, /<h2 id="task-1---inspect">/);
+  assert.match(taskHeading.code, /<h2 id="ask--plan">/);
+  assert.ok(!taskHeading.code.includes('{#'));
 });
 
 test('routes are project-base-aware and source paths are encoded rather than interpolated', () => {
@@ -87,6 +91,15 @@ test('rendering never uses English as a silent translation fallback', () => {
   assert.throws(() => renderDocument(page, 'es', {}, createLinkResolver(pages(), siteSources())), /Missing es translation/);
 });
 
+test('learner archives resolve to direct downloads with the original ZIP bytes', () => {
+  const resolve = createLinkResolver(pages(), siteSources());
+  const file = 'assets/lab-kits/hands-on/01-interface.zip';
+  assert.equal(resolve(`../${file}`, 'docs/downloads.md', 'pt-br'), `/awesome-copilot-adventures/${file}`);
+  const { artifacts, manifest } = buildArtifacts(['en']);
+  assert.deepEqual(artifacts.get(`site-generated/public/${file}`), fs.readFileSync(path.join(root, file)));
+  assert.equal(manifest.find(entry => entry.path === file).mime, 'application/zip');
+});
+
 test('original binary and malformed UTF-8 are not misclassified as source text', () => {
   assert.equal(textPreview(Buffer.from('const example = "ação";\n')), true);
   assert.equal(textPreview(Buffer.from([0, 1, 2])), false);
@@ -110,14 +123,47 @@ test('localized search is accent-insensitive and prioritizes guides over origina
   assert.ok(resultExcerpt(records[1], 'migração').includes('migração'));
 });
 
+test('reading marks are explicit, locale-independent and reject invalid stored data', async () => {
+  const { readingState, toggleReading } = await import('../assets/site/learning.mjs');
+  const allowed = ['docs/start-here.md', 'adventures/example/README.md'];
+  const empty = readingState(null, allowed);
+  assert.deepEqual(empty.read, []);
+  const marked = toggleReading(empty, allowed[0], allowed);
+  assert.deepEqual(marked.read, [allowed[0]]);
+  assert.deepEqual(toggleReading(marked, allowed[0], allowed).read, []);
+  assert.deepEqual(readingState(JSON.stringify({ version: 1, read: [allowed[0], allowed[0], 'retired.md'] }), allowed).read, [allowed[0]]);
+  assert.throws(() => readingState('broken JSON', allowed), SyntaxError);
+  assert.throws(() => readingState('{"version":2,"read":[]}', allowed), /Invalid/);
+  assert.throws(() => readingState('{"version":1,"read":[1]}', allowed), /Invalid/);
+  assert.throws(() => toggleReading(empty, 'unknown.md', allowed), /not in/);
+  assert.deepEqual(empty.read, []);
+});
+
+test('library filters combine category, accented search and user-selected reading marks', async () => {
+  const { filterLibrary } = await import('../assets/site/learning.mjs');
+  const documents = [
+    { title: 'Modernização com Spec Kit', source: 'labs/modernization.md', group: 'hands-on' },
+    { title: 'Agentes e contexto', source: 'adventures/agents.md', group: 'adventures' },
+    { title: 'Guia de contexto', source: 'docs/context.md', group: 'guides' }
+  ];
+  assert.equal(filterLibrary(documents).length, 3);
+  assert.deepEqual(filterLibrary(documents, { query: 'modernizacao', group: 'hands-on' }), [documents[0]]);
+  assert.equal(filterLibrary(documents, { query: 'contexto', group: 'hands-on' }).length, 0);
+  assert.deepEqual(filterLibrary(documents, { group: 'read', read: ['docs/context.md'] }), [documents[2]]);
+});
+
 test('publication covers every source byte and every learning page without recursive copies', () => {
   const { artifacts, data, documents, manifest } = buildArtifacts(['en']);
   assert.equal(manifest.length, data.sourceCount);
   assert.deepEqual(manifest.map(entry => entry.path), siteSources().map(relative));
+  for (const file of ['patterns.js', 'history.js', 'logger.js']) {
+    assert.ok(manifest.some(entry => entry.path === `labs/context-mirrors/starter/lib/${file}`), `Missing published starter source: ${file}`);
+  }
   assert.ok(!manifest.some(entry => /^(site-pages|site-data)\//.test(entry.path)));
   assert.equal(data.adventureCount, 14);
   assert.equal(data.handsOnCount, 26);
   assert.equal(data.documentCount, documents.length);
+  assert.ok(manifest.some(entry => entry.path === 'site/lib/catalog.ts'));
   assert.ok(translationSegments(documents).length > 1000);
   for (const entry of manifest) {
     const object = JSON.parse(artifacts.get(`site-generated/public/site-data/objects/${entry.hash}.json`));

@@ -10,6 +10,11 @@ description: "Awesome Copilot Adventures: an evidence-first curriculum for agent
 
 Learn agentic software engineering through guided, fantasy-themed laboratories built around observable evidence.
 
+> [!TIP]
+> **First visit:** follow [Start here](start-here.md) for one working local check.
+> Then use [the learning order](learning-path.md) to choose your path. Download
+> [one learner kit](downloads.md), not every runtime and project.
+
 > [!IMPORTANT]
 > The curriculum teaches agent roles, harnesses, environments, and customization primitives as separate concepts. It does not teach deprecated custom chat modes.
 
@@ -78,6 +83,8 @@ Ask, Plan, and Agent are **roles**. Local and Copilot are VS Code **agent harnes
 | Destination | Use it for |
 | --- | --- |
 | [Start here](start-here.md) | Prepare the environment and first session |
+| [Learning order](learning-path.md) | Separate required steps, optional extensions and advanced work |
+| [Learner downloads](downloads.md) | Get an individual ZIP and follow extraction, baseline and optional GitHub setup |
 | [Curriculum map](curriculum-map.md) | Follow the complete learning progression |
 | [Harness guide](harness-guide.md) | Choose where and how an agent executes |
 | [Customization primitives](customization-primitives.md) | Select instructions, prompts, skills, agents, MCP, or hooks |

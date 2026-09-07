@@ -8,11 +8,11 @@ step-by-step exercises. The original `Instructions/Labs` filenames and nested
 ## Start
 
 1. Read the [catalog](index.md).
-2. Prepare [the environment](Instructions/Reference/SETUP.md).
+2. [Download a learner kit](../docs/downloads.md) or prepare [the environment](Instructions/Reference/SETUP.md) from an existing clone.
 3. Review [Copilot boundaries](Instructions/Reference/COPILOT.md).
 4. For Spec Kit, use [the versioned reference](Instructions/Reference/SPEC_KIT.md).
-5. Select one fixture from `LabFiles`, copy it with the preparation script, and
-   open only that copy as the workspace root.
+5. Open only the selected copy as the workspace root and record the baseline
+   described by its lesson. The ZIP's `KIT-START.md` explains the exact directory.
 
 ## What changed
 
@@ -28,12 +28,14 @@ step-by-step exercises. The original `Instructions/Labs` filenames and nested
 
 ## Source and publication
 
-`catalog.json` is the machine-readable inventory. The root repository's Jekyll
-configuration publishes these instructions at `/hands-on/`. There is no separate
-nested site or release pipeline.
+`catalog.json` is the machine-readable inventory. The root repository's Astro
+pipeline builds these instructions under each language's `/hands-on/` route.
+There is no separate nested site or release pipeline.
 
-`LabFiles` remain downloadable from GitHub, not an executable web service.
-Instructor references are deliberately omitted by the preparation script.
+`LabFiles` remain available as source, not an executable web service. The
+[download catalog](../docs/downloads.md) offers per-exercise ZIPs with bundled
+instructions, assets, licenses, file manifests and archive checksums.
+Instructor references are deliberately omitted by the preparation script and kits.
 Historical screenshots in `Instructions/Labs/Media` are retained with a provenance
 notice, not used as current setup instructions.
 

@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { root } = require('./repository-files');
+const { includeFixturePath } = require('./fixture-files');
 
 const collection = path.join(root, 'mslearn-github-copilot');
 const catalog = JSON.parse(fs.readFileSync(path.join(collection, 'catalog.json'), 'utf8'));
@@ -35,14 +36,13 @@ function prepare({ id, destination }) {
     throw new Error('Destination resolves into or above the curriculum repository through a symbolic link.');
   }
 
-  const excluded = new Set(['.git', 'bin', 'obj', 'node_modules', '.venv', '__pycache__', '.pytest_cache', 'reference', 'TestResults']);
   fs.cpSync(source, target, {
     recursive: true,
     errorOnExist: true,
     force: false,
     filter(filename) {
       const relative = path.relative(source, filename);
-      if (relative.split(path.sep).some(part => excluded.has(part))) return false;
+      if (!includeFixturePath(relative)) return false;
       if (fs.lstatSync(filename).isSymbolicLink()) throw new Error(`Fixture contains a symbolic link; review it before copying: ${filename}`);
       return true;
     }

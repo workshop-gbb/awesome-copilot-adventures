@@ -19,10 +19,12 @@ export function enhanceSite(config, locationChanged) {
     for (const button of document.querySelectorAll('[data-mark-reading]')) button.disabled = true;
     console.error('Reading progress storage failed.', error);
   };
-  try {
-    state = readingState(localStorage.getItem(storageKey), sources);
-  } catch (error) {
-    storageError(error);
+  if (trackers.length) {
+    try {
+      state = readingState(localStorage.getItem(storageKey), sources);
+    } catch (error) {
+      storageError(error);
+    }
   }
   const renderReading = () => {
     for (const node of document.querySelectorAll('[data-reading-count]')) node.textContent = format.format(state.read.length);
@@ -168,7 +170,13 @@ export function enhanceSite(config, locationChanged) {
       }
     }, { threshold: 0.5 });
     document.querySelectorAll('[data-counter]').forEach(node => counterObserver.observe(node));
-    addEventListener('pagehide', () => { headingObserver.disconnect(); revealObserver.disconnect(); counterObserver.disconnect(); });
+    addEventListener('pagehide', event => {
+      if (!event.persisted) {
+        headingObserver.disconnect();
+        revealObserver.disconnect();
+        counterObserver.disconnect();
+      }
+    });
   }
   for (const details of document.querySelectorAll('[data-workflow-step]')) {
     details.addEventListener('toggle', () => {

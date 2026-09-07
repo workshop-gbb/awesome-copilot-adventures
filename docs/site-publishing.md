@@ -35,6 +35,26 @@ Original downloads are content-addressed and checked against SHA-256. Text line
 endings follow the repository's `.gitattributes` rule; binary bytes are unchanged.
 Source text is displayed as text, never executed as HTML or JavaScript.
 
+## Learner archives
+
+The [download catalog](downloads.md) links to 35 exercise ZIPs under
+`assets/lab-kits/`. Unlike individual source previews, these links resolve to
+static download files in every locale. Packages contain learner fixtures, a lesson
+snapshot, local images, setup guidance, licenses and file-integrity manifests;
+instructor reference directories and local caches are excluded.
+
+After changing a packaged source, lesson, image or setup guide, run:
+
+```bash
+npm run build:kits
+npm run test:kits
+npm run check:kits
+```
+
+Commit the regenerated ZIPs and checksum inventory alongside their source changes.
+Repository tests and site builds reject stale archives. Package tests do not claim
+that an authenticated model, cloud session or every language adaptation ran.
+
 ## Local verification
 
 Use Node.js 24 or newer with the checked-in lockfile. Install dependencies only

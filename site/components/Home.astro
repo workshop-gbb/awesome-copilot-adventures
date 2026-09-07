@@ -22,7 +22,7 @@ const stages = [
       <p class="hero-description">{ui.heroDescription}</p>
       <div class="hero-actions">
         <a class="button button-light" href={href.start}>{ui.start} <span aria-hidden="true">↗</span></a>
-        <a class="button button-outline" href={href.repository}>{ui.heroSecondary} <span aria-hidden="true">→</span></a>
+        <a class="button button-outline" href={href.downloads}>{ui.learnerKits} <span aria-hidden="true">↓</span></a>
       </div>
       <p class="workflow-line">{ui.heroNote}</p>
       <div class="hero-languages">
@@ -52,6 +52,14 @@ const stages = [
     <a href={href.library} aria-label={`${counts.documentCount} ${ui.guides}`}><strong data-counter={counts.documentCount}>{counts.documentCount}</strong><span>{ui.guides}</span></a>
     <a href={href.repository} aria-label={`${counts.sourceCount} ${ui.sourceCount}`}><strong data-counter={counts.sourceCount}>{counts.sourceCount}</strong><span>{ui.sourceCount}</span></a>
   </div>
+</section>
+<section class="section container">
+  <div class="section-heading"><h2>{ui.firstVisit}</h2><p>{ui.firstVisitText}</p></div>
+  <nav class="hero-actions" aria-label={ui.learningNavigation}>
+    <a class="button button-primary" href={href.start}>01 / {ui.start}</a>
+    <a class="button" href={href.learningPath}>02 / {ui.learningOrder}</a>
+    <a class="button" href={href.downloads}>03 / {ui.learnerKits}</a>
+  </nav>
 </section>
 <section class="section container discovery-section">
   <div class="section-heading" data-reveal><p class="eyebrow">{ui.guides}</p><h2>{ui.libraryTitle}</h2><p>{ui.libraryDescription}</p></div>

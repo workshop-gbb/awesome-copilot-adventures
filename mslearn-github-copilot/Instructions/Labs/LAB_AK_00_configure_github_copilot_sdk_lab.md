@@ -21,6 +21,24 @@ The Copilot SDK embeds an agent runtime in **your application**. It is not a lib
 for sending code completions to the VS Code editor. Application identity, tools,
 permissions, and lifecycle are your responsibility.
 
+## Lab briefing
+
+![Separate local application correctness from authenticated inference.](../../../assets/images/hands-on/setup-sdk.svg)
+
+| At a glance | Your route |
+| --- | --- |
+| Level and time | 200; 20 minutes (facilitation estimate) |
+| Starting action | Start with synthetic order-status data and the offline application tests. |
+| Learner materials | [Download 16-sdk.zip](../../../assets/lab-kits/hands-on/16-sdk.zip) |
+| Workspace | Open the extracted kit root; run the baseline from `.` relative to that root |
+| Expected initial check | The supplied baseline tests pass. |
+| Setup help | [Download, extract, local Git and optional GitHub](../../../docs/downloads.md) |
+
+> [!NOTE]
+> Editor access and SDK runtime authentication are separate boundaries.
+
+[Concepts](#concepts-and-use-cases) · [First task](#task-1---prepare-the-selected-fixture) · [Evidence checklist](#verify-your-work) · [Reset](#reset)
+
 ## Learning objectives
 
 - Prepare local tests without invoking a model.
@@ -46,8 +64,8 @@ SQL Server, Blazor, cloud resources, and database migrations are not required.
 
 ## Exercise scenario
 
-You will build a small internal catalog assistant. It may read only the bundled
-public product records. It must not execute shell commands, read arbitrary files,
+You will prepare a small support assistant. It may read only synthetic order-status
+records owned by the trusted fixture actor. It must not execute shell commands, read arbitrary files,
 make purchases, or pretend a failed tool succeeded.
 
 ## Task 1 - Prepare the selected fixture

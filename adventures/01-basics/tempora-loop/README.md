@@ -16,11 +16,14 @@ primary_capability: "Iterating with deterministic feedback"
 
 
 > [!NOTE]
-> **Status:** Content ready · **Media:** Pending · **Last verified:** 2026-09-05  
+> **Status:** Content ready · **Media:** Original SVG illustration · **Last verified:** 2026-09-05  
 > **Primary capability:** Iterating with deterministic feedback
 
+![Hypothesis, Iteration budget, Stop condition illustrated through The Tempora Loop.](../../../assets/images/adventures/tempora-loop-hero.svg)
+
 > [!TIP]
-> Production hero media is intentionally pending. Use the specification in [Media Prompts](../../../docs/media-prompts.md) before adding a production hero asset.
+> [Download this learner kit](../../../assets/lab-kits/adventures/tempora-loop.zip) and use
+> [the extraction and setup guide](../../../docs/downloads.md). Keep the original starter untouched.
 
 ```mermaid
 ---
@@ -64,19 +67,20 @@ config:
     attributeBackgroundColorOdd: "#f5f5f5"
     attributeBackgroundColorEven: "#e0e0e0"
 ---
-flowchart LR
-    accTitle: Evidence-first development workflow
-    accDescr: Investigation leads to planning, implementation, review and evidence; unresolved gaps return to investigation.
-    A["Ask<br/>Investigate"] --> P["Plan<br/>Design"]
-    P --> G["Agent<br/>Implement"]
-    G --> R["Review<br/>Challenge"]
-    R --> E["Evidence<br/>Prove"]
-    E -. "gap found" .-> A
+flowchart TD
+    accTitle: The Tempora Loop capability map
+    accDescr: Both outcomes are legitimate. A bounded loop must return evidence about why it stopped rather than silently claiming convergence.
+    I["Validate step and limit"] --> S["Call one step"]
+    S --> Q{"Same as previous value?"}
+    Q -->|Yes| D["Return stable result"]
+    Q -->|No| B{"Budget remaining?"}
+    B -->|Yes| S
+    B -->|No| N["Return bounded non-stable result"]
 ```
 
-**Legend.** Rectangles are workflow stages. Solid arrows show the normal progression; the dashed arrow returns unresolved evidence gaps to investigation.
+**Legend.** Diamonds are stop decisions. The return boxes distinguish stability from budget exhaustion.
 
-**Explanation.** A fluent response is not completion. The loop ends only when the reviewed result meets the acceptance criteria and the recorded checks support it.
+**Explanation.** Both outcomes are legitimate. A bounded loop must return evidence about why it stopped rather than silently claiming convergence.
 
 ## Official references
 
@@ -94,26 +98,30 @@ The fantasy is a memory aid; the engineering lesson requires observable, reprodu
 
 ## Learning objectives
 
-By the end, you can:
-
-- Explain the primary capability in precise product language.
-- Separate role, harness, target, environment, and customization primitive.
-- Complete a bounded Ask → Plan → Agent workflow.
-- Review tool use, changes, and verification evidence independently.
-- State unavailable, Preview, experimental, or unverified behavior without guessing.
+- Implement a refinement loop with a maximum number of step calls.
+- Distinguish reaching a stable value from exhausting the iteration budget.
+- Reject invalid limits and explain the iteration count using a concrete trace.
 
 ## Prerequisites
 
-- Completion of the preceding adventure, or equivalent familiarity.
-- A disposable repository or authorized sandbox.
-- Access appropriate to the selected Copilot surface; availability is not assumed.
-- An existing test, build, lint, validation, or review mechanism where applicable.
+| Requirement | Why it matters |
+| --- | --- |
+| Complete the preceding adventure, or demonstrate its exit evidence | Keep this mission focused on its named capability |
+| Node 24 and the extracted kit | The local verifier uses the supplied runtime and files |
+| A disposable folder outside another project | Customizations and intentional failures must not leak into other work |
+| Authorized host access, only for live steps | Availability, tools and policies differ |
 
-Never use production secrets, customer data, or irreversible resources. Use the paper fallback when a named service is unavailable.
+**Evidence boundary:** This local function models bounded iteration; it does not control a live Copilot session automatically.
+
+Estimated session: 45–75 minutes after prerequisites; actual duration varies. Never use production secrets or customer data.
 
 ## Concept explanation
 
 A reliable agent loop is inspect, hypothesize, change, verify, and review. Use one bounded hypothesis per iteration and the narrowest existing deterministic check. Failed checks update the hypothesis; they do not justify unrelated edits. Hooks can automate lifecycle commands on supported surfaces, but hook support or behavior may be Preview and surface-specific. The lesson works without hooks.
+
+### Concrete use case
+
+Starting at zero and adding two until six produces a repeated six on the fourth step call. The stable flag describes equality between consecutive values, not simply reaching the target number.
 
 ### Vocabulary checkpoint
 
@@ -165,23 +173,46 @@ A reliable agent loop is inspect, hypothesize, change, verify, and review. Use o
 
 ## Guided mission
 
-Open the [Tempora Loop lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/tempora-loop/README.md) and implement the bounded refinement loop.
+### 1. Prepare one isolated copy
 
-Select a small intentional defect in a disposable project. Record the failing baseline, define a loop budget and stop condition, then run at least two short cycles. Log each hypothesis, change, command, exit result, and diff. Finish with the targeted check passing and broaden validation only when justified.
+1. Download and extract the [tempora-loop kit](../../../assets/lab-kits/adventures/tempora-loop.zip) into a new work-drive directory.
+2. Read `KIT-START.md` at its root. Open `starter/` as the VS Code workspace when testing discovery, but run the verifier from the kit root.
+3. Inspect `starter/loop.js`, `verify.js` before editing.
+4. From the extracted kit root, run `node verify.js`.
+5. Record the documented starter rejection. A missing runtime or unrelated crash is not the expected exercise result.
 
-Record each material step in this table:
+### 2. Investigate and plan
+
+In Ask, request a trace of the inspected files and what the verifier actually observes. Challenge any claim about live execution that is not supported by output.
+
+Use this planning prompt:
+
+```text
+Specify refine input validation, equality, iteration counting and the returned object. Trace stable and never-stable examples before implementing; preserve the step-call limit.
+Do not implement yet. Identify affected files, the negative case and a safe reset.
+```
+
+### 3. Implement the reviewed slice
+
+1. Approve only the named starter artifact and necessary focused tests.
+2. Ask Agent to implement one slice; inspect proposed commands before execution.
+3. Run `node verify.js` again from the kit root, or `node ../verify.js` from `starter/`.
+4. Compare the exact result with the checkpoint below and review the complete diff.
+5. Record host discovery or live activity separately when available. Do not enable extra services to manufacture a passing result.
+
+> [!IMPORTANT]
+> **Checkpoint:** The stable example ends at six after four calls; the never-stable example stops at its budget.
+> This local function models bounded iteration; it does not control a live Copilot session automatically.
+
+### 4. Prove a check can reject a mistake
+
+Temporarily increment the reported iteration count incorrectly. Confirm the stable-count assertion fails, then restore it.
 
 | Observation | Decision | Action | Evidence | Limitation |
-|---|---|---|---|---|
-| What was inspected? | Why this next step? | What changed or ran? | What proves it? | What remains unknown? |
+| --- | --- | --- | --- | --- |
+| Initial state and exact diagnostic | Why this change is needed | Named file and bounded change | Command, exit code and observed result | What the local check does not prove |
 
-### Guided acceptance criteria
-
-- The initial state is supported by current evidence.
-- The plan is bounded and contains a reset path.
-- Agent work stays inside the declared scope.
-- Verification observes the requested behavior.
-- Review is independent from the implementation claim.
+Finish with the adventure-specific capability evidence in [the rubric](rubric.md), not just the presence of a file.
 
 ## Intentional failure: The Unbounded Time Spell
 
@@ -217,11 +248,13 @@ Constraints:
 
 ## Reset instructions
 
-1. Restore the starter with `git restore labs/tempora-loop/starter/loop.js`.
-2. Run `git status --short -- labs/tempora-loop`; it should print nothing.
-3. Close any session whose context assumes the completed loop.
+1. Save your diff, command output and limitations from the disposable kit.
+2. Stop only the process or learning session you started. Do not stop other projects.
+3. If you initialized Git in the kit, inspect `git status --short` there and restore only your named exercise files from its local baseline.
+4. Otherwise, extract the original ZIP into a new unused directory for another attempt; do not overwrite your current work.
+5. Remove only exercise-owned configurations, worktrees or remote resources after reviewing anything worth preserving.
 
-Cleanup is part of completion. Do not leave billable resources, credentials, processes, branches, or worktrees behind.
+The curriculum source and other projects must remain unchanged. A reset of the copied kit is not a repository-wide hard reset.
 
 ## Next adventure
 
