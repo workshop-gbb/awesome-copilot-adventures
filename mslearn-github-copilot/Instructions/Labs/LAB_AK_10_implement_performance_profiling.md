@@ -31,7 +31,7 @@ your workload. A valid result may be **no measurable improvement**.
 
 Prepare `10-profiling` with [the resource-limited setup](../Reference/SETUP.md).
 The default fixture is the small DataAnalyzerReporter. The imported
-[ContosoOnlineStore and benchmark examples](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/10-implement-performance-profiling)
+[ContosoOnlineStore and benchmark examples](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/10-implement-performance-profiling)
 are an **optional isolated-machine extension**, not part of the default run.
 Do not launch BenchmarkDotNet, a load test, or parallel request fan-out here.
 

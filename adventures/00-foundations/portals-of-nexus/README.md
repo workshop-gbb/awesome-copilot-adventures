@@ -165,7 +165,7 @@ An agentic workflow has separate dimensions. A role is Ask, Plan, Agent, or a cu
 
 ## Guided mission
 
-Open the [Portals of Nexus lab](https://github.com/paulasilvatech/awesome-copilot-adventures/blob/main/labs/portals-of-nexus/README.md) and keep its verifier output as evidence.
+Open the [Portals of Nexus lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/portals-of-nexus/README.md) and keep its verifier output as evidence.
 
 Create a five-column map for one task: role, harness, target, environment, and evidence. Investigate the repository with Ask, design a reversible change with Plan, let Agent make it in a disposable repository, then review the diff and existing checks.
 

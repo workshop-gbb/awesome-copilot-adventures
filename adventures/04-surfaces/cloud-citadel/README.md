@@ -165,7 +165,7 @@ GitHub Copilot cloud agent can work on assigned repository tasks in a GitHub-hos
 
 ## Guided mission
 
-Open the [Cloud Citadel lab](https://github.com/paulasilvatech/awesome-copilot-adventures/blob/main/labs/cloud-citadel/README.md) and turn the starter issue into a bounded task contract.
+Open the [Cloud Citadel lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/cloud-citadel/README.md) and turn the starter issue into a bounded task contract.
 
 Confirm repository eligibility and policy. Draft one issue-sized task with context, acceptance criteria, non-goals, forbidden areas, and verification. If authorized and available, assign it; otherwise conduct a documented lifecycle walkthrough. Review logs, commits, diff, checks, and unresolved risks.
 

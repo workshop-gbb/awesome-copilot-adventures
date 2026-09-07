@@ -166,7 +166,7 @@ The capstone treats agentic engineering as a governed system. Realm one is a loc
 
 ## Guided mission
 
-Open the [Convergence lab](https://github.com/paulasilvatech/awesome-copilot-adventures/blob/main/labs/convergence-of-three-realms/README.md) and complete the cross-realm workflow contract.
+Open the [Convergence lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/convergence-of-three-realms/README.md) and complete the cross-realm workflow contract.
 
 Choose a small end-to-end scenario. Map at least three requirements to actors, agent roles, harnesses, targets, environments, tools, trust boundaries, implementation artifacts, checks, cloud review criteria, and runtime-agent evaluation cases. Complete local Ask → Plan → Agent, prepare or execute one cloud issue, design or execute the runtime evaluation, and assemble an independent evidence bundle.
 

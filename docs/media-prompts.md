@@ -129,4 +129,4 @@ Export each as **1920 × 1080**, 16:9, **8–12 seconds**, seamless or gently en
 - Avoid flashes, strobing, rapid zooms, parallax that tracks scrolling, and motion needed to understand the lesson.
 - Check contrast after placing HTML text over an image; add a solid or translucent backing rather than relying on the artwork.
 
-Generated files belong in the GitHub [adventure images folder](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/assets/images/adventures) and [video assets folder](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/assets/video).
+Generated files belong in the GitHub [adventure images folder](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/assets/images/adventures) and [video assets folder](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/assets/video).

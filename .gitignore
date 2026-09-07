@@ -5,6 +5,11 @@ coverage/
 _site/
 .jekyll-cache/
 .jekyll-metadata
+.astro/
+site-generated/
+site-pages/
+site-data/
+_data/site.json
 *.log
 .DS_Store
 Thumbs.db

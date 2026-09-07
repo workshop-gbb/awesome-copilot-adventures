@@ -9,15 +9,15 @@
 </p>
 
 <p align="center">
-  <a href="https://paulasilvatech.github.io/awesome-copilot-adventures/"><img alt="GitHub Pages availability" src="https://img.shields.io/website?url=https%3A%2F%2Fpaulasilvatech.github.io%2Fawesome-copilot-adventures%2F&label=Pages"></a>
+  <a href="https://workshop-gbb.github.io/awesome-copilot-adventures/"><img alt="GitHub Pages availability" src="https://img.shields.io/website?url=https%3A%2F%2Fworkshop-gbb.github.io%2Fawesome-copilot-adventures%2F&label=Pages"></a>
   <a href="./LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-8250df"></a>
   <a href="./docs/feature-status.md"><img alt="Official documentation verified on 2026-09-05" src="https://img.shields.io/badge/official%20docs-verified%202026--09--05-0969da"></a>
 </p>
 
 <p align="center">
-  <a href="https://paulasilvatech.github.io/awesome-copilot-adventures/"><strong>Explore the learning site</strong></a>
+  <a href="https://workshop-gbb.github.io/awesome-copilot-adventures/"><strong>Explore the learning site</strong></a>
   ·
-  <a href="https://codespaces.new/paulasilvatech/awesome-copilot-adventures?quickstart=1"><strong>Open in Codespaces</strong></a>
+  <a href="https://codespaces.new/workshop-gbb/awesome-copilot-adventures?quickstart=1"><strong>Open in Codespaces</strong></a>
   ·
   <a href="./docs/curriculum-map.md"><strong>View the curriculum</strong></a>
 </p>
@@ -141,13 +141,37 @@ The [Customization Primitives guide](./docs/customization-primitives.md) include
 ## Quick start
 
 ```bash
-gh repo clone paulasilvatech/awesome-copilot-adventures
+gh repo clone workshop-gbb/awesome-copilot-adventures
 cd awesome-copilot-adventures
 npm install
 npm test
 ```
 
 For the complete environment, reopen the repository in its Dev Container.
+
+## Multilingual learning site
+
+The Astro site contains the complete current learning library in
+[English](https://workshop-gbb.github.io/awesome-copilot-adventures/en/),
+[Spanish](https://workshop-gbb.github.io/awesome-copilot-adventures/es/) and
+[Brazilian Portuguese](https://workshop-gbb.github.io/awesome-copilot-adventures/pt-br/).
+Language switches preserve the document and its section.
+
+The repository explorer includes original starters, tests, solutions, data,
+customizations, media, licenses and clearly identified historical material.
+Code and executable examples keep their original text. Downloads are checked
+against their SHA-256 inventory before use.
+
+```bash
+npm run build:site
+npm run check:astro
+npm run check:site:rendered -- dist
+npm run preview:site -- --host 127.0.0.1
+```
+
+The build is static, uses one page-rendering worker, and does not require Ruby,
+Jekyll, a model API or a database. See the [publishing guide](docs/site-publishing.md)
+and [design system](docs/DESIGN.md).
 
 ## Repository map
 
@@ -160,7 +184,10 @@ solutions/            Reference implementations for legacy challenges
 .github/prompts/      Manually invoked prompt files
 .github/instructions/ Path-scoped instructions
 .github/hooks/        Preview hook examples and guidance
-docs/                 GitHub Pages content
+docs/                 Canonical guide content
+site/                 Astro layouts, components and routes
+site-locales/          Reviewed Spanish and Brazilian Portuguese prose
+site-generated/       Ignored, reproducible publication input
 assets/               Current, legacy, and generated media
 legacy/               Preserved version-one curriculum
 shared/               Deterministic shared data
@@ -174,7 +201,7 @@ dotnet build solutions/csharp/CopilotAdventures.sln
 python solutions/python/test_gridlock_arena.py
 ```
 
-The checks validate current Markdown links, curriculum structure, customization files, lab syntax, the Context Mirrors baseline, and reference solutions.
+The checks validate current Markdown links, curriculum structure, customization files, lab syntax, the Context Mirrors baseline, reference solutions, complete translation coverage and original-source integrity.
 
 ## Media
 

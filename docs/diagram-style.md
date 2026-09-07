@@ -25,7 +25,7 @@ printed document. Color alone never conveys a decision, a failure, or ownership.
 | Ink | `#111111`, `#000000` | Text and emphasis |
 
 The canonical theme is maintained in
-[mermaid-theme.json](https://github.com/paulasilvatech/awesome-copilot-adventures/blob/main/scripts/mermaid-theme.json).
+[mermaid-theme.json](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/scripts/mermaid-theme.json).
 Every block includes that configuration in Mermaid's **diagram frontmatter**,
 so rendering on GitHub does not depend on the Jekyll site's CSS.
 

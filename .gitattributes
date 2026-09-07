@@ -7,3 +7,5 @@
 *.gif binary
 *.mp4 binary
 *.webm binary
+
+site-locales/** linguist-documentation=true

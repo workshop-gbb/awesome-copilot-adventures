@@ -31,7 +31,7 @@ functions. A green collection UI is not proof that a regression assertion execut
 
 Prepare `04-pytest` following [the setup guide](../Reference/SETUP.md).
 Use the supplied
-[Python testing fixture](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/04-python-develop-unit-tests-pytest/AccelerateDevGHCopilot).
+[Python testing fixture](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/04-python-develop-unit-tests-pytest/AccelerateDevGHCopilot).
 Select an environment on the work drive. Install `requirements.txt` in that copy
 only if pytest is missing, then run commands from `library`.
 

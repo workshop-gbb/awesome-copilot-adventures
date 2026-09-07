@@ -1,0 +1,22 @@
+---
+import { languageFor, labelFor, counts, type Locale } from '../lib/catalog';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const { ui, catalog } = languageFor(locale);
+const groups = ['adventures', 'hands-on', 'guides', 'fixtures', 'solutions', 'media'];
+---
+<div class="section-heading">
+  <p class="eyebrow">{counts.documentCount} / {ui.guides}</p>
+  <h1>{ui.libraryTitle}</h1>
+  <p>{ui.libraryDescription}</p>
+</div>
+{groups.map(group => (
+  <section class="library-group">
+    <h2>{labelFor(locale, group)}</h2>
+    <ul class="library-list">
+      {catalog.filter(document => document.group === group).map(document => (
+        <li><a href={document.url}>{document.title} <span aria-hidden="true">↗</span></a><small>{document.source}</small></li>
+      ))}
+    </ul>
+  </section>
+))}

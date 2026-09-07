@@ -30,7 +30,7 @@ have different copying and mutation semantics. Preserve the behavior users depen
 
 Prepare `05-python` using [the setup guide](../Reference/SETUP.md).
 Run commands from `library` in the bundled
-[Python refactoring fixture](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/05-python-refactor-improve-existing-code/AccelerateDevGHCopilot).
+[Python refactoring fixture](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/05-python-refactor-improve-existing-code/AccelerateDevGHCopilot).
 
 ## Concepts and use cases
 

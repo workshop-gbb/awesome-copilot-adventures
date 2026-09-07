@@ -102,12 +102,12 @@ flowchart TB
 
 | Level | Focus | Catalog | Source |
 | --- | --- | --- | --- |
-| **00 · Foundations** | Roles, harnesses, targets, context, and evidence | [Foundations](adventures/foundations.md) | [Adventure files](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/adventures/00-foundations) |
-| **01 · Basics** | Instructions and bounded agent loops | [Basics](adventures/basics.md) | [Adventure files](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/adventures/01-basics) |
-| **02 · Intermediate** | Skills, custom agents, and guardrails | [Intermediate](adventures/intermediate.md) | [Adventure files](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/adventures/02-intermediate) |
-| **03 · Advanced** | Model Context Protocol, graphs, and parallel work | [Advanced](adventures/advanced.md) | [Adventure files](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/adventures/03-advanced) |
-| **04 · Surfaces** | CLI, cloud execution, and SDK applications | [Surfaces](adventures/surfaces.md) | [Adventure files](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/adventures/04-surfaces) |
-| **99 · Capstone** | Integrated agentic engineering | [Capstone](adventures/capstone.md) | [Adventure files](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/adventures/99-capstone) |
+| **00 · Foundations** | Roles, harnesses, targets, context, and evidence | [Foundations](adventures/foundations.md) | [Adventure files](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/adventures/00-foundations) |
+| **01 · Basics** | Instructions and bounded agent loops | [Basics](adventures/basics.md) | [Adventure files](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/adventures/01-basics) |
+| **02 · Intermediate** | Skills, custom agents, and guardrails | [Intermediate](adventures/intermediate.md) | [Adventure files](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/adventures/02-intermediate) |
+| **03 · Advanced** | Model Context Protocol, graphs, and parallel work | [Advanced](adventures/advanced.md) | [Adventure files](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/adventures/03-advanced) |
+| **04 · Surfaces** | CLI, cloud execution, and SDK applications | [Surfaces](adventures/surfaces.md) | [Adventure files](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/adventures/04-surfaces) |
+| **99 · Capstone** | Integrated agentic engineering | [Capstone](adventures/capstone.md) | [Adventure files](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/adventures/99-capstone) |
 
 > [!TIP]
 > Follow the levels in order on a first pass. On later passes, repeat one lab in a different harness and compare the evidence rather than the fluency of the response.

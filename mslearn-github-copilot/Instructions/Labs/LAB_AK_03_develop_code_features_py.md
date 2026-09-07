@@ -30,7 +30,7 @@ entire library. Track the change from menu input to observed result.
 
 Prepare `03-python` using [the common setup](../Reference/SETUP.md) and open the
 copy alone. Run the following commands from its `library` directory. The bundled
-[feature fixture](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/03-python-develop-code-features/AccelerateDevGHCopilot)
+[feature fixture](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/03-python-develop-code-features/AccelerateDevGHCopilot)
 uses synthetic JSON data.
 
 ## Concepts and use cases

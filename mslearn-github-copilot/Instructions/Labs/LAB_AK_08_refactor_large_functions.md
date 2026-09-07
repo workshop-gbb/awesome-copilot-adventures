@@ -32,7 +32,7 @@ side effects, not just the successful order.
 
 Prepare `08-functions` using [the environment guide](../Reference/SETUP.md).
 Use the bundled
-[ECommerceOrderProcessing fixture](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/08-refactor-large-functions/ECommerceOrderProcessing).
+[ECommerceOrderProcessing fixture](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/08-refactor-large-functions/ECommerceOrderProcessing).
 All payments, addresses, and notifications are synthetic.
 
 ## Concepts and use cases

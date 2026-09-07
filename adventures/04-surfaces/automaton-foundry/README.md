@@ -165,7 +165,7 @@ The GitHub Copilot SDK embeds the Copilot agent runtime in an application. The r
 
 ## Guided mission
 
-Open the [Automaton Foundry lab](https://github.com/paulasilvatech/awesome-copilot-adventures/blob/main/labs/automaton-foundry/README.md), complete the pinned Copilot SDK application, and define its local evaluation contract.
+Open the [Automaton Foundry lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/automaton-foundry/README.md), complete the pinned Copilot SDK application, and define its local evaluation contract.
 
 Design a narrow documentation-answering agent. Separate input, output, instructions, model criteria, tools, identity, failure behavior, and evaluation. Complete five safe cases covering a grounded answer, bounded plan, verified change, unsupported request, and controlled tool failure. Execute in an authorized sandbox or provide an exact paper fallback, then revise one decision from actual evidence.
 

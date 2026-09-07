@@ -1,0 +1,24 @@
+---
+import { languageFor, labelFor, locales, settings, counts, type PageInfo } from '../lib/catalog';
+interface Props { page: PageInfo; }
+const { page } = Astro.props;
+const { ui, href } = languageFor(page.locale);
+---
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div><p class="eyebrow">Awesome Copilot Adventures</p><h2>{ui.footerTitle}</h2><p>{ui.footerText}</p></div>
+    <nav aria-label={ui.guides}>
+      <a href={href.glossary}>{ui.glossary}</a>
+      <a href={href.status}>{ui.status}</a>
+      <a href={href.design}>{ui.design}</a>
+      <a href={href.support}>{ui.support}</a>
+    </nav>
+    <nav aria-label={ui.languages}>
+      {locales.map(locale => (
+        <a href={page.alternates[locale]} data-locale={locale} lang={locale}>{labelFor(locale, 'language')}</a>
+      ))}
+      <a href={`https://github.com/${settings.repository}`}>GitHub ↗</a>
+    </nav>
+  </div>
+  <div class="container footer-bottom"><span>MIT · Awesome Copilot Adventures</span><span class="mono">{counts.revision}</span></div>
+</footer>

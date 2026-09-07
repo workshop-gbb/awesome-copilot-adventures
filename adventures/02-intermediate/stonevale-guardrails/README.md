@@ -165,7 +165,7 @@ Guardrails combine host permissions, tool restrictions, repository protections, 
 
 ## Guided mission
 
-Open the [Guardrails of Stonevale lab](https://github.com/paulasilvatech/awesome-copilot-adventures/blob/main/labs/stonevale-guardrails/README.md) and implement its deterministic command policy.
+Open the [Guardrails of Stonevale lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/stonevale-guardrails/README.md) and implement its deterministic command policy.
 
 Create a threat-and-authority table for a practice task. Limit a custom agent or simulated role to the minimum tools. Present external text containing a malicious instruction and verify it is treated as data. Run existing checks, inspect the complete diff, and perform a secret review.
 

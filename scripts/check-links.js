@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { root, markdownFiles: listMarkdownFiles } = require('./repository-files');
 const { withoutCodeBlocks } = require('./markdown-helpers');
+const { ownedSourcePath } = require('./site-content');
 const markdownFiles = listMarkdownFiles();
 
 const linkPatterns = [
@@ -15,9 +16,9 @@ for (const file of markdownFiles) {
   for (const linkPattern of linkPatterns) {
     for (const match of content.matchAll(linkPattern)) {
       let target = match[1].trim();
-      const ownedSource = target.match(/^https:\/\/github\.com\/paulasilvatech\/awesome-copilot-adventures\/(?:blob|tree)\/main\/([^?#]+)/);
-      if (ownedSource) {
-        const local = path.join(root, decodeURIComponent(ownedSource[1]));
+      const ownedSource = ownedSourcePath(target);
+      if (ownedSource !== null) {
+        const local = path.join(root, decodeURIComponent(ownedSource.split(/[?#]/)[0]));
         if (!fs.existsSync(local)) failures.push(`${path.relative(root, file)} -> ${target} (missing repository source)`);
         continue;
       }

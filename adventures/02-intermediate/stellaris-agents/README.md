@@ -165,7 +165,7 @@ A custom agent is a reusable role with focused instructions, selected tools, and
 
 ## Guided mission
 
-Open the [Agents of Stellaris lab](https://github.com/paulasilvatech/awesome-copilot-adventures/blob/main/labs/stellaris-agents/README.md) and complete the test-focused custom agent.
+Open the [Agents of Stellaris lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/stellaris-agents/README.md) and complete the test-focused custom agent.
 
 Create a narrow read-focused custom agent in a disposable repository. Define its mission, minimal tools, constraints, output evidence, and one handoff. Test an in-scope request, an out-of-scope request, and a request missing evidence. Revise until boundaries are observable.
 

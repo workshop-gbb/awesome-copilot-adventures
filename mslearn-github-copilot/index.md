@@ -134,4 +134,4 @@ and rollback, not just a new implementation.
 - [Scope a hands-on exercise](Instructions/Concepts/How%20to%20scope%20vibe%20coding%20lab%20exercise.md)
 - [Lab-by-lab audit](Instructions/Reference/AUDIT.md)
 - [Repository diagram style](../docs/diagram-style.md)
-- [Download fixture sources](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles)
+- [Download fixture sources](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles)

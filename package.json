@@ -4,8 +4,15 @@
   "private": true,
   "description": "Evidence-first, fantasy-themed curriculum for agentic software engineering with GitHub Copilot",
   "scripts": {
-    "build": "node scripts/check-content.js",
-    "test": "node scripts/check-links.js && node scripts/check-content.js && node scripts/check-hands-on.js && node scripts/check-diagrams.js && node --test --test-concurrency=1 scripts/hands-on.test.js && node scripts/verify-labs.js && node solutions/javascript/The-Gridlock-Arena-of-Mythos/The-Gridlock-Arena-of-Mythos.test.js",
+    "build": "node scripts/check-content.js && npm run build:site",
+    "build:site": "node scripts/build-site.js && node scripts/site-cli.js build",
+    "check:astro": "node scripts/site-cli.js check",
+    "dev:site": "node scripts/build-site.js && node scripts/site-cli.js dev",
+    "preview:site": "node scripts/site-cli.js preview",
+    "check:site": "node scripts/build-site.js --check",
+    "check:site:rendered": "node scripts/check-rendered-site.js",
+    "test:site": "node --test --test-concurrency=1 scripts/site.test.js",
+    "test": "node scripts/check-links.js && node scripts/check-content.js && node scripts/check-hands-on.js && node scripts/check-diagrams.js && node --test --test-concurrency=1 scripts/hands-on.test.js scripts/site.test.js && node scripts/build-site.js --validate && node scripts/verify-labs.js && node solutions/javascript/The-Gridlock-Arena-of-Mythos/The-Gridlock-Arena-of-Mythos.test.js",
     "format:diagrams": "node scripts/format-diagrams.js",
     "test:hands-on": "node scripts/check-hands-on.js && node --test --test-concurrency=1 scripts/hands-on.test.js"
   },
@@ -14,12 +21,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/paulasilvatech/awesome-copilot-adventures.git"
+    "url": "git+https://github.com/workshop-gbb/awesome-copilot-adventures.git"
   },
   "bugs": {
-    "url": "https://github.com/paulasilvatech/awesome-copilot-adventures/issues"
+    "url": "https://github.com/workshop-gbb/awesome-copilot-adventures/issues"
   },
-  "homepage": "https://paulasilvatech.github.io/awesome-copilot-adventures/",
+  "homepage": "https://workshop-gbb.github.io/awesome-copilot-adventures/",
   "keywords": [
     "github-copilot",
     "ai-agents",
@@ -30,5 +37,11 @@
     "model-context-protocol",
     "education"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@astrojs/markdown-satteri": "0.3.8",
+    "astro": "7.2.9",
+    "typescript": "6.0.3"
+  }
 }

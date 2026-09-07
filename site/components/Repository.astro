@@ -1,0 +1,34 @@
+---
+import { languageFor, counts, type Locale } from '../lib/catalog';
+interface Props { locale: Locale; }
+const { ui } = languageFor(Astro.props.locale);
+---
+<div class="section-heading">
+  <p class="eyebrow">{counts.sourceCount} / {ui.sourceCount}</p>
+  <h1>{ui.repository}</h1>
+  <p>{ui.sourceCoverage}</p>
+</div>
+<div class="source-explorer">
+  <aside class="source-tree">
+    <label for="source-filter" class="eyebrow">{ui.sourceFilter}</label>
+    <input id="source-filter" type="search" autocomplete="off" spellcheck="false" />
+    <p id="source-count" class="source-meta" role="status"></p>
+    <nav id="source-files" aria-label={ui.repository}></nav>
+  </aside>
+  <section class="source-viewer" aria-label={ui.source}>
+    <p id="source-status" role="status">{ui.loading}</p>
+    <div id="source-content" hidden>
+      <header class="source-heading">
+        <h2 id="source-title"></h2>
+        <p id="source-details" class="source-meta"></p>
+        <nav class="source-actions" aria-label={ui.source}>
+          <button id="source-download" class="button button-primary" type="button">{ui.download} ↓</button>
+          <a id="source-reading" class="button" hidden>{ui.read}</a>
+          <a id="source-github">{ui.github} ↗</a>
+        </nav>
+      </header>
+      <p id="source-notice" class="original-note"></p>
+      <div id="source-preview"></div>
+    </div>
+  </section>
+</div>

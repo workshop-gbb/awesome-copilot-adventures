@@ -1,0 +1,34 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Site from '../../layouts/Site.astro';
+import { activeLocales, languageFor, alternateUrls, type PageInfo } from '../../lib/catalog';
+
+export async function getStaticPaths() {
+  const documents = await getCollection('lessons');
+  const paths: { params: { locale: string; slug: string | undefined }; props: Props }[] = documents.map(entry => ({
+    params: { locale: entry.data.locale, slug: entry.data.route.replace(/^\/|\/$/g, '') || undefined },
+    props: { page: entry.data, entry }
+  }));
+  for (const locale of activeLocales) {
+    for (const kind of ['repository', 'library', 'not-found'] as const) {
+      const slug = kind === 'not-found' ? '404' : kind;
+      const route = `/${slug}/`;
+      const { ui } = languageFor(locale);
+      paths.push({
+        params: { locale, slug },
+        props: {
+          page: { locale, kind, title: ui[kind === 'library' ? 'libraryTitle' : kind === 'repository' ? 'repository' : 'notFound'], route, alternates: alternateUrls(route) },
+          entry: null
+        }
+      });
+    }
+  }
+  return paths;
+}
+
+interface Props { page: PageInfo; entry: CollectionEntry<'lessons'> | null; }
+const { page, entry } = Astro.props;
+const rendered = entry ? await render(entry) : null;
+const Content = rendered?.Content;
+---
+<Site page={page}>{Content && <Content />}</Site>

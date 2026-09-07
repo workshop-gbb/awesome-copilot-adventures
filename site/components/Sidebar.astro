@@ -1,0 +1,21 @@
+---
+import { languageFor, labelFor, type PageInfo } from '../lib/catalog';
+interface Props { page: PageInfo; }
+const { page } = Astro.props;
+const { ui, href, catalog } = languageFor(page.locale);
+const groups = ['adventures', 'hands-on', 'guides', 'fixtures', 'solutions', 'media'];
+---
+<aside class="learning-sidebar" aria-label={ui.learningNavigation}>
+  <a class="sidebar-start" href={href.curriculum}>{ui.curriculum} <span aria-hidden="true">↗</span></a>
+  {groups.map(group => (
+    <details class="sidebar-group" open={page.group === group}>
+      <summary>{labelFor(page.locale, group)}</summary>
+      <nav aria-label={labelFor(page.locale, group)}>
+        {catalog.filter(document => document.group === group).map(document => (
+          <a href={document.url} aria-current={document.source === page.source ? 'page' : undefined}>{document.title}</a>
+        ))}
+      </nav>
+    </details>
+  ))}
+  <a class="sidebar-source" href={href.repository}>{ui.repository} <span aria-hidden="true">↗</span></a>
+</aside>

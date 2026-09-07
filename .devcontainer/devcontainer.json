@@ -22,11 +22,16 @@
   ],
   "postCreateCommand": "bash .devcontainer/post-create.sh",
   "forwardPorts": [
-    3000
+    3000,
+    4321
   ],
   "portsAttributes": {
     "3000": {
       "label": "Context Mirrors lab",
+      "onAutoForward": "notify"
+    },
+    "4321": {
+      "label": "Astro learning site",
       "onAutoForward": "notify"
     }
   },
@@ -47,7 +52,9 @@
         "files.exclude": {
           "**/bin": true,
           "**/obj": true,
-          "**/__pycache__": true
+          "**/__pycache__": true,
+          "site-generated": true,
+          ".astro": true
         }
       }
     }

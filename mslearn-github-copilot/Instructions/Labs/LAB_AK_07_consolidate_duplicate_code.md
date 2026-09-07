@@ -32,7 +32,7 @@ inventory directions. Removing those differences would be a behavior change.
 
 Prepare `07-duplication` with [the common setup](../Reference/SETUP.md).
 The source is the bundled
-[ECommerceOrderAndReturn fixture](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/07-consolidate-duplicate-code/ECommerceOrderAndReturn).
+[ECommerceOrderAndReturn fixture](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/07-consolidate-duplicate-code/ECommerceOrderAndReturn).
 Use its .NET SDK target and one build process.
 
 ## Concepts and use cases

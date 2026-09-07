@@ -165,7 +165,7 @@ A reliable agent loop is inspect, hypothesize, change, verify, and review. Use o
 
 ## Guided mission
 
-Open the [Tempora Loop lab](https://github.com/paulasilvatech/awesome-copilot-adventures/blob/main/labs/tempora-loop/README.md) and implement the bounded refinement loop.
+Open the [Tempora Loop lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/tempora-loop/README.md) and implement the bounded refinement loop.
 
 Select a small intentional defect in a disposable project. Record the failing baseline, define a loop budget and stop condition, then run at least two short cycles. Log each hypothesis, change, command, exit result, and diff. Finish with the targeted check passing and broaden validation only when justified.
 

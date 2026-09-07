@@ -30,7 +30,7 @@ preserve comparison, ordering, null behavior, populated references and side effe
 
 Prepare `05-csharp` using [the setup guide](../Reference/SETUP.md).
 Use the bundled
-[C# refactoring fixture](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/05-refactor-improve-existing-code/AccelerateDevGHCopilot).
+[C# refactoring fixture](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/05-refactor-improve-existing-code/AccelerateDevGHCopilot).
 Do not change dependency versions during a refactor.
 
 ## Concepts and use cases

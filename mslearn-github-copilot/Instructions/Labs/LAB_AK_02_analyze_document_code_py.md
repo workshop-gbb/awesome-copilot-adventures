@@ -31,7 +31,7 @@ case sensitivity, or error handling.
 
 Complete [Python setup](LAB_AK_00_configure_lab_environment_py.md) and prepare
 `02-python`. Use the bundled
-[Python library fixture](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/02-python-analyze-document-code/AccelerateDevGHCopilot).
+[Python library fixture](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/02-python-analyze-document-code/AccelerateDevGHCopilot).
 Run commands below from its `library` directory.
 
 ## Concepts and use cases

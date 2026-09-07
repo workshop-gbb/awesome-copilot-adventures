@@ -165,7 +165,7 @@ Parallel agents are appropriate when tasks are independent, inputs and outputs a
 
 ## Guided mission
 
-Open the [Mythos Parallel lab](https://github.com/paulasilvatech/awesome-copilot-adventures/blob/main/labs/mythos-parallel/README.md) and preserve isolation and deterministic result ordering.
+Open the [Mythos Parallel lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/mythos-parallel/README.md) and preserve isolation and deterministic result ordering.
 
 Use a dependency map to define at least two non-overlapping work packets with ownership, exclusions, deliverables, and checks. Execute or simulate the workers, collect evidence-rich reports once, integrate sequentially, resolve conflicts, and run a combined verification.
 

@@ -6,8 +6,6 @@ permalink: /
 description: "Awesome Copilot Adventures: an evidence-first curriculum for agentic software engineering."
 ---
 
-<img src="{{ '/assets/images/legacy/copilot-adventures.png' | relative_url }}" alt="Fantasy adventurers exploring a luminous landscape of software engineering challenges">
-
 # Awesome Copilot Adventures
 
 Learn agentic software engineering through guided, fantasy-themed laboratories built around observable evidence.
@@ -88,7 +86,12 @@ Ask, Plan, and Agent are **roles**. Local and Copilot are VS Code **agent harnes
 | [Hands-on Labs](../mslearn-github-copilot/index.md) | Follow non-fantasy exercises, including Spec Kit modernization |
 | [Diagram style](diagram-style.md) | Understand monochrome colors, legends and accessibility |
 
-The executable source for each mission lives in the GitHub [adventure tree](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/adventures) and [lab tree](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/labs).
+The executable source for each mission lives in the GitHub [adventure tree](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/adventures) and [lab tree](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/labs).
+
+The multilingual site also includes a repository explorer for original code,
+fixtures, solutions, customizations, media and historical material. Learning pages
+are available in English, Spanish and Brazilian Portuguese; executable examples
+and original licenses retain their source text.
 
 > [!NOTE]
 > Product guidance was last verified against current official GitHub and Microsoft documentation on **2026-09-05**. Recheck the linked source when availability or policy materially affects your task.

@@ -31,7 +31,7 @@ was inspected or every claim is correct.
 
 Complete [C# setup](LAB_AK_00_configure_lab_environment.md), then prepare `02-csharp`.
 The bundled fixture is
-[AccelerateDevGHCopilot](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/02-analyze-document-code/AccelerateDevGHCopilot).
+[AccelerateDevGHCopilot](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/02-analyze-document-code/AccelerateDevGHCopilot).
 No remote clone or new GitHub repository is required.
 
 ## Concepts and use cases

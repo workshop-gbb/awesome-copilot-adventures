@@ -31,7 +31,7 @@ A helper that is never connected to the menu is not a completed feature.
 
 Prepare `03-csharp` using [the common setup](../Reference/SETUP.md).
 Use the bundled
-[library feature fixture](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/03-develop-code-features/AccelerateDevGHCopilot).
+[library feature fixture](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/03-develop-code-features/AccelerateDevGHCopilot).
 The C# setup lab describes SDK, caches and execution directories.
 
 ## Concepts and use cases

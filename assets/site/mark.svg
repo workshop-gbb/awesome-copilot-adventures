@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>Awesome Copilot Adventures</title>
+  <rect width="32" height="32" rx="3" fill="#1a1a1a"/>
+  <path fill="#39b8ff" d="M6 6h9v9H6z"/>
+  <path fill="#7ed956" d="M17 6h9v9h-9z"/>
+  <path fill="#ffde59" d="M6 17h9v9H6z"/>
+  <path fill="#ff3133" d="M17 17h9v9h-9z"/>
+</svg>

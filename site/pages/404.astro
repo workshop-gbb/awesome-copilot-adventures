@@ -1,0 +1,5 @@
+---
+import Site from '../layouts/Site.astro';
+import { alternateUrls, labelFor } from '../lib/catalog';
+---
+<Site page={{ locale: 'en', title: labelFor('en', 'notFound'), route: '/404/', kind: 'not-found', alternates: alternateUrls('/404/') }} />

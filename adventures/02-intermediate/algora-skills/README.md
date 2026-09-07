@@ -165,7 +165,7 @@ A skill packages reusable expertise an agent can load when relevant. Instruction
 
 ## Guided mission
 
-Open the [Skills of Algora lab](https://github.com/paulasilvatech/awesome-copilot-adventures/blob/main/labs/algora-skills/README.md) and complete the reusable skill.
+Open the [Skills of Algora lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/algora-skills/README.md) and complete the reusable skill.
 
 Design a skill for a deterministic task such as updating documentation links or adding a unit test. Include purpose, use-when, do-not-use-when, procedure, guardrails, and verification. Exercise one positive and one negative scenario, then record actual discovery behavior and limitations.
 

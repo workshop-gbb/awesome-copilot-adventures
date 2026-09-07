@@ -1,0 +1,79 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Search from '../components/Search.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Home from '../components/Home.astro';
+import Library from '../components/Library.astro';
+import Repository from '../components/Repository.astro';
+import { languageFor, labelFor, settings, type PageInfo } from '../lib/catalog';
+interface Props { page: PageInfo; }
+const { page } = Astro.props;
+const { ui, href } = languageFor(page.locale);
+const base = settings.base;
+const config = { locale: page.locale, base, mermaidVersion: settings.mermaidVersion, repository: settings.repository, kind: page.kind || 'document', ui };
+const json = JSON.stringify(config).replace(/</g, '\\u003c');
+const canonical = settings.site + page.alternates[page.locale];
+const ogLocale = { en: 'en_US', es: 'es_ES', 'pt-br': 'pt_BR' }[page.locale];
+---
+<!doctype html>
+<html lang={ui.languageTag} data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>{page.title} · Awesome Copilot Adventures</title>
+    <meta name="description" content={ui.heroDescription} />
+    <link rel="canonical" href={canonical} />
+    {page.kind === 'not-found' && <meta name="robots" content="noindex" />}
+    {Object.entries(page.alternates).map(([locale, url]) => <link rel="alternate" hreflang={locale} href={`${settings.site}${url}`} />)}
+    <link rel="alternate" hreflang="x-default" href={`${settings.site}${page.alternates.en}`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`${page.title} · Awesome Copilot Adventures`} />
+    <meta property="og:description" content={ui.heroDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={ogLocale} />
+    <link rel="icon" href={`${base}/assets/site/mark.svg`} type="image/svg+xml" />
+    <link rel="stylesheet" href={`${base}/assets/site/site.css`} />
+    <script is:inline src={`${base}/assets/site/theme.js`}></script>
+    <script is:inline id="site-config" type="application/json" set:html={json}></script>
+    <script is:inline type="module" src={`${base}/assets/site/site.js`}></script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">{ui.skip}</a>
+    <Header page={page} />
+    {page.home ? (
+      <main id="main">
+        <Home locale={page.locale} />
+        <section class="section home-reading container">
+          <div class="section-heading"><p class="eyebrow">{ui.curriculumEyebrow}</p><h2>{ui.libraryTitle}</h2><p>{ui.libraryDescription}</p></div>
+          <article class="document"><slot /></article>
+        </section>
+      </main>
+    ) : page.kind === 'repository' ? (
+      <main id="main" class="container section"><Repository locale={page.locale} /></main>
+    ) : page.kind === 'library' ? (
+      <main id="main" class="container section"><Library locale={page.locale} /></main>
+    ) : page.kind === 'not-found' ? (
+      <main id="main" class="container section not-found"><p class="eyebrow">404</p><h1>{ui.notFound}</h1><p>{ui.notFoundText}</p><a class="button button-primary" href={href.home}>{ui.home}</a></main>
+    ) : (
+      <div class="document-layout container">
+        <Sidebar page={page} />
+        <main id="main" class="reading-pane">
+          <nav class="breadcrumb" aria-label={ui.navigation}><a href={href.home}>{ui.home}</a><span aria-hidden="true">/</span><a href={href.library}>{labelFor(page.locale, page.group || 'guides')}</a></nav>
+          {page.verified && <p class="verification">{ui.verified} <time datetime={page.verified}>{page.verified}</time></p>}
+          <article class="document"><slot /></article>
+          <aside class="original-note">{ui.originalNotice}</aside>
+          <nav class="document-actions" aria-label={ui.source}>
+            <a href={`${href.repository}?path=${encodeURIComponent(page.source || '')}`}>{ui.source}</a>
+            <a href={`https://github.com/${settings.repository}/edit/main/${page.source}`}>{ui.edit} <span aria-hidden="true">↗</span></a>
+          </nav>
+        </main>
+        <aside class="page-toc" aria-label={ui.onPage} hidden><p class="eyebrow">{ui.onPage}</p><nav id="toc"></nav><a class="back-top" href="#top">{ui.backTop} ↑</a></aside>
+      </div>
+    )}
+    <Footer page={page} />
+    <Search locale={page.locale} />
+    <noscript><p class="noscript-note container">{ui.noScript}</p></noscript>
+  </body>
+</html>

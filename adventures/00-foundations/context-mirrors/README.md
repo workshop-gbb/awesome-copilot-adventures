@@ -165,7 +165,7 @@ Context includes the prompt, selected text, open files, repository instructions,
 
 ## Guided mission
 
-Open the [Context Mirrors lab](https://github.com/paulasilvatech/awesome-copilot-adventures/blob/main/labs/context-mirrors/README.md) and use a fresh copy for every experiment variant.
+Open the [Context Mirrors lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/context-mirrors/README.md) and use a fresh copy for every experiment variant.
 
 Choose a tiny behavior in a disposable repository. Ask for a source-grounded explanation with path citations. Define a minimal context packet containing the goal, two relevant paths, one explicit exclusion, acceptance criteria, and one verification command. Implement a reversible change and compare the initial assumptions with the final diff and check output.
 

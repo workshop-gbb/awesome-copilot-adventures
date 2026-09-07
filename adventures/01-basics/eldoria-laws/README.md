@@ -165,7 +165,7 @@ Repository instructions automatically provide durable conventions and constraint
 
 ## Guided mission
 
-Open the [Laws of Eldoria lab](https://github.com/paulasilvatech/awesome-copilot-adventures/blob/main/labs/eldoria-laws/README.md) and complete the scoped repository instructions.
+Open the [Laws of Eldoria lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/eldoria-laws/README.md) and complete the scoped repository instructions.
 
 In a disposable repository, inventory existing instruction files and one verifiable convention. Add a concise global instruction naming the real test command and prohibiting secrets, plus one path-specific rule. Request reversible changes inside and outside the scope; review prompts, diffs, and checks to prove the effect.
 

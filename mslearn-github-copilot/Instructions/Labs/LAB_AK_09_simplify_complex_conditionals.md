@@ -30,7 +30,7 @@ applies only inside a premium/high-value branch must not become a global rule.
 
 Prepare `09-conditionals` using [the setup guide](../Reference/SETUP.md).
 The primary fixture is
-[ECommercePricingEngine](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/09-simplify-complex-conditionals/ECommercePricingEngine).
+[ECommercePricingEngine](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/09-simplify-complex-conditionals/ECommercePricingEngine).
 The loan-approval demo is optional and purely fictional; it is not a credit policy
 or a system for real financial decisions.
 

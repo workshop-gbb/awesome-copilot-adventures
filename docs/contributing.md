@@ -7,7 +7,7 @@ permalink: /contributing/
 
 # Contributing
 
-Read the repository [Contribution Guide](https://github.com/paulasilvatech/awesome-copilot-adventures/blob/main/CONTRIBUTING.md), [Code of Conduct](https://github.com/paulasilvatech/awesome-copilot-adventures/blob/main/CODE_OF_CONDUCT.md), and [Security Policy](https://github.com/paulasilvatech/awesome-copilot-adventures/blob/main/SECURITY.md) before proposing changes.
+Read the repository [Contribution Guide](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/CONTRIBUTING.md), [Code of Conduct](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/CODE_OF_CONDUCT.md), and [Security Policy](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/SECURITY.md) before proposing changes.
 
 ```mermaid
 ---

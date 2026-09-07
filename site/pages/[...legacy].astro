@@ -1,0 +1,26 @@
+---
+import redirects from '../../site-generated/redirects.json';
+import { settings, alternateUrls, labelFor } from '../lib/catalog';
+
+export function getStaticPaths() {
+  return redirects.map(route => ({ params: { legacy: route.replace(/^\/|\/$/g, '') || undefined }, props: { route } }));
+}
+
+interface Props { route: string; }
+const { route } = Astro.props;
+const alternate = alternateUrls(route);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Awesome Copilot Adventures</title>
+    <link rel="canonical" href={`${settings.site}${alternate.en}`} />
+    <meta http-equiv="refresh" content={`0;url=${alternate.en}`} />
+  </head>
+  <body>
+    <p>{labelFor('en', 'redirect')} <a href={alternate.en}>English</a> · <a href={alternate.es}>Español</a> · <a href={alternate['pt-br']}>Português do Brasil</a></p>
+    <script is:inline define:vars={{ target: alternate.en }}>location.replace(target + location.search + location.hash);</script>
+  </body>
+</html>

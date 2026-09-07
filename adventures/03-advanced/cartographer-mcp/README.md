@@ -165,7 +165,7 @@ Model Context Protocol standardizes how a host can discover capabilities exposed
 
 ## Guided mission
 
-Open the [MCP Cartographer lab](https://github.com/paulasilvatech/awesome-copilot-adventures/blob/main/labs/cartographer-mcp/README.md), complete its portable configuration, and verify `initialize`, `tools/list`, and the read-only `tools/call`.
+Open the [MCP Cartographer lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/cartographer-mcp/README.md), complete its portable configuration, and verify `initialize`, `tools/list`, and the read-only `tools/call`.
 
 Confirm host support, choose a harmless read-only server, and map client, server, capability, data flow, authentication, and trust boundary. Record discovered capabilities, invoke one bounded read-only tool, and verify its answer independently rather than trusting the response alone.
 

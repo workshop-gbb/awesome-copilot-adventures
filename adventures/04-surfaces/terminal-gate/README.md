@@ -165,7 +165,7 @@ Copilot CLI is a terminal agent harness. Commands inherit the current directory,
 
 ## Guided mission
 
-Open the [Terminal Gate lab](https://github.com/paulasilvatech/awesome-copilot-adventures/blob/main/labs/terminal-gate/README.md) and implement its safe command parser.
+Open the [Terminal Gate lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/terminal-gate/README.md) and implement its safe command parser.
 
 In a disposable repository, record the working directory, repository status, project instructions, available tools, and existing checks. Ask for a source-grounded explanation, plan one reversible change, implement it, run the narrowest validation, and capture commands, exit codes, status, and diff.
 

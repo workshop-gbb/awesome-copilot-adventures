@@ -11,7 +11,7 @@ permalink: /start-here/
 
 | Option | Best for |
 | --- | --- |
-| [GitHub Codespaces](https://codespaces.new/paulasilvatech/awesome-copilot-adventures?quickstart=1) | Fastest reproducible setup |
+| [GitHub Codespaces](https://codespaces.new/workshop-gbb/awesome-copilot-adventures?quickstart=1) | Fastest reproducible setup |
 | VS Code Dev Container | Local work with the repository-defined toolchain |
 | Local clone | Learners who already have Node 24, Python 3.14, and .NET 10 |
 

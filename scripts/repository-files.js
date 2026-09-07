@@ -7,7 +7,7 @@ const skippedDirectories = new Set([
   '.git', 'node_modules', '_site', 'bin', 'obj', '.venv', '__pycache__',
   '.pytest_cache', 'TestResults', '.cache'
 ]);
-const sourceDirectories = ['adventures', 'assets', 'docs', 'labs', 'legacy', 'mslearn-github-copilot', 'shared', 'solutions', '.github'];
+const sourceDirectories = ['adventures', 'assets', 'docs', 'labs', 'legacy', 'mslearn-github-copilot', 'shared', 'solutions', '.github', '.devcontainer', 'scripts', 'site', 'site-locales'];
 
 function walk(directory) {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
@@ -42,7 +42,9 @@ function repositoryFiles() {
 }
 
 function markdownFiles() {
-  return repositoryFiles().filter(filename => filename.toLowerCase().endsWith('.md'));
+  // Generated locale copies have their own translation, route and diagram checks.
+  return repositoryFiles().filter(filename => filename.toLowerCase().endsWith('.md')
+    && !path.relative(root, filename).startsWith(`site-pages${path.sep}`));
 }
 
 module.exports = { root, repositoryFiles, markdownFiles };

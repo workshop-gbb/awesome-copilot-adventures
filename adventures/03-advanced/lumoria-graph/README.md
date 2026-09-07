@@ -165,7 +165,7 @@ A repository knowledge graph models files, symbols, tests, services, owners, and
 
 ## Guided mission
 
-Open the [Lumoria Graph lab](https://github.com/paulasilvatech/awesome-copilot-adventures/blob/main/labs/lumoria-graph/README.md) and implement cycle-safe dependency traversal.
+Open the [Lumoria Graph lab](https://github.com/workshop-gbb/awesome-copilot-adventures/blob/main/labs/lumoria-graph/README.md) and implement cycle-safe dependency traversal.
 
 Choose one behavior and trace its entry point, definitions, references, tests, configuration, and external boundaries. Create a small typed Mermaid or text graph with source evidence for every node and edge. Predict impact, make a reversible change, rerun discovery and tests, then update the graph from observations.
 

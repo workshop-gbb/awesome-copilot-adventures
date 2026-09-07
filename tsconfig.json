@@ -1,0 +1,9 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "site/**/*.ts", "site/**/*.astro"],
+  "exclude": ["dist", "labs", "solutions", "legacy", "mslearn-github-copilot", "site-locales", "site-generated"],
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false
+  }
+}

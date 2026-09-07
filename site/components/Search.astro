@@ -1,0 +1,13 @@
+---
+import { languageFor, type Locale } from '../lib/catalog';
+interface Props { locale: Locale; }
+const { ui } = languageFor(Astro.props.locale);
+---
+<dialog id="search-dialog" aria-labelledby="search-title">
+  <div class="search-heading"><h2 id="search-title">{ui.search}</h2><form method="dialog"><button class="quiet-button" aria-label={ui.close}>✕</button></form></div>
+  <label class="sr-only" for="search-input">{ui.search}</label>
+  <input id="search-input" type="search" placeholder={ui.searchPlaceholder} autocomplete="off" aria-describedby="search-help" />
+  <p id="search-help" class="search-help">{ui.searchHelp}</p>
+  <p id="search-status" role="status" aria-live="polite"></p>
+  <ol id="search-results"></ol>
+</dialog>

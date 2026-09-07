@@ -30,7 +30,7 @@ repository instead of testing a helper defined only inside the test.
 
 Prepare `04-xunit` with [the common setup](../Reference/SETUP.md).
 Use the bundled
-[xUnit fixture](https://github.com/paulasilvatech/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/04-develop-unit-tests-xunit/AccelerateDevGHCopilot).
+[xUnit fixture](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/mslearn-github-copilot/LabFiles/04-develop-unit-tests-xunit/AccelerateDevGHCopilot).
 Do not replace xUnit with another framework or install packages globally.
 
 ## Concepts and use cases
