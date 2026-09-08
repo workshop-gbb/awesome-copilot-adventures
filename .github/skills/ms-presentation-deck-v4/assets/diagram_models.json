@@ -1,0 +1,3973 @@
+{
+ "stack": [
+  {
+   "kind": "zone",
+   "x": 0,
+   "y": 0,
+   "w": 1120,
+   "h": 92,
+   "label": "Developer surfaces · where the work happens",
+   "key": "dg1.z1",
+   "color": "var(--ps-color-ms-blue-500)",
+   "text": "var(--ps-text-blue)",
+   "order": 0
+  },
+  {
+   "kind": "zone",
+   "x": 0,
+   "y": 124,
+   "w": 1120,
+   "h": 122,
+   "label": "Microsoft Foundry · one model layer, one agent runtime",
+   "key": "dg1.z2",
+   "color": "var(--ps-vendor-anthropic)",
+   "text": "var(--ps-text-anthropic)",
+   "order": 1
+  },
+  {
+   "kind": "zone",
+   "x": 0,
+   "y": 278,
+   "w": 1120,
+   "h": 92,
+   "label": "Control plane · already there for GPT, now shared with Claude",
+   "key": "dg1.z3",
+   "color": "var(--ps-color-ms-green-500)",
+   "text": "var(--ps-text-green)",
+   "order": 2
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 30,
+   "w": 212,
+   "h": 50,
+   "icon": "gh-mark",
+   "label": "GitHub",
+   "sub": "repos · Actions · Copilot",
+   "key": null,
+   "subkey": "dg1.s1",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 3
+  },
+  {
+   "kind": "node",
+   "x": 234,
+   "y": 30,
+   "w": 212,
+   "h": 50,
+   "icon": "br-githubcopilot",
+   "label": "GitHub Copilot",
+   "sub": "Claude in the model picker",
+   "key": null,
+   "subkey": "dg1.s2",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 4
+  },
+  {
+   "kind": "node",
+   "x": 454,
+   "y": 30,
+   "w": 212,
+   "h": 50,
+   "icon": "br-claudecode",
+   "label": "Claude Code",
+   "sub": "CLI · VS Code · pipeline",
+   "key": null,
+   "subkey": "dg1.s3",
+   "color": "#D97757",
+   "accent": null,
+   "tone": "paper",
+   "order": 5
+  },
+  {
+   "kind": "node",
+   "x": 674,
+   "y": 30,
+   "w": 212,
+   "h": 50,
+   "icon": "br-microsoft",
+   "label": "Copilot Studio",
+   "sub": "Microsoft 365 Copilot",
+   "key": null,
+   "subkey": "dg1.s4",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 6
+  },
+  {
+   "kind": "node",
+   "x": 894,
+   "y": 30,
+   "w": 212,
+   "h": 50,
+   "icon": "br-claude",
+   "label": "Claude Desktop",
+   "sub": "Cowork · Intune deployed",
+   "key": null,
+   "subkey": "dg1.s5",
+   "color": "#D97757",
+   "accent": null,
+   "tone": "paper",
+   "order": 7
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 152,
+   "w": 267,
+   "h": 50,
+   "icon": "br-anthropic",
+   "label": "Claude models",
+   "sub": "Opus 5 · Sonnet 5 · Haiku 4.5",
+   "key": null,
+   "subkey": "dg1.c1s",
+   "color": "#D97757",
+   "accent": "var(--ps-vendor-anthropic)",
+   "tone": "paper",
+   "order": 8
+  },
+  {
+   "kind": "node",
+   "x": 289,
+   "y": 152,
+   "w": 267,
+   "h": 50,
+   "icon": "ic-controlplane",
+   "label": "Model Router",
+   "sub": "GPT · Claude · 11,000+ models",
+   "key": null,
+   "subkey": "dg1.c2s",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 9
+  },
+  {
+   "kind": "node",
+   "x": 564,
+   "y": 152,
+   "w": 267,
+   "h": 50,
+   "icon": "ic-agentsvc",
+   "label": "Agent Service",
+   "sub": "hosted agents · workflows",
+   "key": null,
+   "subkey": "dg1.c3s",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 10
+  },
+  {
+   "kind": "node",
+   "x": 839,
+   "y": 152,
+   "w": 267,
+   "h": 50,
+   "icon": "ic-search",
+   "label": "Foundry IQ · Memory",
+   "sub": "Azure AI Search · grounding",
+   "key": null,
+   "subkey": "dg1.c4s",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 11
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 210,
+   "w": 200,
+   "h": 30,
+   "icon": "ic-functions",
+   "label": "Toolbox",
+   "sub": null,
+   "key": null,
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 12
+  },
+  {
+   "kind": "node",
+   "x": 234,
+   "y": 210,
+   "w": 200,
+   "h": 30,
+   "icon": "ic-apim",
+   "label": "MCP · A2A",
+   "sub": null,
+   "key": null,
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 13
+  },
+  {
+   "kind": "node",
+   "x": 454,
+   "y": 210,
+   "w": 200,
+   "h": 30,
+   "icon": "ic-logicapps",
+   "label": "Skills API",
+   "sub": null,
+   "key": null,
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 14
+  },
+  {
+   "kind": "node",
+   "x": 674,
+   "y": 210,
+   "w": 200,
+   "h": 30,
+   "icon": "ic-foundryproj",
+   "label": "Projects",
+   "sub": null,
+   "key": null,
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 15
+  },
+  {
+   "kind": "node",
+   "x": 894,
+   "y": 210,
+   "w": 200,
+   "h": 30,
+   "icon": "ic-mlstudio",
+   "label": "Evaluations",
+   "sub": null,
+   "key": null,
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 16
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 308,
+   "w": 172,
+   "h": 50,
+   "icon": "ic-entra",
+   "label": "Entra ID",
+   "sub": null,
+   "key": null,
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 17
+  },
+  {
+   "kind": "node",
+   "x": 197,
+   "y": 308,
+   "w": 172,
+   "h": 50,
+   "icon": "gx-agentid",
+   "label": "Agent ID · Agent 365",
+   "sub": null,
+   "key": null,
+   "subkey": null,
+   "color": "#0078D4",
+   "accent": null,
+   "tone": "paper",
+   "order": 18
+  },
+  {
+   "kind": "node",
+   "x": 380,
+   "y": 308,
+   "w": 172,
+   "h": 50,
+   "icon": "ic-defender",
+   "label": "Defender",
+   "sub": null,
+   "key": null,
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 19
+  },
+  {
+   "kind": "node",
+   "x": 563,
+   "y": 308,
+   "w": 172,
+   "h": 50,
+   "icon": "ic-compliance",
+   "label": "Purview",
+   "sub": null,
+   "key": null,
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 20
+  },
+  {
+   "kind": "node",
+   "x": 746,
+   "y": 308,
+   "w": 172,
+   "h": 50,
+   "icon": "ic-monitor",
+   "label": "Azure Monitor",
+   "sub": null,
+   "key": null,
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 21
+  },
+  {
+   "kind": "node",
+   "x": 929,
+   "y": 308,
+   "w": 172,
+   "h": 50,
+   "icon": "ic-cost",
+   "label": "Cost · MACC",
+   "sub": null,
+   "key": null,
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 22
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     120,
+     80
+    ],
+    [
+     120,
+     108
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 6
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     340,
+     80
+    ],
+    [
+     340,
+     108
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 6
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     560,
+     80
+    ],
+    [
+     560,
+     108
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 6
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     780,
+     80
+    ],
+    [
+     780,
+     108
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 6
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     1000,
+     80
+    ],
+    [
+     1000,
+     108
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 6
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     560,
+     108
+    ],
+    [
+     560,
+     124
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 7
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     100,
+     262
+    ],
+    [
+     100,
+     278
+    ]
+   ],
+   "style": "c--gov",
+   "label": null,
+   "key": null,
+   "order": 16
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     283,
+     262
+    ],
+    [
+     283,
+     278
+    ]
+   ],
+   "style": "c--gov",
+   "label": null,
+   "key": null,
+   "order": 16
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     466,
+     262
+    ],
+    [
+     466,
+     278
+    ]
+   ],
+   "style": "c--gov",
+   "label": null,
+   "key": null,
+   "order": 16
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     649,
+     262
+    ],
+    [
+     649,
+     278
+    ]
+   ],
+   "style": "c--gov",
+   "label": null,
+   "key": null,
+   "order": 16
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     832,
+     262
+    ],
+    [
+     832,
+     278
+    ]
+   ],
+   "style": "c--gov",
+   "label": null,
+   "key": null,
+   "order": 16
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     1015,
+     262
+    ],
+    [
+     1015,
+     278
+    ]
+   ],
+   "style": "c--gov",
+   "label": null,
+   "key": null,
+   "order": 16
+  },
+  {
+   "kind": "legend",
+   "x": 0,
+   "y": 398,
+   "items": [
+    {
+     "swatch": "fill",
+     "color": "#D97757",
+     "label": "Anthropic",
+     "key": "dg1.l1"
+    },
+    {
+     "swatch": "fill",
+     "color": "#24292F",
+     "label": "GitHub",
+     "key": "dg1.l2"
+    },
+    {
+     "swatch": "fill",
+     "color": "#0078D4",
+     "label": "Azure · Microsoft",
+     "key": "dg1.l3"
+    },
+    {
+     "swatch": "line",
+     "color": "var(--ps-color-ink-3)",
+     "label": "request path",
+     "key": "dg1.l4"
+    },
+    {
+     "swatch": "dash",
+     "color": "var(--ps-color-ms-green-500)",
+     "label": "governance, inherited",
+     "key": "dg1.l5"
+    }
+   ],
+   "order": 23
+  },
+  {
+   "kind": "canvas",
+   "w": 1120,
+   "h": 412,
+   "uid": "dg1"
+  }
+ ],
+ "boundary": [
+  {
+   "kind": "zone",
+   "x": 0,
+   "y": 0,
+   "w": 810,
+   "h": 300,
+   "label": "Inside the Azure boundary · prompts and completions never leave",
+   "key": "dg2.z1",
+   "color": "var(--ps-color-ms-green-500)",
+   "text": "var(--ps-text-green)",
+   "order": 0
+  },
+  {
+   "kind": "zone",
+   "x": 850,
+   "y": 0,
+   "w": 270,
+   "h": 300,
+   "label": "Leaves the boundary",
+   "key": "dg2.z2",
+   "color": "var(--ps-color-ms-red-500)",
+   "text": "var(--ps-text-red)",
+   "order": 1
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 40,
+   "w": 150,
+   "h": 56,
+   "icon": "ic-aca",
+   "label": "App or agent",
+   "sub": "VNet · private endpoint",
+   "key": "dg2.t1",
+   "subkey": "dg2.s1",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 2
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     164,
+     68
+    ],
+    [
+     176,
+     68
+    ]
+   ],
+   "style": "c--acc",
+   "label": null,
+   "key": null,
+   "order": 2
+  },
+  {
+   "kind": "node",
+   "x": 176,
+   "y": 40,
+   "w": 150,
+   "h": 56,
+   "icon": "ic-entra",
+   "label": "Entra ID",
+   "sub": "token · RBAC · no key",
+   "key": null,
+   "subkey": "dg2.s2",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 3
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     326,
+     68
+    ],
+    [
+     338,
+     68
+    ]
+   ],
+   "style": "c--acc",
+   "label": null,
+   "key": null,
+   "order": 3
+  },
+  {
+   "kind": "node",
+   "x": 338,
+   "y": 40,
+   "w": 150,
+   "h": 56,
+   "icon": "ic-apim",
+   "label": "APIM gateway",
+   "sub": "quota · budget · team",
+   "key": null,
+   "subkey": "dg2.s3",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 4
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     488,
+     68
+    ],
+    [
+     500,
+     68
+    ]
+   ],
+   "style": "c--acc",
+   "label": null,
+   "key": null,
+   "order": 4
+  },
+  {
+   "kind": "node",
+   "x": 500,
+   "y": 40,
+   "w": 150,
+   "h": 56,
+   "icon": "ic-defender",
+   "label": "Content Safety",
+   "sub": "you add it",
+   "key": null,
+   "subkey": "dg2.s4",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 5
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     650,
+     68
+    ],
+    [
+     662,
+     68
+    ]
+   ],
+   "style": "c--acc",
+   "label": null,
+   "key": null,
+   "order": 5
+  },
+  {
+   "kind": "node",
+   "x": 662,
+   "y": 40,
+   "w": 134,
+   "h": 56,
+   "icon": "ic-foundry",
+   "label": "Claude on Azure",
+   "sub": "GPU · your region",
+   "key": "dg2.t5",
+   "subkey": "dg2.s5",
+   "color": null,
+   "accent": "var(--ps-vendor-anthropic)",
+   "tone": "paper",
+   "order": 6
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     729,
+     96
+    ],
+    [
+     729,
+     128
+    ],
+    [
+     89,
+     128
+    ],
+    [
+     89,
+     96
+    ]
+   ],
+   "style": "c--back",
+   "label": "completion, back the same way",
+   "key": "dg2.back",
+   "order": 8
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 176,
+   "w": 188,
+   "h": 56,
+   "icon": "ic-monitor",
+   "label": "Azure Monitor",
+   "sub": "latency · tokens · audit",
+   "key": null,
+   "subkey": "dg2.o1",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 9
+  },
+  {
+   "kind": "node",
+   "x": 212,
+   "y": 176,
+   "w": 188,
+   "h": 56,
+   "icon": "ic-compliance",
+   "label": "Purview",
+   "sub": "classification at source",
+   "key": null,
+   "subkey": "dg2.o2",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 10
+  },
+  {
+   "kind": "node",
+   "x": 410,
+   "y": 176,
+   "w": 188,
+   "h": 56,
+   "icon": "ic-search",
+   "label": "Grounding",
+   "sub": "AI Search · Fabric · MCP",
+   "key": "dg2.t3",
+   "subkey": "dg2.o3",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 11
+  },
+  {
+   "kind": "node",
+   "x": 608,
+   "y": 176,
+   "w": 188,
+   "h": 56,
+   "icon": "ic-vnet",
+   "label": "Network",
+   "sub": "private link · no egress",
+   "key": "dg2.t4",
+   "subkey": "dg2.o4",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 12
+  },
+  {
+   "kind": "node",
+   "x": 864,
+   "y": 40,
+   "w": 242,
+   "h": 56,
+   "icon": "doc",
+   "label": "Usage metadata",
+   "sub": "volume and billing signals",
+   "key": "dg2.y1",
+   "subkey": "dg2.x1",
+   "color": "var(--ps-text-red)",
+   "accent": null,
+   "tone": "paper",
+   "order": 13
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     796,
+     68
+    ],
+    [
+     830,
+     68
+    ],
+    [
+     830,
+     68
+    ],
+    [
+     864,
+     68
+    ]
+   ],
+   "style": "c--out",
+   "label": null,
+   "key": null,
+   "order": 13
+  },
+  {
+   "kind": "node",
+   "x": 864,
+   "y": 114,
+   "w": 242,
+   "h": 56,
+   "icon": "ic-defender",
+   "label": "Safety-flagged content",
+   "sub": "only what safeguards flag",
+   "key": "dg2.y2",
+   "subkey": "dg2.x2",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 14
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     796,
+     68
+    ],
+    [
+     830,
+     68
+    ],
+    [
+     830,
+     142
+    ],
+    [
+     864,
+     142
+    ]
+   ],
+   "style": "c--out",
+   "label": null,
+   "key": null,
+   "order": 14
+  },
+  {
+   "kind": "node",
+   "x": 864,
+   "y": 188,
+   "w": 242,
+   "h": 56,
+   "icon": "ic-apim",
+   "label": "MCP server calls",
+   "sub": "egress your agent opens",
+   "key": "dg2.y3",
+   "subkey": "dg2.x3",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 15
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     796,
+     204
+    ],
+    [
+     830,
+     204
+    ],
+    [
+     830,
+     216
+    ],
+    [
+     864,
+     216
+    ]
+   ],
+   "style": "c--out",
+   "label": null,
+   "key": null,
+   "order": 15
+  },
+  {
+   "kind": "legend",
+   "x": 0,
+   "y": 330,
+   "items": [
+    {
+     "swatch": "line",
+     "color": "var(--accent)",
+     "label": "request",
+     "key": "dg2.l1"
+    },
+    {
+     "swatch": "line",
+     "color": "var(--ps-color-ink-3)",
+     "label": "completion",
+     "key": "dg2.l2"
+    },
+    {
+     "swatch": "dash",
+     "color": "var(--ps-text-red)",
+     "label": "leaves the boundary",
+     "key": "dg2.l3"
+    },
+    {
+     "swatch": "fill",
+     "color": "#D97757",
+     "label": "Claude, hosted on Azure",
+     "key": "dg2.l4"
+    }
+   ],
+   "order": 17
+  },
+  {
+   "kind": "canvas",
+   "w": 1120,
+   "h": 344,
+   "uid": "dg2"
+  }
+ ],
+ "identity": [
+  {
+   "kind": "legend",
+   "x": 0,
+   "y": 350,
+   "items": [
+    {
+     "swatch": "line",
+     "color": "var(--accent)",
+     "label": "request",
+     "key": "dg3.l1"
+    },
+    {
+     "swatch": "line",
+     "color": "var(--ps-color-ink-3)",
+     "label": "response",
+     "key": "dg3.l2"
+    },
+    {
+     "swatch": "fill",
+     "color": "#0078D4",
+     "label": "one directory, people and agents",
+     "key": "dg3.l3"
+    },
+    {
+     "swatch": "fill",
+     "color": "#D97757",
+     "label": "Claude, hosted on Azure",
+     "key": "dg3.l4"
+    }
+   ],
+   "order": 17
+  },
+  {
+   "kind": "canvas",
+   "w": 1120,
+   "h": 362,
+   "uid": "dg3"
+  }
+ ],
+ "residency": [
+  {
+   "kind": "zone",
+   "x": 0,
+   "y": 0,
+   "w": 700,
+   "h": 290,
+   "label": "Azure region you choose · East US 2, Sweden Central",
+   "key": "dg4.z1",
+   "color": "var(--ps-color-ms-blue-500)",
+   "text": "var(--ps-text-blue)",
+   "order": 0
+  },
+  {
+   "kind": "zone",
+   "x": 860,
+   "y": 0,
+   "w": 260,
+   "h": 290,
+   "label": "Anthropic · seller of record",
+   "key": "dg4.z2",
+   "color": "var(--ps-vendor-anthropic)",
+   "text": "var(--ps-text-anthropic)",
+   "order": 1
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 40,
+   "w": 210,
+   "h": 56,
+   "icon": "ic-aca",
+   "label": "Your app",
+   "sub": "prompt out, completion in",
+   "key": "dg4.t1",
+   "subkey": "dg4.n1",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 2
+  },
+  {
+   "kind": "node",
+   "x": 300,
+   "y": 40,
+   "w": 386,
+   "h": 56,
+   "icon": "ic-foundry",
+   "label": "Claude on Azure GPU",
+   "sub": "Foundry resource · Entra · your subscription",
+   "key": null,
+   "subkey": "dg4.n2",
+   "color": null,
+   "accent": "var(--ps-vendor-anthropic)",
+   "tone": "paper",
+   "order": 3
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     224,
+     58
+    ],
+    [
+     300,
+     58
+    ]
+   ],
+   "style": "c--acc",
+   "label": "prompt",
+   "key": "dg4.e1",
+   "order": 4
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     300,
+     80
+    ],
+    [
+     224,
+     80
+    ]
+   ],
+   "style": "c--back",
+   "label": null,
+   "key": null,
+   "order": 5
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 122,
+   "w": 210,
+   "h": 56,
+   "icon": "db",
+   "label": "Data at rest",
+   "sub": "geography you selected",
+   "key": "dg4.t3",
+   "subkey": "dg4.n3",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 6
+  },
+  {
+   "kind": "node",
+   "x": 300,
+   "y": 122,
+   "w": 386,
+   "h": 56,
+   "icon": "ic-compliance",
+   "label": "Retention",
+   "sub": "Anthropic DPA · zero retention by agreement",
+   "key": "dg4.t4",
+   "subkey": "dg4.n4",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 7
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 204,
+   "w": 210,
+   "h": 56,
+   "icon": "ic-entra",
+   "label": "Governance",
+   "sub": "Entra · RBAC · Monitor · Purview",
+   "key": "dg4.t5",
+   "subkey": "dg4.n5",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 8
+  },
+  {
+   "kind": "node",
+   "x": 300,
+   "y": 204,
+   "w": 386,
+   "h": 56,
+   "icon": "ic-monitor",
+   "label": "Model weights",
+   "sub": "Microsoft operates, Anthropic does not run it",
+   "key": "dg4.t6",
+   "subkey": "dg4.n6",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 9
+  },
+  {
+   "kind": "node",
+   "x": 874,
+   "y": 40,
+   "w": 232,
+   "h": 56,
+   "icon": "doc",
+   "label": "Usage metadata",
+   "sub": "volume · billing signals",
+   "key": "dg4.y1",
+   "subkey": "dg4.x1",
+   "color": "var(--ps-text-red)",
+   "accent": null,
+   "tone": "paper",
+   "order": 10
+  },
+  {
+   "kind": "node",
+   "x": 874,
+   "y": 122,
+   "w": 232,
+   "h": 56,
+   "icon": "ic-defender",
+   "label": "Safety-flagged content",
+   "sub": "reviewed by exception",
+   "key": "dg4.y2",
+   "subkey": "dg4.x2",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 11
+  },
+  {
+   "kind": "node",
+   "x": 874,
+   "y": 204,
+   "w": 232,
+   "h": 56,
+   "icon": "br-anthropic",
+   "label": "Training on your data",
+   "sub": "never, under the commercial terms",
+   "key": "dg4.y3",
+   "subkey": "dg4.x3",
+   "color": "#D97757",
+   "accent": null,
+   "tone": "paper",
+   "order": 12
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     686,
+     68
+    ],
+    [
+     874,
+     68
+    ]
+   ],
+   "style": "c--out",
+   "label": null,
+   "key": null,
+   "order": 10
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     686,
+     150
+    ],
+    [
+     874,
+     150
+    ]
+   ],
+   "style": "c--out",
+   "label": null,
+   "key": null,
+   "order": 11
+  },
+  {
+   "kind": "legend",
+   "x": 0,
+   "y": 320,
+   "items": [
+    {
+     "swatch": "line",
+     "color": "var(--accent)",
+     "label": "prompt and completion stay",
+     "key": "dg4.l1"
+    },
+    {
+     "swatch": "dash",
+     "color": "var(--ps-text-red)",
+     "label": "leaves, by contract",
+     "key": "dg4.l2"
+    },
+    {
+     "swatch": "fill",
+     "color": "#0078D4",
+     "label": "Microsoft operates",
+     "key": "dg4.l3"
+    },
+    {
+     "swatch": "fill",
+     "color": "#D97757",
+     "label": "Anthropic sells, does not run",
+     "key": "dg4.l4"
+    }
+   ],
+   "order": 14
+  },
+  {
+   "kind": "canvas",
+   "w": 1120,
+   "h": 334,
+   "uid": "dg4"
+  }
+ ],
+ "sourcing": [
+  {
+   "kind": "zone",
+   "x": 0,
+   "y": 0,
+   "w": 820,
+   "h": 108,
+   "label": "Orchestration · Agent Service",
+   "key": "dg5.z1",
+   "color": "var(--ps-vendor-anthropic)",
+   "text": "var(--ps-text-anthropic)",
+   "order": 0
+  },
+  {
+   "kind": "zone",
+   "x": 0,
+   "y": 132,
+   "w": 820,
+   "h": 84,
+   "label": "Five specialists · one per task",
+   "key": "dg5.z2",
+   "color": "var(--ps-color-ms-blue-500)",
+   "text": "var(--ps-text-blue)",
+   "order": 1
+  },
+  {
+   "kind": "zone",
+   "x": 0,
+   "y": 240,
+   "w": 820,
+   "h": 84,
+   "label": "Systems of record · read, never become",
+   "key": "dg5.z3",
+   "color": "var(--ps-color-ms-green-500)",
+   "text": "var(--ps-text-green)",
+   "order": 2
+  },
+  {
+   "kind": "zone",
+   "x": 850,
+   "y": 0,
+   "w": 270,
+   "h": 324,
+   "label": "Governance · every layer",
+   "key": "dg5.z4",
+   "color": "var(--ps-color-ms-yellow-500)",
+   "text": "var(--ps-text-yellow)",
+   "order": 3
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 36,
+   "w": 240,
+   "h": 56,
+   "icon": "person",
+   "label": "Buyer · human in the loop",
+   "sub": "approve · deny · budget",
+   "key": "dg5.t0",
+   "subkey": "dg5.n0",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 4
+  },
+  {
+   "kind": "node",
+   "x": 320,
+   "y": 36,
+   "w": 300,
+   "h": 56,
+   "icon": "ic-agentsvc",
+   "label": "Orchestrator",
+   "sub": "Opus 5 · plans, routes, checks",
+   "key": "dg5.t1",
+   "subkey": "dg5.n1",
+   "color": null,
+   "accent": "var(--ps-vendor-anthropic)",
+   "tone": "paper",
+   "order": 5
+  },
+  {
+   "kind": "node",
+   "x": 660,
+   "y": 36,
+   "w": 146,
+   "h": 56,
+   "icon": "br-anthropic",
+   "label": "Claude",
+   "sub": "on Foundry",
+   "key": null,
+   "subkey": "dg5.n1b",
+   "color": "#D97757",
+   "accent": null,
+   "tone": "paper",
+   "order": 6
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     254,
+     54
+    ],
+    [
+     320,
+     54
+    ]
+   ],
+   "style": "c--acc",
+   "label": "request",
+   "key": "dg5.e1",
+   "order": 6
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     320,
+     76
+    ],
+    [
+     254,
+     76
+    ]
+   ],
+   "style": "c--back",
+   "label": null,
+   "key": null,
+   "order": 7
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     620,
+     64
+    ],
+    [
+     660,
+     64
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 7
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     470,
+     92
+    ],
+    [
+     470,
+     112
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 8
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 156,
+   "w": 146,
+   "h": 50,
+   "icon": "ic-agentsvc",
+   "label": "Quote",
+   "sub": "Opus 5",
+   "key": "dg5.s1",
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 8
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     87,
+     112
+    ],
+    [
+     87,
+     132
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 8
+  },
+  {
+   "kind": "node",
+   "x": 176,
+   "y": 156,
+   "w": 146,
+   "h": 50,
+   "icon": "ic-agentsvc",
+   "label": "Validation",
+   "sub": "Sonnet 5 +memory",
+   "key": "dg5.s2",
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 9
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     249,
+     112
+    ],
+    [
+     249,
+     132
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 9
+  },
+  {
+   "kind": "node",
+   "x": 338,
+   "y": 156,
+   "w": 146,
+   "h": 50,
+   "icon": "ic-agentsvc",
+   "label": "Fulfillment",
+   "sub": "Sonnet 5 +memory",
+   "key": "dg5.s3",
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 10
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     411,
+     112
+    ],
+    [
+     411,
+     132
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 10
+  },
+  {
+   "kind": "node",
+   "x": 500,
+   "y": 156,
+   "w": 146,
+   "h": 50,
+   "icon": "ic-agentsvc",
+   "label": "Billing",
+   "sub": "Haiku 4.5",
+   "key": "dg5.s4",
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 11
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     573,
+     112
+    ],
+    [
+     573,
+     132
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 11
+  },
+  {
+   "kind": "node",
+   "x": 662,
+   "y": 156,
+   "w": 146,
+   "h": 50,
+   "icon": "ic-agentsvc",
+   "label": "Onboarding",
+   "sub": "Haiku 4.5 +memory",
+   "key": "dg5.s5",
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 12
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     735,
+     112
+    ],
+    [
+     735,
+     132
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 12
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 264,
+   "w": 180,
+   "h": 50,
+   "icon": "ic-search",
+   "label": "Azure AI Search",
+   "sub": "prices · taxonomy",
+   "key": null,
+   "subkey": "dg5.r1",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 13
+  },
+  {
+   "kind": "node",
+   "x": 218,
+   "y": 264,
+   "w": 180,
+   "h": 50,
+   "icon": "gx-lake",
+   "label": "Fabric",
+   "sub": "suppliers · risk",
+   "key": null,
+   "subkey": "dg5.r2",
+   "color": "#0078D4",
+   "accent": null,
+   "tone": "paper",
+   "order": 14
+  },
+  {
+   "kind": "node",
+   "x": 422,
+   "y": 264,
+   "w": 180,
+   "h": 50,
+   "icon": "ic-cosmos",
+   "label": "Cosmos DB",
+   "sub": "orders · sanctions",
+   "key": null,
+   "subkey": "dg5.r3",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 15
+  },
+  {
+   "kind": "node",
+   "x": 626,
+   "y": 264,
+   "w": 180,
+   "h": 50,
+   "icon": "db",
+   "label": "ERP",
+   "sub": "via internal MCP",
+   "key": null,
+   "subkey": "dg5.r4",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 16
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     87,
+     206
+    ],
+    [
+     87,
+     240
+    ]
+   ],
+   "style": "c--thin c--dashed",
+   "label": null,
+   "key": null,
+   "order": 13
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     249,
+     206
+    ],
+    [
+     249,
+     240
+    ]
+   ],
+   "style": "c--thin c--dashed",
+   "label": null,
+   "key": null,
+   "order": 13
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     411,
+     206
+    ],
+    [
+     411,
+     240
+    ]
+   ],
+   "style": "c--thin c--dashed",
+   "label": null,
+   "key": null,
+   "order": 13
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     573,
+     206
+    ],
+    [
+     573,
+     240
+    ]
+   ],
+   "style": "c--thin c--dashed",
+   "label": null,
+   "key": null,
+   "order": 13
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     735,
+     206
+    ],
+    [
+     735,
+     240
+    ]
+   ],
+   "style": "c--thin c--dashed",
+   "label": null,
+   "key": null,
+   "order": 13
+  },
+  {
+   "kind": "node",
+   "x": 864,
+   "y": 36,
+   "w": 242,
+   "h": 56,
+   "icon": "ic-entra",
+   "label": "Entra Agent ID",
+   "sub": "one identity per agent",
+   "key": null,
+   "subkey": "dg5.g1",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 17
+  },
+  {
+   "kind": "node",
+   "x": 864,
+   "y": 108,
+   "w": 242,
+   "h": 56,
+   "icon": "ic-defender",
+   "label": "Content Safety",
+   "sub": "in the app path",
+   "key": null,
+   "subkey": "dg5.g2",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 18
+  },
+  {
+   "kind": "node",
+   "x": 864,
+   "y": 180,
+   "w": 242,
+   "h": 56,
+   "icon": "ic-monitor",
+   "label": "App Insights",
+   "sub": "OpenTelemetry traces",
+   "key": null,
+   "subkey": "dg5.g3",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 19
+  },
+  {
+   "kind": "node",
+   "x": 864,
+   "y": 252,
+   "w": 242,
+   "h": 56,
+   "icon": "ic-apim",
+   "label": "APIM",
+   "sub": "cost and quota policy",
+   "key": null,
+   "subkey": "dg5.g4",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 20
+  },
+  {
+   "kind": "legend",
+   "x": 0,
+   "y": 350,
+   "items": [
+    {
+     "swatch": "line",
+     "color": "var(--accent)",
+     "label": "request",
+     "key": "dg5.l1"
+    },
+    {
+     "swatch": "line",
+     "color": "var(--ps-color-ink-3)",
+     "label": "delegation",
+     "key": "dg5.l2"
+    },
+    {
+     "swatch": "dash",
+     "color": "var(--ps-color-ink-3)",
+     "label": "read only",
+     "key": "dg5.l3"
+    },
+    {
+     "swatch": "fill",
+     "color": "#D97757",
+     "label": "Claude on Foundry",
+     "key": "dg5.l4"
+    }
+   ],
+   "order": 21
+  },
+  {
+   "kind": "canvas",
+   "w": 1120,
+   "h": 362,
+   "uid": "dg5"
+  }
+ ],
+ "fabric": [
+  {
+   "kind": "zone",
+   "x": 0,
+   "y": 0,
+   "w": 1120,
+   "h": 118,
+   "label": "Data · one governed copy, meaning attached",
+   "key": "dg6.z1",
+   "color": "var(--ps-color-ms-green-500)",
+   "text": "var(--ps-text-green)",
+   "order": 0
+  },
+  {
+   "kind": "zone",
+   "x": 0,
+   "y": 148,
+   "w": 1120,
+   "h": 100,
+   "label": "Agent · reads with the user's permissions, remembers across threads",
+   "key": "dg6.z2",
+   "color": "var(--ps-vendor-anthropic)",
+   "text": "var(--ps-text-anthropic)",
+   "order": 1
+  },
+  {
+   "kind": "zone",
+   "x": 0,
+   "y": 278,
+   "w": 1120,
+   "h": 74,
+   "label": "Back into the work",
+   "key": "dg6.z3",
+   "color": "var(--ps-color-ms-blue-500)",
+   "text": "var(--ps-text-blue)",
+   "order": 2
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 36,
+   "w": 250,
+   "h": 56,
+   "icon": "gx-lake",
+   "label": "OneLake",
+   "sub": "one copy, shortcuts not extracts",
+   "key": "dg6.t1",
+   "subkey": "dg6.n1",
+   "color": "#0078D4",
+   "accent": null,
+   "tone": "paper",
+   "order": 3
+  },
+  {
+   "kind": "node",
+   "x": 300,
+   "y": 36,
+   "w": 250,
+   "h": 56,
+   "icon": "gx-lake",
+   "label": "Fabric IQ",
+   "sub": "semantic layer · metrics defined once",
+   "key": "dg6.t2",
+   "subkey": "dg6.n2",
+   "color": "#0078D4",
+   "accent": null,
+   "tone": "paper",
+   "order": 4
+  },
+  {
+   "kind": "node",
+   "x": 586,
+   "y": 36,
+   "w": 250,
+   "h": 56,
+   "icon": "ic-search",
+   "label": "Foundry IQ · AI Search",
+   "sub": "permission-aware, multi-pass retrieval",
+   "key": "dg6.t3",
+   "subkey": "dg6.n3",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 5
+  },
+  {
+   "kind": "node",
+   "x": 872,
+   "y": 36,
+   "w": 234,
+   "h": 56,
+   "icon": "ic-compliance",
+   "label": "Purview",
+   "sub": "labels travel with the data",
+   "key": "dg6.t4",
+   "subkey": "dg6.n4",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 6
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     264,
+     64
+    ],
+    [
+     300,
+     64
+    ]
+   ],
+   "style": "c--acc",
+   "label": null,
+   "key": null,
+   "order": 4
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     550,
+     64
+    ],
+    [
+     586,
+     64
+    ]
+   ],
+   "style": "c--acc",
+   "label": null,
+   "key": null,
+   "order": 5
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     872,
+     64
+    ],
+    [
+     836,
+     64
+    ]
+   ],
+   "style": "c--gov",
+   "label": null,
+   "key": null,
+   "order": 6
+  },
+  {
+   "kind": "node",
+   "x": 300,
+   "y": 174,
+   "w": 300,
+   "h": 56,
+   "icon": "ic-agentsvc",
+   "label": "Foundry agent",
+   "sub": "Claude · inherits the user's access",
+   "key": "dg6.t5",
+   "subkey": "dg6.n5",
+   "color": null,
+   "accent": "var(--ps-vendor-anthropic)",
+   "tone": "paper",
+   "order": 7
+  },
+  {
+   "kind": "node",
+   "x": 660,
+   "y": 174,
+   "w": 300,
+   "h": 56,
+   "icon": "ic-cosmos",
+   "label": "Cosmos DB memory",
+   "sub": "turns · summaries · facts · profiles",
+   "key": "dg6.t6",
+   "subkey": "dg6.n6",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 8
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     711,
+     92
+    ],
+    [
+     711,
+     128
+    ],
+    [
+     450,
+     128
+    ],
+    [
+     450,
+     148
+    ]
+   ],
+   "style": "c--acc",
+   "label": "grounded answer",
+   "key": "dg6.e1",
+   "order": 7
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     600,
+     200
+    ],
+    [
+     660,
+     200
+    ]
+   ],
+   "style": "c--thin",
+   "label": "write",
+   "key": "dg6.e2",
+   "order": 8
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     660,
+     214
+    ],
+    [
+     600,
+     214
+    ]
+   ],
+   "style": "c--back",
+   "label": null,
+   "key": null,
+   "order": 9
+  },
+  {
+   "kind": "node",
+   "x": 140,
+   "y": 300,
+   "w": 300,
+   "h": 40,
+   "icon": "br-microsoft",
+   "label": "Microsoft 365 Copilot",
+   "sub": null,
+   "key": "dg6.t7",
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 10
+  },
+  {
+   "kind": "node",
+   "x": 490,
+   "y": 300,
+   "w": 250,
+   "h": 40,
+   "icon": "br-microsoft",
+   "label": "Teams",
+   "sub": null,
+   "key": null,
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 11
+  },
+  {
+   "kind": "node",
+   "x": 790,
+   "y": 300,
+   "w": 300,
+   "h": 40,
+   "icon": "ic-entra",
+   "label": "Entra ID · one permission model",
+   "sub": null,
+   "key": "dg6.t8",
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 12
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     450,
+     230
+    ],
+    [
+     450,
+     300
+    ]
+   ],
+   "style": "c--acc",
+   "label": "publish",
+   "key": "dg6.e4",
+   "order": 10
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     614,
+     258
+    ],
+    [
+     614,
+     300
+    ]
+   ],
+   "style": "c--acc",
+   "label": null,
+   "key": null,
+   "order": 11
+  },
+  {
+   "kind": "legend",
+   "x": 0,
+   "y": 378,
+   "items": [
+    {
+     "swatch": "line",
+     "color": "var(--accent)",
+     "label": "data to answer",
+     "key": "dg6.l1"
+    },
+    {
+     "swatch": "dash",
+     "color": "var(--ps-color-ms-green-500)",
+     "label": "governance, inherited",
+     "key": "dg6.l2"
+    },
+    {
+     "swatch": "line",
+     "color": "var(--ps-color-ink-3)",
+     "label": "memory",
+     "key": "dg6.l3"
+    },
+    {
+     "swatch": "fill",
+     "color": "#D97757",
+     "label": "Claude on Foundry",
+     "key": "dg6.l4"
+    }
+   ],
+   "order": 13
+  },
+  {
+   "kind": "canvas",
+   "w": 1120,
+   "h": 392,
+   "uid": "dg6"
+  }
+ ],
+ "host": [
+  {
+   "kind": "zone",
+   "x": 0,
+   "y": 0,
+   "w": 548,
+   "h": 96,
+   "label": "Hosted on Azure · the default",
+   "key": "dg7.z1",
+   "color": "var(--ps-color-ms-green-500)",
+   "text": "var(--ps-text-green)",
+   "order": 0
+  },
+  {
+   "kind": "zone",
+   "x": 572,
+   "y": 0,
+   "w": 548,
+   "h": 96,
+   "label": "Hosted on Anthropic · the exception",
+   "key": "dg7.z2",
+   "color": "var(--ps-color-ms-red-500)",
+   "text": "var(--ps-text-red)",
+   "order": 1
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 30,
+   "w": 140,
+   "h": 48,
+   "icon": "ic-aca",
+   "label": "Your app",
+   "sub": "Entra token",
+   "key": "dg7.t1",
+   "subkey": "dg7.n1",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 2
+  },
+  {
+   "kind": "node",
+   "x": 196,
+   "y": 30,
+   "w": 160,
+   "h": 48,
+   "icon": "ic-foundry",
+   "label": "Foundry",
+   "sub": "endpoint · Azure region",
+   "key": "dg7.t2",
+   "subkey": "dg7.n2",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 3
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     154,
+     54
+    ],
+    [
+     196,
+     54
+    ]
+   ],
+   "style": "c--acc",
+   "label": null,
+   "key": null,
+   "order": 3
+  },
+  {
+   "kind": "node",
+   "x": 586,
+   "y": 30,
+   "w": 140,
+   "h": 48,
+   "icon": "ic-aca",
+   "label": "Your app",
+   "sub": "Entra token",
+   "key": "dg7.t1",
+   "subkey": "dg7.n1",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 3
+  },
+  {
+   "kind": "node",
+   "x": 768,
+   "y": 30,
+   "w": 160,
+   "h": 48,
+   "icon": "ic-foundry",
+   "label": "Foundry",
+   "sub": "endpoint · Azure region",
+   "key": "dg7.t2",
+   "subkey": "dg7.n2",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 4
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     726,
+     54
+    ],
+    [
+     768,
+     54
+    ]
+   ],
+   "style": "c--acc",
+   "label": null,
+   "key": null,
+   "order": 4
+  },
+  {
+   "kind": "node",
+   "x": 398,
+   "y": 30,
+   "w": 136,
+   "h": 48,
+   "icon": "br-anthropic",
+   "label": "Claude",
+   "sub": "Azure GPU · your geo",
+   "key": "dg7.t3",
+   "subkey": "dg7.n3",
+   "color": "#D97757",
+   "accent": "var(--ps-color-ms-green-500)",
+   "tone": "paper",
+   "order": 5
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     356,
+     54
+    ],
+    [
+     398,
+     54
+    ]
+   ],
+   "style": "c--acc",
+   "label": null,
+   "key": null,
+   "order": 5
+  },
+  {
+   "kind": "node",
+   "x": 970,
+   "y": 30,
+   "w": 136,
+   "h": 48,
+   "icon": "br-anthropic",
+   "label": "Claude",
+   "sub": "Anthropic infra",
+   "key": "dg7.t3",
+   "subkey": "dg7.n4",
+   "color": "#D97757",
+   "accent": "var(--ps-text-red)",
+   "tone": "paper",
+   "order": 6
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     928,
+     54
+    ],
+    [
+     970,
+     54
+    ]
+   ],
+   "style": "c--out",
+   "label": null,
+   "key": null,
+   "order": 6
+  },
+  {
+   "kind": "canvas",
+   "w": 1120,
+   "h": 112,
+   "uid": "dg7"
+  }
+ ],
+ "regions": [
+  {
+   "kind": "zone",
+   "x": 0,
+   "y": 0,
+   "w": 340,
+   "h": 300,
+   "label": "Client · Brazil and LATAM",
+   "key": "dg8.z1",
+   "color": "var(--ps-color-ms-blue-500)",
+   "text": "var(--ps-text-blue)",
+   "order": 0
+  },
+  {
+   "kind": "zone",
+   "x": 400,
+   "y": 0,
+   "w": 720,
+   "h": 300,
+   "label": "Where Claude on Azure runs today",
+   "key": "dg8.z2",
+   "color": "var(--ps-color-ms-green-500)",
+   "text": "var(--ps-text-green)",
+   "order": 1
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 40,
+   "w": 312,
+   "h": 56,
+   "icon": "ic-aca",
+   "label": "Your app · São Paulo",
+   "sub": "prompt out, completion back",
+   "key": "dg8.t1",
+   "subkey": "dg8.n1",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 2
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 122,
+   "w": 312,
+   "h": 56,
+   "icon": "ic-vnet",
+   "label": "Brazil South",
+   "sub": "not available for Claude models",
+   "key": "dg8.t2",
+   "subkey": "dg8.n2",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 3
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 204,
+   "w": 312,
+   "h": 56,
+   "icon": "ic-compliance",
+   "label": "How to frame it",
+   "sub": "compliant international transfer",
+   "key": "dg8.t3",
+   "subkey": "dg8.n3",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 5
+  },
+  {
+   "kind": "node",
+   "x": 414,
+   "y": 40,
+   "w": 330,
+   "h": 56,
+   "icon": "ic-foundry",
+   "label": "East US 2",
+   "sub": "Global Standard · US Data Zone",
+   "key": "dg8.t4",
+   "subkey": "dg8.n4",
+   "color": null,
+   "accent": "var(--ps-color-ms-green-500)",
+   "tone": "paper",
+   "order": 6
+  },
+  {
+   "kind": "node",
+   "x": 776,
+   "y": 40,
+   "w": 330,
+   "h": 56,
+   "icon": "ic-foundry",
+   "label": "Sweden Central",
+   "sub": "Global Standard",
+   "key": "dg8.t5",
+   "subkey": "dg8.n5",
+   "color": null,
+   "accent": "var(--ps-color-ms-green-500)",
+   "tone": "paper",
+   "order": 7
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     326,
+     60
+    ],
+    [
+     414,
+     60
+    ]
+   ],
+   "style": "c--acc",
+   "label": "prompt",
+   "key": "dg8.e1",
+   "order": 6
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     414,
+     80
+    ],
+    [
+     326,
+     80
+    ]
+   ],
+   "style": "c--back",
+   "label": null,
+   "key": null,
+   "order": 7
+  },
+  {
+   "kind": "node",
+   "x": 414,
+   "y": 122,
+   "w": 330,
+   "h": 56,
+   "icon": "db",
+   "label": "Data at rest",
+   "sub": "in the Azure geography you select",
+   "key": "dg8.t6",
+   "subkey": "dg8.n6",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 8
+  },
+  {
+   "kind": "node",
+   "x": 776,
+   "y": 122,
+   "w": 330,
+   "h": 56,
+   "icon": "ic-foundry",
+   "label": "EU and APAC zones",
+   "sub": "planned from Q2 FY27 · confirm the date",
+   "key": "dg8.t7",
+   "subkey": "dg8.n7",
+   "color": null,
+   "accent": null,
+   "tone": "ghost",
+   "order": 9
+  },
+  {
+   "kind": "node",
+   "x": 414,
+   "y": 204,
+   "w": 330,
+   "h": 56,
+   "icon": "ic-entra",
+   "label": "Who signs it off",
+   "sub": "field CELA picks the instrument",
+   "key": "dg8.t8",
+   "subkey": "dg8.n8",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 10
+  },
+  {
+   "kind": "node",
+   "x": 776,
+   "y": 204,
+   "w": 330,
+   "h": 56,
+   "icon": "ic-vnet",
+   "label": "Sovereign clouds",
+   "sub": "Anthropic models absent · scope out early",
+   "key": "dg8.t9",
+   "subkey": "dg8.n9",
+   "color": null,
+   "accent": null,
+   "tone": "ghost",
+   "order": 11
+  },
+  {
+   "kind": "legend",
+   "x": 0,
+   "y": 330,
+   "items": [
+    {
+     "swatch": "line",
+     "color": "var(--accent)",
+     "label": "prompt",
+     "key": "dg8.l1"
+    },
+    {
+     "swatch": "fill",
+     "color": "var(--ps-color-ms-green-500)",
+     "label": "available today",
+     "key": "dg8.l2"
+    },
+    {
+     "swatch": "dash",
+     "color": "var(--ps-color-ink-3)",
+     "label": "planned, not promised",
+     "key": "dg8.l3"
+    },
+    {
+     "swatch": "fill",
+     "color": "var(--ps-text-red)",
+     "label": "not available",
+     "key": "dg8.l4"
+    }
+   ],
+   "order": 13
+  },
+  {
+   "kind": "canvas",
+   "w": 1120,
+   "h": 344,
+   "uid": "dg8"
+  }
+ ],
+ "platform": [
+  {
+   "kind": "zone",
+   "x": 0,
+   "y": 0,
+   "w": 500,
+   "h": 352,
+   "label": "On the Microsoft estate",
+   "key": "dg9.z1",
+   "color": "var(--ps-color-ms-blue-500)",
+   "text": "var(--ps-text-blue)",
+   "order": 0
+  },
+  {
+   "kind": "zone",
+   "x": 760,
+   "y": 0,
+   "w": 360,
+   "h": 352,
+   "label": "On AWS",
+   "key": "dg9.z2",
+   "color": "var(--ps-color-ink-3)",
+   "text": "var(--ps-color-ink-3)",
+   "order": 1
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 30,
+   "w": 472,
+   "h": 40,
+   "icon": "br-microsoft",
+   "label": "Microsoft 365 Copilot",
+   "sub": "Researcher · Excel · Word · PowerPoint · Copilot Studio",
+   "key": null,
+   "subkey": "dg9.m1",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 2
+  },
+  {
+   "kind": "node",
+   "x": 774,
+   "y": 30,
+   "w": 332,
+   "h": 40,
+   "icon": "db",
+   "label": "Amazon Quick Suite",
+   "sub": "no Office underneath",
+   "key": null,
+   "subkey": "dg9.a1",
+   "color": null,
+   "accent": null,
+   "tone": "ghost",
+   "order": 2
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 76,
+   "w": 472,
+   "h": 40,
+   "icon": "br-githubcopilot",
+   "label": "GitHub Copilot",
+   "sub": "the seat the client already licenses",
+   "key": null,
+   "subkey": "dg9.m2",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 3
+  },
+  {
+   "kind": "node",
+   "x": 774,
+   "y": 76,
+   "w": 332,
+   "h": 40,
+   "icon": "db",
+   "label": "Kiro · Amazon Q Developer",
+   "sub": "bought separately",
+   "key": null,
+   "subkey": "dg9.a2",
+   "color": null,
+   "accent": null,
+   "tone": "ghost",
+   "order": 3
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 122,
+   "w": 472,
+   "h": 40,
+   "icon": "ic-agentsvc",
+   "label": "Foundry Agent Service",
+   "sub": "prompt and hosted agents · Agent Framework",
+   "key": null,
+   "subkey": "dg9.m3",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 4
+  },
+  {
+   "kind": "node",
+   "x": 774,
+   "y": 122,
+   "w": 332,
+   "h": 40,
+   "icon": "db",
+   "label": "Bedrock AgentCore",
+   "sub": "same openness claim",
+   "key": null,
+   "subkey": "dg9.a3",
+   "color": null,
+   "accent": null,
+   "tone": "ghost",
+   "order": 4
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 168,
+   "w": 472,
+   "h": 40,
+   "icon": "ic-entra",
+   "label": "Entra · Agent ID",
+   "sub": "one directory for people and agents",
+   "key": null,
+   "subkey": "dg9.m4",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 5
+  },
+  {
+   "kind": "node",
+   "x": 774,
+   "y": 168,
+   "w": 332,
+   "h": 40,
+   "icon": "db",
+   "label": "IAM · AgentCore Identity",
+   "sub": "beside the workforce directory",
+   "key": null,
+   "subkey": "dg9.a4",
+   "color": null,
+   "accent": null,
+   "tone": "ghost",
+   "order": 5
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 214,
+   "w": 472,
+   "h": 40,
+   "icon": "gx-lake",
+   "label": "Fabric · OneLake · Foundry IQ",
+   "sub": "retrieval that respects Entra permissions",
+   "key": null,
+   "subkey": "dg9.m5",
+   "color": "#0078D4",
+   "accent": null,
+   "tone": "paper",
+   "order": 6
+  },
+  {
+   "kind": "node",
+   "x": 774,
+   "y": 214,
+   "w": 332,
+   "h": 40,
+   "icon": "db",
+   "label": "S3 · Redshift · Glue · Kendra",
+   "sub": "assembled per project",
+   "key": null,
+   "subkey": "dg9.a5",
+   "color": null,
+   "accent": null,
+   "tone": "ghost",
+   "order": 6
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 260,
+   "w": 472,
+   "h": 40,
+   "icon": "ic-defender",
+   "label": "Defender · Purview · Sentinel",
+   "sub": "same tenant, productivity layer covered",
+   "key": null,
+   "subkey": "dg9.m6",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 7
+  },
+  {
+   "kind": "node",
+   "x": 774,
+   "y": 260,
+   "w": 332,
+   "h": 40,
+   "icon": "db",
+   "label": "GuardDuty · Macie",
+   "sub": "no productivity layer to cover",
+   "key": null,
+   "subkey": "dg9.a6",
+   "color": null,
+   "accent": null,
+   "tone": "ghost",
+   "order": 7
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 306,
+   "w": 472,
+   "h": 40,
+   "icon": "ic-cost",
+   "label": "One MACC, one Azure invoice",
+   "sub": "Marketplace billed sales",
+   "key": null,
+   "subkey": "dg9.m7",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 8
+  },
+  {
+   "kind": "node",
+   "x": 774,
+   "y": 306,
+   "w": 332,
+   "h": 40,
+   "icon": "db",
+   "label": "Separate EDP",
+   "sub": "a second finance conversation",
+   "key": null,
+   "subkey": "dg9.a7",
+   "color": null,
+   "accent": null,
+   "tone": "ghost",
+   "order": 8
+  },
+  {
+   "kind": "legend",
+   "x": 0,
+   "y": 374,
+   "items": [
+    {
+     "swatch": "fill",
+     "color": "#0078D4",
+     "label": "already open on the desktop",
+     "key": "dg9.l1"
+    },
+    {
+     "swatch": "dash",
+     "color": "var(--ps-color-ink-3)",
+     "label": "capable, bought separately",
+     "key": "dg9.l2"
+    },
+    {
+     "swatch": "fill",
+     "color": "#D97757",
+     "label": "same Claude in both",
+     "key": "dg9.l3"
+    }
+   ],
+   "order": 10
+  },
+  {
+   "kind": "canvas",
+   "w": 1120,
+   "h": 388,
+   "uid": "dg9"
+  }
+ ],
+ "databricks": [
+  {
+   "kind": "zone",
+   "x": 0,
+   "y": 0,
+   "w": 700,
+   "h": 300,
+   "label": "Inside Azure · the boundary the client defends",
+   "key": "dg10.z1",
+   "color": "var(--ps-color-ms-green-500)",
+   "text": "var(--ps-text-green)",
+   "order": 0
+  },
+  {
+   "kind": "zone",
+   "x": 760,
+   "y": 0,
+   "w": 360,
+   "h": 300,
+   "label": "Outside Azure",
+   "key": "dg10.z2",
+   "color": "var(--ps-color-ms-red-500)",
+   "text": "var(--ps-text-red)",
+   "order": 1
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 36,
+   "w": 250,
+   "h": 56,
+   "icon": "ic-databricks",
+   "label": "Azure Databricks",
+   "sub": "notebook · SQL · job · Unity Catalog",
+   "key": "dg10.t1",
+   "subkey": "dg10.n1",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 2
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 122,
+   "w": 250,
+   "h": 56,
+   "icon": "ic-controlplane",
+   "label": "External model provider",
+   "sub": "one dropdown, four destinations",
+   "key": "dg10.t2",
+   "subkey": "dg10.n2",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 3
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     139,
+     92
+    ],
+    [
+     139,
+     122
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 3
+  },
+  {
+   "kind": "node",
+   "x": 340,
+   "y": 36,
+   "w": 346,
+   "h": 48,
+   "icon": "ic-foundry",
+   "label": "Azure OpenAI · Entra ID",
+   "sub": "Azure endpoint, Azure identity",
+   "key": "dg10.t3",
+   "subkey": "dg10.n3",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 4
+  },
+  {
+   "kind": "node",
+   "x": 340,
+   "y": 100,
+   "w": 346,
+   "h": 56,
+   "icon": "ic-apim",
+   "label": "OpenAI-compatible endpoint",
+   "sub": "APIM in front of the Foundry Claude deployment",
+   "key": "dg10.t4",
+   "subkey": "dg10.n4",
+   "color": null,
+   "accent": "var(--ps-color-ms-green-500)",
+   "tone": "paper",
+   "order": 5
+  },
+  {
+   "kind": "node",
+   "x": 340,
+   "y": 172,
+   "w": 346,
+   "h": 48,
+   "icon": "br-anthropic",
+   "label": "Claude on Foundry",
+   "sub": "the client's own deployment · MACC · ZDR",
+   "key": "dg10.t5",
+   "subkey": "dg10.n5",
+   "color": "#D97757",
+   "accent": "var(--ps-vendor-anthropic)",
+   "tone": "paper",
+   "order": 6
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     513,
+     156
+    ],
+    [
+     513,
+     172
+    ]
+   ],
+   "style": "c--acc",
+   "label": null,
+   "key": null,
+   "order": 6
+  },
+  {
+   "kind": "node",
+   "x": 774,
+   "y": 36,
+   "w": 332,
+   "h": 48,
+   "icon": "br-anthropic",
+   "label": "Anthropic API · API key",
+   "sub": "client's own contract · no MACC",
+   "key": "dg10.t6",
+   "subkey": "dg10.n6",
+   "color": "#D97757",
+   "accent": null,
+   "tone": "ghost",
+   "order": 7
+  },
+  {
+   "kind": "node",
+   "x": 774,
+   "y": 100,
+   "w": 332,
+   "h": 48,
+   "icon": "db",
+   "label": "Amazon Bedrock · Claude",
+   "sub": "same dropdown, another cloud",
+   "key": "dg10.t7",
+   "subkey": "dg10.n7",
+   "color": null,
+   "accent": null,
+   "tone": "ghost",
+   "order": 8
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     264,
+     150
+    ],
+    [
+     300,
+     150
+    ],
+    [
+     300,
+     60
+    ],
+    [
+     340,
+     60
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 4
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     264,
+     150
+    ],
+    [
+     300,
+     150
+    ],
+    [
+     300,
+     128
+    ],
+    [
+     340,
+     128
+    ]
+   ],
+   "style": "c--acc",
+   "label": null,
+   "key": null,
+   "order": 5
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     264,
+     150
+    ],
+    [
+     300,
+     150
+    ],
+    [
+     300,
+     236
+    ],
+    [
+     730,
+     236
+    ],
+    [
+     730,
+     60
+    ],
+    [
+     774,
+     60
+    ]
+   ],
+   "style": "c--out",
+   "label": null,
+   "key": null,
+   "order": 7
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     730,
+     124
+    ],
+    [
+     774,
+     124
+    ]
+   ],
+   "style": "c--out",
+   "label": null,
+   "key": null,
+   "order": 8
+  },
+  {
+   "kind": "legend",
+   "x": 0,
+   "y": 330,
+   "items": [
+    {
+     "swatch": "line",
+     "color": "var(--accent)",
+     "label": "the configuration to recommend",
+     "key": "dg10.l1"
+    },
+    {
+     "swatch": "line",
+     "color": "var(--ps-color-ink-3)",
+     "label": "also inside Azure",
+     "key": "dg10.l2"
+    },
+    {
+     "swatch": "dash",
+     "color": "var(--ps-text-red)",
+     "label": "leaves Azure, leaves MACC",
+     "key": "dg10.l3"
+    },
+    {
+     "swatch": "fill",
+     "color": "#D97757",
+     "label": "Claude on Foundry",
+     "key": "dg10.l4"
+    }
+   ],
+   "order": 9
+  },
+  {
+   "kind": "canvas",
+   "w": 1120,
+   "h": 344,
+   "uid": "dg10"
+  }
+ ],
+ "copilot": [
+  {
+   "kind": "zone",
+   "x": 0,
+   "y": 0,
+   "w": 340,
+   "h": 300,
+   "label": "Where the developer is",
+   "key": "dg11.z1",
+   "color": "var(--ps-color-ink-3)",
+   "text": "var(--ps-color-ink-3)",
+   "order": 0
+  },
+  {
+   "kind": "zone",
+   "x": 380,
+   "y": 0,
+   "w": 300,
+   "h": 300,
+   "label": "GitHub Copilot · the seat",
+   "key": "dg11.z2",
+   "color": "var(--ps-color-ms-blue-500)",
+   "text": "var(--ps-text-blue)",
+   "order": 1
+  },
+  {
+   "kind": "zone",
+   "x": 720,
+   "y": 0,
+   "w": 400,
+   "h": 300,
+   "label": "Where the model runs",
+   "key": "dg11.z3",
+   "color": "var(--ps-vendor-anthropic)",
+   "text": "var(--ps-text-anthropic)",
+   "order": 2
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 36,
+   "w": 312,
+   "h": 48,
+   "icon": "gh-copilot",
+   "label": "VS Code · JetBrains",
+   "sub": "chat · agent mode",
+   "key": null,
+   "subkey": "dg11.n1",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 3
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     326,
+     60
+    ],
+    [
+     352,
+     60
+    ],
+    [
+     352,
+     128
+    ],
+    [
+     380,
+     128
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 3
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 98,
+   "w": 312,
+   "h": 48,
+   "icon": "gh-cli",
+   "label": "GitHub Copilot CLI",
+   "sub": "terminal",
+   "key": null,
+   "subkey": "dg11.n2",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 4
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     326,
+     122
+    ],
+    [
+     380,
+     122
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 4
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 160,
+   "w": 312,
+   "h": 48,
+   "icon": "gh-mark",
+   "label": "Coding agent · github.com",
+   "sub": "issue to pull request",
+   "key": null,
+   "subkey": "dg11.n3",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 5
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     326,
+     184
+    ],
+    [
+     352,
+     184
+    ],
+    [
+     352,
+     128
+    ],
+    [
+     380,
+     128
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 5
+  },
+  {
+   "kind": "node",
+   "x": 14,
+   "y": 222,
+   "w": 312,
+   "h": 48,
+   "icon": "gh-actions",
+   "label": "Agentic Workflows",
+   "sub": "GitHub Actions",
+   "key": null,
+   "subkey": "dg11.n4",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 6
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     326,
+     246
+    ],
+    [
+     352,
+     246
+    ],
+    [
+     352,
+     128
+    ],
+    [
+     380,
+     128
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 6
+  },
+  {
+   "kind": "node",
+   "x": 394,
+   "y": 100,
+   "w": 272,
+   "h": 56,
+   "icon": "br-githubcopilot",
+   "label": "Model picker",
+   "sub": "Claude Sonnet 5 · Claude Opus 5",
+   "key": "dg11.t1",
+   "subkey": "dg11.n5",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 7
+  },
+  {
+   "kind": "node",
+   "x": 394,
+   "y": 176,
+   "w": 272,
+   "h": 48,
+   "icon": "gh-security",
+   "label": "Org policy",
+   "sub": "model policy · ZDR toggle",
+   "key": "dg11.t2",
+   "subkey": "dg11.n6",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 8
+  },
+  {
+   "kind": "node",
+   "x": 394,
+   "y": 36,
+   "w": 272,
+   "h": 48,
+   "icon": "gh-mark",
+   "label": "Code completions",
+   "sub": "stay on GitHub models",
+   "key": "dg11.t3",
+   "subkey": "dg11.n7",
+   "color": null,
+   "accent": null,
+   "tone": "ghost",
+   "order": 9
+  },
+  {
+   "kind": "node",
+   "x": 734,
+   "y": 36,
+   "w": 372,
+   "h": 56,
+   "icon": "br-anthropic",
+   "label": "AI Credits · GitHub-hosted",
+   "sub": "1 credit = US$ 0.01 · zero procurement",
+   "key": "dg11.t4",
+   "subkey": "dg11.n8",
+   "color": "#D97757",
+   "accent": null,
+   "tone": "paper",
+   "order": 10
+  },
+  {
+   "kind": "node",
+   "x": 734,
+   "y": 122,
+   "w": 372,
+   "h": 56,
+   "icon": "ic-foundry",
+   "label": "BYOK · the client's Foundry deployment",
+   "sub": "chat and agent mode · Azure · MACC",
+   "key": "dg11.t5",
+   "subkey": "dg11.n9",
+   "color": null,
+   "accent": "var(--ps-vendor-anthropic)",
+   "tone": "paper",
+   "order": 11
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     666,
+     118
+    ],
+    [
+     700,
+     118
+    ],
+    [
+     700,
+     64
+    ],
+    [
+     734,
+     64
+    ]
+   ],
+   "style": "c--thin",
+   "label": "default",
+   "key": "dg11.e1",
+   "order": 10
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     666,
+     138
+    ],
+    [
+     700,
+     138
+    ],
+    [
+     700,
+     150
+    ],
+    [
+     734,
+     150
+    ]
+   ],
+   "style": "c--acc",
+   "label": "BYOK",
+   "key": "dg11.e2",
+   "order": 11
+  },
+  {
+   "kind": "node",
+   "x": 734,
+   "y": 204,
+   "w": 372,
+   "h": 48,
+   "icon": "ic-entra",
+   "label": "Governed by the client",
+   "sub": "Entra · Cost Management · quota alerts",
+   "key": "dg11.t6",
+   "subkey": "dg11.n10",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 12
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     920,
+     178
+    ],
+    [
+     920,
+     204
+    ]
+   ],
+   "style": "c--gov",
+   "label": null,
+   "key": null,
+   "order": 12
+  },
+  {
+   "kind": "legend",
+   "x": 0,
+   "y": 330,
+   "items": [
+    {
+     "swatch": "line",
+     "color": "var(--ps-color-ink-3)",
+     "label": "default, billed in AI Credits",
+     "key": "dg11.l1"
+    },
+    {
+     "swatch": "line",
+     "color": "var(--accent)",
+     "label": "BYOK to Foundry, on the Azure invoice",
+     "key": "dg11.l2"
+    },
+    {
+     "swatch": "dash",
+     "color": "var(--ps-color-ms-green-500)",
+     "label": "governance, inherited",
+     "key": "dg11.l3"
+    },
+    {
+     "swatch": "fill",
+     "color": "#D97757",
+     "label": "Claude",
+     "key": "dg11.l4"
+    }
+   ],
+   "order": 13
+  },
+  {
+   "kind": "canvas",
+   "w": 1120,
+   "h": 344,
+   "uid": "dg11"
+  }
+ ],
+ "pipeline": [
+  {
+   "kind": "node",
+   "x": 0,
+   "y": 0,
+   "w": 300,
+   "h": 48,
+   "icon": "gh-mark",
+   "label": "Trigger",
+   "sub": "push · @claude on a pull request",
+   "key": "dg12.t1",
+   "subkey": "dg12.n1",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 0
+  },
+  {
+   "kind": "node",
+   "x": 330,
+   "y": 0,
+   "w": 300,
+   "h": 48,
+   "icon": "gh-actions",
+   "label": "GitHub Actions",
+   "sub": "workflow · repository secrets",
+   "key": "dg12.t2",
+   "subkey": "dg12.n2",
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 1
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     300,
+     24
+    ],
+    [
+     330,
+     24
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 1
+  },
+  {
+   "kind": "node",
+   "x": 330,
+   "y": 78,
+   "w": 300,
+   "h": 56,
+   "icon": "br-claudecode",
+   "label": "Claude Code, headless",
+   "sub": "allowed_tools per workflow",
+   "key": "dg12.t3",
+   "subkey": "dg12.n3",
+   "color": "#D97757",
+   "accent": null,
+   "tone": "paper",
+   "order": 2
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     480,
+     48
+    ],
+    [
+     480,
+     78
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 2
+  },
+  {
+   "kind": "node",
+   "x": 330,
+   "y": 164,
+   "w": 300,
+   "h": 56,
+   "icon": "ic-foundry",
+   "label": "The client's Foundry resource",
+   "sub": "Entra · Azure region · MACC",
+   "key": "dg12.t4",
+   "subkey": "dg12.n4",
+   "color": null,
+   "accent": "var(--ps-vendor-anthropic)",
+   "tone": "paper",
+   "order": 3
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     480,
+     134
+    ],
+    [
+     480,
+     164
+    ]
+   ],
+   "style": "c--acc",
+   "label": "inference",
+   "key": "dg12.e1",
+   "order": 3
+  },
+  {
+   "kind": "node",
+   "x": 0,
+   "y": 78,
+   "w": 250,
+   "h": 38,
+   "icon": "gh-mark",
+   "label": "Tests generated",
+   "sub": null,
+   "key": "dg12.o1",
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 4
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     330,
+     100
+    ],
+    [
+     250,
+     100
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 4
+  },
+  {
+   "kind": "node",
+   "x": 0,
+   "y": 126,
+   "w": 250,
+   "h": 38,
+   "icon": "gh-mark",
+   "label": "Pull request reviewed",
+   "sub": null,
+   "key": "dg12.o2",
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 5
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     330,
+     106
+    ],
+    [
+     300,
+     106
+    ],
+    [
+     300,
+     145
+    ],
+    [
+     250,
+     145
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 5
+  },
+  {
+   "kind": "node",
+   "x": 0,
+   "y": 174,
+   "w": 250,
+   "h": 38,
+   "icon": "gh-mark",
+   "label": "Fix drafted",
+   "sub": null,
+   "key": "dg12.o3",
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 6
+  },
+  {
+   "kind": "conn",
+   "points": [
+    [
+     330,
+     106
+    ],
+    [
+     300,
+     106
+    ],
+    [
+     300,
+     193
+    ],
+    [
+     250,
+     193
+    ]
+   ],
+   "style": "c--thin",
+   "label": null,
+   "key": null,
+   "order": 6
+  },
+  {
+   "kind": "node",
+   "x": 0,
+   "y": 236,
+   "w": 630,
+   "h": 40,
+   "icon": "ic-cost",
+   "label": "Budgets and quota alerts before every repository",
+   "sub": null,
+   "key": "dg12.t5",
+   "subkey": null,
+   "color": null,
+   "accent": null,
+   "tone": "paper",
+   "order": 7
+  },
+  {
+   "kind": "canvas",
+   "w": 640,
+   "h": 280,
+   "uid": "dg12"
+  }
+ ]
+}
