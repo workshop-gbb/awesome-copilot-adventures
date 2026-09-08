@@ -12,9 +12,11 @@ and [media prompt catalog](../docs/media-prompts.md).
 
 The [hands-on inventory](hands-on-media.json) maps the supplied `L01.jpeg` through
 `L26.jpeg` images to the 26 preparation guides and exercises. Their WebP covers
-are center-cropped and downscaled without stretching; the JPEG originals remain
-unchanged. Each guide retains its localized SVG in an expandable concept view.
-The covers are illustrations, not product screenshots or evidence of test results.
+are downscaled without stretching. Most use a centered crop; the conditionals
+and SDK application covers use side padding to preserve the complete scene.
+The JPEG originals remain unchanged. Each guide retains its localized SVG in an
+expandable concept view. The covers are illustrations, not product screenshots
+or evidence of test results.
 
 Required hero format:
 

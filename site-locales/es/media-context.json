@@ -1,3 +1,4 @@
 {
-  "ae27ee566a6ad94c": "En Ask, solicita un rastreo de los archivos inspeccionados y de lo que el verificador observa realmente. Cuestiona cualquier afirmación sobre ejecución en vivo que no esté respaldada por la salida."
+  "ae27ee566a6ad94c": "En Ask, solicita un rastreo de los archivos inspeccionados y de lo que el verificador observa realmente. Cuestiona cualquier afirmación sobre ejecución en vivo que no esté respaldada por la salida.",
+  "954adf825fad93fc": "El [inventario práctico](hands-on-media.json) relaciona las imágenes proporcionadas de `L01.jpeg` a\n`L26.jpeg` con las 26 guías de preparación y ejercicios. Sus portadas WebP\nse reducen sin estirarlas. La mayoría usa un recorte centrado; las portadas de condicionales\ny de la aplicación SDK usan márgenes laterales para conservar la escena completa.\nLos originales JPEG permanecen sin cambios. Cada guía conserva su SVG localizado en una\nvista conceptual desplegable. Las portadas son ilustraciones, no capturas de productos\nni evidencia de resultados de pruebas."
 }

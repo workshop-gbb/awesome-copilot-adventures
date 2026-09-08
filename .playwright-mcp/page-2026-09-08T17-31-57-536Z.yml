@@ -1,0 +1,491 @@
+- generic [active] [ref=e1]:
+  - link "Ir para o conteúdo" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - progressbar "Progresso de leitura da página" [ref=e3]
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "Awesome Copilot Adventures · Início" [ref=e6] [cursor=pointer]:
+        - /url: /awesome-copilot-adventures/pt-br/
+        - generic [ref=e12]:
+          - text: Awesome Copilot
+          - strong [ref=e13]: Adventures
+      - button "Menu" [ref=e14] [cursor=pointer]
+      - generic [ref=e18]:
+        - button "Buscar" [ref=e19] [cursor=pointer]
+        - generic [ref=e23]:
+          - generic [ref=e24]: Idioma
+          - navigation "Escolher idioma" [ref=e25]:
+            - link "English" [ref=e26] [cursor=pointer]:
+              - /url: http://127.0.0.1:4349/awesome-copilot-adventures/en/
+              - text: EN
+            - link "Español" [ref=e27] [cursor=pointer]:
+              - /url: http://127.0.0.1:4349/awesome-copilot-adventures/es/
+              - text: ES
+            - link "Português do Brasil" [ref=e28] [cursor=pointer]:
+              - /url: http://127.0.0.1:4349/awesome-copilot-adventures/pt-br/
+              - text: PT-BR
+        - button "Tema escuro" [ref=e29] [cursor=pointer]
+  - main [ref=e32]:
+    - generic [ref=e33]:
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - paragraph [ref=e36]: Engenharia agêntica · Evidência primeiro
+          - heading "Aprenda a construir. Comprove o resultado." [level=1] [ref=e38]: Aprenda a construir.Comprove o resultado.
+          - paragraph [ref=e39]: "Uma biblioteca completa para aprender GitHub Copilot: aventuras guiadas, labs práticos e o código original de cada exercício."
+          - generic [ref=e40]:
+            - link "Começar a aprender" [ref=e41] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/pt-br/start-here/
+              - text: Começar a aprender
+              - generic [aria-hidden] [ref=e42]: ↗
+            - link "Baixar um lab" [ref=e43] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/pt-br/downloads/
+              - text: Baixar um lab
+              - generic [aria-hidden] [ref=e44]: ↓
+          - paragraph [ref=e45]: Ask → Plan → Agent → Revisão → Evidência
+          - generic [ref=e46]:
+            - text: A biblioteca completa em três idiomas
+            - navigation "Escolher idioma" [ref=e47]:
+              - link "English" [ref=e48] [cursor=pointer]:
+                - /url: http://127.0.0.1:4349/awesome-copilot-adventures/en/
+              - link "Español" [ref=e49] [cursor=pointer]:
+                - /url: http://127.0.0.1:4349/awesome-copilot-adventures/es/
+              - link "Português do Brasil" [ref=e50] [cursor=pointer]:
+                - /url: http://127.0.0.1:4349/awesome-copilot-adventures/pt-br/
+        - complementary [ref=e51]:
+          - generic [ref=e52]: ACA / 01
+          - heading "Explore o fluxo de trabalho" [level=2] [ref=e59]
+          - generic [ref=e60]:
+            - group [ref=e61]:
+              - generic "01 Ask" [ref=e62] [cursor=pointer]:
+                - generic [ref=e63]: "01"
+                - generic [ref=e64]: Ask
+                - generic [aria-hidden] [ref=e65]: +
+              - generic [ref=e66]:
+                - paragraph [ref=e67]: Investigue o repositório, as restrições e as incógnitas antes de solicitar uma alteração.
+                - generic [ref=e68]: Artefato esperado
+                - paragraph [ref=e69]: Um mapa baseado nas fontes e perguntas em aberto.
+            - group [ref=e70]:
+              - generic "02 Plan" [ref=e71] [cursor=pointer]:
+                - generic [ref=e72]: "02"
+                - generic [ref=e73]: Plan
+                - generic [aria-hidden] [ref=e74]: +
+            - group [ref=e75]:
+              - generic "03 Agent" [ref=e76] [cursor=pointer]:
+                - generic [ref=e77]: "03"
+                - generic [ref=e78]: Agent
+                - generic [aria-hidden] [ref=e79]: +
+            - group [ref=e80]:
+              - generic "04 Revisão" [ref=e81] [cursor=pointer]:
+                - generic [ref=e82]: "04"
+                - generic [ref=e83]: Revisão
+                - generic [aria-hidden] [ref=e84]: +
+            - group [ref=e85]:
+              - generic "05 Evidência" [ref=e86] [cursor=pointer]:
+                - generic [ref=e87]: "05"
+                - generic [ref=e88]: Evidência
+                - generic [aria-hidden] [ref=e89]: +
+          - paragraph [ref=e90]: Selecione uma etapa. Este é um recurso de aprendizagem, não um agente em execução.
+      - generic [ref=e91]:
+        - link "14 Aventuras" [ref=e92] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/adventures/
+          - strong [ref=e93]: "14"
+          - generic [ref=e94]: Aventuras
+        - link "26 Labs práticos" [ref=e95] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/hands-on/
+          - strong [ref=e96]: "26"
+          - generic [ref=e97]: Labs práticos
+        - link "143 Guias" [ref=e98] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/library/
+          - strong [ref=e99]: "143"
+          - generic [ref=e100]: Guias
+        - link "1295 arquivos-fonte" [ref=e101] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/repository/
+          - strong [ref=e102]: "1295"
+          - generic [ref=e103]: arquivos-fonte
+      - text: </>
+    - generic [ref=e104]:
+      - generic [ref=e105]:
+        - heading "Primeira vez aqui? Siga um caminho claro." [level=2] [ref=e106]
+        - paragraph [ref=e107]: Comece com uma verificação local. Escolha a próxima lição e baixe apenas os materiais necessários.
+      - navigation "Navegação de aprendizagem" [ref=e108]:
+        - link "00 / Pré-requisitos" [ref=e109] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/prerequisites/
+        - link "01 / Começar a aprender" [ref=e110] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/start-here/
+        - link "02 / Ordem de aprendizagem" [ref=e111] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/learning-path/
+        - link "03 / Baixar um lab" [ref=e112] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/downloads/
+    - region [ref=e114]:
+      - generic [ref=e115]:
+        - paragraph [ref=e116]: Histórias visuais geradas
+        - heading "Aventuras em movimento" [level=2] [ref=e117]
+        - paragraph [ref=e118]: Três montagens curtas apresentam o mundo das aventuras. São ilustrações, não gravações do Copilot nem evidência de execução de um lab.
+      - paragraph [ref=e119]: Os vídeos carregam apenas quando você escolhe reproduzir. Movimento reduzido mantém a imagem estática; você ainda pode iniciar uma animação explicitamente. A reprodução para quando a página fica oculta.
+      - generic [ref=e120]:
+        - figure [ref=e121]:
+          - img "Uma navegadora estuda instrumentos na câmara de Nexus." [ref=e123]
+          - generic [ref=e124]:
+            - paragraph [ref=e125]: 10 segundos · sem áudio
+            - heading "Portais, contexto e iteração" [level=3] [ref=e126]
+            - paragraph [ref=e127]: Uma navegadora explora as estações de Nexus, compara o mesmo mecanismo em dois espelhos de contexto e depois trabalha ao redor do mecanismo circular de Tempora.
+          - button "Reproduzir animação" [ref=e129] [cursor=pointer]
+          - generic [ref=e130]:
+            - link "Abrir vídeo sem áudio" [ref=e131] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/site-data/media/8144d68a79b277d2e2f329c631b42955f1a3b6ff9da13a4d672cd07b5dc37892.mp4
+            - link "Arquivo original" [ref=e132] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/pt-br/repository/?path=assets%2Fimages%2Fadventures%2Fda_pra_fazer_uma_animacao_comp.mp4
+        - figure [ref=e133]:
+          - img "Uma navegadora examina um dispositivo entre estações iluminadas." [ref=e135]
+          - generic [ref=e136]:
+            - paragraph [ref=e137]: 10 segundos · sem áudio
+            - heading "Da investigação aos guardrails" [level=3] [ref=e138]
+            - paragraph [ref=e139]: As cenas passam de uma mesa de navegação para um ciclo mecânico, uma cidade-arquivo, um handoff entre especialistas e um checkpoint com mecanismo de parada.
+          - button "Reproduzir animação" [ref=e141] [cursor=pointer]
+          - generic [ref=e142]:
+            - link "Abrir vídeo sem áudio" [ref=e143] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/site-data/media/8f3ff16732781e4790ae460b16c6bb51f125e995756f403d7d223e216bc041ed.mp4
+            - link "Arquivo original" [ref=e144] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/pt-br/repository/?path=assets%2Fimages%2Fadventures%2Fawesome-copilot-adventures-teaser-01.mp4
+        - figure [ref=e145]:
+          - img "Caminhos iluminados partem de uma carta central em direção a uma cidade-arquivo." [ref=e147]
+          - generic [ref=e148]:
+            - paragraph [ref=e149]: 10 segundos · sem áudio
+            - heading "Regras, skills e conexões" [level=3] [ref=e150]
+            - paragraph [ref=e151]: Uma carta do arquivo dá lugar a um toolkit selecionado, estações de especialistas, espelhos de contexto contrastantes e uma cartógrafa que observa um arquivo distante.
+          - button "Reproduzir animação" [ref=e153] [cursor=pointer]
+          - generic [ref=e154]:
+            - link "Abrir vídeo sem áudio" [ref=e155] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/site-data/media/002306b574299308e2df5d91df0e5a74953a224151bee235f7036bf6b258ae5b.mp4
+            - link "Arquivo original" [ref=e156] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/pt-br/repository/?path=assets%2Fimages%2Fadventures%2Fawesome-copilot-adventures-teaser-02.mp4
+    - generic [ref=e158]:
+      - generic [ref=e159]:
+        - paragraph [ref=e160]: Aprendizado interativo / somente local
+        - heading "Estúdio de prática" [level=2] [ref=e161]
+        - paragraph [ref=e162]: Tome uma decisão. Observe a consequência. Reinicie e tente novamente antes de levar a ideia para um laboratório real.
+      - generic [ref=e163]:
+        - link "01 Fluxo do agente Percorra uma alteração delimitada e veja por que uma revisão com falhas deve interromper a passagem de trabalho. Pratique este conceito" [ref=e164] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/simulations/#workflow
+          - generic [ref=e165]: "01"
+          - heading "Fluxo do agente" [level=3] [ref=e169]
+          - paragraph [ref=e170]: Percorra uma alteração delimitada e veja por que uma revisão com falhas deve interromper a passagem de trabalho.
+          - generic [ref=e171]: Pratique este conceito
+        - link "02 Bancada de contexto Escolha apenas o contexto relevante necessário. Mais arquivos não significam automaticamente um contexto melhor. Pratique este conceito" [ref=e174] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/simulations/#context
+          - generic [ref=e175]: "02"
+          - heading "Bancada de contexto" [level=3] [ref=e179]
+          - paragraph [ref=e180]: Escolha apenas o contexto relevante necessário. Mais arquivos não significam automaticamente um contexto melhor.
+          - generic [ref=e181]: Pratique este conceito
+        - link "03 Ciclo de verificação Execute um pequeno exemplo JavaScript neste navegador. Compare uma implementação com falhas a uma corrigida. Pratique este conceito" [ref=e184] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/simulations/#verification
+          - generic [ref=e185]: "03"
+          - heading "Ciclo de verificação" [level=3] [ref=e189]
+          - paragraph [ref=e190]: Execute um pequeno exemplo JavaScript neste navegador. Compare uma implementação com falhas a uma corrigida.
+          - generic [ref=e191]: Pratique este conceito
+      - paragraph [ref=e194]: Simulações didáticas, não uma sessão real do Copilot. Nenhum modelo de IA, conta, terminal, edição de arquivo ou serviço externo é utilizado.
+    - generic [ref=e195]:
+      - generic [ref=e196]:
+        - paragraph [ref=e197]: Guias
+        - heading "A biblioteca completa de aprendizagem" [level=2] [ref=e198]
+        - paragraph [ref=e199]: Todos os documentos de aprendizagem atuais estão disponíveis em inglês, espanhol e português do Brasil. Troque de idioma sem perder seu lugar.
+      - complementary [ref=e200]:
+        - generic [ref=e201]:
+          - paragraph [ref=e202]: Suas leituras
+          - paragraph [ref=e203]:
+            - strong [ref=e204]: "0"
+            - text: leituras marcadas
+        - button "Limpar minhas marcações" [ref=e206] [cursor=pointer]
+        - paragraph [ref=e207]: Salvo apenas neste navegador. Suas marcações de leitura não comprovam a conclusão de um lab nem a execução dos testes.
+        - status
+      - generic [ref=e208]:
+        - generic [ref=e209]:
+          - generic [ref=e210]: Buscar um tema, lab ou arquivo
+          - searchbox "Buscar um tema, lab ou arquivo" [ref=e211]
+          - group "Filtrar a biblioteca" [ref=e212]:
+            - button "Todo o conteúdo" [pressed] [ref=e213] [cursor=pointer]
+            - button "Aventuras" [ref=e214] [cursor=pointer]
+            - button "Labs práticos" [ref=e215] [cursor=pointer]
+            - button "Guias" [ref=e216] [cursor=pointer]
+            - button "Projetos iniciais" [ref=e217] [cursor=pointer]
+            - button "Soluções" [ref=e218] [cursor=pointer]
+            - button "Mídia" [ref=e219] [cursor=pointer]
+            - button "Marcados por mim" [ref=e220] [cursor=pointer]
+          - generic [ref=e221]:
+            - status [ref=e222]: "Documentos encontrados: 143"
+            - button "Limpar filtros" [ref=e223] [cursor=pointer]
+        - list [ref=e224]:
+          - listitem [ref=e225]:
+            - generic [ref=e226]: Aventuras
+            - link "Os Portais de Nexus" [ref=e227] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/pt-br/adventures/00-foundations/portals-of-nexus/
+              - text: Os Portais de Nexus
+              - generic [aria-hidden] [ref=e228]: ↗
+            - generic [ref=e229]: adventures/00-foundations/portals-of-nexus/README.md
+          - listitem [ref=e230]:
+            - generic [ref=e231]: Projetos iniciais
+            - link "Laboratório dos Portais de Nexus" [ref=e232] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/pt-br/read/labs/portals-of-nexus/readme/
+              - text: Laboratório dos Portais de Nexus
+              - generic [aria-hidden] [ref=e233]: ↗
+            - generic [ref=e234]: labs/portals-of-nexus/README.md
+          - listitem [ref=e235]:
+            - generic [ref=e236]: Aventuras
+            - link "Os Espelhos do Contexto" [ref=e237] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/pt-br/adventures/00-foundations/context-mirrors/
+              - text: Os Espelhos do Contexto
+              - generic [aria-hidden] [ref=e238]: ↗
+            - generic [ref=e239]: adventures/00-foundations/context-mirrors/README.md
+          - listitem [ref=e240]:
+            - generic [ref=e241]: Aventuras
+            - link "As Leis de Eldoria" [ref=e242] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/pt-br/adventures/01-basics/eldoria-laws/
+              - text: As Leis de Eldoria
+              - generic [aria-hidden] [ref=e243]: ↗
+            - generic [ref=e244]: adventures/01-basics/eldoria-laws/README.md
+          - listitem [ref=e245]:
+            - generic [ref=e246]: Aventuras
+            - link "O Ciclo de Tempora" [ref=e247] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/pt-br/adventures/01-basics/tempora-loop/
+              - text: O Ciclo de Tempora
+              - generic [aria-hidden] [ref=e248]: ↗
+            - generic [ref=e249]: adventures/01-basics/tempora-loop/README.md
+          - listitem [ref=e250]:
+            - generic [ref=e251]: Aventuras
+            - link "As Skills de Algora" [ref=e252] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/pt-br/adventures/02-intermediate/algora-skills/
+              - text: As Skills de Algora
+              - generic [aria-hidden] [ref=e253]: ↗
+            - generic [ref=e254]: adventures/02-intermediate/algora-skills/README.md
+        - link "Abrir a biblioteca completa" [ref=e255] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/library/
+          - text: Abrir a biblioteca completa
+          - generic [aria-hidden] [ref=e256]: →
+    - generic [ref=e257]:
+      - generic [ref=e258]:
+        - paragraph [ref=e259]: Escolha sua trilha
+        - heading "Dois formatos. Uma progressão de aprendizagem." [level=2] [ref=e260]
+      - generic [ref=e261]:
+        - link "01 / Aventuras Aventuras A fantasia apoia a lição. Aprenda contexto, agentes personalizados, skills, hooks, MCP, loops, grafos, CLI, SDK e um desafio integrador." [ref=e262] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/adventures/
+          - generic [ref=e263]: 01 / Aventuras
+          - heading "Aventuras" [level=3] [ref=e264]
+          - paragraph [ref=e265]: A fantasia apoia a lição. Aprenda contexto, agentes personalizados, skills, hooks, MCP, loops, grafos, CLI, SDK e um desafio integrador.
+          - generic [aria-hidden] [ref=e266]: ↗
+        - link "02 / Labs práticos Labs práticos Exercícios profissionais numerados. Pratique engenharia de software, fluxos greenfield e brownfield com Spec Kit e modernização." [ref=e267] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/hands-on/
+          - generic [ref=e268]: 02 / Labs práticos
+          - heading "Labs práticos" [level=3] [ref=e269]
+          - paragraph [ref=e270]: Exercícios profissionais numerados. Pratique engenharia de software, fluxos greenfield e brownfield com Spec Kit e modernização.
+          - generic [aria-hidden] [ref=e271]: ↗
+        - link "03 / Guias Guias Entenda papéis, harnesses, ambientes, primitivas de personalização e disponibilidade antes de fazer alterações." [ref=e272] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/harnesses/
+          - generic [ref=e273]: 03 / Guias
+          - heading "Guias" [level=3] [ref=e274]
+          - paragraph [ref=e275]: Entenda papéis, harnesses, ambientes, primitivas de personalização e disponibilidade antes de fazer alterações.
+          - generic [aria-hidden] [ref=e276]: ↗
+        - link "04 / Fonte original Acervo Inspecione projetos iniciais, soluções, testes, dados, personalizações, mídia e material histórico identificado." [ref=e277] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/repository/
+          - generic [ref=e278]: 04 / Fonte original
+          - heading "Acervo" [level=3] [ref=e279]
+          - paragraph [ref=e280]: Inspecione projetos iniciais, soluções, testes, dados, personalizações, mídia e material histórico identificado.
+          - generic [aria-hidden] [ref=e281]: ↗
+    - generic [ref=e283]:
+      - generic [ref=e284]:
+        - paragraph [ref=e285]: Construa conhecimento
+        - heading "Do primeiro contexto à coordenação complexa." [level=2] [ref=e286]
+      - list [ref=e287]:
+        - listitem [ref=e288]:
+          - text: "01"
+          - heading "Fundamentos" [level=3] [ref=e289]
+          - paragraph [ref=e290]: Contexto, escolha do harness e instruções do repositório.
+        - listitem [ref=e291]:
+          - text: "02"
+          - heading "Engenharia" [level=3] [ref=e292]
+          - paragraph [ref=e293]: Alterações delimitadas, skills, agentes personalizados e controles.
+        - listitem [ref=e294]:
+          - text: "03"
+          - heading "Coordenação" [level=3] [ref=e295]
+          - paragraph [ref=e296]: MCP, loops de verificação, grafos e trabalho paralelo.
+        - listitem [ref=e297]:
+          - text: "04"
+          - heading "Superfícies" [level=3] [ref=e298]
+          - paragraph [ref=e299]: CLI, agente na nuvem, SDK e um desafio integrador.
+      - link "Trilhas de aprendizagem" [ref=e300] [cursor=pointer]:
+        - /url: /awesome-copilot-adventures/pt-br/curriculum/
+        - text: Trilhas de aprendizagem →
+    - generic [ref=e301]:
+      - generic [ref=e302]:
+        - paragraph [ref=e303]: Construa conhecimento
+        - heading "A biblioteca completa de aprendizagem" [level=2] [ref=e304]
+        - paragraph [ref=e305]: Todos os documentos de aprendizagem atuais estão disponíveis em inglês, espanhol e português do Brasil. Troque de idioma sem perder seu lugar.
+      - article [ref=e306]:
+        - paragraph [ref=e307]: Aprenda engenharia de software agêntica por meio de laboratórios guiados com temática de fantasia, construídos em torno de evidências observáveis.
+        - blockquote [ref=e308]:
+          - strong [ref=e309]: Dica
+          - paragraph [ref=e310]:
+            - strong [ref=e311]: "Primeira visita:"
+            - text: siga
+            - link "Comece aqui" [ref=e312] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/pt-br/start-here/
+            - text: para uma verificação local. Depois use
+            - link "a ordem de aprendizado" [ref=e313] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/pt-br/learning-path/
+            - text: para escolher seu caminho. Baixe
+            - link "um único kit de aprendizado" [ref=e314] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/pt-br/downloads/
+            - text: ", não todos os runtimes e projetos."
+        - blockquote [ref=e315]:
+          - strong [ref=e316]: Importante
+          - paragraph [ref=e317]: O currículo ensina papéis de agentes, harnesses, ambientes e primitivas de personalização como conceitos separados. Não ensina modos de chat personalizados obsoletos.
+        - heading "Um único fluxo de trabalho progressivo" [level=2] [ref=e318]
+        - figure [ref=e319]
+        - group [ref=e320]:
+          - generic "Fonte Mermaid" [ref=e321] [cursor=pointer]
+        - paragraph [ref=e322]:
+          - strong [ref=e323]: Legenda.
+          - text: Os retângulos são etapas do fluxo de trabalho. As setas contínuas mostram a progressão normal; a seta tracejada retorna lacunas de evidências não resolvidas à investigação.
+        - paragraph [ref=e324]:
+          - strong [ref=e325]: Explicação.
+          - text: Uma resposta fluente não significa conclusão. O ciclo termina somente quando o resultado revisado atende aos critérios de aceitação e as verificações registradas o sustentam.
+        - paragraph [ref=e326]:
+          - text: Ask, Plan e Agent são
+          - strong [ref=e327]: papéis
+          - text: . Local e Copilot são
+          - strong [ref=e328]: harnesses de agentes
+          - text: do VS Code. Cloud é um
+          - strong [ref=e329]: destino de sessão
+          - text: remota. Uma pasta, worktree, Codespace, máquina local ou workspace remoto efêmero é um
+          - strong [ref=e330]: ambiente
+          - text: .
+        - heading "Comece a jornada" [level=2] [ref=e331]
+        - table [ref=e332]:
+          - rowgroup [ref=e333]:
+            - row [ref=e334]:
+              - columnheader "Destino" [ref=e335]
+              - columnheader "Para que serve" [ref=e336]
+          - rowgroup [ref=e337]:
+            - row [ref=e338]:
+              - cell [ref=e339]:
+                - link "Pré-requisitos e contas" [ref=e340] [cursor=pointer]:
+                  - /url: /awesome-copilot-adventures/pt-br/prerequisites/
+              - cell "Instalar um ambiente, ativar sua própria conta e entender os limites dos planos gratuitos" [ref=e341]
+            - row [ref=e342]:
+              - cell [ref=e343]:
+                - link "Comece aqui" [ref=e344] [cursor=pointer]:
+                  - /url: /awesome-copilot-adventures/pt-br/start-here/
+              - cell "Preparar o ambiente e a primeira sessão" [ref=e345]
+            - row [ref=e346]:
+              - cell [ref=e347]:
+                - link "Ordem de aprendizagem" [ref=e348] [cursor=pointer]:
+                  - /url: /awesome-copilot-adventures/pt-br/learning-path/
+              - cell "Separar etapas obrigatórias, extensões opcionais e trabalho avançado" [ref=e349]
+            - row [ref=e350]:
+              - cell [ref=e351]:
+                - link "Downloads para aprendizagem" [ref=e352] [cursor=pointer]:
+                  - /url: /awesome-copilot-adventures/pt-br/downloads/
+              - cell "Obter um ZIP individual e seguir as orientações de extração, verificação inicial e configuração opcional do GitHub" [ref=e353]
+            - row [ref=e354]:
+              - cell [ref=e355]:
+                - link "Mapa do currículo" [ref=e356] [cursor=pointer]:
+                  - /url: /awesome-copilot-adventures/pt-br/curriculum/
+              - cell "Seguir a progressão completa de aprendizagem" [ref=e357]
+            - row [ref=e358]:
+              - cell [ref=e359]:
+                - link "Guia de harnesses" [ref=e360] [cursor=pointer]:
+                  - /url: /awesome-copilot-adventures/pt-br/harnesses/
+              - cell "Escolher onde e como um agente executa" [ref=e361]
+            - row [ref=e362]:
+              - cell [ref=e363]:
+                - link "Primitivas de personalização" [ref=e364] [cursor=pointer]:
+                  - /url: /awesome-copilot-adventures/pt-br/customization/
+              - cell "Selecionar instruções, prompts, skills, agentes, MCP ou hooks" [ref=e365]
+            - row [ref=e366]:
+              - cell [ref=e367]:
+                - link "Status dos recursos" [ref=e368] [cursor=pointer]:
+                  - /url: /awesome-copilot-adventures/pt-br/feature-status/
+              - cell "Conferir a disponibilidade atual e as indicações de versão prévia" [ref=e369]
+            - row [ref=e370]:
+              - cell [ref=e371]:
+                - link "Catálogo de aventuras" [ref=e372] [cursor=pointer]:
+                  - /url: /awesome-copilot-adventures/pt-br/adventures/
+              - cell "Explorar todas as missões guiadas" [ref=e373]
+            - row [ref=e374]:
+              - cell [ref=e375]:
+                - link "Laboratórios práticos" [ref=e376] [cursor=pointer]:
+                  - /url: /awesome-copilot-adventures/pt-br/hands-on/
+              - cell "Seguir exercícios sem fantasia, incluindo modernização com Spec Kit" [ref=e377]
+            - row [ref=e378]:
+              - cell [ref=e379]:
+                - link "Estilo de diagramas" [ref=e380] [cursor=pointer]:
+                  - /url: /awesome-copilot-adventures/pt-br/diagram-style/
+              - cell "Entender cores monocromáticas, legendas e acessibilidade" [ref=e381]
+        - paragraph [ref=e382]:
+          - text: As fontes executáveis de cada missão ficam na
+          - link "árvore de aventuras" [ref=e383] [cursor=pointer]:
+            - /url: /awesome-copilot-adventures/pt-br/repository/?path=adventures
+          - text: e na
+          - link "árvore de laboratórios" [ref=e384] [cursor=pointer]:
+            - /url: /awesome-copilot-adventures/pt-br/repository/?path=labs
+          - text: do GitHub.
+        - paragraph [ref=e385]: O site multilíngue também inclui um explorador do repositório para código original, fixtures, soluções, personalizações, mídia e material histórico. As páginas de aprendizagem estão disponíveis em inglês, espanhol e português brasileiro; os exemplos executáveis e as licenças originais mantêm seu texto-fonte.
+        - blockquote [ref=e386]:
+          - strong [ref=e387]: Nota
+          - paragraph [ref=e388]:
+            - text: As orientações de produto foram verificadas pela última vez na documentação oficial atual do GitHub e da Microsoft em
+            - strong [ref=e389]: 2026-09-05
+            - text: . Consulte novamente a fonte vinculada quando a disponibilidade ou a política afetar significativamente sua tarefa.
+  - contentinfo [ref=e390]:
+    - generic [ref=e391]:
+      - generic [ref=e392]:
+        - paragraph [ref=e393]: Awesome Copilot Adventures
+        - heading "Construa com intenção. Verifique com evidência." [level=2] [ref=e394]
+        - paragraph [ref=e395]: Um currículo educacional aberto. A disponibilidade depende do produto, do harness, da conta e das políticas.
+        - generic [ref=e396]:
+          - generic [ref=e397]: Esta edição é mantida por
+          - strong [ref=e398]: Paula Silva
+          - link "@paulasilvatech" [ref=e399] [cursor=pointer]:
+            - /url: https://github.com/paulasilvatech
+          - link "agenticdevopsplatform.com" [ref=e400] [cursor=pointer]:
+            - /url: https://agenticdevopsplatform.com
+      - navigation "Guias" [ref=e401]:
+        - link "Estúdio de prática" [ref=e402] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/simulations/
+        - link "Glossário" [ref=e403] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/glossary/
+        - link "Status dos recursos" [ref=e404] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/feature-status/
+        - link "Sistema de design" [ref=e405] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/design-system/
+        - link "Suporte" [ref=e406] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/pt-br/read/support/
+        - link "Inter · Licenças das fontes" [ref=e407] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/assets/site/fonts/OFL-Inter.txt
+        - link "JetBrains Mono · Licenças das fontes" [ref=e408] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/assets/site/fonts/OFL-JetBrains-Mono.txt
+      - navigation "Escolher idioma" [ref=e409]:
+        - link "English" [ref=e410] [cursor=pointer]:
+          - /url: http://127.0.0.1:4349/awesome-copilot-adventures/en/
+        - link "Español" [ref=e411] [cursor=pointer]:
+          - /url: http://127.0.0.1:4349/awesome-copilot-adventures/es/
+        - link "Português do Brasil" [ref=e412] [cursor=pointer]:
+          - /url: http://127.0.0.1:4349/awesome-copilot-adventures/pt-br/
+        - link "GitHub ↗" [ref=e413] [cursor=pointer]:
+          - /url: https://github.com/workshop-gbb/awesome-copilot-adventures
+    - region [ref=e415]:
+      - heading "Créditos e inspiração" [level=2] [ref=e416]
+      - list [ref=e417]:
+        - listitem [ref=e418]:
+          - link "microsoft/CopilotAdventures" [ref=e419] [cursor=pointer]:
+            - /url: https://github.com/microsoft/CopilotAdventures
+          - generic [ref=e420]: Inspiração original para a trilha de aventuras.
+        - listitem [ref=e421]:
+          - link "MicrosoftLearning/mslearn-github-copilot-dev" [ref=e422] [cursor=pointer]:
+            - /url: https://github.com/MicrosoftLearning/mslearn-github-copilot-dev
+          - generic [ref=e423]: Inspiração original para a trilha de labs práticos.
+      - paragraph [ref=e424]: Ambas as trilhas incluem material atualizado e melhorado, além de novas aventuras e novos labs. A autoria e as licenças originais são preservadas.
+      - link "Ler os créditos completos" [ref=e425] [cursor=pointer]:
+        - /url: /awesome-copilot-adventures/pt-br/read/notice/
+    - generic [ref=e426]:
+      - generic [ref=e427]: MIT · Awesome Copilot Adventures
+      - generic [ref=e428]: 6b790e2240c37905

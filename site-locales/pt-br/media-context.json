@@ -1,3 +1,4 @@
 {
-  "ae27ee566a6ad94c": "Em Ask, solicite um rastreamento dos arquivos inspecionados e do que o verificador realmente observa. Questione qualquer afirmação sobre execução ao vivo que não esteja respaldada pela saída."
+  "ae27ee566a6ad94c": "Em Ask, solicite um rastreamento dos arquivos inspecionados e do que o verificador realmente observa. Questione qualquer afirmação sobre execução ao vivo que não esteja respaldada pela saída.",
+  "954adf825fad93fc": "O [inventário hands-on](hands-on-media.json) relaciona as imagens fornecidas de `L01.jpeg` a\n`L26.jpeg` aos 26 guias de preparação e exercícios. Suas capas WebP\nsão reduzidas sem distorção. A maioria usa recorte central; as capas de condicionais\ne da aplicação SDK usam margens laterais para preservar a cena completa.\nOs JPEGs originais permanecem inalterados. Cada guia mantém seu SVG localizado em uma\nvisualização conceitual expansível. As capas são ilustrações, não capturas de produtos\nnem evidência de resultados de testes."
 }
