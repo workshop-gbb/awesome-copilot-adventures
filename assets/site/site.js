@@ -38,7 +38,7 @@ function navigation() {
   document.querySelectorAll('[data-site-control]').forEach(control => { control.hidden = false; });
   const menu = document.querySelector('.menu-button');
   const masthead = document.querySelector('.masthead');
-  const mobile = matchMedia('(max-width: 1280px)');
+  const mobile = matchMedia('(max-width: 1536px)');
   const setOpen = open => {
     masthead.dataset.menuOpen = String(open);
     menu.setAttribute('aria-expanded', String(open));
@@ -113,6 +113,7 @@ function alerts() {
     const match = node.textContent.match(/^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)]\s*/);
     if (!match) continue;
     node.textContent = node.textContent.slice(match[0].length);
+    quote.dataset.alert = match[1].toLowerCase();
     quote.prepend(element('strong', labels[locale][match[1]], 'alert-label'));
   }
 }
@@ -124,36 +125,46 @@ function codeCopy(root = document, selector = '.document pre') {
     if (!code) continue;
     pre.tabIndex = 0;
     const wrapper = element('div', undefined, 'code-wrapper');
+    const toolbar = element('div', undefined, 'code-toolbar');
+    const languageClass = [...code.classList].find(name => name.startsWith('language-'));
+    const language = element('span', languageClass?.slice('language-'.length).toUpperCase() || 'CODE', 'code-language');
     pre.before(wrapper);
-    wrapper.append(pre);
-    const button = element('button', ui.copy, 'code-copy');
+    const button = element('button', undefined, 'code-copy');
     button.type = 'button';
-    const message = element('span', '', 'copy-message');
+    const icon = element('span', '', 'copy-icon');
+    icon.setAttribute('aria-hidden', 'true');
+    const label = element('span', ui.copy, 'copy-label');
+    button.append(icon, label);
+    const message = element('span', '', 'copy-message sr-only');
     message.setAttribute('role', 'status');
     let feedbackTimeout;
     button.addEventListener('click', async () => {
       clearTimeout(feedbackTimeout);
       button.disabled = true;
+      message.textContent = '';
+      message.classList.add('sr-only');
       try {
         await copyText(code.textContent, navigator.clipboard);
-        button.textContent = ui.copied;
+        label.textContent = ui.copied;
         button.dataset.copied = 'true';
         message.textContent = ui.copied;
         feedbackTimeout = setTimeout(() => {
-          button.textContent = ui.copy;
+          label.textContent = ui.copy;
           delete button.dataset.copied;
           message.textContent = '';
         }, 1500);
       } catch (error) {
-        button.textContent = ui.copy;
+        label.textContent = ui.copy;
         delete button.dataset.copied;
+        message.classList.remove('sr-only');
         message.textContent = ui.copyError;
         console.error('Code copy failed.', error);
       } finally {
         button.disabled = false;
       }
     });
-    wrapper.append(button, message);
+    toolbar.append(language, button, message);
+    wrapper.append(toolbar, pre);
   }
 }
 

@@ -1,10 +1,13 @@
 ---
-interface Props {
-  name: 'search' | 'menu' | 'theme' | 'close' | 'play' | 'pause' | 'step' | 'reset' | 'arrow' | 'workflow' | 'context' | 'check' | 'file' | 'expand' | 'book' | 'terminal';
-  size?: number;
-}
-const { name, size = 20 } = Astro.props;
-const paths = {
+export type IconName =
+  | 'search' | 'menu' | 'theme' | 'close' | 'play' | 'pause' | 'step' | 'reset' | 'arrow'
+  | 'workflow' | 'context' | 'check' | 'file' | 'expand' | 'book' | 'terminal'
+  | 'compass' | 'spark' | 'steps' | 'download' | 'map' | 'repository' | 'layers'
+  | 'code' | 'network' | 'cloud' | 'bolt' | 'grid' | 'shield' | 'target' | 'globe' | 'toolkit';
+export type IconTone = 'blue' | 'green' | 'yellow' | 'red' | 'ink';
+interface Props { name: IconName; size?: number; tone?: IconTone; chip?: boolean; }
+const { name, size = 20, tone, chip = false } = Astro.props;
+const paths: Record<IconName, string[]> = {
   search: ['M21 21l-5-5', 'M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0'],
   menu: ['M4 6h16M4 12h16M4 18h16'],
   theme: ['M12 3a9 9 0 1 0 9 9A9 9 0 0 1 12 3Z'],
@@ -20,9 +23,38 @@ const paths = {
   file: ['M5 3h9l5 5v13H5ZM14 3v6h5M9 13h6M9 17h6'],
   expand: ['M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5'],
   book: ['M12 5v16M3 3h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5v16h-5a4 4 0 0 0-4 2 4 4 0 0 0-4-2H3Z'],
-  terminal: ['M3 4h18v16H3ZM7 8l4 4-4 4M13 16h4']
+  terminal: ['M3 4h18v16H3ZM7 8l4 4-4 4M13 16h4'],
+  compass: ['M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20', 'M15.8 8.2l-2.1 5.5-5.5 2.1 2.1-5.5Z'],
+  spark: ['M12 3l2.4 6.1L20.5 11l-6.1 1.9L12 19l-2.4-6.1L3.5 11l6.1-1.9Z', 'M18.5 3.5v3M20 5h-3'],
+  steps: ['M4 20h4v-5H4Z', 'M10 20h4V9h-4Z', 'M16 20h4V4h-4Z'],
+  download: ['M12 3v12', 'M7 11l5 5 5-5', 'M4 20h16'],
+  map: ['M9 4 3 6v14l6-2 6 2 6-2V4l-6 2Z', 'M9 4v14', 'M15 6v14'],
+  repository: ['M5 4h13a1 1 0 0 1 1 1v15H6a1 1 0 0 1-1-1Z', 'M5 17h14', 'M9 8h6'],
+  layers: ['M12 3 3 8l9 5 9-5Z', 'M3 13l9 5 9-5', 'M3 17.5 12 22l9-4.5'],
+  code: ['M8 6 3 12l5 6', 'M16 6l5 6-5 6', 'M13.5 3.5l-3 17'],
+  network: [
+    'M6 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5', 'M6 21a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5',
+    'M18 21a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5', 'M6 8v8', 'M8.5 18.5h7', 'M8.4 6.6H16a2 2 0 0 1 2 2v7'
+  ],
+  cloud: ['M7 19h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6 10.6 4.2 4.2 0 0 0 7 19Z'],
+  bolt: ['M13 3 5 13.5h5.5L10 21l8-10.5h-5.5Z'],
+  grid: ['M4 4h7v7H4ZM13 4h7v7h-7ZM4 13h7v7H4ZM13 13h7v7h-7Z'],
+  shield: ['M12 3l8 3v6c0 4.9-3.4 8-8 9-4.6-1-8-4.1-8-9V6Z', 'M9 12l2.2 2.2L15.5 10'],
+  target: ['M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18', 'M12 16.5a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9', 'M12 12h.01'],
+  globe: ['M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18', 'M3.5 9.5h17M3.5 14.5h17', 'M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18'],
+  toolkit: ['M4 8h16v12H4Z', 'M9 8V5h6v3', 'M4 13.5h16', 'M10.5 13.5h3']
 };
+const glyph = paths[name];
+if (!glyph) throw new Error(`Unknown icon: ${name}`);
 ---
-<svg class="he-icon" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-  {paths[name].map(d => <path d={d} />)}
-</svg>
+{chip ? (
+  <span class="he-icon-chip" data-tone={tone} aria-hidden="true">
+    <svg class="he-icon" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+      {glyph.map(d => <path d={d} />)}
+    </svg>
+  </span>
+) : (
+  <svg class="he-icon" width={size} height={size} viewBox="0 0 24 24" data-tone={tone} fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    {glyph.map(d => <path d={d} />)}
+  </svg>
+)}

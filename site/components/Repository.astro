@@ -1,10 +1,11 @@
 ---
 import { languageFor, counts, type Locale } from '../lib/catalog';
+import Icon from './Icon.astro';
 interface Props { locale: Locale; }
 const { ui } = languageFor(Astro.props.locale);
 ---
-<div class="section-heading">
-  <p class="eyebrow">{counts.sourceCount} / {ui.sourceCount}</p>
+<div class="section-heading" data-tone="green">
+  <p class="eyebrow"><Icon name="repository" size={14} />{counts.sourceCount} / {ui.sourceCount}</p>
   <h1>{ui.repository}</h1>
   <p>{ui.sourceCoverage}</p>
 </div>

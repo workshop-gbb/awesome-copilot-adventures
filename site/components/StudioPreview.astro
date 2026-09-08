@@ -7,19 +7,19 @@ const { locale } = Astro.props;
 const text = copy[locale];
 const { href } = languageFor(locale);
 const demos = [
-  { id: 'workflow', icon: 'workflow', title: text.workflow, description: text.workflowText },
-  { id: 'context', icon: 'context', title: text.context, description: text.contextText },
-  { id: 'verification', icon: 'terminal', title: text.verification, description: text.verificationText }
+  { id: 'workflow', icon: 'workflow', tone: 'blue', title: text.workflow, description: text.workflowText },
+  { id: 'context', icon: 'context', tone: 'yellow', title: text.context, description: text.contextText },
+  { id: 'verification', icon: 'terminal', tone: 'green', title: text.verification, description: text.verificationText }
 ] as const;
 ---
 <section class="section he-studio-preview">
   <div class="container">
-    <div class="section-heading"><p class="eyebrow">{text.eyebrow}</p><h2>{text.title}</h2><p>{text.description}</p></div>
+    <div class="section-heading" data-tone="blue"><p class="eyebrow"><Icon name="target" size={14} />{text.eyebrow}</p><h2>{text.title}</h2><p>{text.description}</p></div>
     <div class="he-demo-grid">
       {demos.map((demo, index) => (
-        <a class="he-demo-card" href={`${href.simulations}#${demo.id}`}>
-          <div class="he-demo-top"><Icon name={demo.icon} size={28} /><span class="mono">0{index + 1}</span></div>
-          <h3>{demo.title}</h3><p>{demo.description}</p><span class="he-demo-link">{text.related}<Icon name="arrow" /></span>
+        <a class="he-demo-card" href={`${href.simulations}#${demo.id}`} data-tone={demo.tone}>
+          <div class="he-demo-top"><Icon name={demo.icon} size={22} tone={demo.tone} chip /><span class="mono">0{index + 1}</span></div>
+          <h3>{demo.title}</h3><p>{demo.description}</p><span class="he-demo-link">{text.related}<Icon name="arrow" size={16} /></span>
         </a>
       ))}
     </div>

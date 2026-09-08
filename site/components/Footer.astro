@@ -1,39 +1,59 @@
 ---
 import { languageFor, labelFor, locales, settings, counts, type PageInfo } from '../lib/catalog';
+import Icon from './Icon.astro';
 import simulationCopy from '../simulations.json';
 interface Props { page: PageInfo; }
 const { page } = Astro.props;
 const { ui, href } = languageFor(page.locale);
 ---
 <footer class="site-footer">
-  <div class="container footer-grid">
-    <div>
-      <p class="eyebrow">Awesome Copilot Adventures</p><h2>{ui.footerTitle}</h2><p>{ui.footerText}</p>
+  <div class="footer-atmosphere" aria-hidden="true"></div>
+  <div class="container footer-stage">
+    <div class="footer-intro">
+      <p class="eyebrow"><Icon name="spark" size={14} />Awesome Copilot Adventures</p><h2>{ui.footerTitle}</h2><p>{ui.footerText}</p>
       <address class="footer-author">
         <span>{ui.maintainedBy}</span>
-        <strong>{settings.maintainer.name}</strong>
-        <a href={settings.maintainer.profile}>{settings.maintainer.handle}</a>
-        <a href={settings.maintainer.website}>agenticdevopsplatform.com</a>
+        <div>
+          <strong>{settings.maintainer.name}</strong>
+          <a href={settings.maintainer.profile}>{settings.maintainer.handle}</a>
+          <a href={settings.maintainer.website}>agenticdevopsplatform.ai</a>
+        </div>
       </address>
     </div>
-    <nav aria-label={ui.guides}>
-      <a href={href.simulations}>{simulationCopy[page.locale].title}</a>
-      <a href={href.glossary}>{ui.glossary}</a>
-      <a href={href.status}>{ui.status}</a>
-      <a href={href.design}>{ui.design}</a>
-      <a href={href.support}>{ui.support}</a>
-      <a href={`${settings.base}/assets/site/fonts/OFL-Inter.txt`}>Inter · {ui.fontLicenses}</a>
-      <a href={`${settings.base}/assets/site/fonts/OFL-JetBrains-Mono.txt`}>JetBrains Mono · {ui.fontLicenses}</a>
-    </nav>
-    <nav aria-label={ui.languages}>
-      {locales.map(locale => (
-        <a href={page.alternates[locale]} data-locale={locale} lang={locale}>{labelFor(locale, 'language')}</a>
-      ))}
-      <a href={`https://github.com/${settings.repository}`}>GitHub ↗</a>
-    </nav>
+    <div class="footer-constellation" aria-hidden="true">
+      <span class="footer-node footer-node-blue"><Icon name="compass" size={28} /><i>01</i></span>
+      <span class="footer-node footer-node-green"><Icon name="code" size={28} /><i>02</i></span>
+      <span class="footer-node footer-node-yellow"><Icon name="workflow" size={28} /><i>03</i></span>
+      <span class="footer-node footer-node-red"><Icon name="check" size={28} /><i>04</i></span>
+      <svg viewBox="0 0 520 260" preserveAspectRatio="none">
+        <path d="M44 174 C130 34 206 226 282 91 S420 55 480 150" />
+        <path d="M44 174 L282 91 L480 150" />
+      </svg>
+    </div>
   </div>
-  <div class="container">
-    <section class="footer-credits" aria-labelledby="footer-credits-title">
+  <div class="container footer-directory">
+    <nav class="footer-panel" data-tone="blue" aria-label={ui.guides}>
+      <h3><Icon name="book" size={18} />{ui.guides}</h3>
+      <div>
+        <a href={href.simulations}>{simulationCopy[page.locale].title}<Icon name="arrow" size={14} /></a>
+        <a href={href.glossary}>{ui.glossary}<Icon name="arrow" size={14} /></a>
+        <a href={href.status}>{ui.status}<Icon name="arrow" size={14} /></a>
+        <a href={href.design}>{ui.design}<Icon name="arrow" size={14} /></a>
+        <a href={href.support}>{ui.support}<Icon name="arrow" size={14} /></a>
+      </div>
+    </nav>
+    <nav class="footer-panel" data-tone="green" aria-label={ui.languages}>
+      <h3><Icon name="globe" size={18} />{ui.languages}</h3>
+      <div>
+        {locales.map(locale => (
+          <a href={page.alternates[locale]} data-locale={locale} lang={locale}>{labelFor(locale, 'language')}<span>{locale.toUpperCase()}</span></a>
+        ))}
+        <a href={`https://github.com/${settings.repository}`}>GitHub <span>↗</span></a>
+        <a href={`${settings.base}/assets/site/fonts/OFL-Inter.txt`}>Inter <span>{ui.fontLicenses}</span></a>
+        <a href={`${settings.base}/assets/site/fonts/OFL-JetBrains-Mono.txt`}>JetBrains Mono <span>{ui.fontLicenses}</span></a>
+      </div>
+    </nav>
+    <section class="footer-panel footer-credits" data-tone="yellow" aria-labelledby="footer-credits-title">
       <h2 id="footer-credits-title">{ui.credits}</h2>
       <ul>
         <li><a href="https://github.com/microsoft/CopilotAdventures">microsoft/CopilotAdventures</a><span>{ui.adventureCredit}</span></li>
@@ -43,5 +63,5 @@ const { ui, href } = languageFor(page.locale);
       <a class="footer-credit-link" href={href.credits}>{ui.fullCredits}</a>
     </section>
   </div>
-  <div class="container footer-bottom"><span>MIT · Awesome Copilot Adventures</span><span class="mono">{counts.revision}</span></div>
+  <div class="container footer-bottom"><span>MIT · Awesome Copilot Adventures</span><span class="footer-spectrum" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="mono">{counts.revision}</span></div>
 </footer>

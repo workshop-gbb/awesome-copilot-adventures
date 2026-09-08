@@ -2,12 +2,13 @@
 import { languageFor, counts, type Locale } from '../lib/catalog';
 import Discovery from './Discovery.astro';
 import Reading from './Reading.astro';
+import Icon from './Icon.astro';
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const { ui } = languageFor(locale);
 ---
-<div class="section-heading">
-  <p class="eyebrow">{counts.documentCount} / {ui.guides}</p>
+<div class="section-heading" data-tone="yellow">
+  <p class="eyebrow"><Icon name="book" size={14} />{counts.documentCount} / {ui.guides}</p>
   <h1>{ui.libraryTitle}</h1>
   <p>{ui.libraryDescription}</p>
 </div>

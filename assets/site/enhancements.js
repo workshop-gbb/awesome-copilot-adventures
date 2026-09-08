@@ -152,7 +152,7 @@ export function enhanceSite(config, locationChanged) {
       }
     }, { rootMargin: '-120px 0px -55% 0px' });
     headings.forEach(heading => headingObserver.observe(heading));
-    const reveals = [...document.querySelectorAll('[data-reveal], .section-heading, .track-card, .he-demo-card, .progression-grid li')];
+    const reveals = [...document.querySelectorAll('[data-reveal], .section-heading, .track-card, .pathway-card, .he-demo-card, .progression-grid li')];
     const revealObserver = new IntersectionObserver(entries => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;

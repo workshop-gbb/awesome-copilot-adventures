@@ -1,11 +1,16 @@
 ---
 import { languageFor, labelFor, type Locale } from '../lib/catalog';
+import Icon, { type IconName } from './Icon.astro';
 interface Props { locale: Locale; compact?: boolean; adventuresOnly?: boolean; }
 const { locale, compact = false, adventuresOnly = false } = Astro.props;
 const { ui, href, catalog } = languageFor(locale);
 const id = adventuresOnly ? 'adventure-library' : compact ? 'home-library' : 'full-library';
 const groups = adventuresOnly ? ['all', 'read'] : ['all', 'adventures', 'hands-on', 'guides', 'fixtures', 'solutions', 'media', 'read'];
 const groupLabel = (group: string) => group === 'all' ? ui.filterAll : group === 'read' ? ui.filterRead : labelFor(locale, group);
+const groupIcon: Record<string, IconName> = {
+  adventures: 'map', 'hands-on': 'terminal', guides: 'book', fixtures: 'toolkit',
+  solutions: 'check', media: 'play', read: 'file'
+};
 const priority = (source: string) => source.includes('/portals-of-nexus/README.md') ? 0 : source.startsWith('adventures/') && source.endsWith('/README.md') ? 1 : 2;
 const documents = adventuresOnly
   ? catalog.filter(document => document.group === 'adventures' && document.source.endsWith('/README.md'))
@@ -26,7 +31,7 @@ const documents = adventuresOnly
     {documents.map((document, index) => (
       <li class="discovery-card" data-library-card data-source={document.source} data-group={document.group} data-title={document.title} hidden={compact && index >= 6}>
         {document.image && ['adventures', 'hands-on'].includes(document.group) && <img class="he-card-image" src={document.image} width={document.group === 'adventures' ? 1456 : 1440} height={document.group === 'adventures' ? 832 : 630} alt="" loading="lazy" decoding="async" />}
-        <span class="card-index">{labelFor(locale, document.group)} <span data-read-badge hidden>✓</span></span>
+        <span class="card-index"><Icon name={groupIcon[document.group] || 'file'} size={14} />{labelFor(locale, document.group)} <span data-read-badge hidden>✓</span></span>
         <a href={document.url}>{document.title}<span aria-hidden="true">↗</span></a>
         <small>{document.source}</small>
       </li>

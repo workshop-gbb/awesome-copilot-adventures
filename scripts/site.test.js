@@ -10,7 +10,7 @@ const {
   retainHeadingAnchors, createLinkResolver, renderDocument,   textPreview, readSource, buildArtifacts
 } = require('./build-site');
 const ui = require('./site-ui.json');
-const { decodeHtml } = require('./check-rendered-site');
+const { decodeHtml, adventureVideoErrors } = require('./check-rendered-site');
 const { markdownLinkTargets } = require('./markdown-helpers');
 const { mediaId, mediaImage, mediaImages, renderMedia, loadAdventureMedia, loadHandsOnMedia } = require('./site-media');
 
@@ -94,6 +94,185 @@ test('film controls and visual descriptions have complete copy in every site lan
   }
 });
 
+test('adventure films use integrated ambient playback instead of detached play controls', () => {
+  const component = fs.readFileSync(path.join(root, 'site/components/AdventureFilms.astro'), 'utf8');
+  const script = fs.readFileSync(path.join(root, 'assets/site/adventure-films.js'), 'utf8');
+  assert.ok(component.includes('data-film-trigger'));
+  assert.ok(!component.includes('data-film-play'));
+  assert.ok(!component.includes('data-film-still'));
+  assert.ok(!/<video[\s\S]*?\bcontrols\b/.test(component));
+  assert.ok(script.includes("trigger.addEventListener('mouseenter'"));
+  assert.ok(script.includes("trigger.addEventListener('focus'"));
+  assert.ok(script.includes("matchMedia('(prefers-reduced-motion: reduce)')"));
+  assert.ok(script.includes("matchMedia('(hover: none)')"));
+  assert.ok(script.includes("error?.name === 'AbortError'"));
+});
+
+function integratedFilmMarkup() {
+  return `<section data-adventure-films data-video-error="Playback failed." data-video-playing="Playing." data-video-paused="Paused.">
+    <p id="film-motion-note">Hover or focus to preview; activate to toggle playback.</p>
+    <figure data-adventure-film>
+      <button type="button" data-film-trigger aria-pressed="false" aria-label="Play visual story: Example" aria-describedby="example-description film-motion-note">
+        <img data-film-poster src="/poster.webp" alt="A navigator examines a workbench.">
+        <video data-adventure-video data-video-src="/example.mp4" poster="/poster.webp" loop muted playsinline preload="none" aria-hidden="true"></video>
+      </button>
+      <figcaption>
+        <h3 id="example-title">Example</h3>
+        <p id="example-description">A navigator compares instruments.</p>
+        <a href="/example.mp4">Open silent video</a>
+        <p data-film-status role="status"></p>
+      </figcaption>
+    </figure>
+  </section>`;
+}
+
+test('adventure video validation accepts described integrated controls with interaction-only looping', () => {
+  const markup = integratedFilmMarkup();
+  assert.deepEqual(adventureVideoErrors(markup), []);
+  assert.deepEqual(adventureVideoErrors(markup.replace(' loop', '')), []);
+  assert.deepEqual(adventureVideoErrors(markup.replaceAll('"', "'")), []);
+  assert.deepEqual(adventureVideoErrors('<video controls src="/unrelated.mp4"></video>'), []);
+});
+
+test('adventure video validation rejects eager playback and inaccessible or missing fallbacks', () => {
+  const markup = integratedFilmMarkup();
+  const mutations = [
+    ['autoplay', text => text.replace('<video ', '<video autoplay ')],
+    ['false autoplay is still enabled', text => text.replace('<video ', '<video autoplay="false" ')],
+    ['eager source', text => text.replace('<video ', '<video src="/example.mp4" ')],
+    ['nested source', text => text.replace('</video>', '<source src="/example.mp4"></video>')],
+    ['native controls', text => text.replace('<video ', '<video controls ')],
+    ['eager preload', text => text.replace('preload="none"', 'preload="metadata"')],
+    ['unmuted video', text => text.replace(' muted', '')],
+    ['missing inline playback', text => text.replace(' playsinline', '')],
+    ['exposed decorative video', text => text.replace('aria-hidden="true"', 'aria-hidden="false"')],
+    ['missing video poster', text => text.replace(' poster="/poster.webp"', '')],
+    ['missing deferred source', text => text.replace('data-video-src="/example.mp4"', 'data-video-src=""')],
+    ['missing trigger', text => text.replace('data-film-trigger', 'data-unrelated-trigger')],
+    ['submit control', text => text.replace('type="button"', 'type="submit"')],
+    ['unnamed control', text => text.replace('aria-label="Play visual story: Example"', 'aria-label=" "')],
+    ['hidden control', text => text.replace('<button ', '<button hidden ')],
+    ['disabled control', text => text.replace('<button ', '<button disabled ')],
+    ['missing initial state', text => text.replace('aria-pressed="false"', '')],
+    ['unresolved description', text => text.replace('example-description film-motion-note', 'missing-description film-motion-note')],
+    ['missing scene description', text => text.replace('example-description film-motion-note', 'film-motion-note')],
+    ['missing motion description', text => text.replace('example-description film-motion-note', 'example-description')],
+    ['missing poster alternative', text => text.replace('alt="A navigator examines a workbench."', 'alt=""')],
+    ['mismatched poster', text => text.replace('src="/poster.webp"', 'src="/different.webp"')],
+    ['missing direct download', text => text.replace('href="/example.mp4"', 'href="/different.mp4"')],
+    ['missing live status', text => text.replace('role="status"', '')],
+    ['missing error announcement', text => text.replace('data-video-error="Playback failed."', '')],
+    ['missing play announcement', text => text.replace('data-video-playing="Playing."', '')],
+    ['missing pause announcement', text => text.replace('data-video-paused="Paused."', '')]
+  ];
+  for (const [reason, mutate] of mutations) {
+    assert.ok(adventureVideoErrors(mutate(markup)).length > 0, reason);
+  }
+});
+
+test('adventure film interaction keeps activation, reduced motion, focus and errors accessible', async () => {
+  const events = properties => ({
+    ...properties,
+    listeners: new Map(),
+    addEventListener(name, listener) { this.listeners.set(name, listener); },
+    async emit(name, event = {}) {
+      await this.listeners.get(name)?.(event);
+      await new Promise(resolve => setImmediate(resolve));
+    }
+  });
+  const reducedMotion = events({ matches: false });
+  const hoverless = events({ matches: false });
+  const lifecycle = events({});
+  const failures = [];
+  const players = [0, 1].map(index => {
+    const attributes = new Map();
+    const trigger = events({
+      setAttribute(name, value) { attributes.set(name, value); },
+      getAttribute(name) { return attributes.get(name); }
+    });
+    const videoAttributes = new Map();
+    const video = events({
+      dataset: { videoSrc: `/film-${index}.mp4` }, paused: true, currentTime: 0, playCount: 0,
+      hasAttribute(name) { return videoAttributes.has(name); },
+      load() {},
+      pause() { this.paused = true; },
+      async play() { this.playCount++; this.paused = false; }
+    });
+    Object.defineProperty(video, 'src', { set(value) { videoAttributes.set('src', value); } });
+    const status = { textContent: '' };
+    const elements = { '[data-adventure-video]': video, '[data-film-trigger]': trigger, '[data-film-status]': status };
+    const card = { dataset: {}, querySelector(selector) { return elements[selector]; } };
+    return { card, trigger, video, status };
+  });
+  const gallery = {
+    dataset: { videoPlaying: 'Playing.', videoPaused: 'Paused.', videoError: 'Playback failed.' },
+    querySelectorAll() { return players.map(player => player.card); }
+  };
+  const document = events({ hidden: false, querySelector() { return gallery; } });
+  const script = fs.readFileSync(path.join(root, 'assets/site/adventure-films.js'), 'utf8');
+  require('node:vm').runInNewContext(`${script.replace('export function', 'function')}\nenhanceAdventureFilms();`, {
+    document,
+    matchMedia: query => query === '(prefers-reduced-motion: reduce)' ? reducedMotion : hoverless,
+    addEventListener: lifecycle.addEventListener.bind(lifecycle),
+    console: { error: (...args) => failures.push(args), info() {} }
+  });
+  const [first, second] = players;
+  assert.ok(players.every(player => !player.video.hasAttribute('src') && player.video.paused));
+  await first.trigger.emit('mouseenter');
+  assert.equal(first.trigger.getAttribute('aria-pressed'), 'true');
+  assert.equal(first.video.paused, false);
+  await first.trigger.emit('click');
+  assert.equal(first.video.paused, true);
+  assert.equal(first.trigger.getAttribute('aria-pressed'), 'false');
+  assert.equal(first.status.textContent, 'Paused.');
+  await first.trigger.emit('click');
+  assert.equal(first.video.paused, false);
+  assert.equal(first.status.textContent, 'Playing.');
+  await first.trigger.emit('blur');
+  assert.equal(first.video.paused, true);
+  reducedMotion.matches = true;
+  await second.trigger.emit('mouseenter');
+  await second.trigger.emit('focus');
+  assert.equal(second.video.hasAttribute('src'), false);
+  await second.trigger.emit('click');
+  assert.equal(second.video.paused, false);
+  assert.equal(second.status.textContent, 'Playing.');
+  await first.trigger.emit('click');
+  assert.equal(second.video.paused, true);
+  assert.equal(second.trigger.getAttribute('aria-pressed'), 'false');
+  await reducedMotion.emit('change', { matches: true });
+  assert.ok(players.every(player => player.video.paused && player.card.dataset.playing === undefined));
+  reducedMotion.matches = false;
+  hoverless.matches = true;
+  const playCount = second.video.playCount;
+  await second.trigger.emit('focus');
+  assert.equal(second.video.playCount, playCount);
+  await second.trigger.emit('click');
+  assert.equal(second.video.paused, false);
+  document.hidden = true;
+  await document.emit('visibilitychange');
+  assert.ok(players.every(player => player.video.paused));
+  document.hidden = false;
+  await document.emit('visibilitychange');
+  assert.ok(players.every(player => player.video.paused));
+  second.video.play = async () => { throw new Error('Playback permission denied'); };
+  await second.trigger.emit('click');
+  assert.equal(second.trigger.getAttribute('aria-pressed'), 'false');
+  assert.equal(second.status.textContent, 'Playback failed.');
+  assert.equal(failures.length, 1);
+});
+
+test('code copying uses an integrated persistent toolbar', () => {
+  const script = fs.readFileSync(path.join(root, 'assets/site/site.js'), 'utf8');
+  const styles = fs.readFileSync(path.join(root, 'assets/site/site.css'), 'utf8');
+  assert.ok(script.includes("'code-toolbar'"));
+  assert.ok(script.includes("'code-language'"));
+  assert.ok(script.includes("'copy-icon'"));
+  assert.ok(script.includes("message.classList.remove('sr-only')"), 'Clipboard failures must be visible, not only announced to screen readers.');
+  assert.ok(styles.includes('.code-toolbar'));
+  assert.ok(!styles.includes('.code-wrapper:hover .code-copy'));
+});
+
 test('source link checks include reference definitions but ignore literal code examples', () => {
   const source = [
     '[Lesson](./lesson.md#evidence)',
@@ -142,6 +321,14 @@ test('locale dictionaries cover identical UI controls with real language tags', 
   assert.equal(ui['pt-br'].languageTag, 'pt-BR');
   assert.notEqual(ui.en.heroTitle, ui.es.heroTitle);
   assert.notEqual(ui.en.heroTitle, ui['pt-br'].heroTitle);
+});
+
+test('responsive navigation keeps its CSS and interaction breakpoint aligned for longer translated labels', () => {
+  const script = fs.readFileSync(path.join(root, 'assets/site/site.js'), 'utf8');
+  const styles = fs.readFileSync(path.join(root, 'assets/site/site.css'), 'utf8');
+  const query = script.match(/const mobile = matchMedia\('([^']+)'\)/)?.[1];
+  assert.equal(query, '(max-width: 1536px)');
+  assert.ok(styles.includes(`@media ${query} {`));
 });
 
 test('every current learning segment has a structurally valid translation in each published language', () => {
@@ -207,7 +394,7 @@ test('prerequisites are discoverable and official resource links open safely in 
     assert.match(attributes, /rel="noopener noreferrer"/);
   }
   for (const file of ['site/components/Header.astro', 'site/components/Sidebar.astro', 'site/components/Home.astro']) {
-    assert.match(fs.readFileSync(path.join(root, file), 'utf8'), /href=\{href\.prerequisites\}/, file);
+    assert.match(fs.readFileSync(path.join(root, file), 'utf8'), /\bhref\.prerequisites\b/, file);
   }
   for (const locale of locales) {
     const rendered = renderDocument(page, locale, loadTranslations(locale), createLinkResolver(pages(), siteSources()));
@@ -346,7 +533,7 @@ test('credits identify the maintainer and both original projects in every langua
   const settings = require('../site.config.json');
   assert.deepEqual(settings.maintainer, {
     name: 'Paula Silva', handle: '@paulasilvatech',
-    profile: 'https://github.com/paulasilvatech', website: 'https://agenticdevopsplatform.com'
+    profile: 'https://github.com/paulasilvatech', website: 'https://agenticdevopsplatform.ai'
   });
   const documents = pages();
   const creditPage = documents.find(document => document.source === 'NOTICE.md');

@@ -12,6 +12,61 @@ function decodeHtml(value) {
   });
 }
 
+function htmlAttributes(text) {
+  return new Map([...text.matchAll(/(?:^|\s)([a-z_:][\w:.-]*)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/gi)]
+    .map(([, name, doubleQuoted, singleQuoted, unquoted]) =>
+      [name.toLowerCase(), decodeHtml(doubleQuoted ?? singleQuoted ?? unquoted ?? '')]));
+}
+
+function adventureVideoErrors(rendered) {
+  const videos = [...rendered.matchAll(/<video\b([^>]*)>([\s\S]*?)<\/video>/g)]
+    .filter(([, attributes]) => htmlAttributes(attributes).has('data-adventure-video'));
+  if (!videos.length) return [];
+  const failures = [];
+  const ids = new Set([...rendered.matchAll(/\sid=(["'])(.*?)\1/g)].map(([, , id]) => decodeHtml(id)));
+  const cards = [...rendered.matchAll(/<figure\b([^>]*)>([\s\S]*?)<\/figure>/g)]
+    .filter(([, attributes]) => htmlAttributes(attributes).has('data-adventure-film'));
+  const gallery = [...rendered.matchAll(/<section\b([^>]*)>/g)]
+    .map(([, attributes]) => htmlAttributes(attributes)).find(attributes => attributes.has('data-adventure-films'));
+  if (!['data-video-error', 'data-video-playing', 'data-video-paused'].every(name => gallery?.get(name)?.trim())) {
+    failures.push('adventure films must provide localized playback and error announcements');
+  }
+  for (const [videoMarkup, attributes, children] of videos) {
+    const video = htmlAttributes(attributes);
+    if (['autoplay', 'src', 'controls'].some(name => video.has(name))
+      || /<source\b[^>]*\ssrc\s*=/.test(children)
+      || video.get('preload') !== 'none' || video.get('aria-hidden') !== 'true'
+      || !video.get('poster')?.trim() || !video.get('data-video-src')?.trim()
+      || !['muted', 'playsinline'].every(name => video.has(name))) {
+      failures.push('adventure video must be interaction-loaded, muted and poster-backed, without native controls');
+    }
+    const card = cards.find(([, , body]) => body.includes(videoMarkup))?.[2] || '';
+    const button = [...card.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/g)]
+      .find(([, attributes, body]) => htmlAttributes(attributes).has('data-film-trigger') && body.includes(videoMarkup));
+    const trigger = htmlAttributes(button?.[1] || '');
+    const descriptions = (trigger.get('aria-describedby') || '').trim().split(/\s+/).filter(Boolean);
+    if (trigger.get('type') !== 'button' || trigger.get('aria-pressed') !== 'false'
+      || !trigger.get('aria-label')?.trim() || trigger.get('aria-hidden') === 'true'
+      || ['disabled', 'hidden'].some(name => trigger.has(name))
+      || descriptions.length < 2 || !descriptions.includes('film-motion-note')
+      || !descriptions.every(id => ids.has(id))) {
+      failures.push('adventure video must have a named, described and operable integrated toggle');
+    }
+    const poster = [...(button?.[2] || '').matchAll(/<img\b([^>]*)>/g)]
+      .map(([, attributes]) => htmlAttributes(attributes)).find(attributes => attributes.has('data-film-poster'));
+    if (!poster?.get('alt')?.trim() || poster.get('src') !== video.get('poster')) {
+      failures.push('adventure video must retain its matching still image and alternative text');
+    }
+    const links = [...card.matchAll(/<a\b([^>]*)>/g)].map(([, attributes]) => htmlAttributes(attributes));
+    const status = [...card.matchAll(/<p\b([^>]*)>/g)]
+      .map(([, attributes]) => htmlAttributes(attributes)).find(attributes => attributes.has('data-film-status'));
+    if (!links.some(link => link.get('href') === video.get('data-video-src')) || status?.get('role') !== 'status') {
+      failures.push('adventure video must retain a direct file link and accessible playback status');
+    }
+  }
+  return failures;
+}
+
 function walk(directory) {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
     const file = path.join(directory, entry.name);
@@ -66,10 +121,18 @@ function verifyRenderedSite(directory, selectedLocales = locales) {
       }
     }
     const rendered = content.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
+    if (selectedLocales.includes(currentLocale) && name === `${currentLocale}/index.html`) {
+      const main = rendered.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1] || '';
+      if (!main.includes(`href="${basePath}/${currentLocale}/prerequisites/"`)) {
+        failures.push(`${name}: missing prerequisites link in the homepage learning path`);
+      }
+    }
     if (selectedLocales.includes(currentLocale)) {
       if ([`${currentLocale}/index.html`, `${currentLocale}/adventures/index.html`].includes(name)) {
-        const videos = [...rendered.matchAll(/<video\b[^>]*\bdata-adventure-video\b/g)];
+        const videos = [...rendered.matchAll(/<video\b[^>]*\bdata-adventure-video\b[^>]*>/g)];
         if (videos.length !== adventureMedia.films.length) failures.push(`${name}: missing adventure films`);
+        const triggers = [...rendered.matchAll(/<button\b[^>]*\bdata-film-trigger\b[^>]*>/g)];
+        if (triggers.length !== adventureMedia.films.length) failures.push(`${name}: missing integrated film interactions`);
         for (const film of adventureMedia.films) {
           if (!rendered.includes(`data-video-src="${mediaUrl(film.source)}"`)
             || !rendered.includes(`poster="${mediaUrl(film.poster)}"`)) {
@@ -109,15 +172,7 @@ function verifyRenderedSite(directory, selectedLocales = locales) {
         }
       }
     }
-    for (const [, attributes] of rendered.matchAll(/<video\b([^>]*)>/g)) {
-      if (!attributes.includes('data-adventure-video')) continue;
-      if (/\s(?:autoplay|loop|src)(?:=|\s|$)/.test(attributes)
-        || !/\spreload="none"/.test(attributes) || !/\sposter="/.test(attributes)
-        || !/\sdata-video-src="/.test(attributes) || !/\saria-describedby="/.test(attributes)
-        || !['controls', 'muted', 'playsinline'].every(attribute => new RegExp(`\\s${attribute}(?:=|\\s|$)`).test(attributes))) {
-        failures.push(`${name}: adventure video must be opt-in, muted, described and poster-backed`);
-      }
-    }
+    failures.push(...adventureVideoErrors(rendered).map(error => `${name}: ${error}`));
     for (const match of rendered.matchAll(/\b(href|src|poster|data-video-src)=(["'])([\s\S]*?)\2/g)) {
       const target = decodeHtml(match[3]);
       if (/^(data:|blob:|mailto:|tel:)/i.test(target)) continue;
@@ -180,4 +235,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { decodeHtml, verifyRenderedSite };
+module.exports = { decodeHtml, adventureVideoErrors, verifyRenderedSite };

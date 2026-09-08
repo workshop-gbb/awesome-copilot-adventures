@@ -2,7 +2,7 @@
 
 This community edition is maintained by **Paula Silva**:
 [@paulasilvatech](https://github.com/paulasilvatech) ·
-[agenticdevopsplatform.com](https://agenticdevopsplatform.com).
+[agenticdevopsplatform.ai](https://agenticdevopsplatform.ai).
 
 ## Projects that inspired this edition
 

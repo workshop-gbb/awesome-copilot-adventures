@@ -13,11 +13,13 @@ including their audio tracks, remain unchanged in `assets/images/adventures/`.
 
 The [homepage](../../docs/index.md) and [adventure catalog](../../docs/adventures/index.md)
 offer a gallery with localized descriptions. Video bytes are not requested before
-an explicit play action. Native controls provide pause and seeking; the still-image
-button stops playback and releases the source. Starting another clip stops the
-previous one. Hiding the page or enabling reduced motion restores the still image.
-Reduced motion never starts playback automatically; an explicit play action is
-still available.
+interaction with a scene. Hover or keyboard focus previews its silent loop; the
+integrated button toggles playback with a click, tap, Enter or Space. Moving the
+pointer or focus away restores the poster. Starting another clip stops the
+previous one. Hiding the page or enabling reduced motion pauses playback and
+restores the still image without automatically resuming. Reduced motion and touch
+require explicit activation instead of hover or focus. Playback and errors have
+localized status messages, and the direct video link remains available.
 
 Without JavaScript, the posters, descriptions and direct video links remain usable.
 These silent visual montages add no required instructional information or spoken

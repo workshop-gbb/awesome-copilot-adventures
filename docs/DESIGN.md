@@ -177,11 +177,15 @@ while their original localized SVG concept illustrations remain in native disclo
 The [cover inventory](../assets/images/adventures/README.md) records each pairing.
 Fantasy artwork is limited to the adventure track; hands-on illustrations are unchanged.
 
-The homepage and adventure catalog include 3 silent, 10-second animated montages.
-Each has a first-frame poster, a localized visual description, native playback
-controls and an explicit still-image reset. No video source is loaded until the
-learner chooses to play. Only one clip plays at a time. Page hiding and a switch
-to reduced motion restore the poster without automatic resumption. Direct links
+The homepage and adventure catalog include 3 silent, 10-second animated montages
+in a full-width editorial section. Each has a first-frame poster and a localized
+visual description. Pointer hover or keyboard focus starts a scene without a
+separate play button; leaving the scene restores the poster. Touch users can tap
+the image to toggle playback. Only one clip plays at a time.
+
+No video source is loaded before interaction. Page hiding and a switch to reduced
+motion restore the poster without automatic resumption. With reduced motion, hover
+and focus remain still and an explicit tap or activation is required. Direct links
 remain available without JavaScript.
 
 Original JPEGs and MP4s are preserved; optimized covers, silent playback copies

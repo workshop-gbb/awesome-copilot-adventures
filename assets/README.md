@@ -27,5 +27,8 @@ Required hero format:
 - retain a still image when adding video.
 
 Motion assets must not autoplay with sound and must respect `prefers-reduced-motion`.
-The site loads the silent teasers only after an explicit play action and offers
-native controls, a still-image reset, localized descriptions and direct file links.
+The site loads silent teasers only after interaction with an integrated scene
+button. Hover or keyboard focus previews a scene; activation toggles playback.
+Reduced motion and touch require explicit activation. Leaving a scene restores
+its poster. Localized descriptions, playback status and direct file links remain
+available without detached video controls.

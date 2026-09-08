@@ -4,6 +4,7 @@ import Discovery from './Discovery.astro';
 import Reading from './Reading.astro';
 import StudioPreview from './StudioPreview.astro';
 import AdventureFilms from './AdventureFilms.astro';
+import Icon from './Icon.astro';
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const { ui, href } = languageFor(locale);
@@ -14,21 +15,46 @@ const stages = [
   { id: 'agent', name: 'Agent', goal: ui.agentGoal, artifact: ui.agentArtifact },
   { id: 'review', name: ui.reviewStage, goal: ui.reviewGoal, artifact: ui.reviewArtifact },
   { id: 'evidence', name: ui.evidenceStage, goal: ui.evidenceGoal, artifact: ui.evidenceArtifact }
-];
+] as const;
+const pathway = [
+  { tone: 'blue', icon: 'compass', label: ui.prerequisites, url: href.prerequisites },
+  { tone: 'green', icon: 'spark', label: ui.start, url: href.start },
+  { tone: 'yellow', icon: 'steps', label: ui.learningOrder, url: href.learningPath },
+  { tone: 'red', icon: 'download', label: ui.learnerKits, url: href.downloads }
+] as const;
+const tracks = [
+  { tone: 'blue', icon: 'map', label: ui.adventures, title: ui.adventures, text: ui.adventureDescription, url: href.adventures },
+  { tone: 'green', icon: 'terminal', label: ui['hands-on'], title: ui['hands-on'], text: ui.handsOnDescription, url: href.handsOn },
+  { tone: 'yellow', icon: 'book', label: ui.guides, title: ui.guides, text: ui.guideDescription, url: href.harness },
+  { tone: 'red', icon: 'repository', label: ui.source, title: ui.repository, text: ui.sourceDescription, url: href.repository }
+] as const;
+const progression = [
+  { tone: 'blue', icon: 'layers', title: ui.foundations, text: ui.foundationsText },
+  { tone: 'green', icon: 'code', title: ui.engineering, text: ui.engineeringText },
+  { tone: 'yellow', icon: 'network', title: ui.coordination, text: ui.coordinationText },
+  { tone: 'red', icon: 'cloud', title: ui.surfaces, text: ui.surfacesText }
+] as const;
+const stats = [
+  { tone: 'blue', icon: 'map', value: counts.adventureCount, label: ui.adventures, url: href.adventures },
+  { tone: 'green', icon: 'terminal', value: counts.handsOnCount, label: ui['hands-on'], url: href.handsOn },
+  { tone: 'yellow', icon: 'book', value: counts.documentCount, label: ui.guides, url: href.library },
+  { tone: 'red', icon: 'repository', value: counts.sourceCount, label: ui.sourceCount, url: href.repository }
+] as const;
 ---
 <section class="hero">
+  <div class="hero-aurora" aria-hidden="true"></div>
   <div class="container hero-grid">
     <div class="hero-copy">
       <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span>{ui.heroEyebrow}</p>
       <h1>{ui.heroTitle.split('\n').map((line, index) => <>{index > 0 && <br />}{line}</>)}</h1>
       <p class="hero-description">{ui.heroDescription}</p>
       <div class="hero-actions">
-        <a class="button button-light" href={href.start}>{ui.start} <span aria-hidden="true">↗</span></a>
-        <a class="button button-outline" href={href.downloads}>{ui.learnerKits} <span aria-hidden="true">↓</span></a>
+        <a class="button button-light" href={href.start}>{ui.start} <Icon name="spark" size={16} /></a>
+        <a class="button button-outline" href={href.downloads}>{ui.learnerKits} <Icon name="download" size={16} /></a>
       </div>
       <p class="workflow-line">{ui.heroNote}</p>
       <div class="hero-languages">
-        <span>{ui.languageAccess}</span>
+        <span><Icon name="globe" size={14} />{ui.languageAccess}</span>
         <nav aria-label={ui.languages}>
           {locales.map(language => <a href={alternates[language]} data-locale={language} lang={language} hreflang={language} aria-current={language === locale ? 'page' : undefined}>{labelFor(language, 'language')}</a>)}
         </nav>
@@ -49,46 +75,60 @@ const stages = [
     </aside>
   </div>
   <div class="container hero-stats">
-    <a href={href.adventures} aria-label={`${counts.adventureCount} ${ui.adventures}`}><strong data-counter={counts.adventureCount}>{counts.adventureCount}</strong><span>{ui.adventures}</span></a>
-    <a href={href.handsOn} aria-label={`${counts.handsOnCount} ${ui['hands-on']}`}><strong data-counter={counts.handsOnCount}>{counts.handsOnCount}</strong><span>{ui['hands-on']}</span></a>
-    <a href={href.library} aria-label={`${counts.documentCount} ${ui.guides}`}><strong data-counter={counts.documentCount}>{counts.documentCount}</strong><span>{ui.guides}</span></a>
-    <a href={href.repository} aria-label={`${counts.sourceCount} ${ui.sourceCount}`}><strong data-counter={counts.sourceCount}>{counts.sourceCount}</strong><span>{ui.sourceCount}</span></a>
+    {stats.map(stat => (
+      <a href={stat.url} data-tone={stat.tone} aria-label={`${stat.value} ${stat.label}`}>
+        <Icon name={stat.icon} size={18} />
+        <strong data-counter={stat.value}>{stat.value}</strong>
+        <span>{stat.label}</span>
+      </a>
+    ))}
   </div>
 </section>
-<section class="section container">
-  <div class="section-heading"><h2>{ui.firstVisit}</h2><p>{ui.firstVisitText}</p></div>
-  <nav class="hero-actions" aria-label={ui.learningNavigation}>
-    <a class="button" href={href.prerequisites}>00 / {ui.prerequisites}</a>
-    <a class="button button-primary" href={href.start}>01 / {ui.start}</a>
-    <a class="button" href={href.learningPath}>02 / {ui.learningOrder}</a>
-    <a class="button" href={href.downloads}>03 / {ui.learnerKits}</a>
+<section class="section container pathway-section">
+  <div class="section-heading" data-tone="green"><p class="eyebrow"><Icon name="compass" size={14} />{ui.learningNavigation}</p><h2>{ui.firstVisit}</h2><p>{ui.firstVisitText}</p></div>
+  <nav class="pathway-grid" aria-label={ui.learningNavigation}>
+    {pathway.map((step, index) => (
+      <a class="pathway-card" href={step.url} data-tone={step.tone}>
+        <Icon name={step.icon} size={22} tone={step.tone} chip />
+        <span class="pathway-index">{String(index).padStart(2, '0')}</span>
+        <span class="pathway-label">{step.label}</span>
+        <Icon name="arrow" size={16} />
+      </a>
+    ))}
   </nav>
 </section>
-<div class="container"><AdventureFilms locale={locale} /></div>
+<AdventureFilms locale={locale} />
 <StudioPreview locale={locale} />
 <section class="section container discovery-section">
-  <div class="section-heading" data-reveal><p class="eyebrow">{ui.guides}</p><h2>{ui.libraryTitle}</h2><p>{ui.libraryDescription}</p></div>
+  <div class="section-heading" data-tone="yellow" data-reveal><p class="eyebrow"><Icon name="book" size={14} />{ui.guides}</p><h2>{ui.libraryTitle}</h2><p>{ui.libraryDescription}</p></div>
   <Reading locale={locale} />
   <Discovery locale={locale} compact />
 </section>
 <section class="section container">
-  <div class="section-heading"><p class="eyebrow">{ui.tracksEyebrow}</p><h2>{ui.tracksTitle}</h2></div>
+  <div class="section-heading" data-tone="blue"><p class="eyebrow"><Icon name="grid" size={14} />{ui.tracksEyebrow}</p><h2>{ui.tracksTitle}</h2></div>
   <div class="track-grid">
-    <a class="track-card accent-blue" href={href.adventures}><span class="card-index">01 / {ui.adventures}</span><h3>{ui.adventures}</h3><p>{ui.adventureDescription}</p><span class="card-arrow" aria-hidden="true">↗</span></a>
-    <a class="track-card accent-green" href={href.handsOn}><span class="card-index">02 / {ui['hands-on']}</span><h3>{ui['hands-on']}</h3><p>{ui.handsOnDescription}</p><span class="card-arrow" aria-hidden="true">↗</span></a>
-    <a class="track-card accent-yellow" href={href.harness}><span class="card-index">03 / {ui.guides}</span><h3>{ui.guides}</h3><p>{ui.guideDescription}</p><span class="card-arrow" aria-hidden="true">↗</span></a>
-    <a class="track-card accent-red" href={href.repository}><span class="card-index">04 / {ui.source}</span><h3>{ui.repository}</h3><p>{ui.sourceDescription}</p><span class="card-arrow" aria-hidden="true">↗</span></a>
+    {tracks.map((track, index) => (
+      <a class="track-card" href={track.url} data-tone={track.tone}>
+        <span class="card-index"><Icon name={track.icon} size={16} />0{index + 1} / {track.label}</span>
+        <h3>{track.title}</h3>
+        <p>{track.text}</p>
+        <span class="card-arrow"><Icon name="arrow" size={20} /></span>
+      </a>
+    ))}
   </div>
 </section>
 <section class="section progression-section">
   <div class="container">
-    <div class="section-heading"><p class="eyebrow">{ui.curriculumEyebrow}</p><h2>{ui.curriculumTitle}</h2></div>
+    <div class="section-heading" data-tone="red"><p class="eyebrow"><Icon name="steps" size={14} />{ui.curriculumEyebrow}</p><h2>{ui.curriculumTitle}</h2></div>
     <ol class="progression-grid">
-      <li><span class="step-number">01</span><h3>{ui.foundations}</h3><p>{ui.foundationsText}</p></li>
-      <li><span class="step-number">02</span><h3>{ui.engineering}</h3><p>{ui.engineeringText}</p></li>
-      <li><span class="step-number">03</span><h3>{ui.coordination}</h3><p>{ui.coordinationText}</p></li>
-      <li><span class="step-number">04</span><h3>{ui.surfaces}</h3><p>{ui.surfacesText}</p></li>
+      {progression.map((stage, index) => (
+        <li data-tone={stage.tone}>
+          <span class="step-number"><Icon name={stage.icon} size={18} tone={stage.tone} chip />0{index + 1}</span>
+          <h3>{stage.title}</h3>
+          <p>{stage.text}</p>
+        </li>
+      ))}
     </ol>
-    <a class="text-link" href={href.curriculum}>{ui.curriculum} <span aria-hidden="true">→</span></a>
+    <a class="text-link" href={href.curriculum}>{ui.curriculum} <Icon name="arrow" size={16} /></a>
   </div>
 </section>

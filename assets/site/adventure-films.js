@@ -2,70 +2,77 @@ export function enhanceAdventureFilms() {
   const gallery = document.querySelector('[data-adventure-films]');
   if (!gallery) return;
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const hoverless = matchMedia('(hover: none)');
   const players = [...gallery.querySelectorAll('[data-adventure-film]')].map(card => {
     const video = card.querySelector('[data-adventure-video]');
-    const poster = card.querySelector('[data-film-poster]');
-    const play = card.querySelector('[data-film-play]');
-    const still = card.querySelector('[data-film-still]');
+    const trigger = card.querySelector('[data-film-trigger]');
     const status = card.querySelector('[data-film-status]');
     let attempt = 0;
-    const showPoster = () => {
+    let pending = false;
+    const showPoster = ({ announce = false, reset = false } = {}) => {
       attempt++;
-      const restoreFocus = document.activeElement === video || document.activeElement === still;
+      pending = false;
       video.pause();
-      video.removeAttribute('src');
-      video.load();
-      video.hidden = true;
-      poster.hidden = false;
-      play.hidden = false;
-      play.disabled = false;
-      still.hidden = true;
-      status.textContent = '';
-      if (restoreFocus) play.focus();
+      if (reset) video.currentTime = 0;
+      delete card.dataset.playing;
+      trigger.setAttribute('aria-pressed', 'false');
+      status.textContent = announce ? gallery.dataset.videoPaused : '';
     };
     const reportError = error => {
       showPoster();
       status.textContent = gallery.dataset.videoError;
       console.error('Adventure animation playback failed.', error);
     };
-    play.hidden = false;
-    play.addEventListener('click', async () => {
+    const playFilm = async ({ explicit = false } = {}) => {
+      if (!explicit && (reducedMotion.matches || hoverless.matches)) return;
+      if (pending || card.dataset.playing === 'true') return;
       for (const player of players) {
-        if (player.video !== video && !player.video.hidden) player.showPoster();
+        if (player.video !== video) player.showPoster();
       }
       const currentAttempt = ++attempt;
+      pending = true;
       status.textContent = '';
-      play.disabled = true;
-      video.muted = true;
-      video.src = video.dataset.videoSrc;
-      poster.hidden = true;
-      video.hidden = false;
-      still.hidden = false;
+      if (!video.hasAttribute('src')) {
+        video.src = video.dataset.videoSrc;
+        video.load();
+      }
       try {
         await video.play();
         if (currentAttempt !== attempt) return;
-        play.hidden = true;
-        video.focus();
+        pending = false;
+        card.dataset.playing = 'true';
+        trigger.setAttribute('aria-pressed', 'true');
+        status.textContent = explicit ? gallery.dataset.videoPlaying : '';
       } catch (error) {
-        // Switching clips or restoring the poster intentionally cancels pending playback.
         if (currentAttempt !== attempt) return;
+        if (error?.name === 'AbortError') {
+          showPoster();
+          console.info('Adventure animation playback was interrupted by the browser.');
+          return;
+        }
         reportError(error);
       }
+    };
+    trigger.addEventListener('mouseenter', () => playFilm());
+    trigger.addEventListener('mouseleave', () => showPoster());
+    trigger.addEventListener('focus', () => playFilm());
+    trigger.addEventListener('blur', () => showPoster());
+    trigger.addEventListener('click', () => {
+      if (pending || card.dataset.playing === 'true') showPoster({ announce: true });
+      else playFilm({ explicit: true });
     });
-    still.addEventListener('click', showPoster);
     video.addEventListener('error', () => {
       if (video.hasAttribute('src')) reportError(video.error);
     });
-    video.addEventListener('ended', showPoster);
     return { video, showPoster };
   });
   reducedMotion.addEventListener('change', event => {
-    if (event.matches) for (const player of players) player.showPoster();
+    if (event.matches) for (const player of players) player.showPoster({ reset: true });
   });
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) for (const player of players) player.showPoster();
+    if (document.hidden) for (const player of players) player.showPoster({ reset: true });
   });
   addEventListener('pagehide', () => {
-    for (const player of players) player.showPoster();
+    for (const player of players) player.showPoster({ reset: true });
   });
 }
