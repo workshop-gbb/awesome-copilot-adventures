@@ -1,0 +1,3 @@
+{
+  "79a75f4c08fde5db": "As entradas ZIP usam o método STORE sem compressão, de modo que as somas de verificação não dependem da biblioteca de compressão do runtime. Os pacotes são maiores que os ZIPs comprimidos, mas preservam os mesmos arquivos extraídos e bytes determinísticos nos ambientes compatíveis."
+}

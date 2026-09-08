@@ -218,6 +218,10 @@ The generator uses Node's standard library, sorted entries, fixed ZIP timestamps
 bundled licenses, file manifests and SHA-256 inventory. It never runs learner code.
 This is reproducibility for the declared package format, not a security certification.
 
+ZIP entries use the uncompressed STORE method, so checksums do not depend on the
+runtime's compression library. Archives are larger than compressed ZIPs, but keep
+the same extracted files and deterministic bytes across supported environments.
+
 ## Official references
 
 - [Download source archives](https://docs.github.com/en/repositories/working-with-files/using-files/downloading-source-code-archives)

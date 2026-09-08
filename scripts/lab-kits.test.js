@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const crypto = require('node:crypto');
-const { inflateRawSync, crc32 } = require('node:zlib');
+const { crc32 } = require('node:zlib');
 const { spawnSync } = require('node:child_process');
 const { createZip, safeEntryName } = require('./lab-kit-zip');
 const { includeFixturePath, fixtureFiles } = require('./fixture-files');
@@ -17,14 +17,14 @@ function readArchive(bytes) {
   let offset = 0;
   while (bytes.readUInt32LE(offset) === 0x04034b50) {
     assert.equal(bytes.readUInt16LE(offset + 6), 0x0800);
-    assert.equal(bytes.readUInt16LE(offset + 8), 8);
+    assert.equal(bytes.readUInt16LE(offset + 8), 0);
     const compressedSize = bytes.readUInt32LE(offset + 18);
     const nameSize = bytes.readUInt16LE(offset + 26);
     const extraSize = bytes.readUInt16LE(offset + 28);
     const name = bytes.subarray(offset + 30, offset + 30 + nameSize).toString('utf8');
     assert.ok(safeEntryName(name));
     const start = offset + 30 + nameSize + extraSize;
-    const content = inflateRawSync(bytes.subarray(start, start + compressedSize));
+    const content = bytes.subarray(start, start + compressedSize);
     assert.equal(content.length, bytes.readUInt32LE(offset + 22));
     assert.equal(crc32(content), bytes.readUInt32LE(offset + 14));
     assert.ok(!files.has(name));
@@ -40,6 +40,7 @@ function readArchive(bytes) {
   let central = offset;
   for (const [name, content] of files) {
     assert.equal(bytes.readUInt32LE(central), 0x02014b50);
+    assert.equal(bytes.readUInt16LE(central + 10), 0);
     const nameSize = bytes.readUInt16LE(central + 28);
     assert.equal(bytes.subarray(central + 46, central + 46 + nameSize).toString('utf8'), name);
     assert.equal(bytes.readUInt32LE(central + 16), crc32(content));
@@ -59,6 +60,16 @@ test('ZIP output is deterministic, preserves bytes and supports UTF-8 names', ()
   assert.deepEqual(zip, createZip([...entries].reverse()));
   const files = readArchive(zip);
   for (const entry of entries) assert.deepEqual(files.get(entry.name), entry.data);
+});
+
+test('portable ZIP byte contract uses STORE without runtime compression', () => {
+  const expected = Buffer.from(
+    '504b03041400000800000000210020303a36060000000600000005000000612e74787468656c6c6f0a'
+    + '504b010214031400000800000000210020303a360600000006000000050000000000000000000000a48100000000612e747874'
+    + '504b0506000000000100010033000000290000000000',
+    'hex'
+  );
+  assert.deepEqual(createZip([{ name: 'a.txt', data: Buffer.from('hello\n') }]), expected);
 });
 
 test('ZIP rejects unsafe paths, duplicate names and unsupported archive sizes', () => {
