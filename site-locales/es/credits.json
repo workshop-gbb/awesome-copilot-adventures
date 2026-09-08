@@ -1,0 +1,12 @@
+{
+  "9362a040b120e4b1": "Créditos y atribución",
+  "e536e0b2ba87980e": "# Créditos y atribución",
+  "1f81b4844b699bfe": "Esta edición comunitaria es mantenida por **Paula Silva**:\n[@paulasilvatech](https://github.com/paulasilvatech) ·\n[agenticdevopsplatform.com](https://agenticdevopsplatform.com).",
+  "fd4235df52104311": "## Proyectos que inspiraron esta edición",
+  "b123e6b0e3cd1b07": "- **Aventuras:** el proyecto original [microsoft/CopilotAdventures](https://github.com/microsoft/CopilotAdventures)\n  inspiró esta ruta y aportó material adaptado bajo su licencia MIT.\n- **Laboratorios prácticos:** [MicrosoftLearning/mslearn-github-copilot-dev](https://github.com/MicrosoftLearning/mslearn-github-copilot-dev)\n  inspiró la ruta de ejercicios profesionales, incluidos ejercicios y proyectos de aprendizaje adaptados.",
+  "f3f7c2b73554c609": "## Qué cambiamos y creamos",
+  "5360fc86f68fc657": "**Ambas rutas** incluyen mejoras y actualizaciones del material existente, además de nuevas aventuras y laboratorios prácticos. Esta edición amplía el currículo de desarrollo con agentes, los proyectos iniciales ejecutables, la verificación, los ejemplos de personalización y las guías de aprendizaje, y añade un sitio multilingüe y vistas previas interactivas.",
+  "4de54b991e449b54": "Estas contribuciones no sustituyen el reconocimiento debido a los proyectos originales y sus colaboradores. El currículo conservado de la primera versión y los recursos multimedia originales siguen disponibles en [legacy](./legacy/) y [assets/images/legacy](./assets/images/legacy/).\nLa colección de laboratorios prácticos conserva su [licencia MIT original de Microsoft](./mslearn-github-copilot/LICENSE).",
+  "f6ae8c451f7f9d4f": "Esta es una adaptación comunitaria, no un curso ni una certificación oficial de Microsoft.\nLos nombres de los proyectos reconocen sus orígenes y no implican soporte ni respaldo de Microsoft.\n",
+  "356804c779506e9c": "Las ilustraciones SVG actuales de aventuras y laboratorios prácticos tienen vistas previas generadas en el idioma seleccionado, incluidas las etiquetas visibles y las descripciones accesibles. La compilación falla si faltan traducciones de los recursos multimedia. Las imágenes de las lecciones y la vista previa del repositorio usan estas copias localizadas; las descargas originales, las capturas de pantalla y los recursos históricos se conservan sin cambios. El diálogo de imágenes permite ampliar, desplazar y ajustar la imagen en dispositivos móviles."
+}

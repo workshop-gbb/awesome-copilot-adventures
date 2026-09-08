@@ -12,6 +12,7 @@ const {
 const ui = require('./site-ui.json');
 const { decodeHtml } = require('./check-rendered-site');
 const { markdownLinkTargets } = require('./markdown-helpers');
+const { mediaId, mediaImage, mediaImages, renderMedia } = require('./site-media');
 
 test('source link checks include reference definitions but ignore literal code examples', () => {
   const source = [
@@ -160,6 +161,78 @@ test('source resolver sends lessons, code and directories to the correct in-site
 test('rendering never uses English as a silent translation fallback', () => {
   const page = pages().find(page => page.source === 'docs/index.md');
   assert.throws(() => renderDocument(page, 'es', {}, createLinkResolver(pages(), siteSources())), /Missing es translation/);
+});
+
+test('SVG media translations preserve identifiers, geometry and escaped text', () => {
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420"><title>Test map</title><desc>Read and test.</desc><rect width="260" height="96" fill="#111111"/><text>DEMO</text><text>1</text><text>Read the input</text></svg>';
+  const image = mediaImage('assets/images/hands-on/demo.svg', svg);
+  assert.equal(image.tokens.length, 3);
+  const dictionary = {
+    [mediaId('Test map')]: 'Mapa de teste',
+    [mediaId('Read and test.')]: 'Leia e teste.',
+    [mediaId('Read the input')]: 'Leia <input> & valide'
+  };
+  const { bytes, title, description } = renderMedia(image, 'pt-br', dictionary);
+  const localized = bytes.toString('utf8');
+  assert.equal(title, 'Mapa de teste');
+  assert.equal(description, 'Leia e teste.');
+  assert.match(localized, /lang="pt-BR" xml:lang="pt-BR"/);
+  assert.match(localized, /width="960" height="420"/);
+  assert.ok(localized.includes('<text>DEMO</text><text>1</text>'));
+  assert.ok(localized.includes('<rect width="260" height="96" fill="#111111"/>'));
+  assert.ok(localized.includes('Leia &lt;input&gt; &amp; valide'));
+  assert.equal(image.svg, svg);
+  assert.throws(() => renderMedia(image, 'es', {}), /Missing es media translation/);
+  assert.throws(() => renderMedia(image, 'unknown', {}), /Unsupported media locale/);
+  assert.throws(() => mediaImage(image.source, svg.replace('Read the input', '<tspan>Read</tspan>')), /Unsupported illustration text structure/);
+});
+
+test('all current illustrations have localized previews without changing original downloads', () => {
+  const images = mediaImages();
+  assert.equal(images.length, 40);
+  const { artifacts, manifest, documents } = buildArtifacts();
+  const previews = new Map(manifest.filter(entry => entry.previews).map(entry => [entry.path, entry.previews]));
+  const resolve = createLinkResolver(documents, siteSources(), previews);
+  for (const image of images) {
+    const entry = manifest.find(entry => entry.path === image.source);
+    const original = readSource(path.join(root, image.source));
+    const object = JSON.parse(artifacts.get(`site-generated/public/site-data/objects/${entry.hash}.json`));
+    assert.deepEqual(Buffer.from(object.content, 'base64'), original);
+    assert.deepEqual(artifacts.get(`site-generated/public/site-data/media/${entry.hash}.svg`), original);
+    assert.equal(new Set(Object.values(entry.previews).map(preview => preview.url)).size, 3);
+    for (const locale of locales) {
+      const preview = entry.previews[locale];
+      const bytes = artifacts.get(`site-generated/public${preview.url.slice('/awesome-copilot-adventures'.length)}`);
+      const expected = renderMedia(image, locale, loadTranslations(locale));
+      assert.deepEqual(bytes, expected.bytes, `${locale}: ${image.source}`);
+      assert.equal(preview.title, expected.title);
+      assert.equal(preview.description, expected.description);
+      assert.equal(resolve(`/${image.source}`, 'README.md', locale, true), preview.url);
+    }
+  }
+  assert.ok(manifest.filter(entry => entry.path.startsWith('assets/images/legacy/'))
+    .every(entry => entry.legacy && !entry.previews));
+});
+
+test('credits identify the maintainer and both original projects in every language', () => {
+  const settings = require('../site.config.json');
+  assert.deepEqual(settings.maintainer, {
+    name: 'Paula Silva', handle: '@paulasilvatech',
+    profile: 'https://github.com/paulasilvatech', website: 'https://agenticdevopsplatform.com'
+  });
+  const documents = pages();
+  const creditPage = documents.find(document => document.source === 'NOTICE.md');
+  const resolve = createLinkResolver(documents, siteSources());
+  for (const locale of locales) {
+    const text = renderDocument(creditPage, locale, loadTranslations(locale), resolve);
+    for (const expected of [settings.maintainer.name, settings.maintainer.handle, settings.maintainer.website,
+      'https://github.com/microsoft/CopilotAdventures',
+      'https://github.com/MicrosoftLearning/mslearn-github-copilot-dev']) {
+      assert.ok(text.includes(expected), `${locale}: ${expected}`);
+    }
+    assert.ok(ui[locale].creditsEvolution);
+    assert.ok(ui[locale].fullCredits);
+  }
 });
 
 test('learner archives resolve to direct downloads with the original ZIP bytes', () => {

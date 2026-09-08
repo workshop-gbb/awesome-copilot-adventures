@@ -1,5 +1,11 @@
 {
   "repository": "workshop-gbb/awesome-copilot-adventures",
+  "maintainer": {
+    "name": "Paula Silva",
+    "handle": "@paulasilvatech",
+    "profile": "https://github.com/paulasilvatech",
+    "website": "https://agenticdevopsplatform.com"
+  },
   "site": "https://workshop-gbb.github.io",
   "base": "/awesome-copilot-adventures",
   "mermaidVersion": "11.17.2",

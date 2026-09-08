@@ -3,6 +3,7 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const { root, repositoryFiles } = require('./repository-files');
 const { fencedBlocks } = require('./markdown-helpers');
+const { mediaImages } = require('./site-media');
 const settings = require('../site.config.json');
 const handsOnOrder = new Map(require('../mslearn-github-copilot/catalog.json').labs.map((lab, index) => [lab.id, index]));
 
@@ -155,13 +156,19 @@ function pages() {
   });
 }
 
-function translationSegments(documents = pages()) {
+function translationSegments(documents = pages(), images = mediaImages()) {
   const segments = new Map();
   for (const page of documents) {
     const entries = [{ id: page.titleId, kind: 'title', text: page.title }, ...page.tokens.filter(token => token.id)];
     for (const entry of entries) {
       if (!segments.has(entry.id)) segments.set(entry.id, { id: entry.id, kind: entry.kind, text: entry.text, sources: [] });
       segments.get(entry.id).sources.push(page.source);
+    }
+  }
+  for (const image of images) {
+    for (const { id, kind, text } of image.tokens) {
+      if (!segments.has(id)) segments.set(id, { id, kind, text, sources: [] });
+      segments.get(id).sources.push(image.source);
     }
   }
   return [...segments.values()];

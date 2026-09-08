@@ -1,7 +1,8 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { basePath, locales } = require('./site-content');
-const { site: siteOrigin } = require('../site.config.json');
+const { site: siteOrigin, maintainer } = require('../site.config.json');
+const labels = require('./site-ui.json');
 
 function decodeHtml(value) {
   return value.replace(/&#x([0-9a-f]+);|&#([0-9]+);|&(amp|quot|apos|lt|gt);/gi, (all, hex, decimal, name) => {
@@ -43,6 +44,17 @@ function verifyRenderedSite(directory, selectedLocales = locales) {
       if (!content.includes(`<html lang="${expectedTag}"`)) failures.push(`${name}: wrong document language`);
       if (!content.includes('id="main"')) failures.push(`${name}: missing main landmark target`);
       if (!/<h1[ >]/.test(content)) failures.push(`${name}: missing primary heading`);
+      const footer = decodeHtml(content.match(/<footer\b[^>]*>([\s\S]*?)<\/footer>/)?.[1] || '');
+      for (const text of [maintainer.name, maintainer.handle, labels[currentLocale].maintainedBy, labels[currentLocale].creditsEvolution]) {
+        if (!footer.includes(text)) failures.push(`${name}: missing localized footer credit ${text}`);
+      }
+      for (const url of [
+        maintainer.profile, maintainer.website, `${basePath}/${currentLocale}/read/notice/`,
+        'https://github.com/microsoft/CopilotAdventures',
+        'https://github.com/MicrosoftLearning/mslearn-github-copilot-dev'
+      ]) {
+        if (!footer.includes(`href="${url}"`)) failures.push(`${name}: missing footer link ${url}`);
+      }
     }
     const rendered = content.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
     for (const match of rendered.matchAll(/\b(href|src)=(["'])([\s\S]*?)\2/g)) {

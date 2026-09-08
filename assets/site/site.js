@@ -273,6 +273,7 @@ async function sourceExplorer() {
   let objectUrl;
   let controller;
   let downloadedBlob;
+  let clearMedia = () => {};
 
   const currentPath = () => new URLSearchParams(location.search).get('path') || '';
   const showError = (error, retry) => {
@@ -312,6 +313,7 @@ async function sourceExplorer() {
     downloadedBlob = undefined;
     download.disabled = true;
     if (objectUrl) URL.revokeObjectURL(objectUrl);
+    clearMedia();
     preview.replaceChildren();
     list();
     updateLanguageLinks();
@@ -338,19 +340,24 @@ async function sourceExplorer() {
       objectUrl = URL.createObjectURL(downloadedBlob);
       document.getElementById('source-title').textContent = entry.path;
       document.getElementById('source-details').textContent = `${number.format(entry.size)} ${ui.sourceBytes} · SHA-256 ${entry.hash}`;
-      document.getElementById('source-notice').textContent = entry.legacy ? ui.legacyNotice : ui.sourceNotice;
+      const localizedPreview = entry.previews?.[locale];
+      if (entry.previews && !localizedPreview) throw new Error(`Missing ${locale} media preview: ${entry.path}`);
+      document.getElementById('source-notice').textContent = entry.legacy ? ui.legacyNotice
+        : localizedPreview ? ui.mediaPreviewNotice : ui.sourceNotice;
       const reading = document.getElementById('source-reading');
       reading.hidden = !entry.read;
       if (entry.read) reading.href = `${base}/${locale}${entry.read}`;
       document.getElementById('source-github').href = `${repository}/blob/main/${entry.path.split('/').map(encodeURIComponent).join('/')}`;
       if (entry.mime.startsWith('image/')) {
         const image = element('img');
-        image.src = objectUrl;
-        image.alt = `${ui.source}: ${entry.path}`;
+        image.src = localizedPreview?.url || objectUrl;
+        image.alt = localizedPreview?.description || `${ui.source}: ${entry.path}`;
         preview.append(image);
+        clearMedia = enhanceMedia(config.media, [image]);
       } else if (entry.mime.startsWith('video/') || entry.mime.startsWith('audio/')) {
         const media = element(entry.mime.startsWith('video/') ? 'video' : 'audio');
         media.controls = true;
+        media.playsInline = true;
         media.preload = 'metadata';
         media.src = objectUrl;
         preview.append(media);

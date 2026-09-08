@@ -8,6 +8,7 @@ const {
 const ui = require('./site-ui.json');
 const { themeFrontmatter, checkDiagram } = require('./check-diagrams');
 const { fencedBlocks, withoutCodeBlocks } = require('./markdown-helpers');
+const { mediaImages, renderMedia } = require('./site-media');
 
 function html(value) {
   return String(value).replace(/[&<>"']/g, character => ({
@@ -93,7 +94,7 @@ function translation(text, id, locale, dictionary) {
   return text.match(/^\s*/)[0] + translated.trim() + text.match(/\s*$/)[0];
 }
 
-function createLinkResolver(documents, sources) {
+function createLinkResolver(documents, sources, mediaPreviews = new Map()) {
   const bySource = new Map(documents.map(page => [page.source, page]));
   const byRoute = new Map(documents.map(page => [page.route, page]));
   const sourceSet = new Set(sources.map(relative));
@@ -144,6 +145,8 @@ function createLinkResolver(documents, sources) {
       return `${basePath}/${cleanSource}${title}`;
     }
     if (image && sourceSet.has(cleanSource)) {
+      const preview = mediaPreviews.get(cleanSource)?.[locale];
+      if (preview) return preview.url + title;
       // Media keeps a real extension for native image rendering; original bytes are also in the archive.
       return `${basePath}/site-data/media/${sha256(readSource(path.join(root, cleanSource)))}${path.extname(cleanSource).toLowerCase()}` + title;
     }
@@ -211,14 +214,26 @@ function readSource(file) {
 function buildArtifacts(selectedLocales = locales) {
   const documents = pages();
   const sources = siteSources();
-  const segments = translationSegments(documents);
+  const images = mediaImages(sources);
+  const segments = translationSegments(documents, images);
   const routes = new Set();
   for (const page of documents) {
     if (routes.has(page.route)) throw new Error(`Duplicate document route: ${page.route}`);
     routes.add(page.route);
   }
-  const resolve = createLinkResolver(documents, sources);
   const artifacts = new Map();
+  const dictionaries = new Map(selectedLocales.map(locale => {
+    const dictionary = loadTranslations(locale);
+    if (locale !== 'en') validateTranslations(segments, locale, dictionary);
+    return [locale, dictionary];
+  }));
+  const mediaPreviews = new Map(images.map(image => [image.source, Object.fromEntries(selectedLocales.map(locale => {
+    const { bytes, title, description } = renderMedia(image, locale, dictionaries.get(locale));
+    const url = `${basePath}/site-data/media/${sha256(bytes)}.svg`;
+    artifacts.set(`site-generated/public${url.slice(basePath.length)}`, bytes);
+    return [locale, { url, title, description }];
+  }))]));
+  const resolve = createLinkResolver(documents, sources, mediaPreviews);
   const manifest = [];
   const bySource = new Map(documents.map(page => [page.source, page]));
   for (const file of sources) {
@@ -233,7 +248,8 @@ function buildArtifacts(selectedLocales = locales) {
     if (name.startsWith('assets/lab-kits/')) artifacts.set(`site-generated/public/${name}`, bytes);
     manifest.push({
       path: name, size: bytes.length, hash, text: textPreview(bytes), mime,
-      legacy: name.startsWith('legacy/'),
+      legacy: name.startsWith('legacy/') || name.startsWith('assets/images/legacy/'),
+      previews: mediaPreviews.get(name),
       read: bySource.get(name)?.route || null
     });
   }
@@ -247,8 +263,7 @@ function buildArtifacts(selectedLocales = locales) {
     locales: {}
   };
   for (const locale of selectedLocales) {
-    const dictionary = loadTranslations(locale);
-    if (locale !== 'en') validateTranslations(segments, locale, dictionary);
+    const dictionary = dictionaries.get(locale);
     const catalog = [];
     const search = [];
     for (const page of documents) {
@@ -278,7 +293,8 @@ function buildArtifacts(selectedLocales = locales) {
       ['learningPath', '/learning-path/'], ['downloads', '/downloads/'], ['simulations', '/simulations/'],
       ['adventures', '/adventures/'], ['handsOn', '/hands-on/'], ['repository', '/repository/'],
       ['library', '/library/'], ['harness', '/harnesses/'], ['status', '/feature-status/'],
-      ['glossary', '/glossary/'], ['design', '/design-system/'], ['support', '/read/support/']
+      ['glossary', '/glossary/'], ['design', '/design-system/'], ['support', '/read/support/'],
+      ['credits', '/read/notice/']
     ].map(([key, route]) => [key, localizedUrl(locale, route)]));
     data.locales[locale] = { ui: ui[locale], catalog, href };
     for (const source of manifest) {

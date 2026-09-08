@@ -1,12 +1,27 @@
-# Attribution
+# Credits and attribution
 
-Awesome Copilot Adventures includes material derived from the original [Microsoft CopilotAdventures repository](https://github.com/microsoft/CopilotAdventures), distributed under the MIT License.
+This community edition is maintained by **Paula Silva**:
+[@paulasilvatech](https://github.com/paulasilvatech) ·
+[agenticdevopsplatform.com](https://agenticdevopsplatform.com).
 
-The preserved version-one curriculum and original media remain available under [legacy](./legacy/) and [assets/images/legacy](./assets/images/legacy/).
+## Projects that inspired this edition
 
-The agentic curriculum, laboratories, customization examples, documentation site, and repository automation were substantially reorganized and expanded for this project.
+- **Adventures:** the original [microsoft/CopilotAdventures](https://github.com/microsoft/CopilotAdventures)
+  inspired this track and supplied material adapted under its MIT License.
+- **Hands-on labs:** [MicrosoftLearning/mslearn-github-copilot-dev](https://github.com/MicrosoftLearning/mslearn-github-copilot-dev)
+  inspired the professional exercise track, including adapted learning exercises and fixtures.
 
-The hands-on collection under `mslearn-github-copilot/` includes adapted Microsoft
-learning exercises and fixtures. Its original [Microsoft MIT license](./mslearn-github-copilot/LICENSE)
-is retained. These community revisions do not imply Microsoft course certification,
-support or endorsement.
+## What we changed and created
+
+**Both tracks** include improvements and updates to existing material, as well as
+newly created adventures and hands-on labs. This edition expands the agentic
+curriculum, runnable starters, verification, customization examples and learning
+guides, and adds a multilingual site and interactive previews.
+
+These contributions do not replace the credit due to the original projects and
+their contributors. The preserved version-one curriculum and original media remain
+available under [legacy](./legacy/) and [assets/images/legacy](./assets/images/legacy/).
+The hands-on collection retains its original [Microsoft MIT license](./mslearn-github-copilot/LICENSE).
+
+This is a community adaptation, not an official Microsoft course or certification.
+The project names acknowledge their origins and do not imply Microsoft support or endorsement.

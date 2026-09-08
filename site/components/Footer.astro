@@ -7,7 +7,15 @@ const { ui, href } = languageFor(page.locale);
 ---
 <footer class="site-footer">
   <div class="container footer-grid">
-    <div><p class="eyebrow">Awesome Copilot Adventures</p><h2>{ui.footerTitle}</h2><p>{ui.footerText}</p></div>
+    <div>
+      <p class="eyebrow">Awesome Copilot Adventures</p><h2>{ui.footerTitle}</h2><p>{ui.footerText}</p>
+      <address class="footer-author">
+        <span>{ui.maintainedBy}</span>
+        <strong>{settings.maintainer.name}</strong>
+        <a href={settings.maintainer.profile}>{settings.maintainer.handle}</a>
+        <a href={settings.maintainer.website}>agenticdevopsplatform.com</a>
+      </address>
+    </div>
     <nav aria-label={ui.guides}>
       <a href={href.simulations}>{simulationCopy[page.locale].title}</a>
       <a href={href.glossary}>{ui.glossary}</a>
@@ -23,6 +31,17 @@ const { ui, href } = languageFor(page.locale);
       ))}
       <a href={`https://github.com/${settings.repository}`}>GitHub ↗</a>
     </nav>
+  </div>
+  <div class="container">
+    <section class="footer-credits" aria-labelledby="footer-credits-title">
+      <h2 id="footer-credits-title">{ui.credits}</h2>
+      <ul>
+        <li><a href="https://github.com/microsoft/CopilotAdventures">microsoft/CopilotAdventures</a><span>{ui.adventureCredit}</span></li>
+        <li><a href="https://github.com/MicrosoftLearning/mslearn-github-copilot-dev">MicrosoftLearning/mslearn-github-copilot-dev</a><span>{ui.handsOnCredit}</span></li>
+      </ul>
+      <p>{ui.creditsEvolution}</p>
+      <a class="footer-credit-link" href={href.credits}>{ui.fullCredits}</a>
+    </section>
   </div>
   <div class="container footer-bottom"><span>MIT · Awesome Copilot Adventures</span><span class="mono">{counts.revision}</span></div>
 </footer>

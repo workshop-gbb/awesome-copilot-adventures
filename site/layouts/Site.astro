@@ -23,7 +23,7 @@ const practice = page.group === 'adventures' || page.group === 'hands-on' || ['/
 const simulationTopic = /context|instructions|skills|eldoria|algora/.test(page.source || '') ? 'context'
   : /test|guardrail|tempora|stonevale|review/.test(page.source || '') ? 'verification' : 'workflow';
 const base = settings.base;
-const config = { locale: page.locale, base, revision: counts.revision, mermaidVersion: settings.mermaidVersion, repository: settings.repository, kind: page.kind || 'document', source: page.source, sources: catalog.map(document => document.source), ui, media: { open: simulationText.imageOpen, close: simulationText.imageClose, title: simulationText.imageTitle, error: simulationText.imageError, original: simulationText.imageOriginal } };
+const config = { locale: page.locale, base, revision: counts.revision, mermaidVersion: settings.mermaidVersion, repository: settings.repository, kind: page.kind || 'document', source: page.source, sources: catalog.map(document => document.source), ui, media: { open: simulationText.imageOpen, close: simulationText.imageClose, title: simulationText.imageTitle, error: simulationText.imageError, original: simulationText.imageOriginal, zoom: simulationText.imageZoom, fit: simulationText.imageFit } };
 const json = JSON.stringify(config).replace(/</g, '\\u003c');
 const canonical = settings.site + page.alternates[page.locale];
 const ogLocale = { en: 'en_US', es: 'es_ES', 'pt-br': 'pt_BR' }[page.locale];

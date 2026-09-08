@@ -1,0 +1,12 @@
+{
+  "9362a040b120e4b1": "Créditos e atribuição",
+  "e536e0b2ba87980e": "# Créditos e atribuição",
+  "1f81b4844b699bfe": "Esta edição da comunidade é mantida por **Paula Silva**:\n[@paulasilvatech](https://github.com/paulasilvatech) ·\n[agenticdevopsplatform.com](https://agenticdevopsplatform.com).",
+  "fd4235df52104311": "## Projetos que inspiraram esta edição",
+  "b123e6b0e3cd1b07": "- **Aventuras:** o projeto original [microsoft/CopilotAdventures](https://github.com/microsoft/CopilotAdventures)\n  inspirou esta trilha e forneceu material adaptado sob sua licença MIT.\n- **Labs práticos:** [MicrosoftLearning/mslearn-github-copilot-dev](https://github.com/MicrosoftLearning/mslearn-github-copilot-dev)\n  inspirou a trilha de exercícios profissionais, incluindo exercícios e projetos de aprendizado adaptados.",
+  "f3f7c2b73554c609": "## O que alteramos e criamos",
+  "5360fc86f68fc657": "**Ambas as trilhas** incluem melhorias e atualizações do material existente, além de novas aventuras e novos labs práticos. Esta edição expande o currículo de desenvolvimento com agentes, os projetos iniciais executáveis, a verificação, os exemplos de personalização e os guias de aprendizado, e acrescenta um site multilíngue e previews interativos.",
+  "4de54b991e449b54": "Estas contribuições não substituem o crédito devido aos projetos originais e às pessoas que contribuíram com eles. O currículo preservado da primeira versão e as mídias originais continuam disponíveis em [legacy](./legacy/) e [assets/images/legacy](./assets/images/legacy/).\nA coleção de labs práticos mantém sua [licença MIT original da Microsoft](./mslearn-github-copilot/LICENSE).",
+  "f6ae8c451f7f9d4f": "Esta é uma adaptação da comunidade, não um curso nem uma certificação oficial da Microsoft.\nOs nomes dos projetos reconhecem suas origens e não implicam suporte ou endosso da Microsoft.\n",
+  "356804c779506e9c": "As ilustrações SVG atuais das aventuras e dos labs práticos têm previews gerados no idioma selecionado, incluindo os rótulos visíveis e as descrições acessíveis. A compilação falha se faltarem traduções de mídia. As imagens das lições e o preview do repositório usam essas cópias localizadas; os downloads originais, as capturas de tela e as mídias históricas permanecem inalterados. O diálogo de imagens permite ampliar, rolar e ajustar a imagem no celular."
+}

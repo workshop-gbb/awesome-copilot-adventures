@@ -35,6 +35,12 @@ Original downloads are content-addressed and checked against SHA-256. Text line
 endings follow the repository's `.gitattributes` rule; binary bytes are unchanged.
 Source text is displayed as text, never executed as HTML or JavaScript.
 
+Current adventure and hands-on SVG illustrations have generated previews in the
+selected language, including visible labels and accessible descriptions. Missing
+media translations fail the build. Lesson images and the repository preview use
+these localized copies; original downloads, screenshots and historical media stay
+unchanged. The image dialog supports zoom, scroll and fit controls on mobile.
+
 ## Learner archives
 
 The [download catalog](downloads.md) links to 35 exercise ZIPs under

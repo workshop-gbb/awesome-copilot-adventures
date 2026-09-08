@@ -84,8 +84,10 @@
     "imageOpen": "Enlarge illustration",
     "imageClose": "Close illustration",
     "imageTitle": "Illustration detail",
-    "imageError": "The illustration could not be loaded. Its description and original image link remain available.",
-    "imageOriginal": "Open original image"
+    "imageError": "The illustration could not be loaded. Its description and image link remain available.",
+    "imageOriginal": "Open image in a new tab",
+    "imageZoom": "Zoom in",
+    "imageFit": "Fit image"
   },
   "es": {
     "title": "El estudio de práctica",
@@ -172,8 +174,10 @@
     "imageOpen": "Ampliar ilustración",
     "imageClose": "Cerrar ilustración",
     "imageTitle": "Detalle de la ilustración",
-    "imageError": "No se pudo cargar la ilustración. Su descripción y el enlace a la imagen original siguen disponibles.",
-    "imageOriginal": "Abrir imagen original"
+    "imageError": "No se pudo cargar la ilustración. Su descripción y el enlace a la imagen siguen disponibles.",
+    "imageOriginal": "Abrir imagen en otra pestaña",
+    "imageZoom": "Acercar",
+    "imageFit": "Ajustar imagen"
   },
   "pt-br": {
     "title": "Estúdio de prática",
@@ -260,7 +264,9 @@
     "imageOpen": "Ampliar ilustração",
     "imageClose": "Fechar ilustração",
     "imageTitle": "Detalhe da ilustração",
-    "imageError": "Não foi possível carregar a ilustração. Sua descrição e o link para a imagem original continuam disponíveis.",
-    "imageOriginal": "Abrir imagem original"
+    "imageError": "Não foi possível carregar a ilustração. Sua descrição e o link para a imagem continuam disponíveis.",
+    "imageOriginal": "Abrir imagem em outra aba",
+    "imageZoom": "Aumentar zoom",
+    "imageFit": "Ajustar imagem"
   }
 }
