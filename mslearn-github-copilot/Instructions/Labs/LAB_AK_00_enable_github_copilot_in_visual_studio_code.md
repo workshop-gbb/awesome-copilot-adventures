@@ -22,7 +22,14 @@ Two installed extensions or an old screenshot are not proof of access.
 
 ## Lab briefing
 
+![An identity card and access controls sit between an editing station and a separate assistance module.](../../../assets/images/hands-on/setup-copilot-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Verify actual access without changing billing or global settings.](../../../assets/images/hands-on/setup-copilot.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

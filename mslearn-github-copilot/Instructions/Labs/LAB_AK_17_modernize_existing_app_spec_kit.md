@@ -23,7 +23,14 @@ Unlike a brownfield feature, the goal here is **not** new business behavior.
 
 ## Lab briefing
 
+![A shared consumer connects to tabular files and a database with a separate return path between storage formats.](../../../assets/images/hands-on/17-modernization-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Change storage without changing consumer behavior.](../../../assets/images/hands-on/17-modernization.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

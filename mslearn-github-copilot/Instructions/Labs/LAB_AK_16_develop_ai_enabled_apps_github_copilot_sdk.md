@@ -23,7 +23,14 @@ error handling are application contracts, not prompt-writing details.
 
 ## Lab briefing
 
+![A transparent application module encloses gears and connects separate input, output and session components.](../../../assets/images/hands-on/16-sdk-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Bound a support assistant by identity, tools and lifecycle.](../../../assets/images/hands-on/16-sdk.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

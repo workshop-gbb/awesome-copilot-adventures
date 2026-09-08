@@ -2,7 +2,8 @@
 
 The 14 current adventures now use generated WebP covers supplied by the maintainer.
 Each lesson also keeps its original monochrome SVG in an expandable concept view,
-including localized titles and descriptions. The professional hands-on track is unchanged.
+including localized titles and descriptions. The hands-on track has its own
+[professional cover inventory](../../hands-on-media.json).
 
 Prepared on 2026-09-08: the 2752 x 1536 JPEG originals were center-cropped and
 downscaled to 1456 x 832 WebP covers, without stretching. All original files remain

@@ -23,7 +23,14 @@ inventory directions. Removing those differences would be a behavior change.
 
 ## Lab briefing
 
+![Order and return paths share a central processing module while keeping separate inputs and outputs.](../../../assets/images/hands-on/07-duplication-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Reuse mechanics while preserving distinct business rules.](../../../assets/images/hands-on/07-duplication.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

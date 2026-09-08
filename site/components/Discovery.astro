@@ -25,7 +25,7 @@ const documents = adventuresOnly
   <ul class="discovery-grid">
     {documents.map((document, index) => (
       <li class="discovery-card" data-library-card data-source={document.source} data-group={document.group} data-title={document.title} hidden={compact && index >= 6}>
-        {document.image && ['adventures', 'hands-on'].includes(document.group) && <img class="he-card-image" src={document.image} width={document.group === 'adventures' ? 1456 : 1300} height={document.group === 'adventures' ? 832 : 560} alt="" loading="lazy" decoding="async" />}
+        {document.image && ['adventures', 'hands-on'].includes(document.group) && <img class="he-card-image" src={document.image} width={document.group === 'adventures' ? 1456 : 1440} height={document.group === 'adventures' ? 832 : 630} alt="" loading="lazy" decoding="async" />}
         <span class="card-index">{labelFor(locale, document.group)} <span data-read-badge hidden>✓</span></span>
         <a href={document.url}>{document.title}<span aria-hidden="true">↗</span></a>
         <small>{document.source}</small>

@@ -22,7 +22,14 @@ have different copying and mutation semantics. Preserve the behavior users depen
 
 ## Lab briefing
 
+![Two trays of parts move through connected mechanisms with separate return paths.](../../../assets/images/hands-on/05-python-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Preserve whether callers observe mutation or a new list.](../../../assets/images/hands-on/05-python.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

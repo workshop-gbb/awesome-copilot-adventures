@@ -23,7 +23,14 @@ Select execution through the actual session target control.
 
 ## Lab briefing
 
+![A ruler, a task card, a tool case and a small workstation share a workbench.](../../../assets/images/hands-on/15-customization-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Match each need to the smallest customization primitive.](../../../assets/images/hands-on/15-customization.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

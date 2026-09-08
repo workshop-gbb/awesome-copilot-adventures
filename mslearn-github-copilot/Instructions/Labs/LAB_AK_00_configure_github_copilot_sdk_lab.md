@@ -23,7 +23,14 @@ permissions, and lifecycle are your responsibility.
 
 ## Lab briefing
 
+![A local application and test mechanism are separated from a remote connector behind an identity gate.](../../../assets/images/hands-on/setup-sdk-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Separate local application correctness from authenticated inference.](../../../assets/images/hands-on/setup-sdk.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

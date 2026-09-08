@@ -23,7 +23,14 @@ feed fetching or a production reader.
 
 ## Lab briefing
 
+![Specification cards surround a small mechanism that organizes incoming document cards.](../../../assets/images/hands-on/13-greenfield-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Specify a small new RSS subscription capability.](../../../assets/images/hands-on/13-greenfield.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

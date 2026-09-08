@@ -22,7 +22,14 @@ with a reproducible case; do not ask an agent to close every issue in a reposito
 
 ## Lab briefing
 
+![A boundary case leads from a larger mechanism to a small correction, a regression sample and a review table.](../../../assets/images/hands-on/11-issues-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Turn a boundary report into a small reproducible fix.](../../../assets/images/hands-on/11-issues.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

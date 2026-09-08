@@ -22,7 +22,14 @@ your workload. A valid result may be **no measurable improvement**.
 
 ## Lab briefing
 
+![A magnifying lens observes one stage of a small data-processing line beside a hypothesis card.](../../../assets/images/hands-on/10-profiling-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Measure one bounded change without promising a speedup.](../../../assets/images/hands-on/10-profiling.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

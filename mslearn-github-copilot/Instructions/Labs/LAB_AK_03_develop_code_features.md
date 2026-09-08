@@ -22,7 +22,14 @@ A helper that is never connected to the menu is not a completed feature.
 
 ## Lab briefing
 
+![A search lens and a results panel distinguish individual book copies on a library shelf.](../../../assets/images/hands-on/03-csharp-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Show availability for each physical copy, not the entire title.](../../../assets/images/hands-on/03-csharp.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

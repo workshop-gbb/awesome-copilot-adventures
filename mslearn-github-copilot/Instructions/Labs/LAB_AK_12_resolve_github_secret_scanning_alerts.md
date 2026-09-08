@@ -27,7 +27,14 @@ from history. The credential provider is the authority on validity.
 
 ## Lab briefing
 
+![A key-shaped tool moves between a file module and separate holders in a staged sequence.](../../../assets/images/hands-on/12-secrets-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Rehearse incident decisions without a real credential.](../../../assets/images/hands-on/12-secrets.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

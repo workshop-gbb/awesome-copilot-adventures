@@ -1,0 +1,549 @@
+- generic [active] [ref=f8e1]:
+  - link "Skip to content" [ref=f8e2] [cursor=pointer]:
+    - /url: "#main"
+  - progressbar "Page reading progress" [ref=f8e3]
+  - banner [ref=f8e4]:
+    - generic [ref=f8e5]:
+      - link "Awesome Copilot Adventures · Home" [ref=f8e6] [cursor=pointer]:
+        - /url: /awesome-copilot-adventures/en/
+        - generic [ref=f8e12]:
+          - text: Awesome Copilot
+          - strong [ref=f8e13]: Adventures
+      - navigation "Main navigation" [ref=f8e14]:
+        - link "Prerequisites" [ref=f8e15] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/prerequisites/
+        - link "Adventures" [ref=f8e16] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/adventures/
+        - link "Hands-on labs" [ref=f8e17] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/hands-on/
+        - link "The practice studio" [ref=f8e18] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/simulations/
+        - link "Guides" [ref=f8e19] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/library/
+        - link "Repository" [ref=f8e20] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/repository/
+      - generic [ref=f8e21]:
+        - button "Search" [ref=f8e22] [cursor=pointer]
+        - generic [ref=f8e26]:
+          - generic [ref=f8e27]: Language
+          - navigation "Choose language" [ref=f8e28]:
+            - link "English" [ref=f8e29] [cursor=pointer]:
+              - /url: http://127.0.0.1:4349/awesome-copilot-adventures/en/adventures/03-advanced/lumoria-graph/
+              - text: EN
+            - link "Español" [ref=f8e30] [cursor=pointer]:
+              - /url: http://127.0.0.1:4349/awesome-copilot-adventures/es/adventures/03-advanced/lumoria-graph/
+              - text: ES
+            - link "Português do Brasil" [ref=f8e31] [cursor=pointer]:
+              - /url: http://127.0.0.1:4349/awesome-copilot-adventures/pt-br/adventures/03-advanced/lumoria-graph/
+              - text: PT-BR
+        - button "Dark theme" [ref=f8e32] [cursor=pointer]
+        - link "Start learning" [ref=f8e35] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/start-here/
+          - text: Start learning
+          - generic [aria-hidden] [ref=f8e36]: ↗
+  - generic [ref=f8e37]:
+    - complementary "Learning navigation" [ref=f8e38]:
+      - group [ref=f8e39]:
+        - generic [ref=f8e40]:
+          - link "Prerequisites" [ref=f8e41] [cursor=pointer]:
+            - /url: /awesome-copilot-adventures/en/prerequisites/
+            - text: Prerequisites
+            - generic [aria-hidden] [ref=f8e42]: ↗
+          - link "Start learning" [ref=f8e43] [cursor=pointer]:
+            - /url: /awesome-copilot-adventures/en/start-here/
+            - text: Start learning
+            - generic [aria-hidden] [ref=f8e44]: ↗
+          - link "Learning order" [ref=f8e45] [cursor=pointer]:
+            - /url: /awesome-copilot-adventures/en/learning-path/
+            - text: Learning order
+            - generic [aria-hidden] [ref=f8e46]: ↗
+          - link "Download a lab" [ref=f8e47] [cursor=pointer]:
+            - /url: /awesome-copilot-adventures/en/downloads/
+            - text: Download a lab
+            - generic [aria-hidden] [ref=f8e48]: ↓
+          - link "Learning paths" [ref=f8e49] [cursor=pointer]:
+            - /url: /awesome-copilot-adventures/en/curriculum/
+            - text: Learning paths
+            - generic [aria-hidden] [ref=f8e50]: ↗
+          - link "The practice studio" [ref=f8e51] [cursor=pointer]:
+            - /url: /awesome-copilot-adventures/en/simulations/
+          - group [ref=f8e54]:
+            - generic "Adventures" [ref=f8e55] [cursor=pointer]
+            - navigation "Adventures" [ref=f8e56]:
+              - link "The Portals of Nexus" [ref=f8e57] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/00-foundations/portals-of-nexus/
+              - link "The Context Mirrors" [ref=f8e58] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/00-foundations/context-mirrors/
+              - link "The Tempora Loop" [ref=f8e59] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/01-basics/tempora-loop/
+              - link "The Laws of Eldoria" [ref=f8e60] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/01-basics/eldoria-laws/
+              - link "The Skills of Algora" [ref=f8e61] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/02-intermediate/algora-skills/
+              - link "The Agents of Stellaris" [ref=f8e62] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/02-intermediate/stellaris-agents/
+              - link "The Guardrails of Stonevale" [ref=f8e63] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/02-intermediate/stonevale-guardrails/
+              - link "The MCP Cartographer" [ref=f8e64] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/03-advanced/cartographer-mcp/
+              - link "The Knowledge Graph of Lumoria" [ref=f8e65] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/03-advanced/lumoria-graph/
+              - link "The Parallel Trials of Mythos" [ref=f8e66] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/03-advanced/mythos-parallel/
+              - link "The Cloud Citadel" [ref=f8e67] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/04-surfaces/cloud-citadel/
+              - link "The Terminal Gate" [ref=f8e68] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/04-surfaces/terminal-gate/
+              - link "The Automaton Foundry" [ref=f8e69] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/04-surfaces/automaton-foundry/
+              - link "The Convergence of Three Realms" [ref=f8e70] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/99-capstone/convergence-of-three-realms/
+          - group [ref=f8e71]:
+            - generic "Hands-on labs" [ref=f8e72] [cursor=pointer]
+          - group [ref=f8e73]:
+            - generic "Guides" [ref=f8e74] [cursor=pointer]
+          - group [ref=f8e75]:
+            - generic "Lab starters" [ref=f8e76] [cursor=pointer]
+          - group [ref=f8e77]:
+            - generic "Solutions" [ref=f8e78] [cursor=pointer]
+          - group [ref=f8e79]:
+            - generic "Media" [ref=f8e80] [cursor=pointer]
+          - link "Repository" [ref=f8e81] [cursor=pointer]:
+            - /url: /awesome-copilot-adventures/en/repository/
+            - text: Repository
+            - generic [aria-hidden] [ref=f8e82]: ↗
+    - main [ref=f8e83]:
+      - navigation "Main navigation" [ref=f8e84]:
+        - link "Home" [ref=f8e85] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/
+        - generic [aria-hidden] [ref=f8e86]: /
+        - link "Adventures" [ref=f8e87] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/library/
+      - paragraph [ref=f8e88]:
+        - text: Product guidance checked
+        - time [ref=f8e89]: 2026-09-05
+      - article [ref=f8e90]:
+        - heading "The Knowledge Graph of Lumoria" [level=1] [ref=f8e91]
+        - blockquote [ref=f8e92]:
+          - strong [ref=f8e93]: Note
+          - paragraph [ref=f8e94]:
+            - strong [ref=f8e95]: "Status:"
+            - text: Content ready ·
+            - strong [ref=f8e96]: "Media:"
+            - text: Generated cover and original SVG illustration ·
+            - strong [ref=f8e97]: "Last verified:"
+            - text: 2026-09-05
+            - strong [ref=f8e98]: "Primary capability:"
+            - text: Modeling source-grounded repository relationships
+        - paragraph [ref=f8e99]:
+          - 'button "Enlarge illustration: An investigator compares a component with a document while illuminated connections distinguish related platforms above a city." [ref=f8e100]':
+            - img "An investigator compares a component with a document while illuminated connections distinguish related platforms above a city." [ref=f8e101]
+            - generic [ref=f8e102]: Enlarge illustration
+        - group [ref=f8e103]:
+          - generic "Original concept illustration (SVG)" [ref=f8e104]
+        - blockquote [ref=f8e105]:
+          - strong [ref=f8e106]: Tip
+          - paragraph [ref=f8e107]:
+            - link "Download this learner kit" [ref=f8e108] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/assets/lab-kits/adventures/lumoria-graph.zip
+            - text: and use
+            - link "the extraction and setup guide" [ref=f8e109] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/en/downloads/
+            - text: . Keep the original starter untouched.
+        - figure [ref=f8e110]
+        - group [ref=f8e111]:
+          - generic "Mermaid source" [ref=f8e112] [cursor=pointer]
+        - paragraph [ref=f8e113]:
+          - strong [ref=f8e114]: Legend.
+          - text: Arrows show change impact, the reverse of the dependency lists supplied to the function.
+        - paragraph [ref=f8e115]:
+          - strong [ref=f8e116]: Explanation.
+          - text: Source-backed edges and a cycle-safe visited set prevent decorative but misleading graphs.
+        - heading "Official references" [level=2] [ref=f8e117]
+        - paragraph [ref=f8e118]: These official sources are the authority for product behavior and availability. Recheck them when using a different surface or after a product update.
+        - list [ref=f8e119]:
+          - listitem [ref=f8e120]:
+            - link "Run subagents" [ref=f8e121] [cursor=pointer]:
+              - /url: https://code.visualstudio.com/docs/agents/run/subagents
+          - listitem [ref=f8e122]:
+            - link "Custom agents and handoffs" [ref=f8e123] [cursor=pointer]:
+              - /url: https://code.visualstudio.com/docs/agent-customization/custom-agents
+          - listitem [ref=f8e124]:
+            - link "Agent sessions" [ref=f8e125] [cursor=pointer]:
+              - /url: https://code.visualstudio.com/docs/agents/concepts/sessions
+        - heading "Story" [level=2] [ref=f8e126]
+        - paragraph [ref=f8e127]: "Lumoria’s libraries are linked by luminous threads: imports, calls, tests, owners, requirements, and runtime edges."
+        - paragraph [ref=f8e128]: The fantasy is a memory aid; the engineering lesson requires observable, reproducible evidence.
+        - heading "Learning objectives" [level=2] [ref=f8e129]
+        - list [ref=f8e130]:
+          - listitem [ref=f8e131]: Interpret graph edges as dependencies and traverse impact in the reverse direction.
+          - listitem [ref=f8e132]: Return a sorted, unique affected set including the starting node.
+          - listitem [ref=f8e133]: Handle cycles and reject unknown nodes without confusing filenames with verified relationships.
+        - heading "Prerequisites" [level=2] [ref=f8e134]
+        - paragraph [ref=f8e135]:
+          - text: For tools and personal accounts, complete
+          - link "the prerequisites guide" [ref=f8e136] [cursor=pointer]:
+            - /url: /awesome-copilot-adventures/en/prerequisites/
+          - text: . For terminal-only study, follow
+          - link "the extracted-kit CLI route" [ref=f8e137] [cursor=pointer]:
+            - /url: /awesome-copilot-adventures/en/downloads/#use-copilot-cli-from-the-extracted-kit
+          - text: ; VS Code-specific evidence remains separate.
+        - table [ref=f8e138]:
+          - rowgroup [ref=f8e139]:
+            - row [ref=f8e140]:
+              - columnheader "Requirement" [ref=f8e141]
+              - columnheader "Why it matters" [ref=f8e142]
+          - rowgroup [ref=f8e143]:
+            - row [ref=f8e144]:
+              - cell "Complete the preceding adventure, or demonstrate its exit evidence" [ref=f8e145]
+              - cell "Keep this mission focused on its named capability" [ref=f8e146]
+            - row [ref=f8e147]:
+              - cell "Node 24 and the extracted kit" [ref=f8e148]
+              - cell "The local verifier uses the supplied runtime and files" [ref=f8e149]
+            - row [ref=f8e150]:
+              - cell "A disposable folder outside another project" [ref=f8e151]
+              - cell "Customizations and intentional failures must not leak into other work" [ref=f8e152]
+            - row [ref=f8e153]:
+              - cell "Authorized host access, only for live steps" [ref=f8e154]
+              - cell "Availability, tools and policies differ" [ref=f8e155]
+        - paragraph [ref=f8e156]:
+          - strong [ref=f8e157]: "Evidence boundary:"
+          - text: The fixture validates traversal, not automatic discovery of every real repository dependency.
+        - paragraph [ref=f8e158]: "Estimated session: 45–75 minutes after prerequisites; actual duration varies. Never use production secrets or customer data."
+        - heading "Concept explanation" [level=2] [ref=f8e159]
+        - paragraph [ref=f8e160]: A repository knowledge graph models files, symbols, tests, services, owners, and requirements with typed edges. Imports are not runtime calls, and co-location is not ownership. Graphs help only when bounded, current, and source-anchored. Generated relationships can become stale, so planning decisions must be confirmed against current files and executable checks.
+        - heading "Concrete use case" [level=3] [ref=f8e161]
+        - paragraph [ref=f8e162]: If api depends on core and core depends on types, a change to types can affect api. A change to api does not automatically affect its dependency types.
+        - heading "Vocabulary checkpoint" [level=3] [ref=f8e163]
+        - list [ref=f8e164]:
+          - listitem [ref=f8e165]:
+            - strong [ref=f8e166]: "Role:"
+            - text: Ask, Plan, Agent, or a custom agent.
+          - listitem [ref=f8e167]:
+            - strong [ref=f8e168]: "Harness/surface:"
+            - text: the runtime or product surface in which a role operates.
+          - listitem [ref=f8e169]:
+            - strong [ref=f8e170]: "Target:"
+            - text: the selected session destination, such as Local, Copilot, or Cloud where exposed.
+          - listitem [ref=f8e171]:
+            - strong [ref=f8e172]: "Environment:"
+            - text: the folder, worktree, local machine, Codespace, or remote environment.
+          - listitem [ref=f8e173]:
+            - strong [ref=f8e174]: "Instructions:"
+            - text: automatically applied durable context.
+          - listitem [ref=f8e175]:
+            - strong [ref=f8e176]: "Prompt:"
+            - text: a manually invoked task template.
+          - listitem [ref=f8e177]:
+            - strong [ref=f8e178]: "Skill:"
+            - text: reusable expertise loaded when relevant.
+          - listitem [ref=f8e179]:
+            - strong [ref=f8e180]: "Custom agent:"
+            - text: a role with instructions, tools, and optional handoffs.
+          - listitem [ref=f8e181]:
+            - strong [ref=f8e182]: "MCP:"
+            - text: Model Context Protocol.
+          - listitem [ref=f8e183]:
+            - strong [ref=f8e184]: "Evidence:"
+            - text: a path, diff, command result, trace, or review decision.
+        - heading "Ask → Plan → Agent workflow" [level=2] [ref=f8e185]
+        - heading "Ask — investigate" [level=3] [ref=f8e186]
+        - list [ref=f8e187]:
+          - listitem [ref=f8e188]: Identify the real user outcome and current source of truth.
+          - listitem [ref=f8e189]: Inspect relevant files, instructions, tools, permissions, and existing checks.
+          - listitem [ref=f8e190]: Cite concrete paths or platform evidence for every important finding.
+          - listitem [ref=f8e191]: Record uncertainty and do not infer unavailable capabilities.
+        - paragraph [ref=f8e192]:
+          - strong [ref=f8e193]: "Gate:"
+          - text: No implementation until the current state and evidence are understood.
+        - heading "Plan — design" [level=3] [ref=f8e194]
+        - list [ref=f8e195]:
+          - listitem [ref=f8e196]: State scope, non-goals, assumptions, risks, and trust boundaries.
+          - listitem [ref=f8e197]: Select the minimum role, tools, authority, and environment.
+          - listitem [ref=f8e198]: Define acceptance criteria, verification commands, review, and reset.
+          - listitem [ref=f8e199]: Mark any Preview or experimental dependency and provide a fallback.
+        - paragraph [ref=f8e200]:
+          - strong [ref=f8e201]: "Gate:"
+          - text: Another learner should be able to predict completion from the plan.
+        - heading "Agent — execute" [level=3] [ref=f8e202]
+        - list [ref=f8e203]:
+          - listitem [ref=f8e204]: Make the smallest reversible change or produce the planned artifact.
+          - listitem [ref=f8e205]: Use short inspect → change → verify loops.
+          - listitem [ref=f8e206]: Preserve command output, exit status, diffs, traces, or platform records.
+          - listitem [ref=f8e207]: Stop when acceptance criteria are met; do not perform unrelated cleanup.
+        - heading "Review — challenge" [level=3] [ref=f8e208]
+        - list [ref=f8e209]:
+          - listitem [ref=f8e210]: Inspect the complete diff or artifact.
+          - listitem [ref=f8e211]: Compare each result with the plan and acceptance criteria.
+          - listitem [ref=f8e212]: Run the narrowest relevant existing check, broadening only when justified.
+          - listitem [ref=f8e213]: Record limitations and unresolved risks.
+          - listitem [ref=f8e214]:
+            - text: Score the work with
+            - link "rubric.md" [ref=f8e215] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/en/adventures/03-advanced/lumoria-graph/rubric/
+            - text: .
+        - heading "Guided mission" [level=2] [ref=f8e216]
+        - heading "1. Prepare one isolated copy" [level=3] [ref=f8e217]
+        - list [ref=f8e218]:
+          - listitem [ref=f8e219]:
+            - text: Download and extract the
+            - link "lumoria-graph kit" [ref=f8e220] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/assets/lab-kits/adventures/lumoria-graph.zip
+            - text: into a new work-drive directory.
+          - listitem [ref=f8e221]:
+            - text: Read
+            - code [ref=f8e222]: KIT-START.md
+            - text: at its root. Open
+            - code [ref=f8e223]: starter/
+            - text: as the VS Code workspace when testing discovery, but run the verifier from the kit root.
+          - listitem [ref=f8e224]:
+            - text: Inspect
+            - code [ref=f8e225]: starter/graph.js
+            - text: ","
+            - code [ref=f8e226]: verify.js
+            - text: before editing.
+          - listitem [ref=f8e227]:
+            - text: From the extracted kit root, run
+            - code [ref=f8e228]: node verify.js
+            - text: .
+          - listitem [ref=f8e229]: Record the documented starter rejection. A missing runtime or unrelated crash is not the expected exercise result.
+        - heading "2. Investigate and plan" [level=3] [ref=f8e230]
+        - paragraph [ref=f8e231]: "Copyable baseline command, from the extracted kit root:"
+        - generic [ref=f8e232]:
+          - code [ref=f8e234]: node verify.js
+          - button "Copy code" [ref=f8e235] [cursor=pointer]
+          - status
+        - paragraph [ref=f8e236]: In Ask, request a trace of the inspected files and what the verifier actually observes. Challenge any claim about live execution that is not supported by output.
+        - paragraph [ref=f8e237]: "Use this planning prompt:"
+        - generic [ref=f8e238]:
+          - code [ref=f8e240]: Specify affectedBy for the provided dependency direction. Include the changed node, visit reverse dependants once, handle cycles and sort the final unique names. Explain an unknown-start error. Do not implement yet. Identify affected files, the negative case and a safe reset.
+          - button "Copy code" [ref=f8e241] [cursor=pointer]
+          - status
+        - heading "3. Implement the reviewed slice" [level=3] [ref=f8e242]
+        - list [ref=f8e243]:
+          - listitem [ref=f8e244]: Approve only the named starter artifact and necessary focused tests.
+          - listitem [ref=f8e245]: Ask Agent to implement one slice; inspect proposed commands before execution.
+          - listitem [ref=f8e246]:
+            - text: Run
+            - code [ref=f8e247]: node verify.js
+            - text: again from the kit root, or
+            - code [ref=f8e248]: node ../verify.js
+            - text: from
+            - code [ref=f8e249]: starter/
+            - text: .
+          - listitem [ref=f8e250]: Compare the exact result with the checkpoint below and review the complete diff.
+          - listitem [ref=f8e251]: Record host discovery or live activity separately when available. Do not enable extra services to manufacture a passing result.
+        - blockquote [ref=f8e252]:
+          - strong [ref=f8e253]: Important
+          - paragraph [ref=f8e254]:
+            - strong [ref=f8e255]: "Checkpoint:"
+            - text: Changing types reaches all five supplied nodes; changing api reaches api and docs only. The fixture validates traversal, not automatic discovery of every real repository dependency.
+        - heading "4. Prove a check can reject a mistake" [level=3] [ref=f8e256]
+        - paragraph [ref=f8e257]: Reverse the traversal direction deliberately in the disposable implementation. Confirm the types impact case detects the mistake, then restore it.
+        - table [ref=f8e258]:
+          - rowgroup [ref=f8e259]:
+            - row [ref=f8e260]:
+              - columnheader "Observation" [ref=f8e261]
+              - columnheader "Decision" [ref=f8e262]
+              - columnheader "Action" [ref=f8e263]
+              - columnheader "Evidence" [ref=f8e264]
+              - columnheader "Limitation" [ref=f8e265]
+          - rowgroup [ref=f8e266]:
+            - row [ref=f8e267]:
+              - cell "Initial state and exact diagnostic" [ref=f8e268]
+              - cell "Why this change is needed" [ref=f8e269]
+              - cell "Named file and bounded change" [ref=f8e270]
+              - cell "Command, exit code and observed result" [ref=f8e271]
+              - cell "What the local check does not prove" [ref=f8e272]
+        - paragraph [ref=f8e273]:
+          - text: Finish with the adventure-specific capability evidence in
+          - link "the rubric" [ref=f8e274] [cursor=pointer]:
+            - /url: /awesome-copilot-adventures/en/adventures/03-advanced/lumoria-graph/rubric/
+          - text: ", not just the presence of a file."
+        - 'heading "Intentional failure: The Decorative Constellation" [level=2] [ref=f8e275]'
+        - paragraph [ref=f8e276]: "Perform this only in a disposable environment:"
+        - paragraph [ref=f8e277]: Draw relationships from filenames and assumptions without reading sources. Unsupported edges create false confidence and an incorrect change plan.
+        - heading "Recovery" [level=3] [ref=f8e278]
+        - paragraph [ref=f8e279]: Return to Ask, identify the violated boundary, narrow the plan, remove unnecessary authority or context, and repeat the smallest relevant verification. Document the causal lesson rather than merely stating that the attempt failed.
+        - heading "Independent challenge" [level=2] [ref=f8e280]
+        - paragraph [ref=f8e281]: Model a feature crossing source, configuration, tests, and an external API, including confidence and verification for every edge.
+        - paragraph [ref=f8e282]: "Constraints:"
+        - list [ref=f8e283]:
+          - listitem [ref=f8e284]: Do not copy the guided mission verbatim.
+          - listitem [ref=f8e285]: Do not add tools, permissions, or cloud resources without a stated need.
+          - listitem [ref=f8e286]: Do not claim quality, performance, compatibility, or availability without executed evidence.
+          - listitem [ref=f8e287]: Keep fantasy language subordinate to technical clarity.
+        - heading "Evidence checklist" [level=2] [ref=f8e288]
+        - list [ref=f8e289]:
+          - listitem [ref=f8e290]:
+            - checkbox [disabled] [ref=f8e291]
+            - text: Source-grounded Ask findings.
+          - listitem [ref=f8e292]:
+            - checkbox [disabled] [ref=f8e293]
+            - text: Approved plan with scope, non-goals, risks, checks, and reset.
+          - listitem [ref=f8e294]:
+            - checkbox [disabled] [ref=f8e295]
+            - text: Agent diff or artifact limited to the declared scope.
+          - listitem [ref=f8e296]:
+            - checkbox [disabled] [ref=f8e297]
+            - text: Verification output with command, status, or platform record.
+          - listitem [ref=f8e298]:
+            - checkbox [disabled] [ref=f8e299]
+            - text: Intentional-failure root cause and recovery.
+          - listitem [ref=f8e300]:
+            - checkbox [disabled] [ref=f8e301]
+            - text: Independent challenge result.
+          - listitem [ref=f8e302]:
+            - checkbox [disabled] [ref=f8e303]
+            - text: Explicit limitations and feature-status notes.
+          - listitem [ref=f8e304]:
+            - checkbox [disabled] [ref=f8e305]
+            - text: Completed
+            - link "rubric.md" [ref=f8e306] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/en/adventures/03-advanced/lumoria-graph/rubric/
+            - text: .
+        - heading "Reset instructions" [level=2] [ref=f8e307]
+        - list [ref=f8e308]:
+          - listitem [ref=f8e309]: Save your diff, command output and limitations from the disposable kit.
+          - listitem [ref=f8e310]: Stop only the process or learning session you started. Do not stop other projects.
+          - listitem [ref=f8e311]:
+            - text: If you initialized Git in the kit, inspect
+            - code [ref=f8e312]: git status --short
+            - text: there and restore only your named exercise files from its local baseline.
+          - listitem [ref=f8e313]: Otherwise, extract the original ZIP into a new unused directory for another attempt; do not overwrite your current work.
+          - listitem [ref=f8e314]: Remove only exercise-owned configurations, worktrees or remote resources after reviewing anything worth preserving.
+        - paragraph [ref=f8e315]: The curriculum source and other projects must remain unchanged. A reset of the copied kit is not a repository-wide hard reset.
+        - heading "Next adventure" [level=2] [ref=f8e316]
+        - paragraph [ref=f8e317]:
+          - link "The Parallel Trials of Mythos" [ref=f8e318] [cursor=pointer]:
+            - /url: /awesome-copilot-adventures/en/adventures/03-advanced/mythos-parallel/
+      - complementary [ref=f8e319]:
+        - generic [ref=f8e322]:
+          - strong [ref=f8e323]: Practice this concept
+          - paragraph [ref=f8e324]: Explore the local simulation, then return to the lesson for its real verification.
+          - link "Open the practice studio" [ref=f8e325] [cursor=pointer]:
+            - /url: /awesome-copilot-adventures/en/simulations/#workflow
+      - complementary [ref=f8e328]:
+        - generic [ref=f8e329]:
+          - paragraph [ref=f8e330]: Your reading
+          - paragraph [ref=f8e331]:
+            - strong [ref=f8e332]: "0"
+            - text: readings marked
+        - generic [ref=f8e333]:
+          - button "Mark as studied" [ref=f8e334] [cursor=pointer]
+          - button "Clear my reading marks" [ref=f8e335] [cursor=pointer]
+        - paragraph [ref=f8e336]: Saved only in this browser. Your reading marks do not prove that a lab or its tests were completed.
+        - status
+      - complementary [ref=f8e337]: Commands, source code, sample prompts, identifiers and exact data remain in their original form so the exercises stay reproducible.
+      - navigation "Original source" [ref=f8e338]:
+        - link "Original source" [ref=f8e339] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/repository/?path=adventures%2F03-advanced%2Flumoria-graph%2FREADME.md
+        - link "Edit source on GitHub" [ref=f8e340] [cursor=pointer]:
+          - /url: https://github.com/workshop-gbb/awesome-copilot-adventures/edit/main/adventures/03-advanced/lumoria-graph/README.md
+          - text: Edit source on GitHub
+          - generic [aria-hidden] [ref=f8e341]: ↗
+    - complementary "On this page" [ref=f8e342]:
+      - paragraph [ref=f8e343]: On this page
+      - navigation [ref=f8e344]:
+        - link "Official references" [ref=f8e345] [cursor=pointer]:
+          - /url: "#official-references"
+        - link "Story" [ref=f8e346] [cursor=pointer]:
+          - /url: "#story"
+        - link "Learning objectives" [ref=f8e347] [cursor=pointer]:
+          - /url: "#learning-objectives"
+        - link "Prerequisites" [ref=f8e348] [cursor=pointer]:
+          - /url: "#prerequisites"
+        - link "Concept explanation" [ref=f8e349] [cursor=pointer]:
+          - /url: "#concept-explanation"
+        - link "Concrete use case" [ref=f8e350] [cursor=pointer]:
+          - /url: "#concrete-use-case"
+        - link "Vocabulary checkpoint" [ref=f8e351] [cursor=pointer]:
+          - /url: "#vocabulary-checkpoint"
+        - link "Ask → Plan → Agent workflow" [ref=f8e352] [cursor=pointer]:
+          - /url: "#ask--plan--agent-workflow"
+        - link "Ask — investigate" [ref=f8e353] [cursor=pointer]:
+          - /url: "#ask--investigate"
+        - link "Plan — design" [ref=f8e354] [cursor=pointer]:
+          - /url: "#plan--design"
+        - link "Agent — execute" [ref=f8e355] [cursor=pointer]:
+          - /url: "#agent--execute"
+        - link "Review — challenge" [ref=f8e356] [cursor=pointer]:
+          - /url: "#review--challenge"
+        - link "Guided mission" [ref=f8e357] [cursor=pointer]:
+          - /url: "#guided-mission"
+        - link "1. Prepare one isolated copy" [ref=f8e358] [cursor=pointer]:
+          - /url: "#1-prepare-one-isolated-copy"
+        - link "2. Investigate and plan" [ref=f8e359] [cursor=pointer]:
+          - /url: "#2-investigate-and-plan"
+        - link "3. Implement the reviewed slice" [ref=f8e360] [cursor=pointer]:
+          - /url: "#3-implement-the-reviewed-slice"
+        - link "4. Prove a check can reject a mistake" [ref=f8e361] [cursor=pointer]:
+          - /url: "#4-prove-a-check-can-reject-a-mistake"
+        - 'link "Intentional failure: The Decorative Constellation" [ref=f8e362] [cursor=pointer]':
+          - /url: "#intentional-failure-the-decorative-constellation"
+        - link "Recovery" [ref=f8e363] [cursor=pointer]:
+          - /url: "#recovery"
+        - link "Independent challenge" [ref=f8e364] [cursor=pointer]:
+          - /url: "#independent-challenge"
+        - link "Evidence checklist" [ref=f8e365] [cursor=pointer]:
+          - /url: "#evidence-checklist"
+        - link "Reset instructions" [ref=f8e366] [cursor=pointer]:
+          - /url: "#reset-instructions"
+        - link "Next adventure" [ref=f8e367] [cursor=pointer]:
+          - /url: "#next-adventure"
+      - link "Back to top ↑" [ref=f8e368] [cursor=pointer]:
+        - /url: "#top"
+  - contentinfo [ref=f8e369]:
+    - generic [ref=f8e370]:
+      - generic [ref=f8e371]:
+        - paragraph [ref=f8e372]: Awesome Copilot Adventures
+        - heading "Build with intent. Verify with evidence." [level=2] [ref=f8e373]
+        - paragraph [ref=f8e374]: An open educational curriculum. Availability depends on the selected product, harness, account and policy.
+        - generic [ref=f8e375]:
+          - generic [ref=f8e376]: This edition is maintained by
+          - strong [ref=f8e377]: Paula Silva
+          - link "@paulasilvatech" [ref=f8e378] [cursor=pointer]:
+            - /url: https://github.com/paulasilvatech
+          - link "agenticdevopsplatform.com" [ref=f8e379] [cursor=pointer]:
+            - /url: https://agenticdevopsplatform.com
+      - navigation "Guides" [ref=f8e380]:
+        - link "The practice studio" [ref=f8e381] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/simulations/
+        - link "Glossary" [ref=f8e382] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/glossary/
+        - link "Feature status" [ref=f8e383] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/feature-status/
+        - link "Design system" [ref=f8e384] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/design-system/
+        - link "Support" [ref=f8e385] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/read/support/
+        - link "Inter · Font licenses" [ref=f8e386] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/assets/site/fonts/OFL-Inter.txt
+        - link "JetBrains Mono · Font licenses" [ref=f8e387] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/assets/site/fonts/OFL-JetBrains-Mono.txt
+      - navigation "Choose language" [ref=f8e388]:
+        - link "English" [ref=f8e389] [cursor=pointer]:
+          - /url: http://127.0.0.1:4349/awesome-copilot-adventures/en/adventures/03-advanced/lumoria-graph/
+        - link "Español" [ref=f8e390] [cursor=pointer]:
+          - /url: http://127.0.0.1:4349/awesome-copilot-adventures/es/adventures/03-advanced/lumoria-graph/
+        - link "Português do Brasil" [ref=f8e391] [cursor=pointer]:
+          - /url: http://127.0.0.1:4349/awesome-copilot-adventures/pt-br/adventures/03-advanced/lumoria-graph/
+        - link "GitHub ↗" [ref=f8e392] [cursor=pointer]:
+          - /url: https://github.com/workshop-gbb/awesome-copilot-adventures
+    - region [ref=f8e394]:
+      - heading "Credits and inspiration" [level=2] [ref=f8e395]
+      - list [ref=f8e396]:
+        - listitem [ref=f8e397]:
+          - link "microsoft/CopilotAdventures" [ref=f8e398] [cursor=pointer]:
+            - /url: https://github.com/microsoft/CopilotAdventures
+          - generic [ref=f8e399]: Original inspiration for the adventure track.
+        - listitem [ref=f8e400]:
+          - link "MicrosoftLearning/mslearn-github-copilot-dev" [ref=f8e401] [cursor=pointer]:
+            - /url: https://github.com/MicrosoftLearning/mslearn-github-copilot-dev
+          - generic [ref=f8e402]: Original inspiration for the hands-on lab track.
+      - paragraph [ref=f8e403]: Both tracks include updated and improved material, plus newly created adventures and labs. Original authorship and licenses are preserved.
+      - link "Read the full credits" [ref=f8e404] [cursor=pointer]:
+        - /url: /awesome-copilot-adventures/en/read/notice/
+    - generic [ref=f8e405]:
+      - generic [ref=f8e406]: MIT · Awesome Copilot Adventures
+      - generic [ref=f8e407]: d41d7e8bb5332fce

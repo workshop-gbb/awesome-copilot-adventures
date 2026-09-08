@@ -23,7 +23,14 @@ case sensitivity, or error handling.
 
 ## Lab briefing
 
+![A source-module frame connects through traced paths to two stacks of stored records.](../../../assets/images/hands-on/02-python-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Explain the actual import root and data flow.](../../../assets/images/hands-on/02-python.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

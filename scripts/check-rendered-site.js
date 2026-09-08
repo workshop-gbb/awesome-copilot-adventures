@@ -3,6 +3,7 @@ const path = require('node:path');
 const { basePath, locales } = require('./site-content');
 const { site: siteOrigin, maintainer } = require('../site.config.json');
 const labels = require('./site-ui.json');
+const { loadAdventureMedia, loadHandsOnMedia } = require('./site-media');
 
 function decodeHtml(value) {
   return value.replace(/&#x([0-9a-f]+);|&#([0-9]+);|&(amp|quot|apos|lt|gt);/gi, (all, hex, decimal, name) => {
@@ -25,6 +26,14 @@ function verifyRenderedSite(directory, selectedLocales = locales) {
   const files = new Set(allFiles.map(file => path.relative(builtRoot, file).split(path.sep).join('/')));
   const sources = JSON.parse(fs.readFileSync(path.join(builtRoot, 'site-data/sources.json'), 'utf8'));
   const sourcePaths = new Set(sources.map(entry => entry.path));
+  const sourceByPath = new Map(sources.map(entry => [entry.path, entry]));
+  const adventureMedia = loadAdventureMedia();
+  const handsOnMedia = loadHandsOnMedia();
+  const mediaUrl = source => {
+    const entry = sourceByPath.get(source);
+    if (!entry) throw new Error(`Missing published media source: ${source}`);
+    return `${basePath}/site-data/media/${entry.hash}${path.extname(source)}`;
+  };
   const htmlFiles = allFiles.filter(file => file.endsWith('.html'));
   const idCache = new Map();
   const failures = [];
@@ -57,6 +66,36 @@ function verifyRenderedSite(directory, selectedLocales = locales) {
       }
     }
     const rendered = content.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
+    if (selectedLocales.includes(currentLocale)) {
+      if ([`${currentLocale}/index.html`, `${currentLocale}/adventures/index.html`].includes(name)) {
+        const videos = [...rendered.matchAll(/<video\b[^>]*\bdata-adventure-video\b/g)];
+        if (videos.length !== adventureMedia.films.length) failures.push(`${name}: missing adventure films`);
+        for (const film of adventureMedia.films) {
+          if (!rendered.includes(`data-video-src="${mediaUrl(film.source)}"`)
+            || !rendered.includes(`poster="${mediaUrl(film.poster)}"`)) {
+            failures.push(`${name}: missing published film or poster: ${film.id}`);
+          }
+        }
+      }
+      const handsOnId = name.match(/^[^/]+\/hands-on\/([^/]+)\/index\.html$/)?.[1];
+      const adventureSlug = name.match(/^[^/]+\/adventures\/[^/]+\/([^/]+)\/index\.html$/)?.[1];
+      const cover = handsOnId ? handsOnMedia.covers.find(entry => entry.id === handsOnId)
+        : adventureMedia.covers.find(entry => entry.slug === adventureSlug);
+      if (cover) {
+        const article = rendered.match(/<article\b[^>]*class="document"[^>]*>([\s\S]*?)<\/article>/)?.[1] || '';
+        const image = article.match(/<img\b[^>]*>/)?.[0] || '';
+        if (!image.includes(`src="${mediaUrl(cover.source)}"`) || !/\balt="[^"]+"/.test(image)) {
+          failures.push(`${name}: first lesson image must be its new cover with alternative text`);
+        }
+        const conceptSource = handsOnId ? `assets/images/hands-on/${handsOnId}.svg`
+          : `assets/images/adventures/${adventureSlug}-hero.svg`;
+        const concept = sourceByPath.get(conceptSource)?.previews?.[currentLocale]?.url;
+        const details = [...article.matchAll(/<details\b[^>]*>([\s\S]*?)<\/details>/g)];
+        if (!concept || !details.some(([, body]) => body.includes(`src="${concept}"`))) {
+          failures.push(`${name}: missing expandable localized concept illustration`);
+        }
+      }
+    }
     if (selectedLocales.includes(currentLocale) && name === `${currentLocale}/prerequisites/index.html`) {
       const article = rendered.match(/<article\b[^>]*class="document"[^>]*>([\s\S]*?)<\/article>/)?.[1];
       if (!article) failures.push(`${name}: missing prerequisites article`);

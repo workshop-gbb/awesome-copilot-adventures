@@ -22,7 +22,14 @@ entire library. Track the change from menu input to observed result.
 
 ## Lab briefing
 
+![Query cards pass through a normalization module and search lens toward individual library copies.](../../../assets/images/hands-on/03-python-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Connect normalized search to copy-level availability.](../../../assets/images/hands-on/03-python.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

@@ -19,7 +19,14 @@ lab:
 
 ## Lab briefing
 
+![Two editing surfaces connect to the same environment module while another module remains separate.](../../../assets/images/hands-on/setup-python-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Make the editor and terminal use the same environment.](../../../assets/images/hands-on/setup-python.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

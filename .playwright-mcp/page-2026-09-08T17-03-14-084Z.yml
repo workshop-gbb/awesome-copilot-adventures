@@ -1,0 +1,291 @@
+- generic [active] [ref=f7e1]:
+  - link "Skip to content" [ref=f7e2] [cursor=pointer]:
+    - /url: "#main"
+  - progressbar "Page reading progress" [ref=f7e3]
+  - banner [ref=f7e4]:
+    - generic [ref=f7e5]:
+      - link "Awesome Copilot Adventures · Home" [ref=f7e6] [cursor=pointer]:
+        - /url: /awesome-copilot-adventures/en/
+        - generic [ref=f7e12]:
+          - text: Awesome Copilot
+          - strong [ref=f7e13]: Adventures
+      - button "Menu" [ref=f7e14] [cursor=pointer]
+      - generic [ref=f7e18]:
+        - button "Search" [ref=f7e19] [cursor=pointer]
+        - generic [ref=f7e23]:
+          - generic [ref=f7e24]: Language
+          - navigation "Choose language" [ref=f7e25]:
+            - link "English" [ref=f7e26] [cursor=pointer]:
+              - /url: http://127.0.0.1:4349/awesome-copilot-adventures/en/adventures/
+              - text: EN
+            - link "Español" [ref=f7e27] [cursor=pointer]:
+              - /url: http://127.0.0.1:4349/awesome-copilot-adventures/es/adventures/
+              - text: ES
+            - link "Português do Brasil" [ref=f7e28] [cursor=pointer]:
+              - /url: http://127.0.0.1:4349/awesome-copilot-adventures/pt-br/adventures/
+              - text: PT-BR
+        - button "Dark theme" [ref=f7e29] [cursor=pointer]
+  - generic [ref=f7e32]:
+    - complementary "Learning navigation" [ref=f7e33]:
+      - group [ref=f7e34]:
+        - generic "Learning navigation +" [ref=f7e35] [cursor=pointer]
+    - main [ref=f7e38]:
+      - navigation "Main navigation" [ref=f7e39]:
+        - link "Home" [ref=f7e40] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/
+        - generic [aria-hidden] [ref=f7e41]: /
+        - link "Guides" [ref=f7e42] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/library/
+      - article [ref=f7e43]:
+        - heading "Adventure catalog" [level=1] [ref=f7e44]
+        - paragraph [ref=f7e45]: Fourteen adventures form a progressive path from foundational mental models to an integrated capstone.
+        - list [ref=f7e46]:
+          - listitem [ref=f7e47]:
+            - link "Foundations" [ref=f7e48] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/en/adventures/foundations/
+          - listitem [ref=f7e49]:
+            - link "Basics" [ref=f7e50] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/en/adventures/basics/
+          - listitem [ref=f7e51]:
+            - link "Intermediate" [ref=f7e52] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/en/adventures/intermediate/
+          - listitem [ref=f7e53]:
+            - link "Advanced" [ref=f7e54] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/en/adventures/advanced/
+          - listitem [ref=f7e55]:
+            - link "Surfaces" [ref=f7e56] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/en/adventures/surfaces/
+          - listitem [ref=f7e57]:
+            - link "Capstone" [ref=f7e58] [cursor=pointer]:
+              - /url: /awesome-copilot-adventures/en/adventures/capstone/
+        - paragraph [ref=f7e59]:
+          - text: Each adventure includes a guided mission, intentional failure, independent challenge, evidence checklist, reset instructions, and rubric. Browse the source in the GitHub
+          - link "adventure tree" [ref=f7e60] [cursor=pointer]:
+            - /url: /awesome-copilot-adventures/en/repository/?path=adventures
+          - text: .
+      - generic [ref=f7e61]:
+        - generic [ref=f7e62]:
+          - generic [ref=f7e63]:
+            - generic [ref=f7e64]: Find a topic, lab or filename
+            - searchbox "Find a topic, lab or filename" [ref=f7e65]
+            - group "Filter the library" [ref=f7e66]:
+              - button "All content" [pressed] [ref=f7e67] [cursor=pointer]
+              - button "Marked by me" [ref=f7e68] [cursor=pointer]
+            - generic [ref=f7e69]:
+              - status [ref=f7e70]: "Matching documents: 14"
+              - button "Clear filters" [ref=f7e71] [cursor=pointer]
+          - list [ref=f7e72]:
+            - listitem [ref=f7e73]:
+              - generic [ref=f7e74]: Adventures
+              - link "The Portals of Nexus" [ref=f7e75] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/00-foundations/portals-of-nexus/
+                - text: The Portals of Nexus
+                - generic [aria-hidden] [ref=f7e76]: ↗
+              - generic [ref=f7e77]: adventures/00-foundations/portals-of-nexus/README.md
+            - listitem [ref=f7e78]:
+              - generic [ref=f7e79]: Adventures
+              - link "The Context Mirrors" [ref=f7e80] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/00-foundations/context-mirrors/
+                - text: The Context Mirrors
+                - generic [aria-hidden] [ref=f7e81]: ↗
+              - generic [ref=f7e82]: adventures/00-foundations/context-mirrors/README.md
+            - listitem [ref=f7e83]:
+              - generic [ref=f7e84]: Adventures
+              - link "The Tempora Loop" [ref=f7e85] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/01-basics/tempora-loop/
+                - text: The Tempora Loop
+                - generic [aria-hidden] [ref=f7e86]: ↗
+              - generic [ref=f7e87]: adventures/01-basics/tempora-loop/README.md
+            - listitem [ref=f7e88]:
+              - generic [ref=f7e89]: Adventures
+              - link "The Laws of Eldoria" [ref=f7e90] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/01-basics/eldoria-laws/
+                - text: The Laws of Eldoria
+                - generic [aria-hidden] [ref=f7e91]: ↗
+              - generic [ref=f7e92]: adventures/01-basics/eldoria-laws/README.md
+            - listitem [ref=f7e93]:
+              - generic [ref=f7e94]: Adventures
+              - link "The Skills of Algora" [ref=f7e95] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/02-intermediate/algora-skills/
+                - text: The Skills of Algora
+                - generic [aria-hidden] [ref=f7e96]: ↗
+              - generic [ref=f7e97]: adventures/02-intermediate/algora-skills/README.md
+            - listitem [ref=f7e98]:
+              - generic [ref=f7e99]: Adventures
+              - link "The Agents of Stellaris" [ref=f7e100] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/02-intermediate/stellaris-agents/
+                - text: The Agents of Stellaris
+                - generic [aria-hidden] [ref=f7e101]: ↗
+              - generic [ref=f7e102]: adventures/02-intermediate/stellaris-agents/README.md
+            - listitem [ref=f7e103]:
+              - generic [ref=f7e104]: Adventures
+              - link "The Guardrails of Stonevale" [ref=f7e105] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/02-intermediate/stonevale-guardrails/
+                - text: The Guardrails of Stonevale
+                - generic [aria-hidden] [ref=f7e106]: ↗
+              - generic [ref=f7e107]: adventures/02-intermediate/stonevale-guardrails/README.md
+            - listitem [ref=f7e108]:
+              - generic [ref=f7e109]: Adventures
+              - link "The MCP Cartographer" [ref=f7e110] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/03-advanced/cartographer-mcp/
+                - text: The MCP Cartographer
+                - generic [aria-hidden] [ref=f7e111]: ↗
+              - generic [ref=f7e112]: adventures/03-advanced/cartographer-mcp/README.md
+            - listitem [ref=f7e113]:
+              - generic [ref=f7e114]: Adventures
+              - link "The Knowledge Graph of Lumoria" [ref=f7e115] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/03-advanced/lumoria-graph/
+                - text: The Knowledge Graph of Lumoria
+                - generic [aria-hidden] [ref=f7e116]: ↗
+              - generic [ref=f7e117]: adventures/03-advanced/lumoria-graph/README.md
+            - listitem [ref=f7e118]:
+              - generic [ref=f7e119]: Adventures
+              - link "The Parallel Trials of Mythos" [ref=f7e120] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/03-advanced/mythos-parallel/
+                - text: The Parallel Trials of Mythos
+                - generic [aria-hidden] [ref=f7e121]: ↗
+              - generic [ref=f7e122]: adventures/03-advanced/mythos-parallel/README.md
+            - listitem [ref=f7e123]:
+              - generic [ref=f7e124]: Adventures
+              - link "The Cloud Citadel" [ref=f7e125] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/04-surfaces/cloud-citadel/
+                - text: The Cloud Citadel
+                - generic [aria-hidden] [ref=f7e126]: ↗
+              - generic [ref=f7e127]: adventures/04-surfaces/cloud-citadel/README.md
+            - listitem [ref=f7e128]:
+              - generic [ref=f7e129]: Adventures
+              - link "The Terminal Gate" [ref=f7e130] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/04-surfaces/terminal-gate/
+                - text: The Terminal Gate
+                - generic [aria-hidden] [ref=f7e131]: ↗
+              - generic [ref=f7e132]: adventures/04-surfaces/terminal-gate/README.md
+            - listitem [ref=f7e133]:
+              - generic [ref=f7e134]: Adventures
+              - link "The Automaton Foundry" [ref=f7e135] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/04-surfaces/automaton-foundry/
+                - text: The Automaton Foundry
+                - generic [aria-hidden] [ref=f7e136]: ↗
+              - generic [ref=f7e137]: adventures/04-surfaces/automaton-foundry/README.md
+            - listitem [ref=f7e138]:
+              - generic [ref=f7e139]: Adventures
+              - link "The Convergence of Three Realms" [ref=f7e140] [cursor=pointer]:
+                - /url: /awesome-copilot-adventures/en/adventures/99-capstone/convergence-of-three-realms/
+                - text: The Convergence of Three Realms
+                - generic [aria-hidden] [ref=f7e141]: ↗
+              - generic [ref=f7e142]: adventures/99-capstone/convergence-of-three-realms/README.md
+        - region [ref=f7e143]:
+          - generic [ref=f7e144]:
+            - paragraph [ref=f7e145]: Generated visual stories
+            - heading "Adventures in motion" [level=2] [ref=f7e146]
+            - paragraph [ref=f7e147]: Three short montages introduce the adventure world. They are illustrations, not recordings of Copilot or evidence that a lab ran.
+          - paragraph [ref=f7e148]: Videos load only when you choose to play. Reduced motion keeps the still image; you can still explicitly start an animation. Playback stops when the page is hidden.
+          - generic [ref=f7e149]:
+            - figure [ref=f7e150]:
+              - img "A navigator studies instruments in the Nexus chamber." [ref=f7e152]
+              - generic [ref=f7e153]:
+                - paragraph [ref=f7e154]: 10 seconds · no audio
+                - heading "Portals, context and iteration" [level=3] [ref=f7e155]
+                - paragraph [ref=f7e156]: A navigator explores the Nexus workstations, compares the same mechanism in two context mirrors, then works around the circular mechanism of Tempora.
+              - button "Play animation" [ref=f7e158] [cursor=pointer]
+              - generic [ref=f7e159]:
+                - link "Open silent video" [ref=f7e160] [cursor=pointer]:
+                  - /url: /awesome-copilot-adventures/site-data/media/8144d68a79b277d2e2f329c631b42955f1a3b6ff9da13a4d672cd07b5dc37892.mp4
+                - link "Original source" [ref=f7e161] [cursor=pointer]:
+                  - /url: /awesome-copilot-adventures/en/repository/?path=assets%2Fimages%2Fadventures%2Fda_pra_fazer_uma_animacao_comp.mp4
+            - figure [ref=f7e162]:
+              - img "A navigator examines a device between illuminated workstations." [ref=f7e164]
+              - generic [ref=f7e165]:
+                - paragraph [ref=f7e166]: 10 seconds · no audio
+                - heading "From investigation to guardrails" [level=3] [ref=f7e167]
+                - paragraph [ref=f7e168]: Scenes move from a navigation desk to a clockwork loop, an archive city, a handoff between specialists and a controlled checkpoint with a stop mechanism.
+              - button "Play animation" [ref=f7e170] [cursor=pointer]
+              - generic [ref=f7e171]:
+                - link "Open silent video" [ref=f7e172] [cursor=pointer]:
+                  - /url: /awesome-copilot-adventures/site-data/media/8f3ff16732781e4790ae460b16c6bb51f125e995756f403d7d223e216bc041ed.mp4
+                - link "Original source" [ref=f7e173] [cursor=pointer]:
+                  - /url: /awesome-copilot-adventures/en/repository/?path=assets%2Fimages%2Fadventures%2Fawesome-copilot-adventures-teaser-01.mp4
+            - figure [ref=f7e174]:
+              - img "Illuminated paths extend from a central charter into an archive city." [ref=f7e176]
+              - generic [ref=f7e177]:
+                - paragraph [ref=f7e178]: 10 seconds · no audio
+                - heading "Rules, skills and connections" [level=3] [ref=f7e179]
+                - paragraph [ref=f7e180]: An archive charter gives way to a selected toolkit, specialist workstations, contrasting context mirrors and a cartographer observing a distant archive.
+              - button "Play animation" [ref=f7e182] [cursor=pointer]
+              - generic [ref=f7e183]:
+                - link "Open silent video" [ref=f7e184] [cursor=pointer]:
+                  - /url: /awesome-copilot-adventures/site-data/media/002306b574299308e2df5d91df0e5a74953a224151bee235f7036bf6b258ae5b.mp4
+                - link "Original source" [ref=f7e185] [cursor=pointer]:
+                  - /url: /awesome-copilot-adventures/en/repository/?path=assets%2Fimages%2Fadventures%2Fawesome-copilot-adventures-teaser-02.mp4
+      - complementary [ref=f7e186]:
+        - generic [ref=f7e187]:
+          - paragraph [ref=f7e188]: Your reading
+          - paragraph [ref=f7e189]:
+            - strong [ref=f7e190]: "0"
+            - text: readings marked
+        - generic [ref=f7e191]:
+          - button "Mark as studied" [ref=f7e192] [cursor=pointer]
+          - button "Clear my reading marks" [ref=f7e193] [cursor=pointer]
+        - paragraph [ref=f7e194]: Saved only in this browser. Your reading marks do not prove that a lab or its tests were completed.
+        - status
+      - complementary [ref=f7e195]: Commands, source code, sample prompts, identifiers and exact data remain in their original form so the exercises stay reproducible.
+      - navigation "Original source" [ref=f7e196]:
+        - link "Original source" [ref=f7e197] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/repository/?path=docs%2Fadventures%2Findex.md
+        - link "Edit source on GitHub" [ref=f7e198] [cursor=pointer]:
+          - /url: https://github.com/workshop-gbb/awesome-copilot-adventures/edit/main/docs/adventures/index.md
+          - text: Edit source on GitHub
+          - generic [aria-hidden] [ref=f7e199]: ↗
+  - contentinfo [ref=f7e200]:
+    - generic [ref=f7e201]:
+      - generic [ref=f7e202]:
+        - paragraph [ref=f7e203]: Awesome Copilot Adventures
+        - heading "Build with intent. Verify with evidence." [level=2] [ref=f7e204]
+        - paragraph [ref=f7e205]: An open educational curriculum. Availability depends on the selected product, harness, account and policy.
+        - generic [ref=f7e206]:
+          - generic [ref=f7e207]: This edition is maintained by
+          - strong [ref=f7e208]: Paula Silva
+          - link "@paulasilvatech" [ref=f7e209] [cursor=pointer]:
+            - /url: https://github.com/paulasilvatech
+          - link "agenticdevopsplatform.com" [ref=f7e210] [cursor=pointer]:
+            - /url: https://agenticdevopsplatform.com
+      - navigation "Guides" [ref=f7e211]:
+        - link "The practice studio" [ref=f7e212] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/simulations/
+        - link "Glossary" [ref=f7e213] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/glossary/
+        - link "Feature status" [ref=f7e214] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/feature-status/
+        - link "Design system" [ref=f7e215] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/design-system/
+        - link "Support" [ref=f7e216] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/en/read/support/
+        - link "Inter · Font licenses" [ref=f7e217] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/assets/site/fonts/OFL-Inter.txt
+        - link "JetBrains Mono · Font licenses" [ref=f7e218] [cursor=pointer]:
+          - /url: /awesome-copilot-adventures/assets/site/fonts/OFL-JetBrains-Mono.txt
+      - navigation "Choose language" [ref=f7e219]:
+        - link "English" [ref=f7e220] [cursor=pointer]:
+          - /url: http://127.0.0.1:4349/awesome-copilot-adventures/en/adventures/
+        - link "Español" [ref=f7e221] [cursor=pointer]:
+          - /url: http://127.0.0.1:4349/awesome-copilot-adventures/es/adventures/
+        - link "Português do Brasil" [ref=f7e222] [cursor=pointer]:
+          - /url: http://127.0.0.1:4349/awesome-copilot-adventures/pt-br/adventures/
+        - link "GitHub ↗" [ref=f7e223] [cursor=pointer]:
+          - /url: https://github.com/workshop-gbb/awesome-copilot-adventures
+    - region [ref=f7e225]:
+      - heading "Credits and inspiration" [level=2] [ref=f7e226]
+      - list [ref=f7e227]:
+        - listitem [ref=f7e228]:
+          - link "microsoft/CopilotAdventures" [ref=f7e229] [cursor=pointer]:
+            - /url: https://github.com/microsoft/CopilotAdventures
+          - generic [ref=f7e230]: Original inspiration for the adventure track.
+        - listitem [ref=f7e231]:
+          - link "MicrosoftLearning/mslearn-github-copilot-dev" [ref=f7e232] [cursor=pointer]:
+            - /url: https://github.com/MicrosoftLearning/mslearn-github-copilot-dev
+          - generic [ref=f7e233]: Original inspiration for the hands-on lab track.
+      - paragraph [ref=f7e234]: Both tracks include updated and improved material, plus newly created adventures and labs. Original authorship and licenses are preserved.
+      - link "Read the full credits" [ref=f7e235] [cursor=pointer]:
+        - /url: /awesome-copilot-adventures/en/read/notice/
+    - generic [ref=f7e236]:
+      - generic [ref=f7e237]: MIT · Awesome Copilot Adventures
+      - generic [ref=f7e238]: d41d7e8bb5332fce

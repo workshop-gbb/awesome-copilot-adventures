@@ -22,7 +22,14 @@ not “GitHub Dev Kit.” C# Dev Kit is a separate VS Code extension.
 
 ## Lab briefing
 
+![Requirement cards and a bounded tool tray surround an existing application module.](../../../assets/images/hands-on/setup-speckit-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Initialize workflow scaffolding without replacing the application.](../../../assets/images/hands-on/setup-speckit.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

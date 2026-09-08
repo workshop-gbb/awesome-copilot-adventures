@@ -22,7 +22,14 @@ repository instead of testing a helper defined only inside the test.
 
 ## Lab briefing
 
+![Two sample trays connect through a repository module to storage, a checking lens and an empty result tray.](../../../assets/images/hands-on/04-xunit-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Test storage behavior through the production repository.](../../../assets/images/hands-on/04-xunit.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

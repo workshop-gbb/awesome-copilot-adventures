@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "prepared": "2026-09-08",
+  "covers": [
+    { "id": "setup-dotnet", "original": "assets/images/hands-on/L01.jpeg", "source": "assets/images/hands-on/setup-dotnet-cover.webp", "width": 1440, "height": 630 },
+    { "id": "setup-python", "original": "assets/images/hands-on/L02.jpeg", "source": "assets/images/hands-on/setup-python-cover.webp", "width": 1440, "height": 630 },
+    { "id": "setup-copilot", "original": "assets/images/hands-on/L03.jpeg", "source": "assets/images/hands-on/setup-copilot-cover.webp", "width": 1440, "height": 630 },
+    { "id": "setup-speckit", "original": "assets/images/hands-on/L04.jpeg", "source": "assets/images/hands-on/setup-speckit-cover.webp", "width": 1440, "height": 630 },
+    { "id": "setup-sdk", "original": "assets/images/hands-on/L05.jpeg", "source": "assets/images/hands-on/setup-sdk-cover.webp", "width": 1440, "height": 630 },
+    { "id": "01-interface", "original": "assets/images/hands-on/L06.jpeg", "source": "assets/images/hands-on/01-interface-cover.webp", "width": 1440, "height": 630 },
+    { "id": "02-csharp", "original": "assets/images/hands-on/L07.jpeg", "source": "assets/images/hands-on/02-csharp-cover.webp", "width": 1440, "height": 630 },
+    { "id": "02-python", "original": "assets/images/hands-on/L08.jpeg", "source": "assets/images/hands-on/02-python-cover.webp", "width": 1440, "height": 630 },
+    { "id": "03-csharp", "original": "assets/images/hands-on/L09.jpeg", "source": "assets/images/hands-on/03-csharp-cover.webp", "width": 1440, "height": 630 },
+    { "id": "03-python", "original": "assets/images/hands-on/L10.jpeg", "source": "assets/images/hands-on/03-python-cover.webp", "width": 1440, "height": 630 },
+    { "id": "04-xunit", "original": "assets/images/hands-on/L11.jpeg", "source": "assets/images/hands-on/04-xunit-cover.webp", "width": 1440, "height": 630 },
+    { "id": "04-pytest", "original": "assets/images/hands-on/L12.jpeg", "source": "assets/images/hands-on/04-pytest-cover.webp", "width": 1440, "height": 630 },
+    { "id": "05-csharp", "original": "assets/images/hands-on/L13.jpeg", "source": "assets/images/hands-on/05-csharp-cover.webp", "width": 1440, "height": 630 },
+    { "id": "05-python", "original": "assets/images/hands-on/L14.jpeg", "source": "assets/images/hands-on/05-python-cover.webp", "width": 1440, "height": 630 },
+    { "id": "06-prototype", "original": "assets/images/hands-on/L15.jpeg", "source": "assets/images/hands-on/06-prototype-cover.webp", "width": 1440, "height": 630 },
+    { "id": "07-duplication", "original": "assets/images/hands-on/L16.jpeg", "source": "assets/images/hands-on/07-duplication-cover.webp", "width": 1440, "height": 630 },
+    { "id": "08-functions", "original": "assets/images/hands-on/L17.jpeg", "source": "assets/images/hands-on/08-functions-cover.webp", "width": 1440, "height": 630 },
+    { "id": "09-conditionals", "original": "assets/images/hands-on/L18.jpeg", "source": "assets/images/hands-on/09-conditionals-cover.webp", "width": 1440, "height": 630 },
+    { "id": "10-profiling", "original": "assets/images/hands-on/L19.jpeg", "source": "assets/images/hands-on/10-profiling-cover.webp", "width": 1440, "height": 630 },
+    { "id": "11-issues", "original": "assets/images/hands-on/L20.jpeg", "source": "assets/images/hands-on/11-issues-cover.webp", "width": 1440, "height": 630 },
+    { "id": "12-secrets", "original": "assets/images/hands-on/L21.jpeg", "source": "assets/images/hands-on/12-secrets-cover.webp", "width": 1440, "height": 630 },
+    { "id": "13-greenfield", "original": "assets/images/hands-on/L22.jpeg", "source": "assets/images/hands-on/13-greenfield-cover.webp", "width": 1440, "height": 630 },
+    { "id": "14-brownfield", "original": "assets/images/hands-on/L23.jpeg", "source": "assets/images/hands-on/14-brownfield-cover.webp", "width": 1440, "height": 630 },
+    { "id": "15-customization", "original": "assets/images/hands-on/L24.jpeg", "source": "assets/images/hands-on/15-customization-cover.webp", "width": 1440, "height": 630 },
+    { "id": "16-sdk", "original": "assets/images/hands-on/L25.jpeg", "source": "assets/images/hands-on/16-sdk-cover.webp", "width": 1440, "height": 630 },
+    { "id": "17-modernization", "original": "assets/images/hands-on/L26.jpeg", "source": "assets/images/hands-on/17-modernization-cover.webp", "width": 1440, "height": 630 }
+  ]
+}

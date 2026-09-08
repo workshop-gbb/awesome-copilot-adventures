@@ -23,7 +23,14 @@ side effects, not just the successful order.
 
 ## Lab briefing
 
+![Preparation, resource reservation and completion modules are linked by forward and return paths.](../../../assets/images/hands-on/08-functions-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Extract responsibilities without losing compensation.](../../../assets/images/hands-on/08-functions.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

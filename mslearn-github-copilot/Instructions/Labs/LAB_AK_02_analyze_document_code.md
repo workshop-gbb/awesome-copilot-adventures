@@ -23,7 +23,14 @@ was inspected or every claim is correct.
 
 ## Lab briefing
 
+![Magnifying lenses trace connections between a terminal, library records, storage and a documentation sheet.](../../../assets/images/hands-on/02-csharp-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Trace an existing library workflow before documenting it.](../../../assets/images/hands-on/02-csharp.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

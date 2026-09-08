@@ -1,6 +1,7 @@
 # Media assets
 
 - `images/adventures/` contains 14 generated WebP covers, their supplied JPEG originals and the original SVG concept illustrations.
+- `images/hands-on/` contains 26 professional WebP covers, their supplied JPEG originals and the original SVG concept illustrations.
 - `images/legacy/` preserves artwork from the version-one curriculum.
 - `video/adventures/` contains 3 silent, optional MP4 teasers and their still posters for the Pages site.
 
@@ -9,9 +10,15 @@ maps each optimized asset to its original; original JPEGs and MP4s remain unchan
 See the [cover inventory](images/adventures/README.md), [video notes](video/README.md)
 and [media prompt catalog](../docs/media-prompts.md).
 
+The [hands-on inventory](hands-on-media.json) maps the supplied `L01.jpeg` through
+`L26.jpeg` images to the 26 preparation guides and exercises. Their WebP covers
+are center-cropped and downscaled without stretching; the JPEG originals remain
+unchanged. Each guide retains its localized SVG in an expandable concept view.
+The covers are illustrations, not product screenshots or evidence of test results.
+
 Required hero format:
 
-- 1456×832 pixels;
+- 1456×832 pixels for adventures; 1440×630 pixels for hands-on guides;
 - PNG or WebP;
 - keep essential text outside the artwork and preserve source provenance;
 - meaningful alt text in the consuming page;

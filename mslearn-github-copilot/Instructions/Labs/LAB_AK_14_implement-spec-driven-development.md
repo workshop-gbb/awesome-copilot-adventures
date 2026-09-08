@@ -22,7 +22,14 @@ must integrate with those constraints instead of regenerating the project.
 
 ## Lab briefing
 
+![A central dashboard connects grouped document trays to a separate metadata module.](../../../assets/images/hands-on/14-brownfield-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Add owner-scoped metadata while preserving the dashboard.](../../../assets/images/hands-on/14-brownfield.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

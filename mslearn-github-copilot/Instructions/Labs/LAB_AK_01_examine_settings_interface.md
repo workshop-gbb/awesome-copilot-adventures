@@ -22,7 +22,14 @@ which changes the runtime, and which changes permission to act.
 
 ## Lab briefing
 
+![A small task module sits on a workbench with separate context trays and a permission control.](../../../assets/images/hands-on/01-interface-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Make a greeting trim whitespace without weakening input errors.](../../../assets/images/hands-on/01-interface.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

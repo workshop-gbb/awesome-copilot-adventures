@@ -19,7 +19,14 @@ lab:
 
 ## Lab briefing
 
+![A project module, compatible tool parts and a checking instrument share a workbench.](../../../assets/images/hands-on/setup-dotnet-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Match the project and runtime before trusting a build.](../../../assets/images/hands-on/setup-dotnet.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

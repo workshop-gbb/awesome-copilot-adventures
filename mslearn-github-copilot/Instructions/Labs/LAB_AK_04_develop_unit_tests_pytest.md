@@ -22,7 +22,14 @@ functions. A green collection UI is not proof that a regression assertion execut
 
 ## Lab briefing
 
+![A few sample blocks enter a function module while separate instruments compare its outputs.](../../../assets/images/hands-on/04-pytest-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Distinguish test collection from useful assertions.](../../../assets/images/hands-on/04-pytest.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

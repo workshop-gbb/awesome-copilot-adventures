@@ -22,7 +22,14 @@ applies only inside a premium/high-value branch must not become a global rule.
 
 ## Lab briefing
 
+![Two connected processing tracks show separate resource trays and return paths.](../../../assets/images/hands-on/09-conditionals-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Simplify the structure while preserving the decisions.](../../../assets/images/hands-on/09-conditionals.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

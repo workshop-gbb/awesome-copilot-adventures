@@ -23,7 +23,14 @@ with a small contract, a working domain module, and observable UI checks.
 
 ## Lab briefing
 
+![Product cards, a keyboard, a highlighted selection and a cart share an interface workbench.](../../../assets/images/hands-on/06-prototype-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Build an accessible interface over the tested cart domain.](../../../assets/images/hands-on/06-prototype.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

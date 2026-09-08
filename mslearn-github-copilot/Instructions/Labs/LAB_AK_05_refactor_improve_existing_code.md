@@ -22,7 +22,14 @@ preserve comparison, ordering, null behavior, populated references and side effe
 
 ## Lab briefing
 
+![Two mechanisms with tangled and organized interiors carry matching sequences of geometric parts.](../../../assets/images/hands-on/05-csharp-cover.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Refactor without changing case, ordering or populated references.](../../../assets/images/hands-on/05-csharp.svg)
+
+</details>
 
 | At a glance | Your route |
 | --- | --- |

@@ -12,7 +12,19 @@ const {
 const ui = require('./site-ui.json');
 const { decodeHtml } = require('./check-rendered-site');
 const { markdownLinkTargets } = require('./markdown-helpers');
-const { mediaId, mediaImage, mediaImages, renderMedia, loadAdventureMedia } = require('./site-media');
+const { mediaId, mediaImage, mediaImages, renderMedia, loadAdventureMedia, loadHandsOnMedia } = require('./site-media');
+
+function assertWebPCover(cover) {
+  const bytes = fs.readFileSync(path.join(root, cover.source));
+  assert.equal(bytes.subarray(0, 4).toString('ascii'), 'RIFF', cover.source);
+  assert.equal(bytes.subarray(8, 12).toString('ascii'), 'WEBP', cover.source);
+  const format = bytes.subarray(12, 16).toString('ascii');
+  assert.ok(['VP8X', 'VP8 '].includes(format), cover.source);
+  const width = format === 'VP8X' ? bytes.readUIntLE(24, 3) + 1 : bytes.readUInt16LE(26) & 0x3fff;
+  const height = format === 'VP8X' ? bytes.readUIntLE(27, 3) + 1 : bytes.readUInt16LE(28) & 0x3fff;
+  assert.equal(width, cover.width, cover.source);
+  assert.equal(height, cover.height, cover.source);
+}
 
 test('adventure media covers every current adventure without losing its concept illustration', () => {
   const media = loadAdventureMedia();
@@ -24,11 +36,38 @@ test('adventure media covers every current adventure without losing its concept 
     const markdown = fs.readFileSync(path.join(root, page.source), 'utf8');
     assert.match(markdown, new RegExp(`${cover.slug}-hero\\.webp`));
     assert.match(markdown, new RegExp(`<details>[\\s\\S]*${cover.slug}-hero\\.svg[\\s\\S]*</details>`));
-    const bytes = fs.readFileSync(path.join(root, cover.source));
-    assert.equal(bytes.subarray(8, 16).toString('ascii'), 'WEBPVP8X');
-    assert.equal(bytes.readUIntLE(24, 3) + 1, cover.width, cover.slug);
-    assert.equal(bytes.readUIntLE(27, 3) + 1, cover.height, cover.slug);
+    assertWebPCover(cover);
   }
+});
+
+test('hands-on media maps all supplied covers to guides and preserves the concept illustrations', () => {
+  const media = loadHandsOnMedia();
+  const labs = require('../mslearn-github-copilot/catalog.json').labs;
+  const lessons = pages().filter(page => page.group === 'hands-on');
+  assert.deepEqual(media.covers.map(cover => cover.id), labs.map(lab => lab.id));
+  assert.equal(lessons.length, media.covers.length);
+  for (const [index, cover] of media.covers.entries()) {
+    assert.equal(cover.original, `assets/images/hands-on/L${String(index + 1).padStart(2, '0')}.jpeg`);
+    const page = lessons.find(page => page.labId === cover.id);
+    assert.ok(page, cover.id);
+    const markdown = fs.readFileSync(path.join(root, page.source), 'utf8');
+    assert.equal(markdown.match(/!\[[^\]]*]\(([^)]+)\)/)?.[1], `../../../${cover.source}`);
+    assert.match(markdown, new RegExp(`<details>[\\s\\S]*hands-on/${cover.id}\\.svg[\\s\\S]*</details>`));
+    assertWebPCover(cover);
+  }
+});
+
+test('hands-on media rejects missing assets, duplicate mappings and incorrect cover metadata', () => {
+  const files = siteSources();
+  const media = loadHandsOnMedia(files);
+  assert.throws(() => loadHandsOnMedia(files, { version: 2, covers: [] }), /Invalid hands-on media catalog/);
+  assert.throws(() => loadHandsOnMedia([], media), /Missing or unsupported/);
+  assert.throws(() => loadHandsOnMedia(files, { ...media, covers: [...media.covers, media.covers[0]] }), /duplicate/);
+  assert.throws(() => loadHandsOnMedia(files, { ...media, covers: [media.covers[0], { ...media.covers[1], original: media.covers[0].original }] }), /Invalid hands-on cover/);
+  assert.throws(() => loadHandsOnMedia(files, { ...media, covers: [{ ...media.covers[0], source: '../outside.webp' }] }), /Missing or unsupported/);
+  assert.throws(() => loadHandsOnMedia(files, { ...media, covers: [{ ...media.covers[0], height: 0 }] }), /Invalid hands-on cover/);
+  const withoutConcept = files.filter(file => !file.endsWith('/hands-on/setup-dotnet.svg'));
+  assert.throws(() => loadHandsOnMedia(withoutConcept, media), /Missing or unsupported/);
 });
 
 test('adventure media rejects missing sources, duplicate identifiers and unsafe playback metadata', () => {
@@ -487,6 +526,16 @@ test('publication covers every source byte and every learning page without recur
   const adventureCards = data.locales.en.catalog.filter(page => page.group === 'adventures' && page.source.endsWith('/README.md'));
   assert.equal(adventureCards.length, 14);
   assert.ok(adventureCards.every(page => page.image.endsWith('.webp')));
+  const handsOnCards = data.locales.en.catalog.filter(page => page.group === 'hands-on');
+  assert.equal(handsOnCards.length, 26);
+  for (const cover of loadHandsOnMedia().covers) {
+    const card = handsOnCards.find(page => page.labId === cover.id);
+    const bytes = fs.readFileSync(path.join(root, cover.source));
+    const hash = crypto.createHash('sha256').update(bytes).digest('hex');
+    assert.equal(card.image, `/awesome-copilot-adventures/site-data/media/${hash}.webp`, cover.id);
+    assert.deepEqual(artifacts.get(`site-generated/public/site-data/media/${hash}.webp`), bytes);
+    assert.ok(manifest.some(entry => entry.path === cover.original), cover.original);
+  }
   assert.equal(data.documentCount, documents.length);
   assert.ok(manifest.some(entry => entry.path === 'site/lib/catalog.ts'));
   assert.ok(manifest.some(entry => entry.path === 'docs/design-system/hub-editorial/tokens.css'));

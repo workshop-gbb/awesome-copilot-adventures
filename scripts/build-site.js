@@ -8,7 +8,7 @@ const {
 const ui = require('./site-ui.json');
 const { themeFrontmatter, checkDiagram } = require('./check-diagrams');
 const { fencedBlocks, withoutCodeBlocks } = require('./markdown-helpers');
-const { mediaImages, renderMedia, loadAdventureMedia } = require('./site-media');
+const { mediaImages, renderMedia, loadAdventureMedia, loadHandsOnMedia } = require('./site-media');
 
 function html(value) {
   return String(value).replace(/[&<>"']/g, character => ({
@@ -219,6 +219,7 @@ function buildArtifacts(selectedLocales = locales) {
   const documents = pages();
   const sources = siteSources();
   const adventureMedia = loadAdventureMedia(sources);
+  loadHandsOnMedia(sources);
   const publishedFilms = new Set(adventureMedia.films.map(film => film.source));
   const images = mediaImages(sources);
   const segments = translationSegments(documents, images);

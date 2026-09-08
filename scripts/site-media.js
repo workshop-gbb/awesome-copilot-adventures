@@ -6,23 +6,28 @@ const { root, repositoryFiles } = require('./repository-files');
 const mediaId = text => crypto.createHash('sha256').update(`media:${text}`).digest('hex').slice(0, 16);
 const textElements = /<(title|desc|text)\b[^>]*>([^<]*)<\/\1>/g;
 
-function loadAdventureMedia(files = repositoryFiles(), catalog = require('../assets/adventure-media.json')) {
-  if (catalog.version !== 1 || !Array.isArray(catalog.covers) || !Array.isArray(catalog.films)) {
-    throw new Error('Invalid adventure media catalog.');
-  }
+function mediaValidator(files) {
   const sources = new Set(files.map(file => path.relative(root, file).split(path.sep).join('/')));
   const ids = new Set();
   const checkFile = (source, pattern) => {
     if (typeof source !== 'string' || !pattern.test(source) || !sources.has(source)) {
-      throw new Error(`Missing or unsupported adventure media source: ${source}`);
+      throw new Error(`Missing or unsupported media source: ${source}`);
     }
   };
   const checkId = id => {
     if (typeof id !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id) || ids.has(id)) {
-      throw new Error(`Invalid or duplicate adventure media identifier: ${id}`);
+      throw new Error(`Invalid or duplicate media identifier: ${id}`);
     }
     ids.add(id);
   };
+  return { checkFile, checkId };
+}
+
+function loadAdventureMedia(files = repositoryFiles(), catalog = require('../assets/adventure-media.json')) {
+  if (catalog.version !== 1 || !Array.isArray(catalog.covers) || !Array.isArray(catalog.films)) {
+    throw new Error('Invalid adventure media catalog.');
+  }
+  const { checkFile, checkId } = mediaValidator(files);
   for (const cover of catalog.covers) {
     checkId(cover.slug);
     checkFile(cover.original, /^assets\/images\/adventures\/[^/]+\.jpe?g$/);
@@ -41,6 +46,26 @@ function loadAdventureMedia(files = repositoryFiles(), catalog = require('../ass
       || film.width !== 1280 || film.height !== 720 || film.duration !== 10 || film.silent !== true) {
       throw new Error(`Invalid adventure film metadata: ${film.id}`);
     }
+  }
+  return catalog;
+}
+
+function loadHandsOnMedia(files = repositoryFiles(), catalog = require('../assets/hands-on-media.json')) {
+  if (catalog.version !== 1 || !Array.isArray(catalog.covers)) {
+    throw new Error('Invalid hands-on media catalog.');
+  }
+  const { checkFile, checkId } = mediaValidator(files);
+  const originals = new Set();
+  for (const cover of catalog.covers) {
+    checkId(cover.id);
+    checkFile(cover.original, /^assets\/images\/hands-on\/L\d{2}\.jpeg$/);
+    checkFile(cover.source, /^assets\/images\/hands-on\/[a-z0-9-]+-cover\.webp$/);
+    checkFile(`assets/images/hands-on/${cover.id}.svg`, /^assets\/images\/hands-on\/[a-z0-9-]+\.svg$/);
+    if (cover.source !== `assets/images/hands-on/${cover.id}-cover.webp`
+      || cover.width !== 1440 || cover.height !== 630 || originals.has(cover.original)) {
+      throw new Error(`Invalid hands-on cover metadata: ${cover.id}`);
+    }
+    originals.add(cover.original);
   }
   return catalog;
 }
@@ -107,4 +132,4 @@ function renderMedia(image, locale, dictionary) {
   };
 }
 
-module.exports = { mediaId, mediaImage, mediaImages, renderMedia, loadAdventureMedia };
+module.exports = { mediaId, mediaImage, mediaImages, renderMedia, loadAdventureMedia, loadHandsOnMedia };
