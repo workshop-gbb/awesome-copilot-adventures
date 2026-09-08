@@ -39,6 +39,7 @@ function inlineCode(text) {
 function structureTokens(text) {
   return {
     alerts: [...text.matchAll(/\[![A-Z]+]/g)].map(match => match[0]),
+    headings: [...text.matchAll(/^(#{1,6})[ \t]+/gm)].map(match => match[1]),
     checkboxes: [...text.matchAll(/^[ \t]*[-*] \[[ xX]\]/gm)].map(match => match[0].trim()),
     tableColumns: text.split('\n').filter(line => line.trim().startsWith('|'))
       .map(line => [...line.matchAll(/(?<!\\)\|/g)].length),

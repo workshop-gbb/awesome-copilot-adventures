@@ -105,6 +105,12 @@ test('translation validation fails closed on missing prose, changed links and al
   assert.doesNotThrow(() => validateTranslations([segment], 'es', { sample: 'Usa `sendAndWait` y la [documentación](https://docs.github.com/).' }));
   const protectedSegment = { id: 'protected', kind: 'prose', text: '> [!NOTE]\n> Stop after 3 attempts.', sources: ['lesson.md'] };
   assert.throws(() => validateTranslations([protectedSegment], 'es', { protected: '> [!NOTA]\n> Detente después de 4 intentos.' }), /protected structure/);
+  const heading = { id: 'heading', kind: 'prose', text: '\n# One clear next step', sources: ['lesson.md'] };
+  assert.throws(() => validateTranslations([heading], 'es', { heading: '\nUn siguiente paso claro' }), /protected structure/);
+  assert.throws(() => validateTranslations([heading], 'es', { heading: '\n## Un siguiente paso claro' }), /protected structure/);
+  assert.doesNotThrow(() => validateTranslations([heading], 'es', { heading: '\n# Un siguiente paso claro' }));
+  const title = { id: 'title', kind: 'title', text: 'Original illustrations', sources: ['lesson.md'] };
+  assert.throws(() => validateTranslations([title], 'es', { title: '# Ilustraciones originales' }), /protected structure/);
 });
 
 test('translated headings retain same-document anchors including duplicates', () => {
