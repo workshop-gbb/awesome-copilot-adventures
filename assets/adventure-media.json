@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "prepared": "2026-09-08",
+  "covers": [
+    { "slug": "portals-of-nexus", "original": "assets/images/adventures/portais-de-nexus.jpeg", "source": "assets/images/adventures/portals-of-nexus-hero.webp", "width": 1456, "height": 832 },
+    { "slug": "context-mirrors", "original": "assets/images/adventures/espelhos-do-contexto.jpeg", "source": "assets/images/adventures/context-mirrors-hero.webp", "width": 1456, "height": 832 },
+    { "slug": "tempora-loop", "original": "assets/images/adventures/loop-de-tempora.jpeg", "source": "assets/images/adventures/tempora-loop-hero.webp", "width": 1456, "height": 832 },
+    { "slug": "eldoria-laws", "original": "assets/images/adventures/leis-de-eldoria.jpeg", "source": "assets/images/adventures/eldoria-laws-hero.webp", "width": 1456, "height": 832 },
+    { "slug": "algora-skills", "original": "assets/images/adventures/ skills-de-algora.jpeg", "source": "assets/images/adventures/algora-skills-hero.webp", "width": 1456, "height": 832 },
+    { "slug": "stellaris-agents", "original": "assets/images/adventures/agentes-de-estelaris.jpeg", "source": "assets/images/adventures/stellaris-agents-hero.webp", "width": 1456, "height": 832 },
+    { "slug": "stonevale-guardrails", "original": "assets/images/adventures/guardrails-de-stonevale.jpeg", "source": "assets/images/adventures/stonevale-guardrails-hero.webp", "width": 1456, "height": 832 },
+    { "slug": "cartographer-mcp", "original": "assets/images/adventures/cartografo-mcp.jpeg", "source": "assets/images/adventures/cartographer-mcp-hero.webp", "width": 1456, "height": 832 },
+    { "slug": "lumoria-graph", "original": "assets/images/adventures/grafo-de-conhecimento-lumoria.jpeg", "source": "assets/images/adventures/lumoria-graph-hero.webp", "width": 1456, "height": 832 },
+    { "slug": "mythos-parallel", "original": "assets/images/adventures/provas-paralelas-mythos.jpeg", "source": "assets/images/adventures/mythos-parallel-hero.webp", "width": 1456, "height": 832 },
+    { "slug": "cloud-citadel", "original": "assets/images/adventures/cidadela-da-nuvem.jpeg", "source": "assets/images/adventures/cloud-citadel-hero.webp", "width": 1456, "height": 832 },
+    { "slug": "terminal-gate", "original": "assets/images/adventures/portal-do-terminal.jpeg", "source": "assets/images/adventures/terminal-gate-hero.webp", "width": 1456, "height": 832 },
+    { "slug": "automaton-foundry", "original": "assets/images/adventures/fundicao-de-automatos.jpeg", "source": "assets/images/adventures/automaton-foundry-hero.webp", "width": 1456, "height": 832 },
+    { "slug": "convergence-of-three-realms", "original": "assets/images/adventures/convergencia-tres-reinos.jpeg", "source": "assets/images/adventures/convergence-of-three-realms-hero.webp", "width": 1456, "height": 832 }
+  ],
+  "films": [
+    {
+      "id": "nexus-context-tempora",
+      "original": "assets/images/adventures/da_pra_fazer_uma_animacao_comp.mp4",
+      "source": "assets/video/adventures/nexus-context-tempora.mp4",
+      "poster": "assets/video/adventures/nexus-context-tempora-poster.webp",
+      "width": 1280,
+      "height": 720,
+      "duration": 10,
+      "silent": true
+    },
+    {
+      "id": "workflow-guardrails",
+      "original": "assets/images/adventures/awesome-copilot-adventures-teaser-01.mp4",
+      "source": "assets/video/adventures/workflow-guardrails.mp4",
+      "poster": "assets/video/adventures/workflow-guardrails-poster.webp",
+      "width": 1280,
+      "height": 720,
+      "duration": 10,
+      "silent": true
+    },
+    {
+      "id": "skills-connections",
+      "original": "assets/images/adventures/awesome-copilot-adventures-teaser-02.mp4",
+      "source": "assets/video/adventures/skills-connections.mp4",
+      "poster": "assets/video/adventures/skills-connections-poster.webp",
+      "width": 1280,
+      "height": 720,
+      "duration": 10,
+      "silent": true
+    }
+  ]
+}

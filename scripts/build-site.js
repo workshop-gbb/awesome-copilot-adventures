@@ -8,7 +8,7 @@ const {
 const ui = require('./site-ui.json');
 const { themeFrontmatter, checkDiagram } = require('./check-diagrams');
 const { fencedBlocks, withoutCodeBlocks } = require('./markdown-helpers');
-const { mediaImages, renderMedia } = require('./site-media');
+const { mediaImages, renderMedia, loadAdventureMedia } = require('./site-media');
 
 function html(value) {
   return String(value).replace(/[&<>"']/g, character => ({
@@ -18,6 +18,10 @@ function html(value) {
 
 function sha256(value) {
   return crypto.createHash('sha256').update(value).digest('hex');
+}
+
+function mediaUrl(source) {
+  return `${basePath}/site-data/media/${sha256(readSource(path.join(root, source)))}${path.extname(source).toLowerCase()}`;
 }
 
 function localizedUrl(locale, route) {
@@ -148,7 +152,7 @@ function createLinkResolver(documents, sources, mediaPreviews = new Map()) {
       const preview = mediaPreviews.get(cleanSource)?.[locale];
       if (preview) return preview.url + title;
       // Media keeps a real extension for native image rendering; original bytes are also in the archive.
-      return `${basePath}/site-data/media/${sha256(readSource(path.join(root, cleanSource)))}${path.extname(cleanSource).toLowerCase()}` + title;
+      return mediaUrl(cleanSource) + title;
     }
     if (sourceSet.has(cleanSource) || directories.has(cleanSource)) return explorerUrl(locale, cleanSource) + title;
     throw new Error(`Unresolved site link in ${from}: ${target}`);
@@ -214,6 +218,8 @@ function readSource(file) {
 function buildArtifacts(selectedLocales = locales) {
   const documents = pages();
   const sources = siteSources();
+  const adventureMedia = loadAdventureMedia(sources);
+  const publishedFilms = new Set(adventureMedia.films.map(film => film.source));
   const images = mediaImages(sources);
   const segments = translationSegments(documents, images);
   const routes = new Set();
@@ -244,7 +250,9 @@ function buildArtifacts(selectedLocales = locales) {
     artifacts.set(`site-generated/public/site-data/objects/${hash}.json`, JSON.stringify(object));
     const mime = sourceMime(name);
     if (name.startsWith('assets/site/fonts/') && name.endsWith('.txt')) artifacts.set(`site-generated/public/${name}`, bytes);
-    if (mime.startsWith('image/')) artifacts.set(`site-generated/public/site-data/media/${hash}${path.extname(name).toLowerCase()}`, bytes);
+    if (mime.startsWith('image/') || publishedFilms.has(name)) {
+      artifacts.set(`site-generated/public/site-data/media/${hash}${path.extname(name).toLowerCase()}`, bytes);
+    }
     if (name.startsWith('assets/lab-kits/')) artifacts.set(`site-generated/public/${name}`, bytes);
     manifest.push({
       path: name, size: bytes.length, hash, text: textPreview(bytes), mime,
@@ -260,6 +268,10 @@ function buildArtifacts(selectedLocales = locales) {
     documentCount: documents.length,
     adventureCount: documents.filter(page => page.source.startsWith('adventures/') && page.source.endsWith('/README.md')).length,
     handsOnCount: documents.filter(page => page.group === 'hands-on').length,
+    adventureFilms: adventureMedia.films.map(film => ({
+      id: film.id, url: mediaUrl(film.source), poster: mediaUrl(film.poster),
+      original: film.original, width: film.width, height: film.height, duration: film.duration
+    })),
     locales: {}
   };
   for (const locale of selectedLocales) {
@@ -289,7 +301,7 @@ function buildArtifacts(selectedLocales = locales) {
       search.push({ title, url, group: page.group, text: plain });
     }
     const href = Object.fromEntries([
-      ['home', '/'], ['start', '/start-here/'], ['curriculum', '/curriculum/'],
+      ['home', '/'], ['start', '/start-here/'], ['prerequisites', '/prerequisites/'], ['curriculum', '/curriculum/'],
       ['learningPath', '/learning-path/'], ['downloads', '/downloads/'], ['simulations', '/simulations/'],
       ['adventures', '/adventures/'], ['handsOn', '/hands-on/'], ['repository', '/repository/'],
       ['library', '/library/'], ['harness', '/harnesses/'], ['status', '/feature-status/'],

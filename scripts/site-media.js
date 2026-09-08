@@ -6,6 +6,45 @@ const { root, repositoryFiles } = require('./repository-files');
 const mediaId = text => crypto.createHash('sha256').update(`media:${text}`).digest('hex').slice(0, 16);
 const textElements = /<(title|desc|text)\b[^>]*>([^<]*)<\/\1>/g;
 
+function loadAdventureMedia(files = repositoryFiles(), catalog = require('../assets/adventure-media.json')) {
+  if (catalog.version !== 1 || !Array.isArray(catalog.covers) || !Array.isArray(catalog.films)) {
+    throw new Error('Invalid adventure media catalog.');
+  }
+  const sources = new Set(files.map(file => path.relative(root, file).split(path.sep).join('/')));
+  const ids = new Set();
+  const checkFile = (source, pattern) => {
+    if (typeof source !== 'string' || !pattern.test(source) || !sources.has(source)) {
+      throw new Error(`Missing or unsupported adventure media source: ${source}`);
+    }
+  };
+  const checkId = id => {
+    if (typeof id !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id) || ids.has(id)) {
+      throw new Error(`Invalid or duplicate adventure media identifier: ${id}`);
+    }
+    ids.add(id);
+  };
+  for (const cover of catalog.covers) {
+    checkId(cover.slug);
+    checkFile(cover.original, /^assets\/images\/adventures\/[^/]+\.jpe?g$/);
+    checkFile(cover.source, /^assets\/images\/adventures\/[a-z0-9-]+-hero\.webp$/);
+    if (cover.source !== `assets/images/adventures/${cover.slug}-hero.webp` || cover.width !== 1456 || cover.height !== 832) {
+      throw new Error(`Invalid adventure cover metadata: ${cover.slug}`);
+    }
+  }
+  for (const film of catalog.films) {
+    checkId(film.id);
+    checkFile(film.original, /^assets\/images\/adventures\/[^/]+\.mp4$/);
+    checkFile(film.source, /^assets\/video\/adventures\/[a-z0-9-]+\.mp4$/);
+    checkFile(film.poster, /^assets\/video\/adventures\/[a-z0-9-]+-poster\.webp$/);
+    if (film.source !== `assets/video/adventures/${film.id}.mp4`
+      || film.poster !== `assets/video/adventures/${film.id}-poster.webp`
+      || film.width !== 1280 || film.height !== 720 || film.duration !== 10 || film.silent !== true) {
+      throw new Error(`Invalid adventure film metadata: ${film.id}`);
+    }
+  }
+  return catalog;
+}
+
 function decodeXml(text) {
   return text.replace(/&(?:#x([0-9a-f]+)|#(\d+)|(amp|lt|gt|quot|apos));/gi, (entity, hex, decimal, name) => {
     if (hex || decimal) return String.fromCodePoint(Number.parseInt(hex || decimal, hex ? 16 : 10));
@@ -68,4 +107,4 @@ function renderMedia(image, locale, dictionary) {
   };
 }
 
-module.exports = { mediaId, mediaImage, mediaImages, renderMedia };
+module.exports = { mediaId, mediaImage, mediaImages, renderMedia, loadAdventureMedia };

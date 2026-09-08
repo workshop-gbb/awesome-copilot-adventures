@@ -73,6 +73,7 @@ function startGuide(recipe) {
 | VS Code workspace | ${recipe.workspace === '.' ? 'The extracted lab directory' : 'The starter/ directory inside the extracted lab'} |
 | Initial check | ${baseline.expected === 'pass' ? 'Expected to pass' : 'Expected intentional starter failure'} |
 | Full instructions | [KIT-LESSON.md](KIT-LESSON.md) |
+| Tools, personal accounts and optional cloud | [.workshop/PREREQUISITES.md](.workshop/PREREQUISITES.md) |
 | Setup and GitHub walkthrough | [.workshop/SETUP.md](.workshop/SETUP.md) |
 
 ## 1. Extract and inspect
@@ -109,10 +110,35 @@ on Windows, use \`py\` instead of \`python\` if that is the installed launcher.
 Install only dependencies required by the selected exercise. Do not run every
 project or profiler in parallel.
 
-## 3. Open the correct workspace
+## 3. Open the correct workspace in your chosen client
 
 Use **File > Open Folder** in a new VS Code window and select
 ${recipe.workspace === '.' ? 'this extracted lab directory' : 'the starter/ directory inside the extracted lab'}.
+VS Code Stable and Insiders are alternatives; configure the edition you use.
+From the extracted kit root, open the workspace in Stable:
+
+\`\`\`bash
+code ${recipe.workspace}
+\`\`\`
+
+Or open the same workspace in Insiders:
+
+\`\`\`bash
+code-insiders ${recipe.workspace}
+\`\`\`
+
+For terminal-only work, install and authenticate the standalone Copilot CLI using
+[the prerequisites guide](.workshop/PREREQUISITES.md). From the extracted kit root:
+
+\`\`\`bash
+${recipe.workspace === '.' ? '' : `cd ${recipe.workspace}\n`}copilot
+\`\`\`
+
+Use only one route. Investigate without edits, review a plan, approve a bounded
+change, then inspect the diff and run the checks yourself in a separate terminal.
+${recipe.workspace === 'starter' ? 'From a terminal inside starter/, run `node ../verify.js`; the baseline above runs from the kit root.\n' : ''}
+CLI work does not prove VS Code-specific controls, discovery or handoffs. Record
+host-specific steps as not performed if you cannot use their documented host.
 Follow [the full lesson](KIT-LESSON.md). When it says to work in a disposable copy,
 this extracted kit is that copy. References to the curriculum describe its source,
 not a second directory you must recreate.
@@ -154,7 +180,8 @@ function kitEntries(recipe) {
   }
   const documents = new Map([
     [recipe.guide, 'KIT-LESSON.md'],
-    ['docs/downloads.md', '.workshop/SETUP.md']
+    ['docs/downloads.md', '.workshop/SETUP.md'],
+    ['docs/prerequisites.md', '.workshop/PREREQUISITES.md']
   ]);
   if (recipe.track === 'hands-on') {
     documents.set('mslearn-github-copilot/Instructions/Reference/COPILOT.md', '.workshop/CONCEPTS.md');

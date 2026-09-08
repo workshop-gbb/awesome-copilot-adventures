@@ -16,10 +16,17 @@ primary_capability: "Building an application with the GitHub Copilot SDK"
 
 
 > [!NOTE]
-> **Status:** Content ready · **Media:** Original SVG illustration · **Last verified:** 2026-09-05  
+> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
 > **Primary capability:** Building an application with the GitHub Copilot SDK
 
+![An engineer assembles an automaton inside a transparent enclosure with separate components, a manual key and a comparison image.](../../../assets/images/adventures/automaton-foundry-hero.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Application identity, SDK session, Evaluation evidence illustrated through The Automaton Foundry.](../../../assets/images/adventures/automaton-foundry-hero.svg)
+
+</details>
 
 > [!TIP]
 > [Download this learner kit](../../../assets/lab-kits/adventures/automaton-foundry.zip) and use
@@ -107,6 +114,10 @@ The fantasy is a memory aid; the engineering lesson requires observable, reprodu
 
 ## Prerequisites
 
+For tools and personal accounts, complete [the prerequisites guide](../../../docs/prerequisites.md).
+For terminal-only study, follow [the extracted-kit CLI route](../../../docs/downloads.md#use-copilot-cli-from-the-extracted-kit);
+VS Code-specific evidence remains separate.
+
 | Requirement | Why it matters |
 | --- | --- |
 | Complete the preceding adventure, or demonstrate its exit evidence | Keep this mission focused on its named capability |
@@ -185,6 +196,12 @@ An application can send a prompt and print a response yet still fail on timeout 
 5. Record the documented starter rejection. A missing runtime or unrelated crash is not the expected exercise result.
 
 ### 2. Investigate and plan
+
+Copyable baseline command, from the extracted kit root:
+
+```bash
+node verify.js
+```
 
 In Ask, request a trace of the inspected files and what the verifier actually observes. Challenge any claim about live execution that is not supported by output.
 

@@ -16,10 +16,17 @@ primary_capability: "Iterating with deterministic feedback"
 
 
 > [!NOTE]
-> **Status:** Content ready · **Media:** Original SVG illustration · **Last verified:** 2026-09-05  
+> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
 > **Primary capability:** Iterating with deterministic feedback
 
+![An engineer inspects a circular mechanism beside a finite stack of tokens and a manual stop lever.](../../../assets/images/adventures/tempora-loop-hero.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Hypothesis, Iteration budget, Stop condition illustrated through The Tempora Loop.](../../../assets/images/adventures/tempora-loop-hero.svg)
+
+</details>
 
 > [!TIP]
 > [Download this learner kit](../../../assets/lab-kits/adventures/tempora-loop.zip) and use
@@ -104,6 +111,10 @@ The fantasy is a memory aid; the engineering lesson requires observable, reprodu
 
 ## Prerequisites
 
+For tools and personal accounts, complete [the prerequisites guide](../../../docs/prerequisites.md).
+For terminal-only study, follow [the extracted-kit CLI route](../../../docs/downloads.md#use-copilot-cli-from-the-extracted-kit);
+VS Code-specific evidence remains separate.
+
 | Requirement | Why it matters |
 | --- | --- |
 | Complete the preceding adventure, or demonstrate its exit evidence | Keep this mission focused on its named capability |
@@ -182,6 +193,12 @@ Starting at zero and adding two until six produces a repeated six on the fourth 
 5. Record the documented starter rejection. A missing runtime or unrelated crash is not the expected exercise result.
 
 ### 2. Investigate and plan
+
+Copyable baseline command, from the extracted kit root:
+
+```bash
+node verify.js
+```
 
 In Ask, request a trace of the inspected files and what the verifier actually observes. Challenge any claim about live execution that is not supported by output.
 

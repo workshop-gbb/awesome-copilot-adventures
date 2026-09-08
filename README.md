@@ -15,6 +15,8 @@
 </p>
 
 <p align="center">
+  <a href="./docs/prerequisites.md"><strong>Tools, accounts and prerequisites</strong></a>
+  ·
   <a href="./docs/start-here.md"><strong>Start here — your first working check</strong></a>
   ·
   <a href="./docs/learning-path.md"><strong>Choose your learning path</strong></a>

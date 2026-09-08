@@ -87,6 +87,13 @@ if (!fs.existsSync(curriculum)) {
           if (!content.includes(section)) {
             failures.push(`Missing "${section}" in adventures/${level}/${slug}/README.md`);
           }
+          if (!content.includes('docs/prerequisites.md')
+            || !content.includes('docs/downloads.md#use-copilot-cli-from-the-extracted-kit')) {
+            failures.push(`Missing prerequisites or terminal-only route for ${slug}`);
+          }
+          if (!fencedBlocks(content).some(block => block.language === 'bash' && block.code.trim() === 'node verify.js')) {
+            failures.push(`Missing copyable extracted-kit baseline for ${slug}`);
+          }
         }
       }
     }
@@ -115,6 +122,7 @@ for (const file of requiredHarnessFiles) {
 const requiredSiteFiles = [
   'docs/index.md',
   'docs/start-here.md',
+  'docs/prerequisites.md',
   'docs/curriculum-map.md',
   'docs/harness-guide.md',
   'docs/customization-primitives.md',

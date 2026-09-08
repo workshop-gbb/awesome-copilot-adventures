@@ -16,10 +16,17 @@ primary_capability: "Selecting roles, harnesses, targets, and environments"
 
 
 > [!NOTE]
-> **Status:** Content ready · **Media:** Original SVG illustration · **Last verified:** 2026-09-05  
+> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
 > **Primary capability:** Selecting roles, harnesses, targets, and environments
 
+![A cartographer compares instruments and consoles in a workshop facing a distant citadel.](../../../assets/images/adventures/portals-of-nexus-hero.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Role, Harness, Environment illustrated through The Portals of Nexus.](../../../assets/images/adventures/portals-of-nexus-hero.svg)
+
+</details>
 
 > [!TIP]
 > [Download this learner kit](../../../assets/lab-kits/adventures/portals-of-nexus.zip) and use
@@ -104,6 +111,10 @@ The fantasy is a memory aid; the engineering lesson requires observable, reprodu
 
 ## Prerequisites
 
+For tools and personal accounts, complete [the prerequisites guide](../../../docs/prerequisites.md).
+For terminal-only study, follow [the extracted-kit CLI route](../../../docs/downloads.md#use-copilot-cli-from-the-extracted-kit);
+VS Code-specific evidence remains separate.
+
 | Requirement | Why it matters |
 | --- | --- |
 | Complete [Start here](../../../docs/start-here.md), or be able to open a folder and run a Node command | Keep this mission focused on its named capability |
@@ -182,6 +193,12 @@ A maintainer asks for an explanation, then a change. Ask can inspect without edi
 5. Record the documented starter rejection. A missing runtime or unrelated crash is not the expected exercise result.
 
 ### 2. Investigate and plan
+
+Copyable baseline command, from the extracted kit root:
+
+```bash
+node verify.js
+```
 
 In Ask, request a trace of the inspected files and what the verifier actually observes. Challenge any claim about live execution that is not supported by output.
 

@@ -3,6 +3,7 @@ import { languageFor, labelFor, alternateUrls, locales, counts, type Locale } fr
 import Discovery from './Discovery.astro';
 import Reading from './Reading.astro';
 import StudioPreview from './StudioPreview.astro';
+import AdventureFilms from './AdventureFilms.astro';
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const { ui, href } = languageFor(locale);
@@ -57,11 +58,13 @@ const stages = [
 <section class="section container">
   <div class="section-heading"><h2>{ui.firstVisit}</h2><p>{ui.firstVisitText}</p></div>
   <nav class="hero-actions" aria-label={ui.learningNavigation}>
+    <a class="button" href={href.prerequisites}>00 / {ui.prerequisites}</a>
     <a class="button button-primary" href={href.start}>01 / {ui.start}</a>
     <a class="button" href={href.learningPath}>02 / {ui.learningOrder}</a>
     <a class="button" href={href.downloads}>03 / {ui.learnerKits}</a>
   </nav>
 </section>
+<div class="container"><AdventureFilms locale={locale} /></div>
 <StudioPreview locale={locale} />
 <section class="section container discovery-section">
   <div class="section-heading" data-reveal><p class="eyebrow">{ui.guides}</p><h2>{ui.libraryTitle}</h2><p>{ui.libraryDescription}</p></div>

@@ -3,16 +3,26 @@ layout: default
 title: Media Prompts
 nav_order: 10
 permalink: /media/
+last_verified: "2026-09-08"
 ---
 
 # Media generation prompts
 
-These specifications are production prompts, not claims that media has already been generated. Keep all artwork text-free, watermark-free, and suitable for cropping. Adventure heroes use **1456 × 832 px**, landscape, exported as **PNG or WebP**. Site illustrations use the dimensions stated below.
+These specifications are production briefs, not substitutes for inspecting the
+generated result. The 14 adventure covers and 3 supplied animated montages are now
+integrated; see the [cover inventory](../assets/images/adventures/README.md) and
+[video notes](../assets/video/README.md). Additional site-image and video briefs
+below remain optional, not claims that those exact assets exist.
+
+Keep essential text outside the artwork, preserve provenance and leave room for
+cropping. Adventure heroes use **1456 × 832 px**, landscape, exported as **PNG or
+WebP**. Site illustrations use the dimensions stated below.
 
 > [!NOTE]
-> The learning guides include original accessible SVG illustrations. Those shipped
-> vector assets are distinct from the optional cinematic PNG/WebP and video briefs
-> below. See [the adventure image inventory](../assets/images/adventures/README.md).
+> The learning guides retain their original accessible SVG illustrations alongside
+> the generated covers. The published video copies are silent, opt-in montages on the
+> homepage and adventure catalog, not recordings of lab execution.
+> See [the adventure image inventory](../assets/images/adventures/README.md).
 > Do not label a prompt, an old screenshot or an unrendered idea as a finished asset.
 
 ## Shared visual direction
@@ -67,9 +77,9 @@ Alt text: “Deterministic checkpoints guide an engineering path through visible
 Alt text: “A cartographer connects to an external tool across a visible protocol boundary.”
 
 ### 10. `lumoria-graph-hero.png`
-**1456 × 832, PNG/WebP.** “A luminous dependency graph floats above a city: investigation nodes feed design nodes, independent implementation branches run in parallel, and all converge at validation; arrows are visually unambiguous, no readable labels, no logos.”
+**1456 × 832, PNG/WebP.** “A small repository dependency graph floats above a city: one changed platform and its affected dependents are distinguished from unrelated platforms; an investigator checks each relationship against source documents; show impact analysis rather than a sequence of agent workflow stages, no readable labels, no logos.”
 
-Alt text: “A dependency graph coordinates investigation, parallel implementation, and validation.”
+Alt text: “An investigator checks which dependent platforms may be affected by a change.”
 
 ### 11. `mythos-parallel-hero.png`
 **1456 × 832, PNG/WebP.** “Three isolated arena lanes represent separate worktrees, each team solving an independent part of one engineering challenge; safe bridges open only during review and integration; energetic but orderly, accessible colors and shapes, no text, no logos.”
@@ -87,9 +97,9 @@ Alt text: “A bounded task travels to a remote cloud environment and returns re
 Alt text: “A transparent agent application is assembled from bounded components in a foundry.”
 
 ### 14. `convergence-of-three-realms-hero.png`
-**1456 × 832, PNG/WebP.** “Three realms converge around a completed engineering artifact: the realm of investigation and context, the realm of planned implementation, and the realm of verified execution; a review bridge and evidence constellation bind them together; epic but readable composition, no text, no logos.”
+**1456 × 832, PNG/WebP.** “A local development workshop, a remote cloud citadel and an application foundry deliver distinct artifacts to a human maintainer's review table; preserve identity and authority boundaries between the three execution surfaces, epic but readable composition, no text, no logos.”
 
-Alt text: “Investigation, planning, and verified execution converge around a reviewed artifact.”
+Alt text: “Local development, cloud work and an embedded application deliver artifacts for human review.”
 
 ### 15. `site-banner.png`
 **1920 × 640, PNG/WebP.** “Wide panoramic banner for an educational agentic software engineering site: a winding path passes through portal, archive, workshop, graph city, cloud citadel, and final convergence beacon; reserve quiet negative space on the left for HTML heading overlay; no embedded text, no logos.”

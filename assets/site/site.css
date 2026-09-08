@@ -150,6 +150,9 @@ button:disabled { cursor: not-allowed; opacity: .6; }
 .discovery-card { display: flex; flex-direction: column; min-width: 0; min-height: 170px; padding: 22px; background: var(--paper); border: 1px solid var(--rule); border-top: 2px solid var(--rule-2); border-radius: var(--he-radius-card); transition: transform .2s var(--ease), border-color .2s; }
 .he-card-image { width: 100%; height: auto; aspect-ratio: 65 / 28; object-fit: contain; border-radius: 6px; margin-bottom: 20px; background: #f5f5f5; }
 .discovery-card[data-group="adventures"] { border-top-color: var(--blue); }
+.discovery-card[data-group="adventures"] .he-card-image { aspect-ratio: 7 / 4; }
+.adventure-catalog { margin-top: 32px; }
+.adventure-catalog .discovery-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
 .discovery-card[data-group="hands-on"] { border-top-color: var(--green); }
 .discovery-card[data-group="guides"] { border-top-color: var(--yellow); }
 .discovery-card:hover { transform: translateY(-3px); border-color: var(--ink-3); }

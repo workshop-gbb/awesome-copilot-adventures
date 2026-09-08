@@ -57,7 +57,29 @@ function verifyRenderedSite(directory, selectedLocales = locales) {
       }
     }
     const rendered = content.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
-    for (const match of rendered.matchAll(/\b(href|src)=(["'])([\s\S]*?)\2/g)) {
+    if (selectedLocales.includes(currentLocale) && name === `${currentLocale}/prerequisites/index.html`) {
+      const article = rendered.match(/<article\b[^>]*class="document"[^>]*>([\s\S]*?)<\/article>/)?.[1];
+      if (!article) failures.push(`${name}: missing prerequisites article`);
+      for (const [, attributes] of (article || '').matchAll(/<a\b([^>]+)>/g)) {
+        const href = attributes.match(/\bhref="([^"]+)"/)?.[1];
+        if (!href || !/^https?:\/\//.test(href)) continue;
+        if (!/\btarget="_blank"/.test(attributes)
+          || !/\brel="[^"]*\bnoopener\b[^"]*"/.test(attributes)
+          || !/\brel="[^"]*\bnoreferrer\b[^"]*"/.test(attributes)) {
+          failures.push(`${name}: external prerequisite link must open safely in a new tab: ${href}`);
+        }
+      }
+    }
+    for (const [, attributes] of rendered.matchAll(/<video\b([^>]*)>/g)) {
+      if (!attributes.includes('data-adventure-video')) continue;
+      if (/\s(?:autoplay|loop|src)(?:=|\s|$)/.test(attributes)
+        || !/\spreload="none"/.test(attributes) || !/\sposter="/.test(attributes)
+        || !/\sdata-video-src="/.test(attributes) || !/\saria-describedby="/.test(attributes)
+        || !['controls', 'muted', 'playsinline'].every(attribute => new RegExp(`\\s${attribute}(?:=|\\s|$)`).test(attributes))) {
+        failures.push(`${name}: adventure video must be opt-in, muted, described and poster-backed`);
+      }
+    }
+    for (const match of rendered.matchAll(/\b(href|src|poster|data-video-src)=(["'])([\s\S]*?)\2/g)) {
       const target = decodeHtml(match[3]);
       if (/^(data:|blob:|mailto:|tel:)/i.test(target)) continue;
       const url = new URL(target, `${siteOrigin}${pagePath}`);
@@ -94,6 +116,7 @@ function verifyRenderedSite(directory, selectedLocales = locales) {
     if (!files.has(`${locale}/index.html`)) failures.push(`Missing ${locale} homepage`);
     if (!files.has(`${locale}/library/index.html`)) failures.push(`Missing ${locale} complete library`);
     if (!files.has(`${locale}/repository/index.html`)) failures.push(`Missing ${locale} repository explorer`);
+    if (!files.has(`${locale}/prerequisites/index.html`)) failures.push(`Missing ${locale} prerequisites guide`);
     const searchFile = path.join(builtRoot, `site-data/search-${locale}.json`);
     if (!fs.existsSync(searchFile)) { failures.push(`Missing ${locale} search index`); continue; }
     for (const record of JSON.parse(fs.readFileSync(searchFile, 'utf8'))) {

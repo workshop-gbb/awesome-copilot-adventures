@@ -16,10 +16,17 @@ primary_capability: "Packaging reusable agent expertise"
 
 
 > [!NOTE]
-> **Status:** Content ready · **Media:** Original SVG illustration · **Last verified:** 2026-09-05  
+> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
 > **Primary capability:** Packaging reusable agent expertise
 
+![One open toolkit connects to a mechanism while the other reusable toolkits remain stored in the library.](../../../assets/images/adventures/algora-skills-hero.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Relevant trigger, Focused procedure, Evidence report illustrated through The Skills of Algora.](../../../assets/images/adventures/algora-skills-hero.svg)
+
+</details>
 
 > [!TIP]
 > [Download this learner kit](../../../assets/lab-kits/adventures/algora-skills.zip) and use
@@ -103,6 +110,10 @@ The fantasy is a memory aid; the engineering lesson requires observable, reprodu
 
 ## Prerequisites
 
+For tools and personal accounts, complete [the prerequisites guide](../../../docs/prerequisites.md).
+For terminal-only study, follow [the extracted-kit CLI route](../../../docs/downloads.md#use-copilot-cli-from-the-extracted-kit);
+VS Code-specific evidence remains separate.
+
 | Requirement | Why it matters |
 | --- | --- |
 | Complete the preceding adventure, or demonstrate its exit evidence | Keep this mission focused on its named capability |
@@ -181,6 +192,12 @@ An evidence-report skill is useful after a code change with a test command. A re
 5. Record the documented starter rejection. A missing runtime or unrelated crash is not the expected exercise result.
 
 ### 2. Investigate and plan
+
+Copyable baseline command, from the extracted kit root:
+
+```bash
+node verify.js
+```
 
 In Ask, request a trace of the inspected files and what the verifier actually observes. Challenge any claim about live execution that is not supported by output.
 

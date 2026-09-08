@@ -11,6 +11,7 @@ const { includeFixturePath, fixtureFiles } = require('./fixture-files');
 const { recipes } = require('./lab-kit-recipes');
 const { kitEntries, buildKits } = require('./build-lab-kits');
 const { root } = require('./repository-files');
+const { fencedBlocks } = require('./markdown-helpers');
 
 function readArchive(bytes) {
   const files = new Map();
@@ -116,6 +117,23 @@ test('each exercise has a recipe, source, workspace and explicit baseline', () =
   assert.throws(() => kitEntries({ ...all[0], source: '../outside' }), /inside the repository/);
 });
 
+test('kit first-run guides provide prerequisites and exact VS Code, Insiders and CLI roots', () => {
+  for (const recipe of recipes()) {
+    const entries = new Map(kitEntries(recipe).map(entry => [entry.name, entry.data]));
+    const start = entries.get('KIT-START.md').toString('utf8');
+    assert.ok(entries.has('.workshop/PREREQUISITES.md'), recipe.id);
+    assert.ok(start.includes('[.workshop/PREREQUISITES.md](.workshop/PREREQUISITES.md)'), recipe.id);
+    const commands = fencedBlocks(start).filter(block => block.language === 'bash').map(block => block.code.trim());
+    assert.ok(commands.includes(`code ${recipe.workspace}`), recipe.id);
+    assert.ok(commands.includes(`code-insiders ${recipe.workspace}`), recipe.id);
+    assert.ok(commands.includes(`${recipe.workspace === '.' ? '' : `cd ${recipe.workspace}\n`}copilot`), recipe.id);
+    if (recipe.track === 'adventures') {
+      const lesson = entries.get('KIT-LESSON.md').toString('utf8');
+      assert.ok(fencedBlocks(lesson).some(block => block.code.trim() === 'node verify.js'), recipe.id);
+    }
+  }
+});
+
 test('learner kit integrity verifier detects modification and does not expose answers', () => {
   const recipe = recipes().find(item => item.id === '13-greenfield');
   const entries = kitEntries(recipe);
@@ -148,7 +166,7 @@ test('all 35 ZIPs contain complete matching manifests, lessons, assets and licen
     const files = readArchive(bytes);
     const prefix = `${kit.id}/`;
     assert.ok([...files.keys()].every(name => name.startsWith(prefix)));
-    for (const name of ['KIT-START.md', 'KIT-LESSON.md', 'KIT-LICENSE.txt', 'KIT-VERIFY.cjs', '.workshop/SETUP.md']) {
+    for (const name of ['KIT-START.md', 'KIT-LESSON.md', 'KIT-LICENSE.txt', 'KIT-VERIFY.cjs', '.workshop/SETUP.md', '.workshop/PREREQUISITES.md']) {
       assert.ok(files.has(prefix + name), `${kit.id}: ${name}`);
     }
     assert.ok(![...files.keys()].some(name => name.split('/').includes('reference')), kit.id);
@@ -173,5 +191,74 @@ test('all 35 ZIPs contain complete matching manifests, lessons, assets and licen
         assert.ok(files.has(resolved), `${name}: missing bundled link ${destination}`);
       }
     }
+  }
+});
+
+test('all 35 extracted kits verify integrity and Node kits reproduce their documented baselines', async t => {
+  const diagnostics = {
+    'algora-skills': 'Skills of Algora verification failed:\n-',
+    'automaton-foundry': 'Automaton Foundry verification failed:\n-',
+    'cartographer-mcp': 'Cartographer MCP verification failed:\n-',
+    'cloud-citadel': 'Cloud Citadel verification failed:\n-',
+    'convergence-of-three-realms': 'Convergence verification failed:\n-',
+    'eldoria-laws': 'Laws of Eldoria verification failed:\n-',
+    'lumoria-graph': 'types should affect api, cli, core, docs, and types',
+    'mythos-parallel': 'all tasks must start before the first task settles',
+    'portals-of-nexus': 'Portals of Nexus verification failed:\n-',
+    'stellaris-agents': 'Agents of Stellaris verification failed:\n-',
+    'stonevale-guardrails': '"npm test" should return false',
+    'tempora-loop': 'stable loop should finish with value 6',
+    'terminal-gate': '"inspect src/index.js" parsed incorrectly',
+    '13-greenfield': 'Exercise: implement the reviewed RSS subscription contract.'
+  };
+  const { artifacts } = buildKits();
+  const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'learner kit baselines '));
+  const env = { ...process.env, HANDS_ON_REFERENCE: '0' };
+  // Each extracted baseline is a fresh CLI run, not a worker of this test file.
+  delete env.NODE_TEST_CONTEXT;
+  const run = (args, cwd) => {
+    const nodeArgs = args[0] === '--test' ? ['--test', '--test-reporter=tap', ...args.slice(1)] : args;
+    const result = spawnSync(process.execPath, nodeArgs, { cwd, encoding: 'utf8', timeout: 10000, env });
+    assert.ifError(result.error);
+    assert.equal(result.signal, null, result.stderr);
+    return { status: result.status, output: result.stdout + result.stderr };
+  };
+  try {
+    for (const recipe of recipes()) {
+      const nodeBaseline = recipe.baseline.commands.every(command => command.startsWith('node '));
+      await t.test(`${recipe.id}: integrity${nodeBaseline ? ' and Node baseline' : ''}`, () => {
+        const archive = artifacts.get(`assets/lab-kits/${recipe.track}/${recipe.id}.zip`);
+        for (const [name, bytes] of readArchive(archive)) {
+          const file = path.join(temporary, name);
+          fs.mkdirSync(path.dirname(file), { recursive: true });
+          fs.writeFileSync(file, bytes);
+        }
+        const kitRoot = path.join(temporary, recipe.id);
+        const integrity = run(['KIT-VERIFY.cjs'], kitRoot);
+        assert.equal(integrity.status, 0, integrity.output);
+        assert.match(integrity.output, /unchanged kit files/);
+        if (nodeBaseline) {
+          const check = result => {
+            assert.doesNotMatch(result.output, /ENOENT|MODULE_NOT_FOUND|SyntaxError|Cannot find module/);
+            if (recipe.baseline.expected === 'pass') {
+              assert.equal(result.status, 0, result.output);
+              assert.match(result.output, /(?:# tests [1-9]|verification passed)/);
+            } else {
+              assert.equal(result.status, 1, result.output);
+              assert.ok(diagnostics[recipe.id], `Missing declared failure diagnostic: ${recipe.id}`);
+              assert.ok(result.output.includes(diagnostics[recipe.id]), result.output);
+            }
+          };
+          for (const command of recipe.baseline.commands) {
+            const [runtime, ...args] = command.split(' ');
+            assert.equal(runtime, 'node');
+            check(run(args, path.join(kitRoot, recipe.baseline.workingDirectory)));
+          }
+          if (recipe.workspace === 'starter') check(run(['../verify.js'], path.join(kitRoot, 'starter')));
+        }
+      });
+    }
+  } finally {
+    fs.rmSync(temporary, { recursive: true });
   }
 });

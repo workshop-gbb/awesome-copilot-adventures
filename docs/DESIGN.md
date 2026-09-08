@@ -169,3 +169,23 @@ stretched or recolored to simulate dark mode.
 The narrow layout exposes learning navigation as a native disclosure instead of
 removing it. Primary controls use the design system's minimum touch target.
 Reduced-motion preferences disable movement without disabling the learning tools.
+
+## Adventure covers and animated montages
+
+The 14 adventures use optimized 1456 x 832 WebP covers received from the maintainer,
+while their original localized SVG concept illustrations remain in native disclosures.
+The [cover inventory](../assets/images/adventures/README.md) records each pairing.
+Fantasy artwork is limited to the adventure track; hands-on illustrations are unchanged.
+
+The homepage and adventure catalog include 3 silent, 10-second animated montages.
+Each has a first-frame poster, a localized visual description, native playback
+controls and an explicit still-image reset. No video source is loaded until the
+learner chooses to play. Only one clip plays at a time. Page hiding and a switch
+to reduced motion restore the poster without automatic resumption. Direct links
+remain available without JavaScript.
+
+Original JPEGs and MP4s are preserved; optimized covers, silent playback copies
+and posters are separate assets. The [media inventory](../assets/adventure-media.json)
+maps the files, and the [video notes](../assets/video/README.md) describe playback
+limits. Generated scenes are visual introductions, not UI screenshots or proof
+that a lab, cloud agent or SDK session ran.

@@ -13,6 +13,11 @@ These exercises are a **non-fantasy companion track** to Awesome Copilot Adventu
 They retain the exercise/task format of the imported learning material.
 You do not need to complete the adventures first.
 
+For first-time installation and accounts, start with
+[Prerequisites and accounts](../../../docs/prerequisites.md): VS Code/Insiders,
+Copilot Free and plans, the standalone CLI, and optional Codespaces or Azure.
+The runtime and resource rules below still apply to the selected exercise.
+
 > [!TIP]
 > **Starting without a clone?** Use [the learner ZIP catalog](../../../docs/downloads.md).
 > Each kit includes a complete lesson, local images, an integrity manifest and

@@ -16,10 +16,17 @@ primary_capability: "Constraining authority and risky operations"
 
 
 > [!NOTE]
-> **Status:** Content ready · **Media:** Original SVG illustration · **Last verified:** 2026-09-05  
+> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
 > **Primary capability:** Constraining authority and risky operations
 
+![A mechanical selector separates incoming cards into different trays beside a barrier and an intervention lever.](../../../assets/images/adventures/stonevale-guardrails-hero.webp)
+
+<details>
+<summary>Original concept illustration (SVG)</summary>
+
 ![Untrusted text, Allowlist policy, Bounded action illustrated through The Guardrails of Stonevale.](../../../assets/images/adventures/stonevale-guardrails-hero.svg)
+
+</details>
 
 > [!TIP]
 > [Download this learner kit](../../../assets/lab-kits/adventures/stonevale-guardrails.zip) and use
@@ -103,6 +110,10 @@ The fantasy is a memory aid; the engineering lesson requires observable, reprodu
 
 ## Prerequisites
 
+For tools and personal accounts, complete [the prerequisites guide](../../../docs/prerequisites.md).
+For terminal-only study, follow [the extracted-kit CLI route](../../../docs/downloads.md#use-copilot-cli-from-the-extracted-kit);
+VS Code-specific evidence remains separate.
+
 | Requirement | Why it matters |
 | --- | --- |
 | Complete the preceding adventure, or demonstrate its exit evidence | Keep this mission focused on its named capability |
@@ -181,6 +192,12 @@ The policy receives a command string and returns a decision. A string containing
 5. Record the documented starter rejection. A missing runtime or unrelated crash is not the expected exercise result.
 
 ### 2. Investigate and plan
+
+Copyable baseline command, from the extracted kit root:
+
+```bash
+node verify.js
+```
 
 In Ask, request a trace of the inspected files and what the verifier actually observes. Challenge any claim about live execution that is not supported by output.
 

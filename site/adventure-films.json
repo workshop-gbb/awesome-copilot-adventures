@@ -1,0 +1,89 @@
+{
+  "en": {
+    "title": "Adventures in motion",
+    "eyebrow": "Generated visual stories",
+    "description": "Three short montages introduce the adventure world. They are illustrations, not recordings of Copilot or evidence that a lab ran.",
+    "play": "Play animation",
+    "still": "Show still image",
+    "download": "Open silent video",
+    "original": "Original source",
+    "silent": "seconds · no audio",
+    "motion": "Videos load only when you choose to play. Reduced motion keeps the still image; you can still explicitly start an animation. Playback stops when the page is hidden.",
+    "error": "The animation could not be played. The still image and direct video link remain available.",
+    "films": {
+      "nexus-context-tempora": {
+        "title": "Portals, context and iteration",
+        "description": "A navigator explores the Nexus workstations, compares the same mechanism in two context mirrors, then works around the circular mechanism of Tempora.",
+        "posterAlt": "A navigator studies instruments in the Nexus chamber."
+      },
+      "workflow-guardrails": {
+        "title": "From investigation to guardrails",
+        "description": "Scenes move from a navigation desk to a clockwork loop, an archive city, a handoff between specialists and a controlled checkpoint with a stop mechanism.",
+        "posterAlt": "A navigator examines a device between illuminated workstations."
+      },
+      "skills-connections": {
+        "title": "Rules, skills and connections",
+        "description": "An archive charter gives way to a selected toolkit, specialist workstations, contrasting context mirrors and a cartographer observing a distant archive.",
+        "posterAlt": "Illuminated paths extend from a central charter into an archive city."
+      }
+    }
+  },
+  "es": {
+    "title": "Aventuras en movimiento",
+    "eyebrow": "Relatos visuales generados",
+    "description": "Tres montajes breves presentan el mundo de las aventuras. Son ilustraciones, no grabaciones de Copilot ni evidencia de ejecución de un laboratorio.",
+    "play": "Reproducir animación",
+    "still": "Mostrar imagen fija",
+    "download": "Abrir vídeo sin audio",
+    "original": "Archivo original",
+    "silent": "segundos · sin audio",
+    "motion": "Los vídeos se cargan solo cuando eliges reproducirlos. El movimiento reducido mantiene la imagen fija; aun así puedes iniciar una animación explícitamente. La reproducción se detiene al ocultar la página.",
+    "error": "No se pudo reproducir la animación. La imagen fija y el enlace directo al vídeo siguen disponibles.",
+    "films": {
+      "nexus-context-tempora": {
+        "title": "Portales, contexto e iteración",
+        "description": "Una navegante explora las estaciones de Nexus, compara el mismo mecanismo en dos espejos de contexto y después trabaja alrededor del mecanismo circular de Tempora.",
+        "posterAlt": "Una navegante estudia instrumentos en la cámara de Nexus."
+      },
+      "workflow-guardrails": {
+        "title": "De la investigación a los controles",
+        "description": "Las escenas pasan de una mesa de navegación a un ciclo mecánico, una ciudad-archivo, un traspaso entre especialistas y un control con un mecanismo de parada.",
+        "posterAlt": "Una navegante examina un dispositivo entre estaciones iluminadas."
+      },
+      "skills-connections": {
+        "title": "Reglas, skills y conexiones",
+        "description": "Una carta del archivo da paso a un conjunto de herramientas seleccionado, estaciones de especialistas, espejos de contexto contrastantes y una cartógrafa que observa un archivo distante.",
+        "posterAlt": "Caminos iluminados se extienden desde una carta central hacia una ciudad-archivo."
+      }
+    }
+  },
+  "pt-br": {
+    "title": "Aventuras em movimento",
+    "eyebrow": "Histórias visuais geradas",
+    "description": "Três montagens curtas apresentam o mundo das aventuras. São ilustrações, não gravações do Copilot nem evidência de execução de um lab.",
+    "play": "Reproduzir animação",
+    "still": "Mostrar imagem estática",
+    "download": "Abrir vídeo sem áudio",
+    "original": "Arquivo original",
+    "silent": "segundos · sem áudio",
+    "motion": "Os vídeos carregam apenas quando você escolhe reproduzir. Movimento reduzido mantém a imagem estática; você ainda pode iniciar uma animação explicitamente. A reprodução para quando a página fica oculta.",
+    "error": "Não foi possível reproduzir a animação. A imagem estática e o link direto do vídeo continuam disponíveis.",
+    "films": {
+      "nexus-context-tempora": {
+        "title": "Portais, contexto e iteração",
+        "description": "Uma navegadora explora as estações de Nexus, compara o mesmo mecanismo em dois espelhos de contexto e depois trabalha ao redor do mecanismo circular de Tempora.",
+        "posterAlt": "Uma navegadora estuda instrumentos na câmara de Nexus."
+      },
+      "workflow-guardrails": {
+        "title": "Da investigação aos guardrails",
+        "description": "As cenas passam de uma mesa de navegação para um ciclo mecânico, uma cidade-arquivo, um handoff entre especialistas e um checkpoint com mecanismo de parada.",
+        "posterAlt": "Uma navegadora examina um dispositivo entre estações iluminadas."
+      },
+      "skills-connections": {
+        "title": "Regras, skills e conexões",
+        "description": "Uma carta do arquivo dá lugar a um toolkit selecionado, estações de especialistas, espelhos de contexto contrastantes e uma cartógrafa que observa um arquivo distante.",
+        "posterAlt": "Caminhos iluminados partem de uma carta central em direção a uma cidade-arquivo."
+      }
+    }
+  }
+}

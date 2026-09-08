@@ -3,7 +3,7 @@ title: Download and start a lab
 layout: default
 nav_order: 10
 permalink: /downloads/
-last_verified: "2026-09-07"
+last_verified: "2026-09-08"
 ---
 
 # Download a lab. Keep your work separate.
@@ -19,6 +19,7 @@ an instructor's finished solution.
 
 | Your goal | Start here |
 | --- | --- |
+| Install tools or prepare personal accounts | [Prerequisites and accounts](prerequisites.md), including all three CLI operating systems |
 | Practice a professional scenario | A hands-on kit below |
 | Follow the fantasy learning path | An adventure kit below |
 | Understand the sequence first | [Curriculum map](curriculum-map.md) |
@@ -32,7 +33,7 @@ an instructor's finished solution.
 | `KIT-START.md` | Runtime, workspace root, baseline command and expected starting state |
 | `KIT-LESSON.md` | Snapshot of the complete exercise instructions |
 | Original project files | Starter code, existing tests, synthetic data and configuration |
-| `.workshop/` | Local setup guidance and the lesson's bundled images |
+| `.workshop/` | Local prerequisites, setup guidance and the lesson's bundled images |
 | `KIT-MANIFEST.json` | Per-file sizes and SHA-256 hashes |
 | `KIT-VERIFY.cjs` | Integrity check before you change the starter |
 | `KIT-LICENSE.txt` | License accompanying the redistributed material |
@@ -142,6 +143,93 @@ that extraction preserved the packaged files.
 
 Local contract tests do not need Copilot authentication. A live agent, CLI, SDK or
 cloud exercise may require account access and can consume usage. Keep it separate.
+
+### Use VS Code or Insiders from the extracted kit
+
+1. Read the workspace value in `KIT-START.md`. Hands-on kits open at the kit
+   root; adventure customizations open under `starter/`.
+2. Use **File > Open Folder** in your chosen edition, or open a terminal in that
+   workspace and run one editor command:
+
+   ```bash
+   code .
+   ```
+
+   For Insiders instead:
+
+   ```bash
+   code-insiders .
+   ```
+
+3. Check the active GitHub account and profile in that edition. Review Workspace
+   Trust and the supplied customizations before authorizing tools.
+4. Follow the lesson's Ask, Plan, Agent and review stages. From an adventure's
+   `starter/` terminal, the verifier is one directory above:
+
+   ```bash
+   node ../verify.js
+   ```
+
+   From the adventure kit root instead:
+
+   ```bash
+   node verify.js
+   ```
+
+These two commands are alternatives based on the working directory, not two
+different tests. Hands-on kits use the baseline printed in their own first-run
+guide. Do not substitute an adventure verifier for a language-specific test.
+
+### Use Copilot CLI from the extracted kit
+
+1. Complete [CLI installation and authentication](prerequisites.md#6-install-the-standalone-copilot-cli)
+   for your operating system. No VS Code installation is necessary for terminal-only
+   code work.
+2. Open a terminal in the extracted kit root. For an adventure, enter its
+   `starter/` directory first; for a hands-on kit, stay at the kit root:
+
+   ```bash
+   cd starter
+   ```
+
+   Run the directory-change command only for an adventure. Then start the
+   standalone agent:
+
+   ```bash
+   copilot
+   ```
+
+3. Use the lesson's investigation prompt without edits first. Then request a
+   plan with file scope, positive and negative checks, and reset. These are
+   responsibilities, not a promise of identical VS Code controls in the CLI.
+4. Approve only the reviewed change. Do not grant access to the whole parent
+   repository or disable permission prompts to make a test convenient.
+5. Keep a separate ordinary terminal for tests. Run the commands in `KIT-START.md`
+   from its stated directory; do not paste test commands into the agent as if
+   that were an executed terminal result.
+6. Review the real diff and outputs. If you initialized Git at the kit root,
+   these read-only commands show the changes:
+
+   ```bash
+   git status --short
+   git diff
+   ```
+
+7. Record the actual surface, version, permissions and limitations in your
+   evidence. Exit the learning session when finished; do not leave an unattended
+   agent with broad authority.
+
+| Lesson surface | What terminal-only work can and cannot prove |
+| --- | --- |
+| Local code and contract checks in all kits | Run the declared baseline and implementation checks with the required runtime |
+| VS Code interface, editor testing and debugger tasks | CLI tests do not prove editor interaction; complete those tasks in VS Code or mark them not performed |
+| Instructions, skills, custom agents and MCP | Review files locally; discovery, tool permissions and handoffs must be checked in the specific documented host |
+| Terminal Gate | Its parser verifier is not proof that a live Copilot CLI session authenticated or executed |
+| SDK and cloud-agent lessons | Offline checks do not prove authenticated inference, a remote assignment or a pull request; complete the separate live route only with authorized access |
+
+The same starter can support different environments without making their
+capabilities interchangeable. Azure credit is not required for these local
+checks or for GitHub Copilot CLI authentication.
 
 ## 4. Create a local repository, if needed
 

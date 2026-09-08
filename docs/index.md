@@ -82,6 +82,7 @@ Ask, Plan, and Agent are **roles**. Local and Copilot are VS Code **agent harnes
 
 | Destination | Use it for |
 | --- | --- |
+| [Prerequisites and accounts](prerequisites.md) | Install one environment, activate your own account and understand free-plan limits |
 | [Start here](start-here.md) | Prepare the environment and first session |
 | [Learning order](learning-path.md) | Separate required steps, optional extensions and advanced work |
 | [Learner downloads](downloads.md) | Get an individual ZIP and follow extraction, baseline and optional GitHub setup |

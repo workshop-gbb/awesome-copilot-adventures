@@ -3,7 +3,7 @@ layout: default
 title: Start Here
 nav_order: 2
 permalink: /start-here/
-last_verified: "2026-09-07"
+last_verified: "2026-09-08"
 ---
 
 # Start here: your first verified change
@@ -27,6 +27,11 @@ need to choose it as your long-term language.
 > Python, .NET, Docker, payment, GitHub repository or cloud deployment is needed.
 
 ## 1. Prepare only what this exercise needs
+
+New to the tools or accounts? Follow [Prerequisites and accounts](prerequisites.md)
+for personal GitHub signup, Copilot Free and plans, VS Code versus Insiders,
+CLI installation on each operating system, and optional Codespaces or Azure.
+Then return here; none of the optional cloud offers is required for this lab.
 
 | Requirement | How to check | If it is missing |
 | --- | --- | --- |

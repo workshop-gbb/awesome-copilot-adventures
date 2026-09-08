@@ -16,6 +16,7 @@ const documentsFor = (group: string) => catalog
   <details class="he-learning-menu" data-learning-menu open>
     <summary><Icon name="book" />{ui.learningNavigation}</summary>
     <div class="he-learning-links">
+  <a class="sidebar-start" href={href.prerequisites} aria-current={page.route === '/prerequisites/' ? 'page' : undefined}>{ui.prerequisites} <span aria-hidden="true">↗</span></a>
   <a class="sidebar-start" href={href.start}>{ui.start} <span aria-hidden="true">↗</span></a>
   <a class="sidebar-start" href={href.learningPath}>{ui.learningOrder} <span aria-hidden="true">↗</span></a>
   <a class="sidebar-start" href={href.downloads}>{ui.learnerKits} <span aria-hidden="true">↓</span></a>

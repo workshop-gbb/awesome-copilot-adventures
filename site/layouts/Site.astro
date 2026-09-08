@@ -8,6 +8,8 @@ import Library from '../components/Library.astro';
 import Repository from '../components/Repository.astro';
 import Reading from '../components/Reading.astro';
 import SimulationStudio from '../components/SimulationStudio.astro';
+import AdventureFilms from '../components/AdventureFilms.astro';
+import Discovery from '../components/Discovery.astro';
 import Icon from '../components/Icon.astro';
 import simulationCopy from '../simulations.json';
 import { languageFor, labelFor, settings, counts, type PageInfo } from '../lib/catalog';
@@ -79,6 +81,7 @@ const ogLocale = { en: 'en_US', es: 'es_ES', 'pt-br': 'pt_BR' }[page.locale];
           <nav class="breadcrumb" aria-label={ui.navigation}><a href={href.home}>{ui.home}</a><span aria-hidden="true">/</span><a href={href.library}>{labelFor(page.locale, page.group || 'guides')}</a></nav>
           {page.verified && <p class="verification">{ui.verified} <time datetime={page.verified}>{page.verified}</time></p>}
           <article class="document"><slot /></article>
+          {page.route === '/adventures/' && <div class="adventure-catalog"><Discovery locale={page.locale} adventuresOnly /><AdventureFilms locale={page.locale} /></div>}
           {practice && <aside class="he-practice-link"><Icon name="workflow" size={28} /><div><strong>{simulationText.related}</strong><p>{simulationText.relatedText}</p><a class="text-link" href={`${href.simulations}#${simulationTopic}`}>{simulationText.open} <Icon name="arrow" size={16} /></a></div></aside>}
           <Reading locale={page.locale} source={page.source} />
           <aside class="original-note">{ui.originalNotice}</aside>

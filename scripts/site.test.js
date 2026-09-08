@@ -12,7 +12,48 @@ const {
 const ui = require('./site-ui.json');
 const { decodeHtml } = require('./check-rendered-site');
 const { markdownLinkTargets } = require('./markdown-helpers');
-const { mediaId, mediaImage, mediaImages, renderMedia } = require('./site-media');
+const { mediaId, mediaImage, mediaImages, renderMedia, loadAdventureMedia } = require('./site-media');
+
+test('adventure media covers every current adventure without losing its concept illustration', () => {
+  const media = loadAdventureMedia();
+  const lessons = pages().filter(page => page.source.startsWith('adventures/') && page.source.endsWith('/README.md'));
+  assert.deepEqual(media.covers.map(cover => cover.slug).sort(), lessons.map(page => page.source.split('/')[2]).sort());
+  assert.equal(media.films.length, 3);
+  for (const cover of media.covers) {
+    const page = lessons.find(page => page.source.split('/')[2] === cover.slug);
+    const markdown = fs.readFileSync(path.join(root, page.source), 'utf8');
+    assert.match(markdown, new RegExp(`${cover.slug}-hero\\.webp`));
+    assert.match(markdown, new RegExp(`<details>[\\s\\S]*${cover.slug}-hero\\.svg[\\s\\S]*</details>`));
+    const bytes = fs.readFileSync(path.join(root, cover.source));
+    assert.equal(bytes.subarray(8, 16).toString('ascii'), 'WEBPVP8X');
+    assert.equal(bytes.readUIntLE(24, 3) + 1, cover.width, cover.slug);
+    assert.equal(bytes.readUIntLE(27, 3) + 1, cover.height, cover.slug);
+  }
+});
+
+test('adventure media rejects missing sources, duplicate identifiers and unsafe playback metadata', () => {
+  const files = siteSources();
+  const media = loadAdventureMedia(files);
+  assert.throws(() => loadAdventureMedia([], media), /Missing or unsupported/);
+  assert.throws(() => loadAdventureMedia(files, { ...media, covers: [...media.covers, media.covers[0]] }), /duplicate/);
+  assert.throws(() => loadAdventureMedia(files, { ...media, films: [{ ...media.films[0], silent: false }] }), /Invalid adventure film/);
+  assert.throws(() => loadAdventureMedia(files, { ...media, films: [{ ...media.films[0], poster: '../outside.webp' }] }), /Missing or unsupported/);
+  assert.throws(() => loadAdventureMedia(files, { ...media, covers: [{ ...media.covers[0], width: 0 }] }), /Invalid adventure cover/);
+});
+
+test('film controls and visual descriptions have complete copy in every site language', () => {
+  const copy = require('../site/adventure-films.json');
+  const media = loadAdventureMedia();
+  for (const locale of locales) {
+    assert.deepEqual(Object.keys(copy[locale]).sort(), Object.keys(copy.en).sort());
+    assert.deepEqual(Object.keys(copy[locale].films).sort(), media.films.map(film => film.id).sort());
+    assert.ok(Object.entries(copy[locale]).filter(([key]) => key !== 'films').every(([, value]) => typeof value === 'string' && value.trim()));
+    for (const film of Object.values(copy[locale].films)) {
+      assert.deepEqual(Object.keys(film).sort(), ['description', 'posterAlt', 'title']);
+      assert.ok(Object.values(film).every(value => typeof value === 'string' && value.trim()));
+    }
+  }
+});
 
 test('source link checks include reference definitions but ignore literal code examples', () => {
   const source = [
@@ -87,6 +128,54 @@ test('dialog Escape dismisses the dialog without propagating to surrounding navi
   assert.equal(escape.defaultPrevented, true);
   assert.equal(closed, 1);
   assert.equal(propagationStopped, 1);
+});
+
+test('clipboard copying preserves commands, Markdown, Unicode and whitespace exactly', async () => {
+  const { copyText } = await import('../assets/site/clipboard.mjs');
+  const copied = [];
+  const clipboard = { async writeText(text) { copied.push(text); } };
+  const samples = [
+    'node --test --test-concurrency=1 greeting.test.mjs\n',
+    '# Evidence\n\n```js\nconst message = "<test> & ação";\n```\n',
+    '  first line\n\tsecond line\n\n',
+    'flowchart LR\n    accTitle: A map\n    A["Ask"] --> B["Plan"]\n',
+    ''
+  ];
+  for (const sample of samples) await copyText(sample, clipboard);
+  assert.deepEqual(copied, samples);
+});
+
+test('clipboard unavailability and denied permission remain explicit failures', async () => {
+  const { copyText } = await import('../assets/site/clipboard.mjs');
+  await assert.rejects(copyText('command', undefined), /Clipboard API is unavailable/);
+  await assert.rejects(copyText('command', {}), /Clipboard API is unavailable/);
+  await assert.rejects(copyText(null, { writeText() {} }), /must be text/);
+  const denied = new DOMException('Permission denied', 'NotAllowedError');
+  await assert.rejects(copyText('command', { async writeText() { throw denied; } }), error => error === denied);
+});
+
+test('prerequisites are discoverable and official resource links open safely in a new tab', () => {
+  const page = pages().find(document => document.source === 'docs/prerequisites.md');
+  assert.equal(page.route, '/prerequisites/');
+  assert.match(page.verified, /^\d{4}-\d{2}-\d{2}$/);
+  assert.ok(page.verified >= '2026-09-08');
+  const source = fs.readFileSync(path.join(root, page.source), 'utf8');
+  const anchors = [...source.matchAll(/<a\b([^>]+)>/g)];
+  assert.ok(anchors.length > 20);
+  for (const [, attributes] of anchors) {
+    assert.match(attributes, /href="https:\/\//);
+    assert.match(attributes, /target="_blank"/);
+    assert.match(attributes, /rel="noopener noreferrer"/);
+  }
+  for (const file of ['site/components/Header.astro', 'site/components/Sidebar.astro', 'site/components/Home.astro']) {
+    assert.match(fs.readFileSync(path.join(root, file), 'utf8'), /href=\{href\.prerequisites\}/, file);
+  }
+  for (const locale of locales) {
+    const rendered = renderDocument(page, locale, loadTranslations(locale), createLinkResolver(pages(), siteSources()));
+    assert.ok(rendered.includes('target="_blank" rel="noopener noreferrer"'), locale);
+    const { data } = buildArtifacts([locale]);
+    assert.equal(data.locales[locale].href.prerequisites, `/awesome-copilot-adventures/${locale}/prerequisites/`);
+  }
 });
 
 test('prose extraction preserves executable fences and surrounding whitespace exactly', () => {
@@ -385,6 +474,19 @@ test('publication covers every source byte and every learning page without recur
   assert.ok(!manifest.some(entry => /^(site-pages|site-data)\//.test(entry.path)));
   assert.equal(data.adventureCount, 14);
   assert.equal(data.handsOnCount, 26);
+  assert.equal(data.adventureFilms.length, 3);
+  const adventureMedia = loadAdventureMedia();
+  for (const film of data.adventureFilms) {
+    const original = adventureMedia.films.find(entry => entry.id === film.id);
+    assert.deepEqual(artifacts.get(`site-generated/public${film.url.slice('/awesome-copilot-adventures'.length)}`),
+      fs.readFileSync(path.join(root, original.source)));
+    assert.deepEqual(artifacts.get(`site-generated/public${film.poster.slice('/awesome-copilot-adventures'.length)}`),
+      fs.readFileSync(path.join(root, original.poster)));
+    assert.ok(manifest.some(entry => entry.path === film.original));
+  }
+  const adventureCards = data.locales.en.catalog.filter(page => page.group === 'adventures' && page.source.endsWith('/README.md'));
+  assert.equal(adventureCards.length, 14);
+  assert.ok(adventureCards.every(page => page.image.endsWith('.webp')));
   assert.equal(data.documentCount, documents.length);
   assert.ok(manifest.some(entry => entry.path === 'site/lib/catalog.ts'));
   assert.ok(manifest.some(entry => entry.path === 'docs/design-system/hub-editorial/tokens.css'));

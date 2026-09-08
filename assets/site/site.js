@@ -2,6 +2,8 @@ import { searchRecords, resultExcerpt } from './search.mjs';
 import { enhanceSite } from './enhancements.js';
 import { enhanceMedia } from './media.js';
 import { closeOnEscape } from './dialog.mjs';
+import { enhanceAdventureFilms } from './adventure-films.js';
+import { copyText } from './clipboard.mjs';
 
 const config = JSON.parse(document.getElementById('site-config').textContent);
 const { ui, locale, base } = config;
@@ -115,9 +117,9 @@ function alerts() {
   }
 }
 
-function codeCopy() {
-  for (const pre of document.querySelectorAll('.document pre')) {
-    if (pre.closest('.mermaid-source')) continue;
+function codeCopy(root = document, selector = '.document pre') {
+  for (const pre of root.querySelectorAll(selector)) {
+    if (pre.closest('.code-wrapper')) continue;
     const code = pre.querySelector('code');
     if (!code) continue;
     pre.tabIndex = 0;
@@ -128,17 +130,27 @@ function codeCopy() {
     button.type = 'button';
     const message = element('span', '', 'copy-message');
     message.setAttribute('role', 'status');
+    let feedbackTimeout;
     button.addEventListener('click', async () => {
+      clearTimeout(feedbackTimeout);
+      button.disabled = true;
       try {
-        if (!navigator.clipboard) throw new Error('Clipboard API is unavailable.');
-        await navigator.clipboard.writeText(code.textContent);
+        await copyText(code.textContent, navigator.clipboard);
         button.textContent = ui.copied;
         button.dataset.copied = 'true';
-        message.textContent = '';
-        setTimeout(() => { button.textContent = ui.copy; delete button.dataset.copied; }, 1500);
+        message.textContent = ui.copied;
+        feedbackTimeout = setTimeout(() => {
+          button.textContent = ui.copy;
+          delete button.dataset.copied;
+          message.textContent = '';
+        }, 1500);
       } catch (error) {
+        button.textContent = ui.copy;
+        delete button.dataset.copied;
         message.textContent = ui.copyError;
         console.error('Code copy failed.', error);
+      } finally {
+        button.disabled = false;
       }
     });
     wrapper.append(button, message);
@@ -152,7 +164,9 @@ async function diagrams() {
     const source = code.textContent;
     const container = code.closest('div.language-mermaid') || code.closest('pre');
     const details = element('details', undefined, 'mermaid-source');
-    details.append(element('summary', ui.diagramSource), element('pre', source));
+    const pre = element('pre');
+    pre.append(element('code', source));
+    details.append(element('summary', ui.diagramSource), pre);
     const frame = element('div', undefined, 'mermaid-frame');
     frame.setAttribute('role', 'figure');
     container.replaceWith(frame, details);
@@ -366,6 +380,7 @@ async function sourceExplorer() {
         pre.tabIndex = 0;
         pre.append(element('code', new TextDecoder('utf-8', { fatal: true }).decode(bytes)));
         preview.append(pre);
+        codeCopy(preview, 'pre');
       } else {
         preview.append(element('p', ui.binaryNotice));
       }
@@ -427,8 +442,10 @@ alerts();
 search();
 enhanceSite(config, updateLanguageLinks);
 enhanceMedia(config.media);
+enhanceAdventureFilms();
 void sourceExplorer();
-void diagrams().then(codeCopy);
+void diagrams();
+codeCopy();
 
 if (config.kind === 'not-found') {
   const requestedLocale = location.pathname.slice(base.length).split('/')[1];
