@@ -1,6 +1,7 @@
-import { createWorkflow, transitionWorkflow, evaluateContext, contextBudget, patches, verifyPatch } from './simulation.mjs';
+import { createWorkflow, transitionWorkflow, evaluateContext, contextBudget, patches, verifyPatch, evidenceLines } from './simulation.mjs';
 
 export function enhanceStudios() {
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   for (const root of document.querySelectorAll('[data-studio]')) {
     const { text, stages, locale } = JSON.parse(root.querySelector('[data-studio-config]').textContent);
     const number = new Intl.NumberFormat(locale);
@@ -75,8 +76,8 @@ export function enhanceStudios() {
     speed.addEventListener('change', schedule);
     root.querySelector('[data-workflow-reset]').addEventListener('click', resetWorkflow);
     retry.addEventListener('click', () => { scenario.value = 'passing'; resetWorkflow(); play.focus(); });
-    document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
-    addEventListener('pagehide', pause);
+    document.addEventListener('visibilitychange', () => { if (document.hidden) { pause(); stopTerminal(); } });
+    addEventListener('pagehide', () => { pause(); stopTerminal(); });
     root.querySelector('[data-workflow-controls]').hidden = false;
     root.querySelector('[data-workflow-output]').hidden = false;
     renderWorkflow();
@@ -131,12 +132,85 @@ export function enhanceStudios() {
     });
     root.querySelector('[data-verification-controls]').hidden = false;
 
+    // Evidence trail: a typed transcript of the same bounded fixture, never a shell.
+    const terminalOutput = root.querySelector('[data-terminal-output]');
+    const terminalPatch = root.querySelector('[data-terminal-patch]');
+    const terminalStatus = root.querySelector('[data-terminal-status]');
+    const prefixes = { command: '$ ', comment: '# ', pass: '\u2713 ', fail: '\u2715 ', warn: '\u26a0 ', output: '' };
+    let terminalTimer;
+    let terminalRun = 0;
+    const stopTerminal = () => { clearTimeout(terminalTimer); terminalTimer = undefined; terminalRun += 1; };
+    // Screen readers hear the outcome once, not every typed character.
+    const announce = lines => {
+      const summary = lines.filter(line => ['output', 'pass', 'warn', 'fail'].includes(line.kind)).slice(-2);
+      terminalStatus.textContent = summary.map(line => line.text).join('. ');
+    };
+    const printTerminal = lines => {
+      terminalOutput.replaceChildren();
+      for (const line of lines) {
+        const node = document.createElement('span');
+        node.dataset.line = line.kind;
+        node.textContent = `${prefixes[line.kind] ?? ''}${line.text}`;
+        terminalOutput.append(node);
+      }
+      announce(lines);
+    };
+    const typeTerminal = () => {
+      stopTerminal();
+      const run = terminalRun;
+      const lines = evidenceLines(terminalPatch.value);
+      if (reducedMotion.matches) { printTerminal(lines); return; }
+      terminalOutput.replaceChildren();
+      terminalStatus.textContent = '';
+      const caret = document.createElement('span');
+      caret.className = 'he-terminal__cursor';
+      caret.setAttribute('aria-hidden', 'true');
+      let index = 0;
+      const next = () => {
+        if (run !== terminalRun) return;
+        if (index >= lines.length) { caret.remove(); announce(lines); return; }
+        const line = lines[index];
+        const node = document.createElement('span');
+        node.dataset.line = line.kind;
+        terminalOutput.insertBefore(node, caret);
+        const full = `${prefixes[line.kind] ?? ''}${line.text}`;
+        index += 1;
+        if (line.kind !== 'command') {
+          node.textContent = full;
+          terminalOutput.scrollTop = terminalOutput.scrollHeight;
+          terminalTimer = setTimeout(next, 260);
+          return;
+        }
+        let position = 0;
+        const typeCharacter = () => {
+          if (run !== terminalRun) return;
+          node.textContent = full.slice(0, position);
+          terminalOutput.scrollTop = terminalOutput.scrollHeight;
+          position += 1;
+          terminalTimer = setTimeout(position <= full.length ? typeCharacter : next, position <= full.length ? 22 : 320);
+        };
+        typeCharacter();
+      };
+      terminalOutput.append(caret);
+      terminalTimer = setTimeout(next, 260);
+    };
+    root.querySelector('[data-terminal-run]').addEventListener('click', typeTerminal);
+    root.querySelector('[data-terminal-reset]').addEventListener('click', () => {
+      stopTerminal();
+      terminalPatch.value = 'incomplete';
+      printTerminal(evidenceLines('incomplete'));
+    });
+    terminalPatch.addEventListener('change', () => { stopTerminal(); printTerminal(evidenceLines(terminalPatch.value)); });
+    reducedMotion.addEventListener('change', () => { if (reducedMotion.matches) { stopTerminal(); printTerminal(evidenceLines(terminalPatch.value)); } });
+    root.querySelector('[data-terminal-controls]').hidden = false;
+
     const tabs = [...root.querySelectorAll('[data-studio-tab]')];
     const panels = [...root.querySelectorAll('[data-studio-panel]')];
     const tablist = root.querySelector('[data-studio-tabs]');
     const selectTab = (id, updateAddress = false) => {
       const selected = tabs.find(tab => tab.dataset.studioTab === id) || tabs[0];
       if (selected.dataset.studioTab !== 'workflow') pause();
+      if (selected.dataset.studioTab !== 'evidence') stopTerminal();
       for (const tab of tabs) {
         const active = tab === selected;
         tab.setAttribute('aria-selected', String(active));

@@ -2,7 +2,7 @@
 import Icon from './Icon.astro';
 import copy from '../simulations.json';
 import { languageFor, type Locale } from '../lib/catalog';
-import { workflowStages, contextFiles, contextBudget, patches, fixtureCases } from '../../assets/site/simulation.mjs';
+import { workflowStages, contextFiles, contextBudget, patches, fixtureCases, evidenceLines } from '../../assets/site/simulation.mjs';
 import '../../assets/site/studio.css';
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
@@ -19,8 +19,12 @@ const contextKeys = ['task', 'code', 'tests', 'logs', 'unrelated'] as const;
 const demos = [
   { id: 'workflow', name: text.workflow, icon: 'workflow' },
   { id: 'context', name: text.context, icon: 'context' },
-  { id: 'verification', name: text.verification, icon: 'terminal' }
+  { id: 'verification', name: text.verification, icon: 'test' },
+  { id: 'evidence', name: text.evidence, icon: 'terminal' }
 ] as const;
+// The transcript is rendered server-side as well, so the panel reads as a finished check without JavaScript.
+const prefix: Record<string, string> = { command: '$ ', comment: '# ', pass: '\u2713 ', fail: '\u2715 ', warn: '\u26a0 ', output: '' };
+const transcript = evidenceLines('incomplete').map(line => ({ ...line, rendered: `${prefix[line.kind] ?? ''}${line.text}` }));
 const config = JSON.stringify({ text, stages, locale }).replace(/</g, '\\u003c');
 ---
 <div class="he-studio" data-studio>
@@ -107,6 +111,21 @@ const config = JSON.stringify({ text, stages, locale }).replace(/</g, '\\u003c')
       </div>
     </div>
     <p class="he-studio-note">{text.checksNote}</p>
+  </section>
+
+  <section id="evidence" class="he-studio-panel" data-studio-panel="evidence">
+    <div class="he-panel-heading"><div><p class="eyebrow">04 / {text.evidence}</p><h2>{text.evidence}</h2><p>{text.evidenceText}</p></div><Icon name="terminal" size={40} /></div>
+    <div class="he-studio-controls" data-terminal-controls hidden>
+      <label>{text.patch}<select data-terminal-patch><option value="incomplete">{text.incompletePatch}</option><option value="corrected">{text.correctedPatch}</option></select></label>
+      <button type="button" class="button button-primary" data-terminal-run><Icon name="play" />{text.evidenceReplay}</button>
+      <button type="button" class="quiet-button" data-terminal-reset><Icon name="reset" />{text.reset}</button>
+    </div>
+    <div class="he-terminal">
+      <p class="he-terminal__bar"><span class="he-terminal__dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mono">{text.terminalTitle}</span></p>
+      <pre class="he-terminal__out" data-terminal-output tabindex="0" aria-label={text.terminalTitle}>{transcript.map(line => <span data-line={line.kind}>{line.rendered}</span>)}</pre>
+    </div>
+    <p class="sr-only" role="status" aria-live="polite" data-terminal-status></p>
+    <p class="he-studio-note">{text.evidenceNote}</p>
   </section>
 </div>
 <aside class="he-studio-references">

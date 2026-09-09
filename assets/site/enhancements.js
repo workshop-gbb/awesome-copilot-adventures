@@ -142,14 +142,25 @@ export function enhanceSite(config, locationChanged) {
   if ('IntersectionObserver' in window) {
     const tocLinks = [...document.querySelectorAll('#toc a')];
     const headings = [...document.querySelectorAll('.document h2[id], .document h3[id]')];
+    const rail = document.querySelector('.page-toc');
+    const current = document.querySelector('.toc-current');
     const headingObserver = new IntersectionObserver(entries => {
       const visible = entries.filter(entry => entry.isIntersecting);
       if (!visible.length) return;
       const hash = `#${encodeURIComponent(visible[0].target.id)}`;
+      let reached = 0;
+      let steps = 0;
       for (const link of tocLinks) {
-        if (link.getAttribute('href') === hash) link.setAttribute('aria-current', 'location');
+        if (link.dataset.level === '2') steps += 1;
+        const active = link.getAttribute('href') === hash;
+        if (active) reached = steps;
+        // Sections above the current one stay marked so the rail reads as progress, not only position.
+        link.dataset.passed = steps <= reached && reached > 0 ? 'true' : 'false';
+        if (active) link.setAttribute('aria-current', 'location');
         else link.removeAttribute('aria-current');
       }
+      if (current) current.textContent = String(reached).padStart(2, '0');
+      if (rail) rail.style.setProperty('--toc-progress', steps ? `${Math.round(reached / steps * 100)}%` : '0%');
     }, { rootMargin: '-120px 0px -55% 0px' });
     headings.forEach(heading => headingObserver.observe(heading));
     const reveals = [...document.querySelectorAll('[data-reveal], .section-heading, .track-card, .pathway-card, .he-demo-card, .progression-grid li')];

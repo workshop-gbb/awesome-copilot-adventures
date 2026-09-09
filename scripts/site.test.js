@@ -293,6 +293,74 @@ test('source link checks include reference definitions but ignore literal code e
   assert.deepEqual(markdownLinkTargets('[Read the `guide`](./guide.md)'), ['./guide.md']);
 });
 
+test('every lesson mechanism scene names a published lesson and an implemented drawing', () => {
+  const scenes = fs.readFileSync(path.join(root, 'site/lib/scenes.ts'), 'utf8');
+  const registry = fs.readFileSync(path.join(root, 'site/lib/lesson-scenes.ts'), 'utf8');
+  const declared = [...scenes.matchAll(/^ {2}'([a-z-]+)': \{$/gm)].map(match => match[1]);
+  const drawn = [...scenes.matchAll(/^ {2}'([a-z-]+)': \(l[,)]/gm)].map(match => match[1]);
+  assert.ok(declared.length >= 11, 'The mechanism catalog must cover the curriculum.');
+  assert.deepEqual([...declared].sort(), [...drawn].sort(), 'Every declared scene needs a drawing and the reverse.');
+  const sources = new Set(pages().map(page => page.source));
+  const entries = [...registry.matchAll(/'([^']+\.md)': '([a-z-]+)'/g)];
+  assert.ok(entries.length >= 10, 'Most adventures should open with their mechanism.');
+  for (const [, source, kind] of entries) {
+    assert.ok(sources.has(source), `Scene registered for a missing lesson: ${source}`);
+    assert.ok(declared.includes(kind), `Unknown mechanism scene: ${kind}`);
+  }
+  // A scene carries its own text in the three published languages, never an English fallback.
+  // Only the specification block holds localized tuples; the drawing block holds layout arrays.
+  const specification = scenes.slice(scenes.indexOf('export const SCENES'), scenes.indexOf('export const sceneKinds'));
+  const tuples = [...specification.matchAll(/\[('(?:[^'\\]|\\.)*'(?:, *'(?:[^'\\]|\\.)*')*)\]/g)];
+  assert.ok(tuples.length > 120);
+  for (const [, body] of tuples) {
+    const parts = body.split(/', *'/).length;
+    assert.ok(parts === 1 || parts === 3, `A localized scene tuple must hold three languages: ${body.slice(0, 60)}`);
+  }
+  for (const [, label, replay] of [[0, 'sceneKicker', 'sceneReplay']]) {
+    for (const dictionary of Object.values(ui)) assert.ok(dictionary[label] && dictionary[replay]);
+  }
+});
+
+test('the evidence transcript reports the fixture result instead of invented output', async () => {
+  const { evidenceLines, verifyPatch } = await import('../assets/site/simulation.mjs');
+  for (const patch of ['incomplete', 'corrected']) {
+    const results = verifyPatch(patch);
+    const lines = evidenceLines(patch);
+    assert.equal(lines[0].kind, 'command');
+    assert.match(lines[0].text, /^node --test /);
+    const checks = lines.filter(line => ['pass', 'fail'].includes(line.kind)).slice(0, results.length);
+    assert.equal(checks.length, results.length);
+    results.forEach((result, index) => {
+      assert.equal(checks[index].kind, result.passed ? 'pass' : 'fail');
+      assert.ok(checks[index].text.includes(JSON.stringify(result.actual)));
+    });
+    const passed = results.filter(result => result.passed).length;
+    assert.ok(lines.some(line => line.text === `${passed} passed, ${results.length - passed} failed, ${results.length} total`));
+    assert.ok(lines.at(-1).text.endsWith(passed === results.length ? '0' : '1'));
+  }
+  assert.throws(() => evidenceLines('unknown'), /Unknown/);
+});
+
+test('each lesson links to the practice simulation that matches its capability', () => {
+  const registry = fs.readFileSync(path.join(root, 'site/lib/lesson-practice.ts'), 'utf8');
+  const topics = new Set(['workflow', 'context', 'verification', 'evidence']);
+  const panels = fs.readFileSync(path.join(root, 'site/components/SimulationStudio.astro'), 'utf8');
+  for (const topic of topics) assert.ok(panels.includes(`data-studio-panel="${topic}"`), topic);
+  const slugs = [...registry.matchAll(/^ {2}'([a-z0-9-]+)': '([a-z]+)',?$/gm)];
+  const adventures = pages().filter(page => page.source.startsWith('adventures/') && page.source.endsWith('/README.md'));
+  const mapped = new Set(slugs.map(match => match[1]));
+  for (const page of adventures) {
+    const slug = page.source.split('/')[2];
+    assert.ok(mapped.has(slug), `Adventure without a practice topic: ${slug}`);
+  }
+  for (const [, , topic] of slugs) assert.ok(topics.has(topic) || topic === 'workflow', topic);
+  // Every hands-on group resolves to a real panel, so no lab falls back silently.
+  const groups = new Set(require('../mslearn-github-copilot/catalog.json').labs.map(lab => lab.group));
+  for (const group of groups) assert.ok(registry.includes(`'${group}':`), `Lab group without a practice topic: ${group}`);
+  assert.ok(!fs.readFileSync(path.join(root, 'site/layouts/Site.astro'), 'utf8').includes('eldoria|algora'),
+    'The lesson practice link must not be routed by a filename regular expression.');
+});
+
 test('the shared design tokens and static reference have no missing local dependencies', () => {
   const directory = path.join(root, 'docs/design-system/hub-editorial');
   const layout = path.join(root, 'site/layouts/Site.astro');
@@ -326,9 +394,19 @@ test('locale dictionaries cover identical UI controls with real language tags', 
 test('responsive navigation keeps its CSS and interaction breakpoint aligned for longer translated labels', () => {
   const script = fs.readFileSync(path.join(root, 'assets/site/site.js'), 'utf8');
   const styles = fs.readFileSync(path.join(root, 'assets/site/site.css'), 'utf8');
-  const query = script.match(/const mobile = matchMedia\('([^']+)'\)/)?.[1];
-  assert.equal(query, '(max-width: 1536px)');
-  assert.ok(styles.includes(`@media ${query} {`));
+  const header = fs.readFileSync(path.join(root, 'site/components/Header.astro'), 'utf8');
+  const query = script.match(/const mobile = matchMedia\('\(max-width: (\d+)px\)'\)/)?.[1];
+  assert.ok(query, 'The menu script must declare one numeric max-width breakpoint.');
+  assert.ok(styles.includes(`@media (max-width: ${query}px) {`), 'The stylesheet must switch at the same width as the script.');
+  // The primary navigation stays visible on a laptop; the collapse point is the width at which the
+  // longest translated labels stop fitting, not an arbitrarily early one.
+  assert.ok(Number(query) <= 1280, 'The navigation must remain visible at common laptop widths.');
+  // Long section titles are shortened for the navigation bar so the six links fit before collapsing.
+  assert.ok(header.includes('ui.navHandsOn') && header.includes('ui.navStudio'));
+  for (const dictionary of Object.values(ui)) {
+    assert.ok(dictionary.navHandsOn.length <= dictionary['hands-on'].length, 'navHandsOn must be a short form.');
+    assert.ok(dictionary.navStudio.length <= 12, 'navStudio must be a short form.');
+  }
 });
 
 test('every current learning segment has a structurally valid translation in each published language', () => {

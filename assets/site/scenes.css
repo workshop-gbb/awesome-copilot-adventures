@@ -1,0 +1,43 @@
+/* Mechanism scenes: authored SVG explanations that draw themselves in reading order and stay complete without motion.
+   The figure breaks out of the reading measure on wide screens so the 1120-unit stage renders at a legible scale;
+   on narrow screens the stage scrolls horizontally instead of shrinking its labels. */
+.he-scene { --cc: var(--ink-3); margin: 32px 0; padding: 22px 24px 20px; border: 1px solid var(--rule); border-radius: var(--he-radius-card); background: var(--paper); }
+.he-scene__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+.he-scene__head .eyebrow { margin: 0 0 6px; color: var(--ink-3); }
+.he-scene__title { margin: 0; font-size: 19px; font-weight: 550; letter-spacing: -.02em; line-height: 1.3; text-wrap: balance; }
+.he-scene__replay { flex-shrink: 0; font: 11px/1.4 var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--ink-2); }
+.he-scene__stage { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
+.he-scene .scn { display: block; width: 100%; min-width: 640px; height: auto; overflow: visible; font-family: var(--sans); }
+.he-scene .sc-node { fill: var(--paper); stroke: var(--cc); stroke-width: 1.7; }
+.he-scene .sc-title { font: 600 24px var(--sans); fill: var(--ink); }
+.he-scene .sc-sub { font: 400 17.5px var(--sans); fill: var(--ink-2); }
+.he-scene .sc-label { font: 500 17px var(--mono); fill: var(--ink-2); }
+.he-scene .sc-kicker { font: 600 14.5px var(--mono); letter-spacing: .08em; fill: var(--ink-3); }
+.he-scene .sc-wire { fill: none; stroke: var(--cc); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.he-scene .sc-frame { fill: none; stroke: var(--rule-2); stroke-width: 1.5; }
+.he-scene .sc-zone { fill: color-mix(in srgb, var(--cc) 8%, var(--paper)); stroke: var(--cc); stroke-width: 1.3; }
+.he-scene .sc-packet { opacity: 0; offset-rotate: 0deg; fill: var(--cc); }
+.he-scene__captions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin: 18px 0 0; }
+.he-scene__caption { min-width: 0; border-top: 2px solid var(--cc); padding-top: 10px; }
+.he-scene__caption b { display: block; font-size: 15px; font-weight: 600; margin-bottom: 4px; color: var(--ink); }
+.he-scene__caption p { margin: 0; font-size: 13px; line-height: 1.55; color: var(--ink-2); }
+@media (prefers-reduced-motion: no-preference) {
+  .he-scene[data-active="false"] .sc-reveal, .he-scene[data-active="false"] .he-scene__caption { opacity: 0; }
+  .he-scene[data-active="false"] .sc-wire { stroke-dasharray: 100; stroke-dashoffset: 100; }
+  .he-scene[data-active="true"] .sc-reveal { animation: he-scene-reveal .48s cubic-bezier(.22, 1, .36, 1) var(--at, 0s) both; }
+  .he-scene[data-active="true"] .sc-wire { animation: he-scene-draw .52s cubic-bezier(.22, 1, .36, 1) var(--at, 0s) both; }
+  .he-scene[data-active="true"] .sc-packet { animation: he-scene-packet .62s ease-in-out var(--at, 0s) both; }
+  .he-scene[data-active="true"] .he-scene__caption { animation: he-scene-reveal .5s var(--ease) calc(1.1s + var(--i, 0) * .16s) both; }
+}
+@keyframes he-scene-reveal { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes he-scene-draw { from { stroke-dasharray: 100; stroke-dashoffset: 100; } to { stroke-dasharray: 100; stroke-dashoffset: 0; } }
+@keyframes he-scene-packet { 0% { opacity: 0; offset-distance: 0%; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { opacity: 0; offset-distance: 100%; } }
+@media (prefers-reduced-motion: reduce) {
+  .he-scene .sc-packet { display: none; }
+  .he-scene__replay { display: none; }
+}
+@media (max-width: 700px) {
+  .he-scene { padding: 16px; }
+  .he-scene__captions { grid-template-columns: 1fr; gap: 14px; }
+  .he-scene__head { flex-direction: column; }
+}

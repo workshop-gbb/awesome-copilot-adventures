@@ -11,7 +11,8 @@ const groupIcon: Record<string, IconName> = {
   adventures: 'map', 'hands-on': 'terminal', guides: 'book', fixtures: 'toolkit',
   solutions: 'check', media: 'play', read: 'file'
 };
-const priority = (source: string) => source.includes('/portals-of-nexus/README.md') ? 0 : source.startsWith('adventures/') && source.endsWith('/README.md') ? 1 : 2;
+const priority = (source: string) => source === 'adventures/00-foundations/portals-of-nexus/README.md' ? 0
+  : source.startsWith('adventures/') && source.endsWith('/README.md') ? 1 : 2;
 const documents = adventuresOnly
   ? catalog.filter(document => document.group === 'adventures' && document.source.endsWith('/README.md'))
     .sort((left, right) => (left.navigationSection || '').localeCompare(right.navigationSection || '')

@@ -1,7 +1,6 @@
 ---
 import { languageFor, labelFor, locales, type PageInfo } from '../lib/catalog';
 import Icon from './Icon.astro';
-import simulationCopy from '../simulations.json';
 interface Props { page: PageInfo; }
 const { page } = Astro.props;
 const { ui, href } = languageFor(page.locale);
@@ -17,8 +16,8 @@ const { ui, href } = languageFor(page.locale);
     <nav id="main-navigation" class="main-navigation" aria-label={ui.navigation}>
       <a href={href.prerequisites} aria-current={page.route === '/prerequisites/' ? 'page' : undefined}>{ui.prerequisites}</a>
       <a href={href.adventures} aria-current={page.group === 'adventures' ? 'true' : undefined}>{ui.adventures}</a>
-      <a href={href.handsOn} aria-current={page.group === 'hands-on' ? 'true' : undefined}>{ui['hands-on']}</a>
-      <a href={href.simulations} aria-current={page.route === '/simulations/' ? 'page' : undefined}>{simulationCopy[page.locale].title}</a>
+      <a href={href.handsOn} aria-current={page.group === 'hands-on' ? 'true' : undefined}>{ui.navHandsOn}</a>
+      <a href={href.simulations} aria-current={page.route === '/simulations/' ? 'page' : undefined}>{ui.navStudio}</a>
       <a href={href.library} aria-current={page.kind === 'library' ? 'page' : undefined}>{ui.guides}</a>
       <a href={href.repository} aria-current={page.kind === 'repository' ? 'page' : undefined}>{ui.repository}</a>
     </nav>

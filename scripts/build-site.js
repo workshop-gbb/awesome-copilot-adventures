@@ -269,6 +269,7 @@ function buildArtifacts(selectedLocales = locales) {
     documentCount: documents.length,
     adventureCount: documents.filter(page => page.source.startsWith('adventures/') && page.source.endsWith('/README.md')).length,
     handsOnCount: documents.filter(page => page.group === 'hands-on').length,
+    guideCount: documents.filter(page => page.group === 'guides').length,
     adventureFilms: adventureMedia.films.map(film => ({
       id: film.id, url: mediaUrl(film.source), poster: mediaUrl(film.poster),
       original: film.original, width: film.width, height: film.height, duration: film.duration

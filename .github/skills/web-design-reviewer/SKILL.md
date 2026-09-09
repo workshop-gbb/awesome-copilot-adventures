@@ -44,14 +44,61 @@ Inspect local or remote websites visually, identify layout, responsive, accessib
 ## Procedure
 
 ```mermaid
+---
+config:
+  theme: base
+  look: classic
+  themeVariables:
+    darkMode: false
+    background: "#ffffff"
+    primaryColor: "#f5f5f5"
+    primaryTextColor: "#111111"
+    primaryBorderColor: "#555555"
+    secondaryColor: "#e0e0e0"
+    secondaryTextColor: "#111111"
+    secondaryBorderColor: "#666666"
+    tertiaryColor: "#bdbdbd"
+    tertiaryTextColor: "#111111"
+    tertiaryBorderColor: "#444444"
+    lineColor: "#444444"
+    textColor: "#111111"
+    mainBkg: "#f5f5f5"
+    nodeBorder: "#555555"
+    clusterBkg: "#ffffff"
+    clusterBorder: "#999999"
+    edgeLabelBackground: "#ffffff"
+    actorBkg: "#e0e0e0"
+    actorBorder: "#555555"
+    actorTextColor: "#111111"
+    actorLineColor: "#777777"
+    signalColor: "#333333"
+    signalTextColor: "#111111"
+    labelBoxBkgColor: "#f5f5f5"
+    labelBoxBorderColor: "#777777"
+    labelTextColor: "#111111"
+    loopTextColor: "#111111"
+    activationBkgColor: "#bdbdbd"
+    activationBorderColor: "#555555"
+    noteBkgColor: "#f5f5f5"
+    noteTextColor: "#111111"
+    noteBorderColor: "#777777"
+    attributeBackgroundColorOdd: "#f5f5f5"
+    attributeBackgroundColorEven: "#e0e0e0"
+---
 flowchart TD
-    A[Step 1: Information Gathering] --> B[Step 2: Visual Inspection]
-    B --> C[Step 3: Issue Fixing]
-    C --> D[Step 4: Re-verification]
-    D --> E{Issues Remaining?}
+    accTitle: Web design review procedure
+    accDescr: Information gathering leads to visual inspection, issue fixing and re-verification; remaining issues return to inspection, otherwise the review ends in a completion report.
+    A["Step 1: Information gathering"] --> B["Step 2: Visual inspection"]
+    B --> C["Step 3: Issue fixing"]
+    C --> D["Step 4: Re-verification"]
+    D --> E{"Issues remaining?"}
     E -->|Yes| B
-    E -->|No| F[Completion Report]
+    E -->|No| F["Completion report"]
 ```
+
+**Legend.** Rectangles are review steps; the diamond is the decision after re-verification. Solid arrows show the normal order; the labeled branches show the two outcomes.
+
+**Explanation.** Inspection and fixing repeat until re-verification finds nothing left. The report is written from the verified state, not from the first pass.
 
 ---
 
@@ -168,14 +215,57 @@ Test at the following viewports:
 ### 3.1 Issue Prioritization
 
 ```mermaid
-block-beta
-    columns 1
-    block:priority["Priority Matrix"]
-        P1["P1: Fix Immediately\n(Layout issues affecting functionality)"]
-        P2["P2: Fix Next\n(Visual issues degrading UX)"]
-        P3["P3: Fix If Possible\n(Minor visual inconsistencies)"]
-    end
+---
+config:
+  theme: base
+  look: classic
+  themeVariables:
+    darkMode: false
+    background: "#ffffff"
+    primaryColor: "#f5f5f5"
+    primaryTextColor: "#111111"
+    primaryBorderColor: "#555555"
+    secondaryColor: "#e0e0e0"
+    secondaryTextColor: "#111111"
+    secondaryBorderColor: "#666666"
+    tertiaryColor: "#bdbdbd"
+    tertiaryTextColor: "#111111"
+    tertiaryBorderColor: "#444444"
+    lineColor: "#444444"
+    textColor: "#111111"
+    mainBkg: "#f5f5f5"
+    nodeBorder: "#555555"
+    clusterBkg: "#ffffff"
+    clusterBorder: "#999999"
+    edgeLabelBackground: "#ffffff"
+    actorBkg: "#e0e0e0"
+    actorBorder: "#555555"
+    actorTextColor: "#111111"
+    actorLineColor: "#777777"
+    signalColor: "#333333"
+    signalTextColor: "#111111"
+    labelBoxBkgColor: "#f5f5f5"
+    labelBoxBorderColor: "#777777"
+    labelTextColor: "#111111"
+    loopTextColor: "#111111"
+    activationBkgColor: "#bdbdbd"
+    activationBorderColor: "#555555"
+    noteBkgColor: "#f5f5f5"
+    noteTextColor: "#111111"
+    noteBorderColor: "#777777"
+    attributeBackgroundColorOdd: "#f5f5f5"
+    attributeBackgroundColorEven: "#e0e0e0"
+---
+flowchart TD
+    accTitle: Fix priority order
+    accDescr: Layout defects that affect functionality are fixed first, then visual defects that degrade the experience, then minor inconsistencies.
+    P1["P1 · fix immediately<br/>layout defects affecting functionality"] --> P2["P2 · fix next<br/>visual defects degrading the experience"]
+    P2 --> P3["P3 · fix if possible<br/>minor visual inconsistencies"]
 ```
+
+**Legend.** Each rectangle is a priority band; the arrows show the order in which the bands are addressed.
+
+**Explanation.** A defect that blocks a task outranks one that only looks wrong. Work down the bands so a long tail of cosmetic issues never delays a functional fix.
 
 ### 3.2 Identifying Source Files
 
@@ -227,11 +317,57 @@ See [references/framework-fixes.md](references/framework-fixes.md) for details.
 ### 4.3 Iteration Decision
 
 ```mermaid
+---
+config:
+  theme: base
+  look: classic
+  themeVariables:
+    darkMode: false
+    background: "#ffffff"
+    primaryColor: "#f5f5f5"
+    primaryTextColor: "#111111"
+    primaryBorderColor: "#555555"
+    secondaryColor: "#e0e0e0"
+    secondaryTextColor: "#111111"
+    secondaryBorderColor: "#666666"
+    tertiaryColor: "#bdbdbd"
+    tertiaryTextColor: "#111111"
+    tertiaryBorderColor: "#444444"
+    lineColor: "#444444"
+    textColor: "#111111"
+    mainBkg: "#f5f5f5"
+    nodeBorder: "#555555"
+    clusterBkg: "#ffffff"
+    clusterBorder: "#999999"
+    edgeLabelBackground: "#ffffff"
+    actorBkg: "#e0e0e0"
+    actorBorder: "#555555"
+    actorTextColor: "#111111"
+    actorLineColor: "#777777"
+    signalColor: "#333333"
+    signalTextColor: "#111111"
+    labelBoxBkgColor: "#f5f5f5"
+    labelBoxBorderColor: "#777777"
+    labelTextColor: "#111111"
+    loopTextColor: "#111111"
+    activationBkgColor: "#bdbdbd"
+    activationBorderColor: "#555555"
+    noteBkgColor: "#f5f5f5"
+    noteTextColor: "#111111"
+    noteBorderColor: "#777777"
+    attributeBackgroundColorOdd: "#f5f5f5"
+    attributeBackgroundColorEven: "#e0e0e0"
+---
 flowchart TD
-    A{Issues Remaining?}
-    A -->|Yes| B[Return to Step 2]
-    A -->|No| C[Proceed to Completion Report]
+    accTitle: Iteration decision after re-verification
+    accDescr: If issues remain the review returns to visual inspection; otherwise it proceeds to the completion report.
+    A{"Issues remaining?"} -->|Yes| B["Return to step 2"]
+    A -->|No| C["Proceed to the completion report"]
 ```
+
+**Legend.** The diamond is the decision after re-verification; the two labeled branches are its outcomes.
+
+**Explanation.** Re-verification decides whether the loop continues. Stopping before it passes leaves the defect in the product with a report that says it was reviewed.
 
 **Iteration Limit**: If more than 3 fix attempts are needed for a specific issue, consult the user
 

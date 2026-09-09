@@ -52,11 +52,26 @@
     "contextNoisy": "The required material is present, but unrelated context still distracts from the task.",
     "contextReady": "Focused selection: the task, implementation and tests fit within the illustrative budget.",
     "contextFiles": {
-      "task": { "title": "Task + acceptance criteria", "detail": "Trim whitespace, normalize case and reject an empty name." },
-      "code": { "title": "Implementation", "detail": "The function to change and its immediate callers." },
-      "tests": { "title": "Relevant tests", "detail": "Examples and boundary cases that describe the behavior." },
-      "logs": { "title": "Unrelated archived logs", "detail": "A large log from a different task." },
-      "unrelated": { "title": "Unrelated screen styles", "detail": "CSS for a screen unaffected by name normalization." }
+      "task": {
+        "title": "Task + acceptance criteria",
+        "detail": "Trim whitespace, normalize case and reject an empty name."
+      },
+      "code": {
+        "title": "Implementation",
+        "detail": "The function to change and its immediate callers."
+      },
+      "tests": {
+        "title": "Relevant tests",
+        "detail": "Examples and boundary cases that describe the behavior."
+      },
+      "logs": {
+        "title": "Unrelated archived logs",
+        "detail": "A large log from a different task."
+      },
+      "unrelated": {
+        "title": "Unrelated screen styles",
+        "detail": "CSS for a screen unaffected by name normalization."
+      }
     },
     "patch": "Fixture implementation",
     "incompletePatch": "Incomplete: trim only",
@@ -87,7 +102,12 @@
     "imageError": "The illustration could not be loaded. Its description and image link remain available.",
     "imageOriginal": "Open image in a new tab",
     "imageZoom": "Zoom in",
-    "imageFit": "Fit image"
+    "imageFit": "Fit image",
+    "evidence": "Evidence trail",
+    "evidenceText": "Watch the same fixture run as a local check, and read what a reviewer would actually receive.",
+    "terminalTitle": "Local check · illustration",
+    "evidenceNote": "The transcript is typed in this browser and its result lines come from the same bounded fixture as the verification panel. No shell command runs, no repository is touched, and a real lab still needs its own recorded output.",
+    "evidenceReplay": "Run the check"
   },
   "es": {
     "title": "El estudio de práctica",
@@ -142,11 +162,26 @@
     "contextNoisy": "El material requerido está presente, pero el contexto no relacionado todavía distrae de la tarea.",
     "contextReady": "Selección enfocada: la tarea, la implementación y las pruebas caben en el presupuesto ilustrativo.",
     "contextFiles": {
-      "task": { "title": "Tarea + criterios de aceptación", "detail": "Recorta espacios, normaliza mayúsculas y rechaza nombres vacíos." },
-      "code": { "title": "Implementación", "detail": "La función que se cambiará y sus llamadas inmediatas." },
-      "tests": { "title": "Pruebas relevantes", "detail": "Ejemplos y casos límite que describen el comportamiento." },
-      "logs": { "title": "Registros archivados no relacionados", "detail": "Un registro grande de otra tarea." },
-      "unrelated": { "title": "Estilos de otra pantalla", "detail": "CSS de una pantalla no afectada por la normalización." }
+      "task": {
+        "title": "Tarea + criterios de aceptación",
+        "detail": "Recorta espacios, normaliza mayúsculas y rechaza nombres vacíos."
+      },
+      "code": {
+        "title": "Implementación",
+        "detail": "La función que se cambiará y sus llamadas inmediatas."
+      },
+      "tests": {
+        "title": "Pruebas relevantes",
+        "detail": "Ejemplos y casos límite que describen el comportamiento."
+      },
+      "logs": {
+        "title": "Registros archivados no relacionados",
+        "detail": "Un registro grande de otra tarea."
+      },
+      "unrelated": {
+        "title": "Estilos de otra pantalla",
+        "detail": "CSS de una pantalla no afectada por la normalización."
+      }
     },
     "patch": "Implementación del ejemplo",
     "incompletePatch": "Incompleta: solo recortar",
@@ -177,7 +212,12 @@
     "imageError": "No se pudo cargar la ilustración. Su descripción y el enlace a la imagen siguen disponibles.",
     "imageOriginal": "Abrir imagen en otra pestaña",
     "imageZoom": "Acercar",
-    "imageFit": "Ajustar imagen"
+    "imageFit": "Ajustar imagen",
+    "evidence": "Rastro de evidencia",
+    "evidenceText": "Observa el mismo ejemplo ejecutado como comprobación local y lee lo que recibiría quien revisa.",
+    "terminalTitle": "Comprobación local · ilustración",
+    "evidenceNote": "La transcripción se escribe en este navegador y sus líneas de resultado provienen del mismo ejemplo acotado del panel de verificación. No se ejecuta ningún comando de shell, no se toca ningún repositorio y un laboratorio real sigue necesitando su propia salida registrada.",
+    "evidenceReplay": "Ejecutar la comprobación"
   },
   "pt-br": {
     "title": "Estúdio de prática",
@@ -232,11 +272,26 @@
     "contextNoisy": "O material necessário está presente, mas o contexto não relacionado ainda distrai da tarefa.",
     "contextReady": "Seleção focada: a tarefa, a implementação e os testes cabem no orçamento ilustrativo.",
     "contextFiles": {
-      "task": { "title": "Tarefa + critérios de aceitação", "detail": "Remova espaços nas extremidades, normalize maiúsculas e rejeite nomes vazios." },
-      "code": { "title": "Implementação", "detail": "A função a alterar e seus chamadores imediatos." },
-      "tests": { "title": "Testes relevantes", "detail": "Exemplos e casos de borda que descrevem o comportamento." },
-      "logs": { "title": "Logs arquivados não relacionados", "detail": "Um log extenso de outra tarefa." },
-      "unrelated": { "title": "Estilos de outra tela", "detail": "CSS de uma tela não afetada pela normalização." }
+      "task": {
+        "title": "Tarefa + critérios de aceitação",
+        "detail": "Remova espaços nas extremidades, normalize maiúsculas e rejeite nomes vazios."
+      },
+      "code": {
+        "title": "Implementação",
+        "detail": "A função a alterar e seus chamadores imediatos."
+      },
+      "tests": {
+        "title": "Testes relevantes",
+        "detail": "Exemplos e casos de borda que descrevem o comportamento."
+      },
+      "logs": {
+        "title": "Logs arquivados não relacionados",
+        "detail": "Um log extenso de outra tarefa."
+      },
+      "unrelated": {
+        "title": "Estilos de outra tela",
+        "detail": "CSS de uma tela não afetada pela normalização."
+      }
     },
     "patch": "Implementação do exemplo",
     "incompletePatch": "Incompleta: apenas remover espaços",
@@ -267,6 +322,11 @@
     "imageError": "Não foi possível carregar a ilustração. Sua descrição e o link para a imagem continuam disponíveis.",
     "imageOriginal": "Abrir imagem em outra aba",
     "imageZoom": "Aumentar zoom",
-    "imageFit": "Ajustar imagem"
+    "imageFit": "Ajustar imagem",
+    "evidence": "Rastro de evidência",
+    "evidenceText": "Veja o mesmo exemplo rodando como verificação local e leia o que uma pessoa revisora receberia.",
+    "terminalTitle": "Verificação local · ilustração",
+    "evidenceNote": "A transcrição é digitada neste navegador e suas linhas de resultado vêm do mesmo exemplo delimitado do painel de verificação. Nenhum comando de shell é executado, nenhum repositório é alterado, e um laboratório real ainda precisa da própria saída registrada.",
+    "evidenceReplay": "Executar a verificação"
   }
 }

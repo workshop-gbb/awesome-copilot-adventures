@@ -8,7 +8,7 @@ const { locale } = Astro.props;
 const { ui } = languageFor(locale);
 ---
 <div class="section-heading" data-tone="yellow">
-  <p class="eyebrow"><Icon name="book" size={14} />{counts.documentCount} / {ui.guides}</p>
+  <p class="eyebrow"><Icon name="book" size={14} />{counts.documentCount} / {ui.documentsLabel}</p>
   <h1>{ui.libraryTitle}</h1>
   <p>{ui.libraryDescription}</p>
 </div>

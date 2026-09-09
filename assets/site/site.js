@@ -4,6 +4,7 @@ import { enhanceMedia } from './media.js';
 import { closeOnEscape } from './dialog.mjs';
 import { enhanceAdventureFilms } from './adventure-films.js';
 import { copyText } from './clipboard.mjs';
+import { enhanceScenes } from './scenes.js';
 
 const config = JSON.parse(document.getElementById('site-config').textContent);
 const { ui, locale, base } = config;
@@ -38,7 +39,7 @@ function navigation() {
   document.querySelectorAll('[data-site-control]').forEach(control => { control.hidden = false; });
   const menu = document.querySelector('.menu-button');
   const masthead = document.querySelector('.masthead');
-  const mobile = matchMedia('(max-width: 1536px)');
+  const mobile = matchMedia('(max-width: 1200px)');
   const setOpen = open => {
     masthead.dataset.menuOpen = String(open);
     menu.setAttribute('aria-expanded', String(open));
@@ -91,13 +92,27 @@ function navigation() {
 function tableOfContents() {
   const toc = document.getElementById('toc');
   if (!toc) return;
+  let step = 0;
   for (const heading of document.querySelectorAll('.document h2[id], .document h3[id]')) {
-    const link = element('a', heading.textContent);
+    const link = element('a');
     link.href = `#${encodeURIComponent(heading.id)}`;
     link.dataset.level = heading.tagName.slice(1);
+    if (link.dataset.level === '2') {
+      step += 1;
+      const index = element('span', String(step).padStart(2, '0'), 'toc-index');
+      index.setAttribute('aria-hidden', 'true');
+      link.append(index);
+    }
+    link.append(element('span', heading.textContent, 'toc-label'));
     toc.append(link);
   }
-  if (toc.childElementCount) toc.closest('.page-toc').hidden = false;
+  if (!toc.childElementCount) return;
+  const rail = toc.closest('.page-toc');
+  rail.hidden = false;
+  rail.dataset.steps = String(step);
+  const progress = element('p', '', 'toc-progress');
+  progress.append(element('strong', '00', 'toc-current'), element('span', ` / ${String(step).padStart(2, '0')}`));
+  toc.before(progress);
 }
 
 function alerts() {
@@ -454,6 +469,7 @@ search();
 enhanceSite(config, updateLanguageLinks);
 enhanceMedia(config.media);
 enhanceAdventureFilms();
+enhanceScenes();
 void sourceExplorer();
 void diagrams();
 codeCopy();

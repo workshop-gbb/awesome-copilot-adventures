@@ -105,3 +105,20 @@
   .he-trace { padding: 16px; }
   .he-code-panel { padding: 14px; }
 }
+
+/* Evidence trail: the terminal is the only dark surface in either theme, matching a real shell. */
+.he-terminal { border: 1px solid #2f302d; border-radius: var(--he-radius-card); background: #101110; overflow: clip; color-scheme: dark; }
+.he-terminal__bar { display: flex; align-items: center; gap: 12px; margin: 0; padding: 10px 16px; border-bottom: 1px solid #2f302d; color: #a9aaa5; font-size: 11px; }
+.he-terminal__dots { display: inline-flex; gap: 6px; }
+.he-terminal__dots i { width: 9px; height: 9px; border-radius: 50%; background: #3a3b38; }
+.he-terminal__out { max-height: 340px; margin: 0; padding: 18px 20px; overflow: auto; color: #e6e6e1; font: 13px/1.85 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+.he-terminal__out span { display: block; }
+.he-terminal__out [data-line="command"] { color: #fff; }
+.he-terminal__out [data-line="comment"] { color: #8f918b; }
+.he-terminal__out [data-line="pass"] { color: #9be07a; }
+.he-terminal__out [data-line="fail"] { color: #ff9a9b; }
+.he-terminal__out [data-line="warn"] { color: #ffd968; }
+.he-terminal__cursor { display: inline-block; width: 8px; height: 1em; margin-left: 2px; background: #9be07a; vertical-align: -2px; }
+@media (prefers-reduced-motion: no-preference) { .he-terminal__cursor { animation: he-caret 1s steps(2) infinite; } }
+@keyframes he-caret { 50% { opacity: 0; } }
+@media (max-width: 560px) { .he-terminal__out { padding: 14px; font-size: 12px; } }

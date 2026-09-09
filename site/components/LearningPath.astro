@@ -1,0 +1,59 @@
+---
+/*
+ * The adventure path: the real six-level progression, built from the published catalog rather than
+ * a hard-coded list, so a new adventure appears here the moment it is published. Rows share the
+ * numbered-rail language used by the lesson session rail.
+ */
+import Icon from './Icon.astro';
+import { languageFor, labelFor, counts, type Locale } from '../lib/catalog';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const { ui, href, catalog } = languageFor(locale);
+const levelOrder = ['00-foundations', '01-basics', '02-intermediate', '03-advanced', '04-surfaces', '99-capstone'] as const;
+const levelLabels: Record<string, string> = {
+  '00-foundations': ui.foundations, '01-basics': ui.levelBasics, '02-intermediate': ui.levelIntermediate,
+  '03-advanced': ui.levelAdvanced, '04-surfaces': ui.surfaces, '99-capstone': ui.levelCapstone
+};
+const tones = ['blue', 'green', 'yellow', 'red', 'blue', 'green'] as const;
+const adventures = catalog
+  .filter(document => document.group === 'adventures' && document.source.endsWith('/README.md'))
+  .sort((left, right) => (left.navigationOrder ?? 1000) - (right.navigationOrder ?? 1000));
+const levels = levelOrder
+  .map((level, index) => ({
+    level,
+    index,
+    tone: tones[index],
+    label: levelLabels[level] || level,
+    lessons: adventures.filter(document => document.navigationSection === level)
+  }))
+  .filter(entry => entry.lessons.length > 0);
+---
+<section class="section container learning-path-section">
+  <div class="section-heading" data-tone="blue">
+    <p class="eyebrow"><Icon name="map" size={14} />{ui.pathEyebrow}</p>
+    <h2>{ui.pathTitle}</h2>
+    <p>{ui.pathText}</p>
+  </div>
+  <ol class="learning-path">
+    {levels.map(entry => (
+      <li data-tone={entry.tone}>
+        <span class="path-index">{String(entry.index + 1).padStart(2, '0')}</span>
+        <div class="path-level">
+          <h3>{entry.label}</h3>
+          <p class="path-count">{entry.lessons.length} {entry.lessons.length === 1 ? ui.adventureOne : labelFor(locale, 'adventures')}</p>
+        </div>
+        <div class="path-lessons">
+          {entry.lessons.map(lesson => <a href={lesson.url}>{lesson.title}</a>)}
+        </div>
+      </li>
+    ))}
+  </ol>
+  <aside class="path-alternative" data-tone="green">
+    <Icon name="terminal" size={22} tone="green" chip />
+    <div>
+      <strong>{ui.labsPathTitle}</strong>
+      <p>{ui.labsPathText}</p>
+    </div>
+    <a class="text-link" href={href.handsOn}>{counts.handsOnCount} {ui['hands-on']} <Icon name="arrow" size={16} /></a>
+  </aside>
+</section>

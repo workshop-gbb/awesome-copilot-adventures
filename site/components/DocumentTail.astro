@@ -1,0 +1,31 @@
+---
+/*
+ * The closing blocks of a learning document: practice link, reading tracker, original-source notice
+ * and the source/edit actions. Extracted so the adventure catalog can place them after its
+ * full-width card grid and film gallery instead of before them.
+ */
+import Reading from './Reading.astro';
+import Icon from './Icon.astro';
+import simulationCopy from '../simulations.json';
+import { languageFor, settings, type PageInfo } from '../lib/catalog';
+interface Props { page: PageInfo; practice: boolean; simulationTopic: string; }
+const { page, practice, simulationTopic } = Astro.props;
+const { ui, href } = languageFor(page.locale);
+const simulationText = simulationCopy[page.locale];
+---
+{practice && (
+  <aside class="he-practice-link">
+    <Icon name="workflow" size={28} />
+    <div>
+      <strong>{simulationText.related}</strong>
+      <p>{simulationText.relatedText}</p>
+      <a class="text-link" href={`${href.simulations}#${simulationTopic}`}>{simulationText.open} <Icon name="arrow" size={16} /></a>
+    </div>
+  </aside>
+)}
+<Reading locale={page.locale} source={page.source} />
+<aside class="original-note">{ui.originalNotice}</aside>
+<nav class="document-actions" aria-label={ui.source}>
+  <a href={`${href.repository}?path=${encodeURIComponent(page.source || '')}`}>{ui.source}</a>
+  <a href={`https://github.com/${settings.repository}/edit/main/${page.source}`}>{ui.edit} <span aria-hidden="true">↗</span></a>
+</nav>

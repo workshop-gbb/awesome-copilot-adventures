@@ -56,9 +56,13 @@ request. Their [Inter license](../assets/site/fonts/OFL-Inter.txt) and
 - Responsive grids collapse into a single column without hiding essential content.
 
 Reading text stays at the 16 px body token on narrow screens. Navigation, filters,
-source actions and learning controls use the 44 px touch-target token. The masthead
-switches to its compact menu at 1280 px to leave room for translated labels; code
-blocks keep space above their first line for the copy control.
+source actions and learning controls use the 44 px touch-target token. The six
+section links stay visible down to 1200 px, where the masthead switches to its
+compact menu; the two longest section titles use short navigation labels so the
+Spanish and Portuguese bars fit on one row. Code blocks keep space above their
+first line for the copy control. A learning document uses a wider column than a
+book measure, because it carries diagrams, tables and code as well as prose; the
+prose itself keeps a bounded measure inside that column.
 
 Exact spacing outside the inspected reference CSS is an implementation choice,
 not a claim of pixel-perfect reproduction.
@@ -123,19 +127,27 @@ third-party theme or client-side application framework.
 
 ## Interaction and motion
 
-The language selector remains visible in the masthead at every viewport size;
-the homepage also names all three languages. Switching language preserves the
+The language selector remains visible in the masthead at every viewport size, and
+the footer names the three languages in full. Switching language preserves the
 document, heading fragment and active library filters.
 
-The hero contains a keyboard-operable, five-stage workflow accordion. The library
-combines topic filtering, localized search and optional reading marks. Reading
-marks are self-reported browser-local state, never proof that a lab or test passed;
-learners can clear only this site's marks with an explicit confirmation.
+The hero contains a keyboard-operable, five-stage workflow accordion. The home page
+shows the real adventure path: six levels built from the published catalog, each
+naming its lessons. The library combines topic filtering, localized search and
+optional reading marks. Reading marks are self-reported browser-local state, never
+proof that a lab or test passed; learners can clear only this site's marks with an
+explicit confirmation.
 
 Entrance animations, one-time section reveals, bounded count transitions, card
 feedback and a scroll progress indicator add motion without a canvas or animation
 framework. Reduced-motion preferences disable the effects. Essential content stays
 readable without JavaScript; native workflow disclosures still work.
+
+Selected lessons open with a mechanism scene: an original inline SVG that draws the
+model it teaches in reading order, followed by three short captions. The scene is
+armed when it scrolls into view and can be replayed; under reduced motion it appears
+complete and still. Long lesson pages carry a session rail that numbers the sections,
+marks the ones already passed and shows the current position.
 
 ## Integrated practice studio
 

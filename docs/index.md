@@ -8,13 +8,6 @@ description: "Awesome Copilot Adventures: an evidence-first curriculum for agent
 
 # Awesome Copilot Adventures
 
-Learn agentic software engineering through guided, fantasy-themed laboratories built around observable evidence.
-
-> [!TIP]
-> **First visit:** follow [Start here](start-here.md) for one working local check.
-> Then use [the learning order](learning-path.md) to choose your path. Download
-> [one learner kit](downloads.md), not every runtime and project.
-
 > [!IMPORTANT]
 > The curriculum teaches agent roles, harnesses, environments, and customization primitives as separate concepts. It does not teach deprecated custom chat modes.
 
@@ -77,29 +70,6 @@ flowchart LR
 **Explanation.** A fluent response is not completion. The loop ends only when the reviewed result meets the acceptance criteria and the recorded checks support it.
 
 Ask, Plan, and Agent are **roles**. Local and Copilot are VS Code **agent harnesses**. Cloud is a remote **session target**. A folder, worktree, Codespace, local machine, or remote ephemeral workspace is an **environment**.
-
-## Begin the journey
-
-| Destination | Use it for |
-| --- | --- |
-| [Prerequisites and accounts](prerequisites.md) | Install one environment, activate your own account and understand free-plan limits |
-| [Start here](start-here.md) | Prepare the environment and first session |
-| [Learning order](learning-path.md) | Separate required steps, optional extensions and advanced work |
-| [Learner downloads](downloads.md) | Get an individual ZIP and follow extraction, baseline and optional GitHub setup |
-| [Curriculum map](curriculum-map.md) | Follow the complete learning progression |
-| [Harness guide](harness-guide.md) | Choose where and how an agent executes |
-| [Customization primitives](customization-primitives.md) | Select instructions, prompts, skills, agents, MCP, or hooks |
-| [Feature status](feature-status.md) | Check current availability and preview labels |
-| [Adventure catalog](adventures/index.md) | Browse every guided mission |
-| [Hands-on Labs](../mslearn-github-copilot/index.md) | Follow non-fantasy exercises, including Spec Kit modernization |
-| [Diagram style](diagram-style.md) | Understand monochrome colors, legends and accessibility |
-
-The executable source for each mission lives in the GitHub [adventure tree](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/adventures) and [lab tree](https://github.com/workshop-gbb/awesome-copilot-adventures/tree/main/labs).
-
-The multilingual site also includes a repository explorer for original code,
-fixtures, solutions, customizations, media and historical material. Learning pages
-are available in English, Spanish and Brazilian Portuguese; executable examples
-and original licenses retain their source text.
 
 > [!NOTE]
 > Product guidance was last verified against current official GitHub and Microsoft documentation on **2026-09-05**. Recheck the linked source when availability or policy materially affects your task.

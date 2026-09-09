@@ -75,3 +75,27 @@ export function verifyPatch(patch) {
     return { input, expected, actual, passed: actual === expected };
   });
 }
+
+/*
+ * The evidence trail: a terminal transcript whose results are computed here, in this browser, by the
+ * same bounded fixture the verification panel runs. Nothing in the transcript is invented output:
+ * the check lines report what verifyPatch actually returned for each implementation.
+ */
+export function evidenceLines(patch = 'incomplete') {
+  const results = verifyPatch(patch);
+  const passed = results.filter(result => result.passed).length;
+  const lines = [
+    { kind: 'command', text: 'node --test normalize.test.mjs' },
+    { kind: 'comment', text: `implementation under test: ${patch}` }
+  ];
+  for (const result of results) {
+    lines.push({
+      kind: result.passed ? 'pass' : 'fail',
+      text: `normalizeName(${JSON.stringify(result.input)}) -> ${JSON.stringify(result.actual)}`
+        + (result.passed ? '' : ` (expected ${JSON.stringify(result.expected)})`)
+    });
+  }
+  lines.push({ kind: 'output', text: `${passed} passed, ${results.length - passed} failed, ${results.length} total` });
+  lines.push({ kind: passed === results.length ? 'pass' : 'warn', text: `exit status ${passed === results.length ? 0 : 1}` });
+  return lines;
+}
