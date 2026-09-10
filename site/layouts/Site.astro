@@ -9,6 +9,7 @@ import Repository from '../components/Repository.astro';
 import SimulationStudio from '../components/SimulationStudio.astro';
 import AdventureFilms from '../components/AdventureFilms.astro';
 import Discovery from '../components/Discovery.astro';
+import LabIndex from '../components/LabIndex.astro';
 import DocumentTail from '../components/DocumentTail.astro';
 import Icon from '../components/Icon.astro';
 import simulationCopy from '../simulations.json';
@@ -19,6 +20,10 @@ import '../../assets/site/scenes.css';
 import { renderScene, injectAfterCover } from '../lib/scenes';
 import { lessonScenes } from '../lib/lesson-scenes';
 import { practiceTopicFor } from '../lib/lesson-practice';
+import { renderBriefing, injectAfterTitle } from '../lib/briefing';
+import { renderQuiz, injectBeforeEvidence } from '../lib/quiz';
+import { injectNextLesson } from '../lib/next-lesson';
+import { lessonQuizzes } from '../lib/lesson-quizzes';
 import themeScript from '../../assets/site/theme.js?raw';
 import mark from '../../assets/site/mark.svg?url';
 interface Props { page: PageInfo; }
@@ -26,13 +31,22 @@ const { page } = Astro.props;
 const { ui, href, catalog } = languageFor(page.locale);
 const simulationText = simulationCopy[page.locale];
 const catalogPage = page.route === '/adventures/';
+const labIndexPage = page.route === '/hands-on/';
+const fullWidthIndex = catalogPage || labIndexPage;
 const practice = page.group === 'adventures' || page.group === 'hands-on' || ['/start-here/', '/harnesses/'].includes(page.route);
 const simulationTopic = practiceTopicFor(page.source);
 const base = settings.base;
 const isDocument = !page.home && page.route !== '/simulations/' && !['repository', 'library', 'not-found'].includes(page.kind || 'document');
 const sceneKind = page.source ? lessonScenes[page.source] : undefined;
 const documentBody = isDocument ? await Astro.slots.render('default') : '';
-const documentHtml = sceneKind ? injectAfterCover(documentBody, renderScene(sceneKind, page.locale, { kicker: ui.sceneKicker, replay: ui.sceneReplay })) : documentBody;
+const withScene = sceneKind ? injectAfterCover(documentBody, renderScene(sceneKind, page.locale, { kicker: ui.sceneKicker, replay: ui.sceneReplay })) : documentBody;
+const briefing = ['adventures', 'hands-on'].includes(page.group || '') ? renderBriefing(page, ui, href.downloads) : '';
+const withBriefing = briefing ? injectAfterTitle(withScene, briefing) : withScene;
+const quiz = page.source ? lessonQuizzes[page.source] : undefined;
+const withQuiz = quiz
+  ? injectBeforeEvidence(withBriefing, renderQuiz(quiz, page.locale, { kicker: ui.quizKicker, empty: ui.quizEmpty, correct: ui.quizCorrect, incorrect: ui.quizIncorrect }, 'lesson-quiz'))
+  : withBriefing;
+const documentHtml = isDocument ? injectNextLesson(withQuiz, catalog, ui) : withQuiz;
 const config = { locale: page.locale, base, revision: counts.revision, mermaidVersion: settings.mermaidVersion, repository: settings.repository, kind: page.kind || 'document', source: page.source, sources: catalog.map(document => document.source), ui, media: { open: simulationText.imageOpen, close: simulationText.imageClose, title: simulationText.imageTitle, error: simulationText.imageError, original: simulationText.imageOriginal, zoom: simulationText.imageZoom, fit: simulationText.imageFit } };
 const json = JSON.stringify(config).replace(/</g, '\\u003c');
 const canonical = settings.site + page.alternates[page.locale];
@@ -80,26 +94,27 @@ const ogLocale = { en: 'en_US', es: 'es_ES', 'pt-br': 'pt_BR' }[page.locale];
     ) : page.kind === 'not-found' ? (
       <main id="main" class="container section not-found"><p class="eyebrow">404</p><h1>{ui.notFound}</h1><p>{ui.notFoundText}</p><a class="button button-primary" href={href.home}>{ui.home}</a></main>
     ) : (
-      <main id="main" class="document-shell" data-catalog={catalogPage ? 'true' : undefined}>
+      <main id="main" class="document-shell" data-catalog={fullWidthIndex ? 'true' : undefined}>
         <div class="document-layout container">
           <Sidebar page={page} />
           <div class="reading-pane" data-group={page.group || 'guides'}>
             <div class="document-meta">
-              <nav class="breadcrumb" aria-label={ui.navigation}><Icon name="compass" size={14} /><a href={href.home}>{ui.home}</a><span aria-hidden="true">/</span><a href={href.library}>{labelFor(page.locale, page.group || 'guides')}</a></nav>
+              <nav class="breadcrumb" aria-label={ui.breadcrumbLabel}><Icon name="compass" size={14} /><a href={href.home}>{ui.home}</a><span aria-hidden="true">/</span><a href={href.library}>{labelFor(page.locale, page.group || 'guides')}</a></nav>
               {page.verified && <p class="verification"><Icon name="check" size={14} />{ui.verified} <time datetime={page.verified}>{page.verified}</time></p>}
             </div>
             <article class="document" data-document-group={page.group || 'guides'} set:html={documentHtml}></article>
-            {!catalogPage && <DocumentTail page={page} practice={practice} simulationTopic={simulationTopic} />}
+            {!fullWidthIndex && <DocumentTail page={page} practice={practice} simulationTopic={simulationTopic} />}
           </div>
           <aside class="page-toc" aria-label={ui.onPage} hidden><p class="eyebrow">{ui.onPage}</p><nav id="toc"></nav><a class="back-top" href="#top">{ui.backTop} ↑</a></aside>
         </div>
         {catalogPage && (
           <>
-            <div class="container adventure-catalog"><Discovery locale={page.locale} adventuresOnly /></div>
+            <div class="container adventure-catalog"><Discovery locale={page.locale} adventuresOnly grouped /></div>
             <AdventureFilms locale={page.locale} />
-            <div class="container document-tail"><DocumentTail page={page} practice={practice} simulationTopic={simulationTopic} /></div>
           </>
         )}
+        {labIndexPage && <LabIndex locale={page.locale} />}
+        {fullWidthIndex && <div class="container document-tail"><DocumentTail page={page} practice={practice} simulationTopic={simulationTopic} /></div>}
       </main>
     )}
     <Footer page={page} />

@@ -14,11 +14,6 @@ primary_capability: "Packaging reusable agent expertise"
 
 # The Skills of Algora
 
-
-> [!NOTE]
-> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
-> **Primary capability:** Packaging reusable agent expertise
-
 ![One open toolkit connects to a mechanism while the other reusable toolkits remain stored in the library.](../../../assets/images/adventures/algora-skills-hero.webp)
 
 <details>

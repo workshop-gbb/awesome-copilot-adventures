@@ -8,7 +8,7 @@ import { iconSvg, type IconName } from './icons';
 
 export type SceneLocale = 'en' | 'pt-br' | 'es';
 export type SceneKind = 'agent-anatomy' | 'feedback-loop' | 'verification-gate' | 'context-assembly' | 'prefix-reuse' | 'parallel-ownership'
-  | 'harness-surfaces' | 'instruction-precedence' | 'skill-loading' | 'agent-handoff' | 'mcp-connection';
+  | 'harness-surfaces' | 'instruction-precedence' | 'skill-loading' | 'agent-handoff' | 'mcp-connection' | 'evidence-workflow';
 export type SceneColor = 'blue' | 'green' | 'yellow' | 'red';
 /** Trilingual text in the order [en, pt-br, es], matching the deck skill tuples. */
 type L3 = readonly [string, string, string];
@@ -306,6 +306,33 @@ export const SCENES: Record<SceneKind, SceneSpec> = {
       [['A server is a boundary', 'Um servidor é um limite', 'Un servidor es un límite'], ['It runs with its own access. Review what it can reach before you enable it.', 'Ele roda com o próprio acesso. Revise o que ele alcança antes de habilitar.', 'Se ejecuta con su propio acceso. Revise a qué llega antes de habilitarlo.'], 'red'],
       [['Keep it disposable', 'Mantenha descartável', 'Manténgalo desechable'], ['Configure it in a lab workspace you can delete, not across every project.', 'Configure em um workspace de laboratório que você pode apagar, não em todo projeto.', 'Configúrelo en un workspace de laboratorio que pueda borrar, no en todos los proyectos.'], 'yellow']
     ]
+  },
+  'evidence-workflow': {
+    title: ['A fluent answer is not a finished change.', 'Uma resposta fluente não é uma mudança concluída.', 'Una respuesta fluida no es un cambio terminado.'],
+    description: [
+      'Investigation leads to a plan, the plan bounds the implementation, a separate review challenges the result and evidence proves it. An unresolved gap returns to investigation instead of closing the work.',
+      'A investigação leva a um plano, o plano delimita a implementação, uma revisão separada questiona o resultado e a evidência o comprova. Uma lacuna não resolvida volta para a investigação em vez de encerrar o trabalho.',
+      'La investigación lleva a un plan, el plan acota la implementación, una revisión separada cuestiona el resultado y la evidencia lo comprueba. Una brecha sin resolver vuelve a la investigación en lugar de cerrar el trabajo.'
+    ],
+    labels: {
+      scope: ['ONE PROGRESSIVE WORKFLOW', 'UM FLUXO PROGRESSIVO', 'UN FLUJO PROGRESIVO'],
+      ask: ['Ask', 'Ask', 'Ask'],
+      askSub: ['investigate', 'investigar', 'investigar'],
+      plan: ['Plan', 'Plan', 'Plan'],
+      planSub: ['design', 'projetar', 'diseñar'],
+      agent: ['Agent', 'Agent', 'Agent'],
+      agentSub: ['implement', 'implementar', 'implementar'],
+      review: ['Review', 'Revisão', 'Revisión'],
+      reviewSub: ['challenge', 'questionar', 'cuestionar'],
+      evidence: ['Evidence', 'Evidência', 'Evidencia'],
+      evidenceSub: ['prove', 'comprovar', 'comprobar'],
+      gap: ['UNRESOLVED GAP RETURNS TO INVESTIGATION', 'LACUNA NÃO RESOLVIDA VOLTA À INVESTIGAÇÃO', 'BRECHA SIN RESOLVER VUELVE A LA INVESTIGACIÓN']
+    },
+    captions: [
+      [['Bound the change first', 'Delimite a mudança primeiro', 'Acote el cambio primero'], ['A plan with acceptance criteria is what makes a result checkable later.', 'Um plano com critérios de aceite é o que torna o resultado verificável depois.', 'Un plan con criterios de aceptación es lo que hace verificable el resultado después.'], 'blue'],
+      [['Review is separate work', 'A revisão é outro trabalho', 'La revisión es otro trabajo'], ['The step that made the change is not the step that decides whether it is right.', 'A etapa que fez a mudança não é a etapa que decide se ela está certa.', 'El paso que hizo el cambio no es el que decide si está bien.'], 'yellow'],
+      [['Evidence closes the loop', 'A evidência fecha o ciclo', 'La evidencia cierra el ciclo'], ['Commands, output and diffs someone else can rerun, not a claim that it works.', 'Comandos, saída e diffs que outra pessoa pode reexecutar, não a alegação de que funciona.', 'Comandos, salida y diffs que otra persona puede reejecutar, no la afirmación de que funciona.'], 'green']
+    ]
   }
 };
 
@@ -498,6 +525,22 @@ const DRAW: Record<SceneKind, (labels: Labels, uid: string) => string> = {
     parts.push(node(584, 196, 288, 92, l.tools, l.toolsSub, 'yellow', 'toolkit', 1.6));
     parts.push(wire('M872 114 H884 V174 H912', 'red', 2.0, uid));
     parts.push(node(912, 128, 196, 92, l.system, l.systemSub, 'red', 'server', 2.25));
+    return parts.join('');
+  },
+  'evidence-workflow': (l, uid) => {
+    const parts = [text(20, 28, l.scope, 'sc-kicker')];
+    const stages: [string, string, SceneColor, IconName][] = [
+      ['ask', 'askSub', 'blue', 'search'], ['plan', 'planSub', 'blue', 'note'], ['agent', 'agentSub', 'yellow', 'agent'],
+      ['review', 'reviewSub', 'red', 'eye'], ['evidence', 'evidenceSub', 'green', 'evidence']
+    ];
+    stages.forEach(([key, sub, color, icon], i) => {
+      const x = 20 + i * 224;
+      if (i) parts.push(wire(`M${x - 20} 138 H${x - 4}`, color, 0.4 + i * 0.42, uid, true));
+      parts.push(node(x, 90, 204, 96, l[key], l[sub], color, icon, 0.14 + i * 0.42));
+    });
+    // The return path is the point of the diagram: an unresolved gap reopens the investigation.
+    parts.push(wire('M1018 186 V262 H122 V190', 'red', 2.3, uid, true));
+    parts.push(reveal(text(560, 300, l.gap, 'sc-kicker', 'middle'), 2.8));
     return parts.join('');
   }
 };

@@ -290,6 +290,12 @@ function buildArtifacts(selectedLocales = locales) {
         source: page.source, group: page.group, verified: page.verified,
         home: page.route === '/', alternates
       };
+      // Briefing fields are optional: only lessons that declare them carry them into the page.
+      if (page.capability) metadata.capability = translation(page.capability, page.capabilityId, locale, dictionary);
+      if (page.status) metadata.status = page.status;
+      if (page.level) metadata.level = page.level;
+      if (page.duration) metadata.duration = page.duration;
+      if (page.difficulty) metadata.difficulty = page.difficulty;
       artifacts.set(`site-generated/content/${locale}/${sha256(page.source).slice(0, 16)}.md`,
         frontmatter(metadata) + markdown);
       const image = markdown.match(/!\[[^\]]*]\(([^)\n]*\/site-data\/media\/[^)\n]+)\)/)?.[1] || null;

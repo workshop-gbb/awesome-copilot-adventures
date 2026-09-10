@@ -6,7 +6,7 @@ interface Props { page: PageInfo; }
 const { page } = Astro.props;
 const { ui, href } = languageFor(page.locale);
 ---
-<footer class="site-footer">
+<footer class="site-footer he-inverse">
   <div class="footer-atmosphere" aria-hidden="true"></div>
   <div class="container footer-stage">
     <div class="footer-intro">
@@ -42,7 +42,7 @@ const { ui, href } = languageFor(page.locale);
         <a href={href.support}>{ui.support}<Icon name="arrow" size={14} /></a>
       </div>
     </nav>
-    <nav class="footer-panel" data-tone="green" aria-label={ui.languages}>
+    <nav class="footer-panel" data-tone="green" aria-label={ui.footerLanguages}>
       <h3><Icon name="globe" size={18} />{ui.languages}</h3>
       <div>
         {locales.map(locale => (

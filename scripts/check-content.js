@@ -80,9 +80,15 @@ if (!fs.existsSync(curriculum)) {
           '## Independent challenge',
           '## Evidence checklist',
           '## Reset instructions',
-          '```mermaid',
-          '> [!NOTE]'
+          '```mermaid'
         ];
+        // The status, verification date and capability are declared in frontmatter and rendered as
+        // the lesson briefing in every language, instead of being repeated as a prose callout.
+        for (const field of ['status:', 'last_verified:', 'primary_capability:', 'level:', 'slug:']) {
+          if (!/^---\n[\s\S]*?\n---/.exec(content)?.[0]?.includes(`\n${field}`)) {
+            failures.push(`Missing frontmatter ${field} in adventures/${level}/${slug}/README.md`);
+          }
+        }
         for (const section of requiredSections) {
           if (!content.includes(section)) {
             failures.push(`Missing "${section}" in adventures/${level}/${slug}/README.md`);

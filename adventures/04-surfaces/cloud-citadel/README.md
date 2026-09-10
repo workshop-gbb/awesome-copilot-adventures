@@ -14,11 +14,6 @@ primary_capability: "Delegating work to GitHub Copilot cloud agent"
 
 # The Cloud Citadel
 
-
-> [!NOTE]
-> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
-> **Primary capability:** Delegating work to GitHub Copilot cloud agent
-
 ![An engineer inspects a task package and map in a local workshop linked to a distant cloud citadel.](../../../assets/images/adventures/cloud-citadel-hero.webp)
 
 <details>

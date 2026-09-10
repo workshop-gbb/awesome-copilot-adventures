@@ -14,11 +14,6 @@ primary_capability: "Constraining authority and risky operations"
 
 # The Guardrails of Stonevale
 
-
-> [!NOTE]
-> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
-> **Primary capability:** Constraining authority and risky operations
-
 ![A mechanical selector separates incoming cards into different trays beside a barrier and an intervention lever.](../../../assets/images/adventures/stonevale-guardrails-hero.webp)
 
 <details>

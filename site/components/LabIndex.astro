@@ -1,0 +1,58 @@
+---
+/*
+ * The hands-on index: 26 labs in the six groups the catalog already declares, with their stack and
+ * cover. Titles come from the published site catalog, so they follow the visitor's language; stack
+ * strings stay in their original technical form.
+ */
+import Icon from './Icon.astro';
+import labCatalog from '../../mslearn-github-copilot/catalog.json';
+import { languageFor, counts, type Locale } from '../lib/catalog';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const { ui, catalog } = languageFor(locale);
+const groupLabels: Record<string, string> = {
+  'Preparation': ui.labGroupPreparation, 'Core workflow': ui.labGroupCore, 'Engineering practice': ui.labGroupEngineering,
+  'Collaboration': ui.labGroupCollaboration, 'Spec-driven development': ui.labGroupSpec, 'Agent customization': ui.labGroupCustomization
+};
+const tones = ['blue', 'green', 'yellow', 'red', 'blue', 'green'];
+const published = new Map(catalog.filter(document => document.group === 'hands-on').map(document => [document.labId, document]));
+const order: string[] = [];
+for (const lab of labCatalog.labs) if (!order.includes(lab.group)) order.push(lab.group);
+const groups = order.map((group, index) => ({
+  group,
+  index,
+  tone: tones[index % tones.length],
+  label: groupLabels[group] || group,
+  labs: labCatalog.labs
+    .filter(lab => lab.group === group)
+    .map(lab => ({ ...lab, page: published.get(lab.id) }))
+    .filter(lab => lab.page)
+}));
+---
+<section class="section container lab-index" aria-labelledby="lab-index-title">
+  <div class="section-heading" data-tone="green">
+    <p class="eyebrow"><Icon name="terminal" size={14} />{ui.labsEyebrow}</p>
+    <h2 id="lab-index-title">{ui.labsTitle}</h2>
+    <p>{ui.labsText}</p>
+  </div>
+  <div class="discovery-bands">
+    {groups.map(entry => (
+      <section class="discovery-band" data-tone={entry.tone} aria-labelledby={`lab-band-${entry.index}`}>
+        <div class="band-heading">
+          <span class="band-index">{String(entry.index + 1).padStart(2, '0')}</span>
+          <h3 id={`lab-band-${entry.index}`}>{entry.label}</h3>
+          <p class="band-count">{entry.labs.length} / {counts.handsOnCount}</p>
+        </div>
+        <ul class="lab-grid">
+          {entry.labs.map(lab => (
+            <li class="lab-card" data-tone={entry.tone}>
+              {lab.page!.image && <img class="he-card-image" src={lab.page!.image} alt="" width="1440" height="630" loading="lazy" decoding="async" />}
+              <p class="lab-stack"><Icon name="code" size={13} />{lab.stack}</p>
+              <a href={lab.page!.url}>{lab.page!.title}<span aria-hidden="true">↗</span></a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</section>

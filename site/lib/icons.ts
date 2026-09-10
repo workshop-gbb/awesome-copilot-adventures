@@ -114,3 +114,9 @@ export function iconInner(name: IconName): string {
 export function iconSvg(name: IconName, x: number, y: number, size = 24, color = 'currentColor'): string {
   return `<svg x="${x}" y="${y}" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:${color}">${iconInner(name)}</svg>`;
 }
+
+/** A standalone HTML icon, for markup injected into an already rendered document. */
+export function iconHtml(name: IconName, size = 16): string {
+  return `<svg class="he-icon" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor"`
+    + ` stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${iconInner(name)}</svg>`;
+}

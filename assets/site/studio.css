@@ -122,3 +122,35 @@
 @media (prefers-reduced-motion: no-preference) { .he-terminal__cursor { animation: he-caret 1s steps(2) infinite; } }
 @keyframes he-caret { 50% { opacity: 0; } }
 @media (max-width: 560px) { .he-terminal__out { padding: 14px; font-size: 12px; } }
+
+/* Workflow motion: a step forward arrives, and a failed review visibly refuses the handoff.
+   Motion here follows the cause it explains and disappears entirely under reduced motion. */
+.he-workflow-map li + li::before { transition: border-color var(--he-motion-base); }
+.he-workflow-map li[data-state="visited"] + li::before { border-color: var(--ink); }
+@media (prefers-reduced-motion: no-preference) {
+  .he-workflow-map li[data-state="current"], .he-workflow-map li[data-state="visited"] {
+    animation: he-stage-arrive .34s cubic-bezier(.22, 1, .36, 1) both;
+  }
+  .he-workflow-map[data-outcome="blocked"] li[data-state="current"] { animation: he-stage-refuse .5s cubic-bezier(.36, .07, .19, .97) both; }
+}
+@keyframes he-stage-arrive { from { opacity: .55; transform: translateY(5px) scale(.985); } to { opacity: 1; transform: none; } }
+@keyframes he-stage-refuse {
+  0%, 100% { transform: translateX(0); }
+  22% { transform: translateX(-5px); }
+  46% { transform: translateX(5px); }
+  70% { transform: translateX(-3px); }
+}
+/* The handoff after a blocked review is severed, not merely uncoloured. */
+.he-workflow-map[data-outcome="blocked"] li[data-state="pending"]::before { border-top-style: dashed; border-color: var(--he-red-ink); }
+.he-workflow-map[data-outcome="blocked"] li[data-state="current"] { outline-color: var(--he-red-ink); }
+.he-workflow-map[data-outcome="complete"] li[data-state="current"] { outline-color: var(--he-green-ink); }
+@media (max-width: 560px) {
+  .he-workflow-map[data-outcome="blocked"] li[data-state="pending"]::before { border-left-style: dashed; border-left-color: var(--he-red-ink); }
+}
+
+@media (forced-colors: active) {
+  .he-studio-tabs button[aria-selected="true"] { outline: 2px solid Highlight; outline-offset: -2px; }
+  .he-workflow-map li[data-state="current"] { outline: 2px solid Highlight; }
+  .he-workflow-map li[data-state="visited"] { outline: 1px solid CanvasText; }
+  .he-context-file:has(input:checked) { outline: 2px solid Highlight; outline-offset: -2px; }
+}

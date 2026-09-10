@@ -39,7 +39,9 @@ diagrams retain their aspect ratios and colors in both themes.
 
 The accents identify navigation/card families and decorative rules, not diagram
 semantics. Every Mermaid diagram retains the repository's white/ice/gray/black
-palette and accessible legend.
+palette and accessible legend. The hero, the film gallery and the footer stay dark
+in both themes; they share one inverted token scope rather than three hand-written
+palettes, so their ink, rules and surfaces come from the same tokens as the rest.
 
 ## Typography and layout
 
@@ -74,7 +76,10 @@ not a claim of pixel-perfect reproduction.
 - Search scoped to the selected language, with clearly labeled original-source entries.
 - Repository explorer with all source files, code/data previews and original downloads.
 - Notices for legacy material, untranslated executable examples and preserved licenses.
-- Visible keyboard focus, skip link, mobile menu and reduced-motion behavior.
+- Visible keyboard focus, skip link, layered mobile menu and reduced-motion behavior.
+- Card feedback answers hover, keyboard focus and touch; the lift is reserved for a real pointer.
+- Search ranks lessons above repository paths and caps the paths so they cannot bury an answer.
+- Windows High Contrast keeps every state that colour alone would carry.
 
 ## Content rules
 
@@ -133,8 +138,11 @@ document, heading fragment and active library filters.
 
 The hero contains a keyboard-operable, five-stage workflow accordion. The home page
 shows the real adventure path: six levels built from the published catalog, each
-naming its lessons. The library combines topic filtering, localized search and
-optional reading marks. Reading marks are self-reported browser-local state, never
+naming its lessons. The adventure catalog repeats that order as bands of covers, and
+the hands-on index groups its labs the way the lab catalog already groups them, with
+each card naming its stack. Every lesson opens with a briefing built from its own
+frontmatter: the capability it teaches, its level, its estimate and its status. The
+library combines topic filtering, localized search and optional reading marks. Reading marks are self-reported browser-local state, never
 proof that a lab or test passed; learners can clear only this site's marks with an
 explicit confirmation.
 
@@ -146,8 +154,17 @@ readable without JavaScript; native workflow disclosures still work.
 Selected lessons open with a mechanism scene: an original inline SVG that draws the
 model it teaches in reading order, followed by three short captions. The scene is
 armed when it scrolls into view and can be replayed; under reduced motion it appears
-complete and still. Long lesson pages carry a session rail that numbers the sections,
-marks the ones already passed and shows the current position.
+complete and still. The home page carries the same kind of scene for the Ask, Plan,
+Agent, Review and Evidence loop, including the return path an unresolved gap takes.
+Long lesson pages carry a session rail that numbers the sections, marks the ones
+already passed and shows the current position. Every adventure and every lab carries
+a retrieval check before the section where evidence is recorded: nothing is
+preselected, the chosen option explains why it holds or fails, and without JavaScript
+every option and its reason stay readable. The evidence checklist itself can be
+ticked during the lab; ticks live in that browser only and never stand in for a
+command that ran. A lesson closes with a card for the next lesson in the path rather
+than a bare link, and page to page navigation cross-fades where the browser supports
+it. All of this stops when the reader asks for reduced motion.
 
 ## Integrated practice studio
 

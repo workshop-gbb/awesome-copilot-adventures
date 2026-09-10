@@ -14,11 +14,6 @@ primary_capability: "Creating specialized custom agents and handoffs"
 
 # The Agents of Stellaris
 
-
-> [!NOTE]
-> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
-> **Primary capability:** Creating specialized custom agents and handoffs
-
 ![Two specialists with different instruments hand over a case at a review table between their observatory workstations.](../../../assets/images/adventures/stellaris-agents-hero.webp)
 
 <details>

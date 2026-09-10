@@ -14,11 +14,6 @@ primary_capability: "Building and validating minimal agent context"
 
 # The Context Mirrors
 
-
-> [!NOTE]
-> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
-> **Primary capability:** Building and validating minimal agent context
-
 ![An investigator compares the same mechanism in two mirrors, surrounded by scattered clues on one side and selected references on the other.](../../../assets/images/adventures/context-mirrors-hero.webp)
 
 <details>

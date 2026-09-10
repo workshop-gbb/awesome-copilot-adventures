@@ -14,11 +14,6 @@ primary_capability: "Using GitHub Copilot CLI safely"
 
 # The Terminal Gate
 
-
-> [!NOTE]
-> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
-> **Primary capability:** Using GitHub Copilot CLI safely
-
 ![An operator controls a token reader and stop lever beside a terminal-shaped gate.](../../../assets/images/adventures/terminal-gate-hero.webp)
 
 <details>

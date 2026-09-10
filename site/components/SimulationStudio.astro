@@ -47,7 +47,7 @@ const config = JSON.stringify({ text, stages, locale }).replace(/</g, '\\u003c')
       </div>
     </div>
     <figure class="he-workflow-figure">
-      <ol class="he-workflow-map" aria-label={text.workflow}>
+      <ol class="he-workflow-map" data-workflow-map data-outcome="ready" aria-label={text.workflow}>
         {stages.map((stage, index) => (
           <li data-stage={workflowStages[index]}><span class="he-node-index">0{index + 1}</span><strong>{stage.name}</strong><span class="he-node-state" data-stage-state>{text.pending}</span></li>
         ))}

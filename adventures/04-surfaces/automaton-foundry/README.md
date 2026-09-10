@@ -14,11 +14,6 @@ primary_capability: "Building an application with the GitHub Copilot SDK"
 
 # The Automaton Foundry
 
-
-> [!NOTE]
-> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
-> **Primary capability:** Building an application with the GitHub Copilot SDK
-
 ![An engineer assembles an automaton inside a transparent enclosure with separate components, a manual key and a comparison image.](../../../assets/images/adventures/automaton-foundry-hero.webp)
 
 <details>

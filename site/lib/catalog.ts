@@ -31,6 +31,11 @@ export interface PageInfo {
   verified?: string;
   home?: boolean;
   kind?: 'document' | 'repository' | 'library' | 'not-found';
+  capability?: string;
+  status?: string;
+  level?: string;
+  duration?: string;
+  difficulty?: string;
 }
 
 const languages: Partial<Record<Locale, Language>> = generated.locales;

@@ -55,8 +55,10 @@ export function enhanceAdventureFilms() {
     };
     trigger.addEventListener('mouseenter', () => playFilm());
     trigger.addEventListener('mouseleave', () => showPoster());
-    trigger.addEventListener('focus', () => playFilm());
-    trigger.addEventListener('blur', () => showPoster());
+    // Keyboard focus reveals the cue but never starts playback: activation stays explicit, so the
+    // control and its announcement always agree about what the next press will do.
+    trigger.addEventListener('focus', () => { card.dataset.focused = 'true'; });
+    trigger.addEventListener('blur', () => { delete card.dataset.focused; showPoster(); });
     trigger.addEventListener('click', () => {
       if (pending || card.dataset.playing === 'true') showPoster({ announce: true });
       else playFilm({ explicit: true });

@@ -150,6 +150,14 @@ function pages() {
       navigationSection: name.startsWith('adventures/') ? name.split('/')[1] : '',
       navigationHidden: scalar(metadata, 'nav_exclude') === 'true',
       verified: scalar(metadata, 'last_verified'),
+      // Briefing metadata: the capability is prose and is translated like a title; the level,
+      // status and duration are identifiers rendered through the interface dictionary.
+      capability: scalar(metadata, 'primary_capability'),
+      capabilityId: scalar(metadata, 'primary_capability') ? digest(scalar(metadata, 'primary_capability')) : '',
+      status: scalar(metadata, 'status'),
+      level: scalar(metadata, 'level'),
+      duration: metadata.match(/^ {2}duration:\s*(.+)$/m)?.[1]?.trim() || '',
+      difficulty: metadata.match(/^ {2}level:\s*(.+)$/m)?.[1]?.trim() || '',
       tokens: tokensFor(body),
       sourceHash: digest(original)
     };
@@ -160,6 +168,7 @@ function translationSegments(documents = pages(), images = mediaImages()) {
   const segments = new Map();
   for (const page of documents) {
     const entries = [{ id: page.titleId, kind: 'title', text: page.title }, ...page.tokens.filter(token => token.id)];
+    if (page.capabilityId) entries.push({ id: page.capabilityId, kind: 'capability', text: page.capability });
     for (const entry of entries) {
       if (!segments.has(entry.id)) segments.set(entry.id, { id: entry.id, kind: entry.kind, text: entry.text, sources: [] });
       segments.get(entry.id).sources.push(page.source);

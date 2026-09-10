@@ -1,0 +1,22 @@
+---
+import Icon, { type IconName } from './Icon.astro';
+import { labelFor, type DocumentInfo, type Locale } from '../lib/catalog';
+interface Props { document: DocumentInfo; locale: Locale; hidden?: boolean; }
+const { document, locale, hidden = false } = Astro.props;
+const groupIcon: Record<string, IconName> = {
+  adventures: 'map', 'hands-on': 'terminal', guides: 'book', fixtures: 'toolkit',
+  solutions: 'check', media: 'play', read: 'file'
+};
+const illustrated = document.image && ['adventures', 'hands-on'].includes(document.group);
+---
+<li class="discovery-card" data-library-card data-source={document.source} data-group={document.group} data-title={document.title} hidden={hidden}>
+  {illustrated && (
+    <img
+      class="he-card-image" src={document.image} alt="" loading="lazy" decoding="async"
+      width={document.group === 'adventures' ? 1456 : 1440} height={document.group === 'adventures' ? 832 : 630}
+    />
+  )}
+  <span class="card-index"><Icon name={groupIcon[document.group] || 'file'} size={14} />{labelFor(locale, document.group)} <span data-read-badge hidden>✓</span></span>
+  <a href={document.url}>{document.title}<span aria-hidden="true">↗</span></a>
+  <small>{document.source}</small>
+</li>

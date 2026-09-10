@@ -14,11 +14,6 @@ primary_capability: "Connecting tools with Model Context Protocol"
 
 # The MCP Cartographer
 
-
-> [!NOTE]
-> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
-> **Primary capability:** Connecting tools with Model Context Protocol
-
 ![A cartographer works at a local map desk connected through a checkpoint and bridge to an external archive.](../../../assets/images/adventures/cartographer-mcp-hero.webp)
 
 <details>

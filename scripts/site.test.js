@@ -102,7 +102,9 @@ test('adventure films use integrated ambient playback instead of detached play c
   assert.ok(!component.includes('data-film-still'));
   assert.ok(!/<video[\s\S]*?\bcontrols\b/.test(component));
   assert.ok(script.includes("trigger.addEventListener('mouseenter'"));
-  assert.ok(script.includes("trigger.addEventListener('focus'"));
+  // Focus reveals the cue; it must not start playback, or the first key press would pause instead of play.
+  assert.ok(script.includes("trigger.addEventListener('focus', () => { card.dataset.focused = 'true'; })"));
+  assert.ok(!/addEventListener\('focus', \(\) => playFilm/.test(script), 'Keyboard focus must not autoplay.');
   assert.ok(script.includes("matchMedia('(prefers-reduced-motion: reduce)')"));
   assert.ok(script.includes("matchMedia('(hover: none)')"));
   assert.ok(script.includes("error?.name === 'AbortError'"));
@@ -234,6 +236,7 @@ test('adventure film interaction keeps activation, reduced motion, focus and err
   await second.trigger.emit('mouseenter');
   await second.trigger.emit('focus');
   assert.equal(second.video.hasAttribute('src'), false);
+  assert.equal(second.card.dataset.focused, 'true');
   await second.trigger.emit('click');
   assert.equal(second.video.paused, false);
   assert.equal(second.status.textContent, 'Playing.');
@@ -246,7 +249,7 @@ test('adventure film interaction keeps activation, reduced motion, focus and err
   hoverless.matches = true;
   const playCount = second.video.playCount;
   await second.trigger.emit('focus');
-  assert.equal(second.video.playCount, playCount);
+  assert.equal(second.video.playCount, playCount, 'Focus must never start playback.');
   await second.trigger.emit('click');
   assert.equal(second.video.paused, false);
   document.hidden = true;
@@ -359,6 +362,167 @@ test('each lesson links to the practice simulation that matches its capability',
   for (const group of groups) assert.ok(registry.includes(`'${group}':`), `Lab group without a practice topic: ${group}`);
   assert.ok(!fs.readFileSync(path.join(root, 'site/layouts/Site.astro'), 'utf8').includes('eldoria|algora'),
     'The lesson practice link must not be routed by a filename regular expression.');
+});
+
+test('the hands-on index publishes every catalogued lab under a localized group', () => {
+  const component = fs.readFileSync(path.join(root, 'site/components/LabIndex.astro'), 'utf8');
+  const catalog = require('../mslearn-github-copilot/catalog.json');
+  const lessons = pages().filter(page => page.group === 'hands-on');
+  assert.equal(catalog.labs.length, lessons.length);
+  for (const lab of catalog.labs) {
+    assert.ok(lessons.some(page => page.labId === lab.id), `Lab without a published page: ${lab.id}`);
+    assert.ok(component.includes(`'${lab.group}':`), `Lab group without a localized label: ${lab.group}`);
+  }
+  const keys = [...component.matchAll(/ui\.(labGroup[A-Za-z]+)/g)].map(match => match[1]);
+  assert.equal(new Set(keys).size, new Set(catalog.labs.map(lab => lab.group)).size);
+  for (const [locale, dictionary] of Object.entries(ui)) {
+    for (const key of keys) assert.ok(dictionary[key]?.trim(), `${locale}: ${key}`);
+  }
+  // The markdown tables the component replaces must not come back and duplicate it.
+  const index = fs.readFileSync(path.join(root, 'mslearn-github-copilot/index.md'), 'utf8');
+  assert.ok(!index.includes('| Lab |'), 'The lab list is rendered from the catalog, not from a table.');
+  assert.ok(index.includes('```mermaid'), 'The Spec Kit decision diagram must stay on the page.');
+});
+
+test('every lesson briefing states a translated capability or a real estimate', () => {
+  const briefing = fs.readFileSync(path.join(root, 'site/lib/briefing.ts'), 'utf8');
+  const documents = pages();
+  const adventures = documents.filter(page => page.source.startsWith('adventures/') && page.source.endsWith('/README.md'));
+  assert.equal(adventures.length, 14);
+  for (const page of adventures) {
+    assert.ok(page.capability?.trim(), `Adventure without a capability: ${page.source}`);
+    assert.equal(page.status, 'content-ready');
+    for (const locale of locales.filter(locale => locale !== 'en')) {
+      const dictionary = loadTranslations(locale);
+      assert.ok(dictionary[page.capabilityId]?.trim(), `${locale} capability missing for ${page.source}`);
+    }
+  }
+  const labs = documents.filter(page => page.group === 'hands-on');
+  assert.ok(labs.every(page => /^\d+ minutes$/.test(page.duration)), 'Every lab declares a facilitation estimate.');
+  // The prose callout the briefing replaced must not return and duplicate it.
+  for (const page of adventures) {
+    const markdown = fs.readFileSync(path.join(root, page.source), 'utf8');
+    assert.ok(!markdown.includes('> **Status:**'), `Duplicated status callout in ${page.source}`);
+  }
+  // The briefing escapes every value it renders and stays empty when a page declares nothing.
+  assert.ok(briefing.includes('function esc(') && briefing.includes("if (!page.capability && !facts.length) return '';"));
+  for (const key of ['briefingCapability', 'briefingLevel', 'briefingStack', 'briefingTime', 'briefingStatus', 'minutesLabel', 'statusContentReady']) {
+    assert.ok(briefing.includes(`ui.${key}`), `The briefing must use the ${key} label.`);
+    for (const [locale, dictionary] of Object.entries(ui)) assert.ok(dictionary[key]?.trim(), `${locale}: ${key}`);
+  }
+});
+
+test('each lesson check has exactly one defensible answer in all three languages', () => {
+  const quizzes = fs.readFileSync(path.join(root, 'site/lib/lesson-quizzes.ts'), 'utf8');
+  const renderer = fs.readFileSync(path.join(root, 'site/lib/quiz.ts'), 'utf8');
+  const sources = new Set(pages().map(page => page.source));
+  const entries = [...quizzes.matchAll(/^ {2}'([^']+\.md)': \{$/gm)].map(match => match[1]);
+  for (const source of entries) assert.ok(sources.has(source), `Check registered for a missing lesson: ${source}`);
+  // Every adventure and every lab meets its own misconception before the learner records evidence.
+  const lessons = pages().filter(page => (page.source.startsWith('adventures/') && page.source.endsWith('/README.md'))
+    || page.group === 'hands-on');
+  assert.equal(lessons.length, 40);
+  for (const page of lessons) {
+    assert.ok(entries.includes(page.source), `Lesson without a retrieval check: ${page.source}`);
+  }
+  // One correct option per question, and every option explains itself.
+  const blocks = quizzes.split(/^ {2}'[^']+\.md': \{$/m).slice(1);
+  assert.equal(blocks.length, entries.length);
+  for (const [index, block] of blocks.entries()) {
+    assert.equal((block.match(/correct: true/g) || []).length, 1, `${entries[index]}: needs exactly one correct option.`);
+    assert.equal((block.match(/^ {8}why: \[/gm) || []).length, (block.match(/^ {8}text: \[/gm) || []).length,
+      `${entries[index]}: every option needs a reason.`);
+  }
+  for (const [, body] of quizzes.matchAll(/\[('(?:[^'\\]|\\.)*'(?:, *'(?:[^'\\]|\\.)*')*)\]/g)) {
+    assert.equal(body.split(/', *'/).length, 3, `A localized option must hold three languages: ${body.slice(0, 60)}`);
+  }
+  // Nothing is preselected and the full answer list survives without JavaScript.
+  assert.ok(!renderer.includes('aria-pressed="true"'));
+  assert.ok(renderer.includes('data-quiz-options hidden') && renderer.includes('class="quiz-answers"'));
+  assert.ok(renderer.includes('role="status"') && renderer.includes('aria-live="polite"'));
+  for (const key of ['quizKicker', 'quizEmpty', 'quizCorrect', 'quizIncorrect']) {
+    for (const [locale, dictionary] of Object.entries(ui)) assert.ok(dictionary[key]?.trim(), `${locale}: ${key}`);
+  }
+});
+
+test('the workflow simulation shows where a failed review stops the handoff', () => {
+  const component = fs.readFileSync(path.join(root, 'site/components/SimulationStudio.astro'), 'utf8');
+  const script = fs.readFileSync(path.join(root, 'assets/site/studio.js'), 'utf8');
+  const styles = fs.readFileSync(path.join(root, 'assets/site/studio.css'), 'utf8');
+  assert.ok(component.includes('data-workflow-map'), 'The stage map must be addressable.');
+  assert.ok(script.includes("dataset.outcome = workflow.status"), 'The map must carry the run outcome.');
+  // A blocked run severs the next handoff instead of only tinting a border.
+  assert.ok(styles.includes('[data-outcome="blocked"] li[data-state="pending"]::before'));
+  assert.ok(styles.includes('border-top-style: dashed'));
+  assert.ok(styles.includes('[data-outcome="complete"] li[data-state="current"]'));
+  // Motion is opt-out: every stage animation sits behind the reduced-motion query.
+  const motion = styles.slice(styles.indexOf('@media (prefers-reduced-motion: no-preference)'));
+  for (const name of ['he-stage-arrive', 'he-stage-refuse']) {
+    assert.ok(motion.includes(name), `${name} must only run when motion is welcome.`);
+    assert.ok(styles.includes(`@keyframes ${name}`));
+  }
+});
+
+test('permanently dark surfaces share one token scope instead of hand-written palettes', () => {
+  const styles = fs.readFileSync(path.join(root, 'assets/site/site.css'), 'utf8');
+  const scope = styles.slice(styles.indexOf('.he-inverse {'), styles.indexOf('.container {'));
+  assert.ok(scope.includes('.he-inverse {'), 'The inverted scope must exist.');
+  for (const token of ['--ink:', '--ink-2:', '--ink-3:', '--bg:', '--bg-alt:', '--rule:', '--rule-2:']) {
+    assert.ok(scope.includes(token), `The inverted scope must map ${token}`);
+  }
+  for (const [file, selector] of [
+    ['site/components/Home.astro', 'class="hero he-inverse"'],
+    ['site/components/Footer.astro', 'class="site-footer he-inverse"'],
+    ['site/components/AdventureFilms.astro', 'class="adventure-films he-inverse"']
+  ]) {
+    assert.ok(fs.readFileSync(path.join(root, file), 'utf8').includes(selector), `${file} must adopt the inverted scope.`);
+  }
+  // Those surfaces read their ink and ground from the scope, not from literals.
+  const hero = styles.slice(styles.indexOf('.hero {'), styles.indexOf('.hero-aurora'));
+  const footer = styles.slice(styles.indexOf('.site-footer {'), styles.indexOf('.footer-atmosphere'));
+  for (const [name, block] of [['hero', hero], ['footer', footer]]) {
+    assert.ok(block.includes('background: var(--bg)') && block.includes('color: var(--ink)'), `${name} must use the scope.`);
+    assert.equal(block.match(/#[0-9a-fA-F]{3,6}\b/g), null, `${name} must not reintroduce colour literals.`);
+  }
+});
+
+test('the evidence checklist is usable locally without ever claiming a check ran', () => {
+  const script = fs.readFileSync(path.join(root, 'assets/site/checklist.js'), 'utf8');
+  const site = fs.readFileSync(path.join(root, 'assets/site/site.js'), 'utf8');
+  assert.ok(site.includes('enhanceChecklist('), 'The checklist enhancement must be loaded.');
+  // Stored per document, in this browser only, and enabled only once script runs.
+  assert.ok(site.includes('${base}:evidence:${config.source'), 'Ticks are stored per document.');
+  assert.ok(script.includes('localStorage.getItem') && script.includes('localStorage.setItem'));
+  assert.ok(script.includes('box.disabled = false'), 'Markdown renders the boxes disabled; script enables them.');
+  assert.ok(script.includes("role', 'status'"), 'Progress must be announced.');
+  for (const [locale, dictionary] of Object.entries(ui)) {
+    for (const key of ['checklistProgress', 'checklistNote', 'checklistClear']) {
+      assert.ok(dictionary[key]?.trim(), `${locale}: ${key}`);
+    }
+    assert.match(dictionary.checklistProgress, /\{done}.*\{total}/, `${locale}: progress needs both counts`);
+    // The wording must keep a tick separate from evidence that something actually ran.
+    assert.match(dictionary.checklistNote, /navegador|navigator|browser/i, `${locale}: note must say where it is stored`);
+  }
+});
+
+test('every adventure ends by pointing at the next lesson in the path', () => {
+  const helper = fs.readFileSync(path.join(root, 'site/lib/next-lesson.ts'), 'utf8');
+  assert.ok(helper.includes("catalog.find(document => document.url === paragraph[1])"),
+    'The card must resolve the link the Markdown actually points at.');
+  const documents = pages();
+  const adventures = documents.filter(page => page.source.startsWith('adventures/') && page.source.endsWith('/README.md'));
+  const routes = new Set(documents.map(page => page.route));
+  let linked = 0;
+  for (const page of adventures) {
+    const markdown = fs.readFileSync(path.join(root, page.source), 'utf8');
+    const section = markdown.split(/^## Next adventure$/m)[1];
+    if (!section) continue;
+    // The last adventure closes the path instead of pointing onward; every other one links.
+    if (section.match(/\[[^\]]+\]\(([^)]+)\)/)) linked += 1;
+  }
+  assert.equal(linked, adventures.length - 1, 'All but the final adventure name their successor.');
+  assert.ok(routes.size > 0);
+  for (const [locale, dictionary] of Object.entries(ui)) assert.ok(dictionary.nextLesson?.trim(), `${locale}: nextLesson`);
 });
 
 test('the shared design tokens and static reference have no missing local dependencies', () => {
@@ -663,11 +827,18 @@ test('localized search is accent-insensitive and prioritizes guides over origina
   ];
   const matches = searchRecords(records, 'modernizacao');
   assert.equal(matches.length, 2);
+  // A lesson always outranks a repository path, and paths are capped so they cannot bury it.
   assert.equal(matches[0].title, records[1].title);
+  assert.equal(matches.at(-1).original, true);
   assert.equal(searchRecords(records, '').length, 0);
   assert.equal(searchRecords(records, 'sem resultados').length, 0);
   assert.equal(searchRecords(records, 'compatibilidade migracao')[0].title, records[1].title);
-  assert.equal(searchRecords(records, 'modernizacao', 1).length, 1);
+  const flooded = [...Array(20)].map((value, index) => ({ title: `path/modernizacao-${index}.py`, text: 'modernizacao', original: true }));
+  const tiered = searchRecords([...flooded, records[1]], 'modernizacao');
+  assert.ok(!tiered[0].original, 'The document comes first even against twenty paths.');
+  assert.equal(tiered.filter(record => record.original).length, 5, 'Paths are capped.');
+  assert.equal(searchRecords(records, 'modernizacao', 1).filter(record => !record.original).length, 1);
+  assert.ok(resultExcerpt({ text: '[!TIP] Keep it small.' }, 'small').startsWith('Keep'), 'Admonition markers are not prose.');
   assert.ok(resultExcerpt(records[1], 'migração').includes('migração'));
 });
 

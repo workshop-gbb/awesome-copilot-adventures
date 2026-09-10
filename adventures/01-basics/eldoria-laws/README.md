@@ -14,11 +14,6 @@ primary_capability: "Authoring scoped repository instructions"
 
 # The Laws of Eldoria
 
-
-> [!NOTE]
-> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
-> **Primary capability:** Authoring scoped repository instructions
-
 ![A central charter sends illuminated paths toward distinct workshop districts in an archive city.](../../../assets/images/adventures/eldoria-laws-hero.webp)
 
 <details>

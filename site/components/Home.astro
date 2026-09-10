@@ -2,12 +2,14 @@
 import { languageFor, counts, type Locale } from '../lib/catalog';
 import Discovery from './Discovery.astro';
 import LearningPath from './LearningPath.astro';
+import { renderScene } from '../lib/scenes';
 import StudioPreview from './StudioPreview.astro';
 import AdventureFilms from './AdventureFilms.astro';
 import Icon from './Icon.astro';
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const { ui, href } = languageFor(locale);
+const workflowScene = renderScene('evidence-workflow', locale, { kicker: ui.sceneKicker, replay: ui.sceneReplay }, 'home-workflow');
 const stages = [
   { id: 'ask', name: 'Ask', goal: ui.askGoal, artifact: ui.askArtifact },
   { id: 'plan', name: 'Plan', goal: ui.planGoal, artifact: ui.planArtifact },
@@ -28,7 +30,7 @@ const stats = [
   { tone: 'red', icon: 'repository', value: counts.sourceCount, label: ui.sourceCount, url: href.repository }
 ] as const;
 ---
-<section class="hero">
+<section class="hero he-inverse">
   <div class="hero-aurora" aria-hidden="true"></div>
   <div class="container hero-grid">
     <div class="hero-copy">
@@ -77,6 +79,9 @@ const stats = [
       </a>
     ))}
   </nav>
+</section>
+<section class="section container workflow-section" aria-label={ui.workflowExplore}>
+  <Fragment set:html={workflowScene} />
 </section>
 <LearningPath locale={locale} />
 <AdventureFilms locale={locale} />

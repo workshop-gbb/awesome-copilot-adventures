@@ -14,11 +14,6 @@ primary_capability: "Integrating local, cloud, and runtime agents"
 
 # The Convergence of Three Realms
 
-
-> [!NOTE]
-> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
-> **Primary capability:** Integrating local, cloud, and runtime agents
-
 ![A maintainer reviews artifacts between a local workshop, a cloud citadel and an automaton foundry.](../../../assets/images/adventures/convergence-of-three-realms-hero.webp)
 
 <details>

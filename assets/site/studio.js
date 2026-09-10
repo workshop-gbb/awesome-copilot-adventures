@@ -34,11 +34,20 @@ export function enhanceStudios() {
       root.querySelector('[data-workflow-count]').textContent = `${number.format(workflow.cursor + 1)} / ${number.format(stages.length)}`;
       nodes.forEach((node, index) => {
         const current = index === workflow.cursor;
-        node.dataset.state = current ? 'current' : index < workflow.cursor ? 'visited' : 'pending';
+        const state = current ? 'current' : index < workflow.cursor ? 'visited' : 'pending';
+        // Re-entering a state replays its arrival, so a step forward is visible as an event.
+        if (node.dataset.state !== state && state !== 'pending') {
+          // Restarting the animation requires the attribute to leave and re-enter the selector.
+          node.dataset.state = 'pending';
+          void node.offsetWidth;
+        }
+        node.dataset.state = state;
         if (current) node.setAttribute('aria-current', 'step');
         else node.removeAttribute('aria-current');
         node.querySelector('[data-stage-state]').textContent = text[node.dataset.state];
       });
+      // The map itself carries the outcome, so a blocked review can show the handoff being refused.
+      root.querySelector('[data-workflow-map]').dataset.outcome = workflow.status;
       details.forEach((detail, index) => { detail.hidden = index !== Math.max(0, workflow.cursor); });
       retry.hidden = workflow.status !== 'blocked';
     };

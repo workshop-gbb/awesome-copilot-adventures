@@ -83,8 +83,14 @@ export function enhanceSite(config, locationChanged) {
       const matches = filterLibrary(documents, { query: input.value, group, read: state.read });
       const visible = new Set((compact ? matches.slice(0, 6) : matches).map(document => document.source));
       for (const card of cards) card.hidden = !visible.has(card.dataset.source);
+      for (const band of root.querySelectorAll('[data-band]')) {
+        band.hidden = ![...band.querySelectorAll('[data-library-card]')].some(card => !card.hidden);
+      }
       for (const button of filters) button.setAttribute('aria-pressed', String(button.dataset.libraryFilter === group));
-      root.querySelector('[data-library-status]').textContent = `${ui.filterShowing}: ${format.format(matches.length)}`;
+      const shown = visible.size;
+      root.querySelector('[data-library-status]').textContent = shown < matches.length
+        ? ui.filterShowingOf.replace('{shown}', format.format(shown)).replace('{total}', format.format(matches.length))
+        : `${ui.filterShowing}: ${format.format(matches.length)}`;
       root.querySelector('[data-library-empty]').hidden = matches.length !== 0;
       const query = new URLSearchParams();
       if (group !== 'all') query.set('track', group);

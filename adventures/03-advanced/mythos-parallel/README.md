@@ -14,11 +14,6 @@ primary_capability: "Coordinating independent agents"
 
 # The Parallel Trials of Mythos
 
-
-> [!NOTE]
-> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
-> **Primary capability:** Coordinating independent agents
-
 ![Three teams work on distinct mechanisms in separate lanes before a shared review table.](../../../assets/images/adventures/mythos-parallel-hero.webp)
 
 <details>

@@ -1,16 +1,14 @@
 ---
 import { languageFor, labelFor, type Locale } from '../lib/catalog';
 import Icon, { type IconName } from './Icon.astro';
-interface Props { locale: Locale; compact?: boolean; adventuresOnly?: boolean; }
-const { locale, compact = false, adventuresOnly = false } = Astro.props;
+import DiscoveryCard from './DiscoveryCard.astro';
+import { adventureLevels } from '../lib/levels';
+interface Props { locale: Locale; compact?: boolean; adventuresOnly?: boolean; grouped?: boolean; }
+const { locale, compact = false, adventuresOnly = false, grouped = false } = Astro.props;
 const { ui, href, catalog } = languageFor(locale);
 const id = adventuresOnly ? 'adventure-library' : compact ? 'home-library' : 'full-library';
 const groups = adventuresOnly ? ['all', 'read'] : ['all', 'adventures', 'hands-on', 'guides', 'fixtures', 'solutions', 'media', 'read'];
 const groupLabel = (group: string) => group === 'all' ? ui.filterAll : group === 'read' ? ui.filterRead : labelFor(locale, group);
-const groupIcon: Record<string, IconName> = {
-  adventures: 'map', 'hands-on': 'terminal', guides: 'book', fixtures: 'toolkit',
-  solutions: 'check', media: 'play', read: 'file'
-};
 const priority = (source: string) => source === 'adventures/00-foundations/portals-of-nexus/README.md' ? 0
   : source.startsWith('adventures/') && source.endsWith('/README.md') ? 1 : 2;
 const documents = adventuresOnly
@@ -18,6 +16,8 @@ const documents = adventuresOnly
     .sort((left, right) => (left.navigationSection || '').localeCompare(right.navigationSection || '')
       || (left.navigationOrder ?? 1000) - (right.navigationOrder ?? 1000))
   : [...catalog].sort((left, right) => priority(left.source) - priority(right.source));
+// The adventure catalog reads as the curriculum path: one band per level, in order.
+const levels = grouped ? adventureLevels(catalog, ui) : [];
 ---
 <div class="discovery" data-discovery data-compact={compact ? 'true' : 'false'}>
   <div class="discovery-controls" data-enhanced-only hidden>
@@ -28,16 +28,26 @@ const documents = adventuresOnly
     </div>
     <div class="discovery-summary"><p data-library-status role="status"></p><button class="quiet-button" type="button" data-clear-filters>{ui.clearFilters}</button></div>
   </div>
-  <ul class="discovery-grid">
-    {documents.map((document, index) => (
-      <li class="discovery-card" data-library-card data-source={document.source} data-group={document.group} data-title={document.title} hidden={compact && index >= 6}>
-        {document.image && ['adventures', 'hands-on'].includes(document.group) && <img class="he-card-image" src={document.image} width={document.group === 'adventures' ? 1456 : 1440} height={document.group === 'adventures' ? 832 : 630} alt="" loading="lazy" decoding="async" />}
-        <span class="card-index"><Icon name={groupIcon[document.group] || 'file'} size={14} />{labelFor(locale, document.group)} <span data-read-badge hidden>✓</span></span>
-        <a href={document.url}>{document.title}<span aria-hidden="true">↗</span></a>
-        <small>{document.source}</small>
-      </li>
-    ))}
-  </ul>
+  {grouped ? (
+    <div class="discovery-bands">
+      {levels.map(level => (
+        <section class="discovery-band" data-band data-tone={level.tone} aria-labelledby={`band-${level.level}`}>
+          <div class="band-heading">
+            <span class="band-index">{String(level.index + 1).padStart(2, '0')}</span>
+            <h3 id={`band-${level.level}`}>{level.label}</h3>
+            <p class="band-count">{level.lessons.length} {level.lessons.length === 1 ? ui.adventureOne : labelFor(locale, 'adventures')}</p>
+          </div>
+          <ul class="discovery-grid">
+            {level.lessons.map(document => <DiscoveryCard document={document} locale={locale} />)}
+          </ul>
+        </section>
+      ))}
+    </div>
+  ) : (
+    <ul class="discovery-grid">
+      {documents.map((document, index) => <DiscoveryCard document={document} locale={locale} hidden={compact && index >= 6} />)}
+    </ul>
+  )}
   <p data-library-empty hidden>{ui.searchEmpty}</p>
   {compact && <a class="button" href={href.library} data-library-more>{ui.viewLibrary} <span aria-hidden="true">→</span></a>}
 </div>

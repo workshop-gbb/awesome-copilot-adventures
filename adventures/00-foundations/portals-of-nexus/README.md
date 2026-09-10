@@ -14,11 +14,6 @@ primary_capability: "Selecting roles, harnesses, targets, and environments"
 
 # The Portals of Nexus
 
-
-> [!NOTE]
-> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
-> **Primary capability:** Selecting roles, harnesses, targets, and environments
-
 ![A cartographer compares instruments and consoles in a workshop facing a distant citadel.](../../../assets/images/adventures/portals-of-nexus-hero.webp)
 
 <details>

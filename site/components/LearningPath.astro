@@ -6,27 +6,11 @@
  */
 import Icon from './Icon.astro';
 import { languageFor, labelFor, counts, type Locale } from '../lib/catalog';
+import { adventureLevels } from '../lib/levels';
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const { ui, href, catalog } = languageFor(locale);
-const levelOrder = ['00-foundations', '01-basics', '02-intermediate', '03-advanced', '04-surfaces', '99-capstone'] as const;
-const levelLabels: Record<string, string> = {
-  '00-foundations': ui.foundations, '01-basics': ui.levelBasics, '02-intermediate': ui.levelIntermediate,
-  '03-advanced': ui.levelAdvanced, '04-surfaces': ui.surfaces, '99-capstone': ui.levelCapstone
-};
-const tones = ['blue', 'green', 'yellow', 'red', 'blue', 'green'] as const;
-const adventures = catalog
-  .filter(document => document.group === 'adventures' && document.source.endsWith('/README.md'))
-  .sort((left, right) => (left.navigationOrder ?? 1000) - (right.navigationOrder ?? 1000));
-const levels = levelOrder
-  .map((level, index) => ({
-    level,
-    index,
-    tone: tones[index],
-    label: levelLabels[level] || level,
-    lessons: adventures.filter(document => document.navigationSection === level)
-  }))
-  .filter(entry => entry.lessons.length > 0);
+const levels = adventureLevels(catalog, ui);
 ---
 <section class="section container learning-path-section">
   <div class="section-heading" data-tone="blue">

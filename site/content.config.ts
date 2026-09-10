@@ -16,7 +16,12 @@ const lessons = defineCollection({
     group: z.enum(['adventures', 'hands-on', 'guides', 'fixtures', 'solutions', 'media']),
     verified: z.string(),
     home: z.boolean(),
-    alternates: z.record(z.string(), z.string())
+    alternates: z.record(z.string(), z.string()),
+    capability: z.string().optional(),
+    status: z.string().optional(),
+    level: z.string().optional(),
+    duration: z.string().optional(),
+    difficulty: z.string().optional()
   })
 });
 

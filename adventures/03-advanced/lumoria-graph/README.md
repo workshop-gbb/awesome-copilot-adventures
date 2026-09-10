@@ -14,11 +14,6 @@ primary_capability: "Modeling source-grounded repository relationships"
 
 # The Knowledge Graph of Lumoria
 
-
-> [!NOTE]
-> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
-> **Primary capability:** Modeling source-grounded repository relationships
-
 ![An investigator compares a component with a document while illuminated connections distinguish related platforms above a city.](../../../assets/images/adventures/lumoria-graph-hero.webp)
 
 <details>

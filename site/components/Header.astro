@@ -12,14 +12,14 @@ const { ui, href } = languageFor(page.locale);
       <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
       <span>Awesome Copilot<strong>Adventures</strong></span>
     </a>
-    <button class="menu-button quiet-button" type="button" data-site-control hidden aria-expanded="false" aria-controls="main-navigation"><span class="menu-label">{ui.menu}</span><Icon name="menu" /></button>
+    <button class="menu-button quiet-button" type="button" data-site-control hidden aria-expanded="false" aria-controls="main-navigation"><span class="menu-label" data-menu-label>{ui.menu}</span><span class="icon-open"><Icon name="menu" /></span><span class="icon-close"><Icon name="close" /></span></button>
     <nav id="main-navigation" class="main-navigation" aria-label={ui.navigation}>
-      <a href={href.prerequisites} aria-current={page.route === '/prerequisites/' ? 'page' : undefined}>{ui.prerequisites}</a>
-      <a href={href.adventures} aria-current={page.group === 'adventures' ? 'true' : undefined}>{ui.adventures}</a>
-      <a href={href.handsOn} aria-current={page.group === 'hands-on' ? 'true' : undefined}>{ui.navHandsOn}</a>
-      <a href={href.simulations} aria-current={page.route === '/simulations/' ? 'page' : undefined}>{ui.navStudio}</a>
-      <a href={href.library} aria-current={page.kind === 'library' ? 'page' : undefined}>{ui.guides}</a>
-      <a href={href.repository} aria-current={page.kind === 'repository' ? 'page' : undefined}>{ui.repository}</a>
+      <a href={href.prerequisites} data-tone="ink" aria-current={page.route === '/prerequisites/' ? 'page' : undefined}>{ui.prerequisites}</a>
+      <a href={href.adventures} data-tone="blue" aria-current={page.group === 'adventures' ? 'true' : undefined}>{ui.adventures}</a>
+      <a href={href.handsOn} data-tone="green" aria-current={page.group === 'hands-on' ? 'true' : undefined}>{ui.navHandsOn}</a>
+      <a href={href.simulations} data-tone="ink" aria-current={page.route === '/simulations/' ? 'page' : undefined}>{ui.navStudio}</a>
+      <a href={href.library} data-tone="yellow" aria-current={page.kind === 'library' ? 'page' : undefined}>{ui.guides}</a>
+      <a href={href.repository} data-tone="red" aria-current={page.kind === 'repository' ? 'page' : undefined}>{ui.repository}</a>
     </nav>
     <div class="masthead-tools">
       <button class="search-trigger quiet-button" type="button" data-site-control hidden aria-label={ui.search}><Icon name="search" /></button>

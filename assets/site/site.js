@@ -5,6 +5,8 @@ import { closeOnEscape } from './dialog.mjs';
 import { enhanceAdventureFilms } from './adventure-films.js';
 import { copyText } from './clipboard.mjs';
 import { enhanceScenes } from './scenes.js';
+import { enhanceQuiz } from './quiz.js';
+import { enhanceChecklist } from './checklist.js';
 
 const config = JSON.parse(document.getElementById('site-config').textContent);
 const { ui, locale, base } = config;
@@ -40,9 +42,11 @@ function navigation() {
   const menu = document.querySelector('.menu-button');
   const masthead = document.querySelector('.masthead');
   const mobile = matchMedia('(max-width: 1200px)');
+  const menuLabel = menu.querySelector('[data-menu-label]');
   const setOpen = open => {
     masthead.dataset.menuOpen = String(open);
     menu.setAttribute('aria-expanded', String(open));
+    if (menuLabel) menuLabel.textContent = open ? ui.close : ui.menu;
   };
   menu.addEventListener('click', () => setOpen(menu.getAttribute('aria-expanded') !== 'true'));
   const mainNavigation = document.getElementById('main-navigation');
@@ -82,9 +86,7 @@ function navigation() {
   });
   if ('ResizeObserver' in window) {
     new ResizeObserver(() => {
-      if (menu.getAttribute('aria-expanded') !== 'true') {
-        document.documentElement.style.setProperty('--header', `${masthead.offsetHeight}px`);
-      }
+      document.documentElement.style.setProperty('--header', `${masthead.offsetHeight}px`);
     }).observe(masthead);
   }
 }
@@ -195,7 +197,16 @@ async function diagrams() {
     details.append(element('summary', ui.diagramSource), pre);
     const frame = element('div', undefined, 'mermaid-frame');
     frame.setAttribute('role', 'figure');
-    container.replaceWith(frame, details);
+    container.replaceWith(frame);
+    // The legend and the explanation follow the picture as bold-led paragraphs; the source
+    // disclosure belongs after them, so the reading order stays picture, legend, explanation.
+    let anchor = frame;
+    while (anchor.nextElementSibling?.tagName === 'P'
+      && anchor.nextElementSibling.firstElementChild?.tagName === 'STRONG'
+      && anchor.nextElementSibling.firstChild === anchor.nextElementSibling.firstElementChild) {
+      anchor = anchor.nextElementSibling;
+    }
+    anchor.after(details);
     return { source, frame, details };
   });
   let mermaid;
@@ -216,7 +227,11 @@ async function diagrams() {
       // Mermaid runs in strict mode; repository source is never inserted as raw HTML.
       block.frame.innerHTML = svg;
       const title = block.frame.querySelector('title');
-      if (title) block.frame.setAttribute('aria-label', title.textContent);
+      if (title) {
+        block.frame.setAttribute('aria-label', title.textContent);
+        const caption = element('p', title.textContent, 'diagram-title');
+        block.frame.append(caption);
+      }
       if (bindFunctions) bindFunctions(block.frame);
     } catch (error) {
       block.frame.replaceWith(element('p', ui.diagramError, 'diagram-error'));
@@ -470,6 +485,8 @@ enhanceSite(config, updateLanguageLinks);
 enhanceMedia(config.media);
 enhanceAdventureFilms();
 enhanceScenes();
+enhanceQuiz({ correct: ui.quizCorrect, incorrect: ui.quizIncorrect });
+enhanceChecklist({ progress: ui.checklistProgress, note: ui.checklistNote, clear: ui.checklistClear }, `${base}:evidence:${config.source || ''}`);
 void sourceExplorer();
 void diagrams();
 codeCopy();

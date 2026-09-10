@@ -1,0 +1,16 @@
+{
+  "86fb9172353a3e53": "Construir y validar el contexto mínimo del agente",
+  "ed53f770a6751d2f": "Seleccionar roles, harnesses, destinos y entornos",
+  "0a60d1536c5552f7": "Redactar instrucciones acotadas del repositorio",
+  "c8e0e2779c32996c": "Iterar con retroalimentación determinista",
+  "d514cab8bb4aff92": "Empaquetar experiencia reutilizable del agente",
+  "4eea8c5a44fb1ae2": "Crear agentes personalizados especializados y sus traspasos",
+  "c4f269567869a57a": "Limitar la autoridad y las operaciones de riesgo",
+  "1223564de217a4d1": "Conectar herramientas con Model Context Protocol",
+  "bf1e7a0867b85ac8": "Modelar relaciones del repositorio ancladas en la fuente",
+  "765000111ba98e13": "Coordinar agentes independientes",
+  "46937b4bf5e03c3a": "Construir una aplicación con el SDK de GitHub Copilot",
+  "e4b2106a04d8153f": "Delegar trabajo al agente en la nube de GitHub Copilot",
+  "fcf2670324775afe": "Usar GitHub Copilot CLI de forma segura",
+  "2afd145d93931e70": "Integrar agentes locales, en la nube y en tiempo de ejecución"
+}

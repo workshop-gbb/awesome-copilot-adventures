@@ -14,11 +14,6 @@ primary_capability: "Iterating with deterministic feedback"
 
 # The Tempora Loop
 
-
-> [!NOTE]
-> **Status:** Content ready · **Media:** Generated cover and original SVG illustration · **Last verified:** 2026-09-05  
-> **Primary capability:** Iterating with deterministic feedback
-
 ![An engineer inspects a circular mechanism beside a finite stack of tokens and a manual stop lever.](../../../assets/images/adventures/tempora-loop-hero.webp)
 
 <details>

@@ -41,3 +41,78 @@
   .he-scene__captions { grid-template-columns: 1fr; gap: 14px; }
   .he-scene__head { flex-direction: column; }
 }
+
+/* Retrieval check: commit to an answer, then read why it holds or fails. */
+.lesson-quiz { margin-block: 36px; padding: 24px; border: 1px solid var(--rule); border-left: 3px solid var(--page-tone, var(--blue)); border-radius: var(--he-radius-card); background: var(--bg-alt); }
+.lesson-quiz .eyebrow { margin: 0 0 10px; color: var(--page-tone-ink, var(--ink-3)); }
+.quiz-question { margin: 0 0 18px; font-size: 18px; font-weight: 550; line-height: 1.4; letter-spacing: -.015em; text-wrap: pretty; }
+.quiz-options { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.quiz-option { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start; width: 100%; min-height: var(--he-touch-target); padding: 13px 16px; border: 1px solid var(--he-control-border); border-radius: var(--he-radius-control); background: var(--paper); color: var(--ink); font-size: 14px; line-height: 1.55; text-align: left; transition: border-color var(--he-motion-fast), background var(--he-motion-fast), transform var(--he-motion-fast) var(--ease); }
+.quiz-option:hover { border-color: var(--ink); transform: translateY(-1px); }
+.quiz-mark { display: grid; place-items: center; width: 22px; height: 22px; border: 1px solid var(--rule-2); border-radius: 50%; font: 11px/1 var(--mono); color: var(--ink-3); }
+.quiz-option[data-chosen] { border-width: 2px; padding: 12px 15px; }
+.quiz-option[data-chosen][data-state="correct"] { border-color: var(--he-green-ink); background: var(--he-green-tint); }
+.quiz-option[data-chosen][data-state="correct"] .quiz-mark { border-color: var(--he-green-ink); color: var(--he-green-ink); }
+.quiz-option[data-chosen][data-state="incorrect"] { border-color: var(--he-red-ink); background: var(--he-red-tint); }
+.quiz-option[data-chosen][data-state="incorrect"] .quiz-mark { border-color: var(--he-red-ink); color: var(--he-red-ink); }
+.quiz-result { min-height: 46px; margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--rule); font-size: 14px; line-height: 1.6; color: var(--ink-2); }
+.lesson-quiz[data-answered="correct"] .quiz-result { color: var(--he-green-ink); }
+.lesson-quiz[data-answered="incorrect"] .quiz-result { color: var(--he-red-ink); }
+.quiz-answers { display: grid; gap: 10px; margin: 4px 0 0; padding: 0; list-style: none; font-size: 14px; line-height: 1.6; }
+.quiz-answers li { padding-left: 14px; border-left: 2px solid var(--rule-2); }
+.quiz-answers li[data-state="correct"] { border-left-color: var(--he-green-ink); }
+@media (max-width: 560px) { .lesson-quiz { padding: 18px; } .quiz-option { padding: 12px; } }
+
+@media (forced-colors: active) {
+  .quiz-option[data-chosen] { outline: 2px solid Highlight; outline-offset: -2px; }
+  .quiz-answers li[data-state="correct"] { border-left-color: Highlight; }
+}
+
+/* Evidence checklist: usable during the lab, stored in this browser, never a completion claim. */
+.evidence-progress { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 16px; margin: 18px 0 12px; padding: 12px 16px; border: 1px solid var(--rule); border-left: 3px solid var(--page-tone, var(--blue)); border-radius: var(--he-radius-control); background: var(--bg-alt); }
+.evidence-progress strong { font: 500 14px/1.4 var(--mono); font-variant-numeric: tabular-nums; color: var(--page-tone-ink, var(--ink)); }
+.evidence-progress .quiet-button { min-height: 34px; padding: 4px 10px; font-size: 12px; color: var(--ink-2); text-decoration: underline; }
+.evidence-note { flex: 1 1 100%; color: var(--ink-3); font-size: 12px; line-height: 1.6; }
+.document ul.evidence-list { padding-left: 0; list-style: none; }
+.document ul.evidence-list li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start; padding: 9px 12px; border-radius: var(--he-radius-control); transition: background var(--he-motion-fast); }
+.document ul.evidence-list li:hover { background: var(--bg-alt); }
+.document ul.evidence-list input[type="checkbox"] { width: 19px; height: 19px; margin: 4px 0 0; accent-color: var(--page-tone-ink, var(--blue)); }
+.document ul.evidence-list li:has(input:checked) { color: var(--ink-3); }
+
+/* The path continues: the closing link becomes the next lesson, with its cover and its level. */
+.next-lesson { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: 20px; align-items: center; margin: 18px 0 8px; padding: 16px; border: 1px solid var(--rule); border-radius: var(--he-radius-card); background: var(--paper); text-decoration: none; transition: transform var(--he-motion-base) var(--ease), border-color var(--he-motion-base), box-shadow var(--he-motion-base); }
+.next-lesson:is(:hover, :focus-visible) { border-color: var(--page-tone, var(--blue)); box-shadow: var(--he-shadow-card); text-decoration: none; }
+.next-lesson img { width: 100%; height: auto; aspect-ratio: 7 / 4; object-fit: cover; border-radius: 8px; background: var(--bg-alt); }
+.next-lesson__body { display: grid; gap: 8px; min-width: 0; }
+.next-lesson .eyebrow { color: var(--page-tone-ink, var(--ink-3)); }
+.next-lesson strong { font-size: 20px; font-weight: 550; line-height: 1.3; letter-spacing: -.02em; }
+.next-lesson__level { color: var(--ink-3); font: 11px/1.6 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+@media (max-width: 560px) { .next-lesson { grid-template-columns: minmax(0, 1fr); } }
+
+/* Lesson rhythm: the four workflow stages carry the same semantic tones the home page taught, and
+   the guided mission reads as numbered steps rather than as more of the same prose. Identifiers are
+   derived from the English source, so these hooks are the same in every language. */
+.document h3#ask--investigate { --stage: var(--he-blue-ink); }
+.document h3#plan--design { --stage: var(--he-yellow-ink); }
+.document h3#agent--execute { --stage: var(--he-green-ink); }
+.document h3#review--challenge { --stage: var(--he-red-ink); }
+.document :is(h3#ask--investigate, h3#plan--design, h3#agent--execute, h3#review--challenge) {
+  display: flex; align-items: center; gap: 12px; margin-top: 34px; padding: 6px 0 6px 16px;
+  border-left: 3px solid var(--stage); color: var(--stage);
+}
+.document :is(h3[id^="1-"], h3[id^="2-"], h3[id^="3-"], h3[id^="4-"], h3[id^="5-"]) {
+  counter-increment: mission; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px;
+  align-items: baseline; margin-top: 36px;
+}
+.document :is(h3[id^="1-"], h3[id^="2-"], h3[id^="3-"], h3[id^="4-"], h3[id^="5-"])::before {
+  content: counter(mission, decimal-leading-zero);
+  font: 500 13px/1.6 var(--mono); letter-spacing: .06em; color: var(--page-tone-ink, var(--ink-3));
+}
+.document h2#guided-mission { counter-reset: mission; }
+/* The vocabulary checkpoint is a glossary, so it is set as term and definition rather than prose. */
+.document h3#vocabulary-checkpoint + ul { display: grid; gap: 2px; padding-left: 0; list-style: none; }
+.document h3#vocabulary-checkpoint + ul li { display: grid; grid-template-columns: minmax(140px, 22%) minmax(0, 1fr); gap: 6px 18px; margin: 0; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+.document h3#vocabulary-checkpoint + ul li strong { color: var(--page-tone-ink, var(--ink)); font-weight: 600; }
+@media (max-width: 620px) {
+  .document h3#vocabulary-checkpoint + ul li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}
