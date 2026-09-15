@@ -1,0 +1,122 @@
+{
+  "en": {
+    "eyebrow": "Visual reference",
+    "noticeLabel": "What to notice",
+    "snapshotLabel": "Reference snapshot",
+    "expandLabel": "Inspect a larger view",
+    "originalLabel": "Open full-size original",
+    "imageLanguage": "The original image text is in English. The explanation above is localized; open the original to inspect its labels.",
+    "visuals": {
+      "context-assembly": {
+        "title": "Look beyond the prompt",
+        "alt": "Diagram grouping instructions, conversation history, implicit context, explicit references and tool outputs inside a context window that feeds a language model.",
+        "notice": "Separate the task you type from the instructions, files and tool results around it. Use these groups to ask which sources your session actually received, and which ones the task needs.",
+        "caution": "Illustrative snapshot, not a guarantee that every source is collected or ordered this way. Verify context in your chosen surface and consult the lesson’s official references."
+      },
+      "context-engineering-workflow": {
+        "title": "Carry context into the plan",
+        "alt": "Flow diagram connecting project and task context to a plan and then code, with a plan template and coding guidelines entering at separate stages.",
+        "notice": "Follow the path from selected project context to a written plan, then to a bounded change. Review what each stage carries forward; generating code does not replace the lesson’s verification steps.",
+        "caution": "Illustrative workflow snapshot, not a required Spec Kit file layout or a current product contract. Keep the lesson’s artifacts, compatibility constraints and checks as the authority."
+      },
+      "agent-loop": {
+        "title": "Find the loop’s stopping points",
+        "alt": "Flow diagram linking context assembly, model responses, tool execution and returned results, with separate branches for limits, cancellation and errors.",
+        "notice": "Trace how tool results return to the next iteration, then find the branches that stop or interrupt work. In your lesson, name the limit and the evidence you keep when execution stops.",
+        "caution": "Illustrative snapshot of one tool loop, not a universal architecture or an SDK API contract. Use the lesson’s documented tools, permissions and stop conditions."
+      },
+      "tdd-implementation-diagram": {
+        "title": "Keep test evidence at the handoff",
+        "alt": "Diagram of test, implementation and refactoring roles passing work between them, beside a separate group of instruction files.",
+        "notice": "Follow the boundary between a test, a minimal change and refactoring. A useful check should reject a deliberate mistake; keep its evidence visible when work changes hands.",
+        "caution": "Illustrative snapshot: the named agents and instruction files are examples, not built-in roles or required lab files. Follow the lesson’s checks; the drawing is not a test result."
+      },
+      "agents-window-session-target": {
+        "title": "Separate the session choices",
+        "alt": "Screenshot of a new-session target menu above separate role, model and permission controls, with workspace and worktree choices nearby.",
+        "notice": "Locate the target selector, then distinguish it from the role, model and permissions. Check where the session will act and what it may do before you approve work.",
+        "caution": "Interface snapshot, not a promise of current model or target availability. Options can differ by version, account and policy; verify your environment using the lesson’s official references."
+      }
+    }
+  },
+  "es": {
+    "eyebrow": "Referencia visual",
+    "noticeLabel": "En qué fijarte",
+    "snapshotLabel": "Imagen de referencia",
+    "expandLabel": "Examinar una vista ampliada",
+    "originalLabel": "Abrir el original a tamaño completo",
+    "imageLanguage": "El texto de la imagen original está en inglés. La explicación anterior está traducida; abre el original para examinar sus etiquetas.",
+    "visuals": {
+      "context-assembly": {
+        "title": "Mira más allá del prompt",
+        "alt": "Diagrama que agrupa instrucciones, historial de conversación, contexto implícito, referencias explícitas y resultados de herramientas dentro de una ventana de contexto que alimenta un modelo de lenguaje.",
+        "notice": "Distingue la tarea que escribes de las instrucciones, los archivos y los resultados de herramientas que la acompañan. Usa estos grupos para comprobar qué fuentes recibió tu sesión y cuáles necesita la tarea.",
+        "caution": "Imagen ilustrativa, no una garantía de que todas las fuentes se recopilen u ordenen así. Verifica el contexto en la interfaz elegida y consulta las referencias oficiales de la lección."
+      },
+      "context-engineering-workflow": {
+        "title": "Lleva el contexto al plan",
+        "alt": "Diagrama de flujo que conecta el contexto del proyecto y de la tarea con un plan y después con código, con una plantilla de plan y pautas de programación en etapas distintas.",
+        "notice": "Sigue el recorrido desde el contexto seleccionado del proyecto hasta un plan escrito y un cambio acotado. Revisa qué se conserva en cada etapa; generar código no sustituye las verificaciones de la lección.",
+        "caution": "Flujo ilustrativo de referencia, no una estructura obligatoria de archivos de Spec Kit ni un contrato vigente del producto. Mantén como autoridad los artefactos, las restricciones de compatibilidad y las comprobaciones de la lección."
+      },
+      "agent-loop": {
+        "title": "Identifica dónde se detiene el ciclo",
+        "alt": "Diagrama de flujo que conecta la preparación del contexto, las respuestas del modelo, la ejecución de herramientas y sus resultados, con ramas para límites, cancelación y errores.",
+        "notice": "Sigue cómo los resultados de las herramientas vuelven a la siguiente iteración y localiza las ramas que detienen o interrumpen el trabajo. En tu lección, identifica el límite y la evidencia que conservas al detenerse la ejecución.",
+        "caution": "Imagen ilustrativa de un ciclo de herramientas, no una arquitectura universal ni un contrato de API del SDK. Usa las herramientas, los permisos y las condiciones de parada documentados en la lección."
+      },
+      "tdd-implementation-diagram": {
+        "title": "Conserva la evidencia al transferir el trabajo",
+        "alt": "Diagrama de roles de pruebas, implementación y refactorización que se transfieren trabajo, junto a un grupo separado de archivos de instrucciones.",
+        "notice": "Observa el límite entre una prueba, un cambio mínimo y la refactorización. Una comprobación útil debe detectar un error deliberado; conserva su evidencia cuando el trabajo pase a otro rol.",
+        "caution": "Imagen ilustrativa: los agentes y archivos de instrucciones nombrados son ejemplos, no roles incorporados ni archivos obligatorios del laboratorio. Sigue las comprobaciones de la lección; el dibujo no es un resultado de pruebas."
+      },
+      "agents-window-session-target": {
+        "title": "Distingue las opciones de la sesión",
+        "alt": "Captura del menú de destino de una sesión nueva sobre controles separados de rol, modelo y permisos, con opciones de espacio de trabajo y worktree cerca.",
+        "notice": "Localiza el selector de destino y distínguelo del rol, el modelo y los permisos. Comprueba dónde actuará la sesión y qué podrá hacer antes de aprobar el trabajo.",
+        "caution": "Captura de interfaz, no una promesa de disponibilidad actual de modelos o destinos. Las opciones pueden variar según la versión, la cuenta y las políticas; verifica tu entorno con las referencias oficiales de la lección."
+      }
+    }
+  },
+  "pt-br": {
+    "eyebrow": "Referência visual",
+    "noticeLabel": "O que observar",
+    "snapshotLabel": "Imagem de referência",
+    "expandLabel": "Examinar uma visão ampliada",
+    "originalLabel": "Abrir o original em tamanho completo",
+    "imageLanguage": "O texto da imagem original está em inglês. A explicação acima está traduzida; abra o original para examinar seus rótulos.",
+    "visuals": {
+      "context-assembly": {
+        "title": "Olhe além do prompt",
+        "alt": "Diagrama que agrupa instruções, histórico da conversa, contexto implícito, referências explícitas e resultados de ferramentas em uma janela de contexto que alimenta um modelo de linguagem.",
+        "notice": "Separe a tarefa que você escreve das instruções, dos arquivos e dos resultados de ferramentas ao redor dela. Use esses grupos para verificar quais fontes sua sessão recebeu e quais a tarefa precisa.",
+        "caution": "Imagem ilustrativa, não uma garantia de que todas as fontes sejam coletadas ou ordenadas assim. Verifique o contexto na interface escolhida e consulte as referências oficiais da lição."
+      },
+      "context-engineering-workflow": {
+        "title": "Leve o contexto para o plano",
+        "alt": "Fluxograma que conecta o contexto do projeto e da tarefa a um plano e depois ao código, com um modelo de plano e diretrizes de programação em etapas distintas.",
+        "notice": "Siga o caminho do contexto selecionado do projeto até um plano escrito e uma alteração delimitada. Revise o que cada etapa leva adiante; gerar código não substitui as verificações da lição.",
+        "caution": "Fluxo ilustrativo de referência, não uma estrutura obrigatória de arquivos do Spec Kit nem um contrato atual do produto. Mantenha os artefatos, as restrições de compatibilidade e as verificações da lição como autoridade."
+      },
+      "agent-loop": {
+        "title": "Encontre os pontos de parada do ciclo",
+        "alt": "Fluxograma que conecta a preparação do contexto, as respostas do modelo, a execução de ferramentas e seus resultados, com ramificações para limites, cancelamento e erros.",
+        "notice": "Siga como os resultados das ferramentas voltam à próxima iteração e encontre as ramificações que param ou interrompem o trabalho. Na sua lição, identifique o limite e a evidência que você mantém quando a execução para.",
+        "caution": "Imagem ilustrativa de um ciclo de ferramentas, não uma arquitetura universal nem um contrato de API do SDK. Use as ferramentas, as permissões e as condições de parada documentadas na lição."
+      },
+      "tdd-implementation-diagram": {
+        "title": "Preserve a evidência ao passar o trabalho",
+        "alt": "Diagrama de papéis de testes, implementação e refatoração que passam trabalho entre si, ao lado de um grupo separado de arquivos de instruções.",
+        "notice": "Observe o limite entre um teste, uma alteração mínima e a refatoração. Uma verificação útil deve detectar um erro intencional; mantenha sua evidência visível quando o trabalho passar a outro papel.",
+        "caution": "Imagem ilustrativa: os agentes e arquivos de instruções citados são exemplos, não papéis integrados nem arquivos obrigatórios do laboratório. Siga as verificações da lição; o desenho não é um resultado de testes."
+      },
+      "agents-window-session-target": {
+        "title": "Separe as escolhas da sessão",
+        "alt": "Captura do menu de destino de uma nova sessão acima de controles separados de papel, modelo e permissões, com opções de espaço de trabalho e worktree por perto.",
+        "notice": "Localize o seletor de destino e diferencie-o do papel, do modelo e das permissões. Confira onde a sessão vai atuar e o que ela pode fazer antes de aprovar o trabalho.",
+        "caution": "Captura de interface, não uma promessa de disponibilidade atual de modelos ou destinos. As opções podem variar conforme a versão, a conta e as políticas; verifique seu ambiente com as referências oficiais da lição."
+      }
+    }
+  }
+}

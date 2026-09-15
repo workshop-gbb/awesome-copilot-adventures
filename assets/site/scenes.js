@@ -3,6 +3,17 @@
 export function enhanceScenes() {
   const scenes = [...document.querySelectorAll('[data-scene]')];
   if (!scenes.length) return;
+  for (const button of document.querySelectorAll('[data-scene-zoom]')) {
+    const scene = button.closest('[data-scene]');
+    const stage = scene.querySelector('.he-scene__stage');
+    button.addEventListener('click', () => {
+      const zoomed = scene.dataset.zoomed !== 'true';
+      scene.dataset.zoomed = String(zoomed);
+      button.setAttribute('aria-pressed', String(zoomed));
+      button.textContent = zoomed ? button.dataset.fitLabel : button.dataset.zoomLabel;
+      if (!zoomed) stage.scrollLeft = 0;
+    });
+  }
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const armAll = () => { for (const scene of scenes) scene.dataset.active = 'true'; };
   if (reducedMotion.matches || !('IntersectionObserver' in window)) { armAll(); return; }

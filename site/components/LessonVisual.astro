@@ -1,0 +1,233 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { Locale } from '../lib/catalog';
+import { lessonVisualFor, type LessonVisualId } from '../lib/lesson-visuals';
+import copy from '../lesson-visuals.json';
+import contextAssembly from '../../assets/images/general/context-assembly.png';
+import contextWorkflow from '../../assets/images/general/context-engineering-workflow.png';
+import agentLoop from '../../assets/images/general/agent-loop.png';
+import tddWorkflow from '../../assets/images/general/tdd-implementation-diagram.png';
+import sessionTarget from '../../assets/images/general/agents-window-session-target.png';
+
+interface Props {
+  locale: Locale;
+  source?: string;
+}
+
+const { locale, source } = Astro.props;
+const images = {
+  'context-assembly': contextAssembly,
+  'context-engineering-workflow': contextWorkflow,
+  'agent-loop': agentLoop,
+  'tdd-implementation-diagram': tddWorkflow,
+  'agents-window-session-target': sessionTarget
+} satisfies Record<LessonVisualId, ImageMetadata>;
+const id = lessonVisualFor(source);
+const text = copy[locale];
+const reference = id ? { id, image: images[id], ...text.visuals[id] } : undefined;
+const titleId = `lesson-visual-${id}-title`;
+---
+
+{reference && (
+  <aside class="lesson-visual" aria-labelledby={titleId} lang={locale} data-lesson-visual={reference.id}>
+    <header class="lesson-visual__heading">
+      <p class="lesson-visual__eyebrow">{text.eyebrow}</p>
+      <h2 id={titleId}>{reference.title}</h2>
+    </header>
+    <figure class="lesson-visual__figure">
+      <div class="lesson-visual__preview">
+        <Image
+          class="lesson-visual__image"
+          src={reference.image}
+          alt={reference.alt}
+          width={Math.min(640, reference.image.width)}
+          widths={[320, 640, 960].filter(width => width <= reference.image.width)}
+          sizes="(max-width: 24rem) 100vw, 22rem"
+          format="webp"
+          layout="none"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <figcaption class="lesson-visual__caption">
+        <p class="lesson-visual__notice"><strong>{text.noticeLabel}</strong>{' '}{reference.notice}</p>
+        <p class="lesson-visual__caution"><strong>{text.snapshotLabel}.</strong>{' '}{reference.caution}</p>
+      </figcaption>
+    </figure>
+    <details class="lesson-visual__details">
+      <summary>{text.expandLabel}</summary>
+      <div class="lesson-visual__expanded">
+        <p>{text.imageLanguage}</p>
+        <a class="lesson-visual__original-link" href={reference.image.src}>
+          {text.originalLabel}<span aria-hidden="true">{' '}↗</span>
+        </a>
+        <img
+          class="lesson-visual__original"
+          src={reference.image.src}
+          width={reference.image.width}
+          height={reference.image.height}
+          alt={reference.alt}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </details>
+  </aside>
+)}
+
+<style>
+  .lesson-visual {
+    container: lesson-visual / inline-size;
+    min-inline-size: 0;
+    margin-block: var(--he-space-10);
+    padding-block-start: var(--he-space-6);
+    border-block-start: 1px solid var(--rule-2);
+    color: var(--ink);
+    font-family: var(--sans);
+    overflow-wrap: anywhere;
+  }
+
+  .lesson-visual__heading {
+    margin-block-end: var(--he-space-5);
+  }
+
+  .lesson-visual__eyebrow {
+    margin: 0 0 var(--he-space-2);
+    color: var(--ink-2);
+    font: 500 var(--he-type-label)/1.6 var(--mono);
+    letter-spacing: var(--he-tracking-label);
+    text-transform: uppercase;
+  }
+
+  .lesson-visual__heading h2 {
+    margin: 0;
+    font-size: var(--he-type-card);
+    font-weight: 550;
+    line-height: 1.35;
+    letter-spacing: var(--he-tracking-heading);
+  }
+
+  .lesson-visual__figure {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: var(--he-space-5);
+    margin: 0;
+  }
+
+  .lesson-visual__preview {
+    display: grid;
+    place-items: center;
+    min-inline-size: 0;
+    padding: var(--he-space-2);
+    border: 1px solid var(--rule);
+    background: var(--bg-alt);
+  }
+
+  /* Preserve the original proportions and colors, including in the dark theme. */
+  .lesson-visual__image {
+    display: block;
+    inline-size: auto;
+    block-size: auto;
+    max-inline-size: min(100%, 22rem);
+    max-block-size: 16rem;
+    object-fit: contain;
+    filter: none;
+  }
+
+  .lesson-visual__caption {
+    min-inline-size: 0;
+  }
+
+  .lesson-visual__notice {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: var(--he-type-body);
+    line-height: var(--he-leading-body);
+  }
+
+  .lesson-visual__notice strong {
+    display: block;
+    margin-block-end: var(--he-space-2);
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .lesson-visual__caution {
+    margin: var(--he-space-4) 0 0;
+    color: var(--ink-2);
+    font-size: var(--he-type-small);
+    line-height: var(--he-leading-body);
+  }
+
+  .lesson-visual__caution strong {
+    font-weight: 600;
+  }
+
+  .lesson-visual__details {
+    margin-block-start: var(--he-space-4);
+    border-block-start: 1px solid var(--rule);
+    font-size: var(--he-type-small);
+    line-height: var(--he-leading-body);
+  }
+
+  .lesson-visual__details > summary {
+    min-block-size: var(--he-touch-target);
+    padding-block: var(--he-space-3);
+    cursor: pointer;
+    color: var(--ink);
+    list-style-position: inside;
+  }
+
+  .lesson-visual__details > summary:hover,
+  .lesson-visual__original-link:hover {
+    text-decoration: underline;
+    text-underline-offset: .22em;
+  }
+
+  .lesson-visual__details > summary:focus-visible,
+  .lesson-visual__original-link:focus-visible {
+    outline: var(--he-focus-width) solid var(--he-focus);
+    outline-offset: var(--he-focus-offset);
+  }
+
+  .lesson-visual__expanded {
+    padding-block-start: var(--he-space-2);
+  }
+
+  .lesson-visual__expanded p {
+    margin: 0;
+    color: var(--ink-2);
+  }
+
+  .lesson-visual__original-link {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--he-touch-target);
+    margin-block: var(--he-space-2);
+    color: var(--he-link);
+    text-decoration: underline;
+    text-underline-offset: .22em;
+  }
+
+  .lesson-visual__original-link span {
+    flex-shrink: 0;
+  }
+
+  .lesson-visual__original {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+    max-inline-size: 100%;
+    filter: none;
+  }
+
+  /* Adapt to the reading pane, not the viewport around its navigation rails. */
+  @container lesson-visual (min-width: 38rem) {
+    .lesson-visual__figure {
+      grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+      gap: var(--he-space-6);
+    }
+  }
+</style>

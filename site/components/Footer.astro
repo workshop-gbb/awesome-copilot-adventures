@@ -1,67 +1,77 @@
 ---
 import { languageFor, labelFor, locales, settings, counts, type PageInfo } from '../lib/catalog';
 import Icon from './Icon.astro';
+import { Image } from 'astro:assets';
+import maintainerArt from '../../assets/images/general/paula-gbb-image.jpg';
 import simulationCopy from '../simulations.json';
 interface Props { page: PageInfo; }
 const { page } = Astro.props;
 const { ui, href } = languageFor(page.locale);
 ---
 <footer class="site-footer he-inverse">
-  <div class="footer-atmosphere" aria-hidden="true"></div>
-  <div class="container footer-stage">
-    <div class="footer-intro">
-      <p class="eyebrow"><Icon name="spark" size={14} />Awesome Copilot Adventures</p><h2>{ui.footerTitle}</h2><p>{ui.footerText}</p>
-      <address class="footer-author">
-        <span>{ui.maintainedBy}</span>
-        <div>
-          <strong>{settings.maintainer.name}</strong>
-          <a href={settings.maintainer.profile}>{settings.maintainer.handle}</a>
+  <div class="container footer-shell">
+    <div class="footer-heading">
+      <div class="footer-identity">
+        <a class="footer-brand" href={href.home} aria-label={`Awesome Copilot Adventures · ${ui.home}`}>
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span>Awesome Copilot<strong>Adventures</strong></span>
+        </a>
+        <p>MIT · {ui.footerAbout}</p>
+      </div>
+      <nav class="footer-languages" aria-label={ui.footerLanguages}>
+        {locales.map(locale => (
+          <a href={page.alternates[locale]} data-locale={locale}
+            lang={labelFor(locale, 'languageTag')} hreflang={labelFor(locale, 'languageTag')}
+            aria-current={locale === page.locale ? 'page' : undefined}>
+            {labelFor(locale, 'language')}
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    <nav class="footer-navigation" aria-label={ui.guides}>
+      <a href={href.simulations}>{simulationCopy[page.locale].title}</a>
+      <a href={href.glossary}>{ui.glossary}</a>
+      <a href={href.status}>{ui.status}</a>
+      <a href={href.design}>{ui.design}</a>
+      <a href={href.support}>{ui.support}</a>
+      <a href={`https://github.com/${settings.repository}`}>GitHub<Icon name="arrow" size={14} /></a>
+    </nav>
+
+    <details class="footer-details">
+      <summary>{ui.footerDetails}</summary>
+      <div class="footer-credit-grid">
+        <section class="footer-credits" aria-labelledby="footer-credits-title">
+          <h2 id="footer-credits-title">{ui.credits}</h2>
+          <ul>
+            <li><a href="https://github.com/microsoft/CopilotAdventures">microsoft/CopilotAdventures</a><span>{ui.adventureCredit}</span></li>
+            <li><a href="https://github.com/MicrosoftLearning/mslearn-github-copilot-dev">MicrosoftLearning/mslearn-github-copilot-dev</a><span>{ui.handsOnCredit}</span></li>
+          </ul>
+          <p>{ui.creditsEvolution}</p>
+          <a class="footer-credit-link" href={href.credits}>{ui.fullCredits}</a>
+        </section>
+        <section class="footer-colophon" aria-labelledby="footer-fonts-title">
+          <h2 id="footer-fonts-title">{ui.fontLicenses}</h2>
+          <nav class="footer-fonts" aria-labelledby="footer-fonts-title">
+            <a href={`${settings.base}/assets/site/fonts/OFL-Inter.txt`}>Inter</a>
+            <a href={`${settings.base}/assets/site/fonts/OFL-JetBrains-Mono.txt`}>JetBrains Mono</a>
+          </nav>
+          <p>{ui.footerText}</p>
           <a href={settings.maintainer.website}>agenticdevopsplatform.ai</a>
+          <p class="footer-build">{ui.footerBuild} <code>{counts.revision}</code></p>
+        </section>
+      </div>
+    </details>
+
+    <div class="footer-bottom">
+      <address class="footer-author">
+        <Image src={maintainerArt} width={48} height={48} alt="" format="webp" loading="lazy" decoding="async" />
+        <div>
+          <span>{ui.maintainedBy}</span>
+          <a href={settings.maintainer.profile}><strong>{settings.maintainer.name}</strong><span>{settings.maintainer.handle}</span></a>
         </div>
       </address>
-    </div>
-    <div class="footer-constellation" aria-hidden="true">
-      <span class="footer-node footer-node-blue"><Icon name="compass" size={28} /><i>01</i></span>
-      <span class="footer-node footer-node-green"><Icon name="code" size={28} /><i>02</i></span>
-      <span class="footer-node footer-node-yellow"><Icon name="workflow" size={28} /><i>03</i></span>
-      <span class="footer-node footer-node-red"><Icon name="check" size={28} /><i>04</i></span>
-      <svg viewBox="0 0 520 260" preserveAspectRatio="none">
-        <path d="M44 174 C130 34 206 226 282 91 S420 55 480 150" />
-        <path d="M44 174 L282 91 L480 150" />
-      </svg>
+      <a class="footer-back-top" href="#top">{ui.backTop}<Icon name="arrow" size={18} /></a>
     </div>
   </div>
-  <div class="container footer-directory">
-    <nav class="footer-panel" data-tone="blue" aria-label={ui.guides}>
-      <h3><Icon name="book" size={18} />{ui.guides}</h3>
-      <div>
-        <a href={href.simulations}>{simulationCopy[page.locale].title}<Icon name="arrow" size={14} /></a>
-        <a href={href.glossary}>{ui.glossary}<Icon name="arrow" size={14} /></a>
-        <a href={href.status}>{ui.status}<Icon name="arrow" size={14} /></a>
-        <a href={href.design}>{ui.design}<Icon name="arrow" size={14} /></a>
-        <a href={href.support}>{ui.support}<Icon name="arrow" size={14} /></a>
-      </div>
-    </nav>
-    <nav class="footer-panel" data-tone="green" aria-label={ui.footerLanguages}>
-      <h3><Icon name="globe" size={18} />{ui.languages}</h3>
-      <div>
-        {locales.map(locale => (
-          <a href={page.alternates[locale]} data-locale={locale} lang={locale}>{labelFor(locale, 'language')}<span>{locale.toUpperCase()}</span></a>
-        ))}
-        <a href={`https://github.com/${settings.repository}`}>GitHub <span>↗</span></a>
-        <a href={`${settings.base}/assets/site/fonts/OFL-Inter.txt`}>Inter <span>{ui.fontLicenses}</span></a>
-        <a href={`${settings.base}/assets/site/fonts/OFL-JetBrains-Mono.txt`}>JetBrains Mono <span>{ui.fontLicenses}</span></a>
-      </div>
-    </nav>
-    <section class="footer-panel footer-credits" data-tone="yellow" aria-labelledby="footer-credits-title">
-      <h2 id="footer-credits-title">{ui.credits}</h2>
-      <ul>
-        <li><a href="https://github.com/microsoft/CopilotAdventures">microsoft/CopilotAdventures</a><span>{ui.adventureCredit}</span></li>
-        <li><a href="https://github.com/MicrosoftLearning/mslearn-github-copilot-dev">MicrosoftLearning/mslearn-github-copilot-dev</a><span>{ui.handsOnCredit}</span></li>
-      </ul>
-      <p>{ui.creditsEvolution}</p>
-      <a class="footer-credit-link" href={href.credits}>{ui.fullCredits}</a>
-    </section>
-  </div>
-  <div class="container footer-bottom"><span>MIT · Awesome Copilot Adventures</span><span class="footer-spectrum" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="mono">{counts.revision}</span></div>
 </footer>

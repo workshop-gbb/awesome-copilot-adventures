@@ -15,6 +15,9 @@
 .he-studio-controls { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px; margin-bottom: 28px; }
 .he-studio-controls label { display: grid; gap: 8px; font-size: 12px; color: var(--ink-2); }
 .he-studio-controls select { min-height: var(--he-touch-target); max-width: 100%; padding: 10px 36px 10px 12px; border: 1px solid var(--he-control-border); border-radius: var(--he-radius-control); background: var(--paper); color: var(--ink); font-size: 13px; }
+@media (max-width: 900px), (pointer: coarse) {
+  .he-studio-controls select { font-size: 16px; }
+}
 .he-playback { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; width: 100%; }
 .he-playback .quiet-button, .he-studio-controls > .quiet-button { font-size: 12px; }
 .he-workflow-figure { margin: 0 0 24px; }

@@ -1,18 +1,47 @@
 ---
 import { languageFor, type Locale } from '../lib/catalog';
+import Icon from './Icon.astro';
 interface Props { locale: Locale; source?: string; }
 const { locale, source } = Astro.props;
-const { ui } = languageFor(locale);
+const { ui, href } = languageFor(locale);
 ---
-<aside class="reading-tracker" data-reading-tracker hidden>
-  <div>
-    <p class="eyebrow">{ui.readingTracker}</p>
-    <p class="reading-count"><strong data-reading-count>0</strong> {ui.markedCountLabel}</p>
+<aside class="reading-tracker" data-reading-tracker data-reading-source={source} data-reading-state="idle" aria-label={ui.readingTracker} hidden>
+  <div class="reading-heading">
+    <span class="reading-emblem" aria-hidden="true"><Icon name="book" size={24} /></span>
+    <div>
+      <p class="eyebrow">{ui.readingTracker}</p>
+      <h2>{source ? ui.readingCurrent : ui.readingLibrary}</h2>
+      <p class="reading-description">{source ? ui.readingHint : ui.readingLibraryHint}</p>
+    </div>
   </div>
-  <div class="reading-controls">
-    {source && <button type="button" class="button button-primary" data-mark-reading={source} aria-pressed="false">{ui.markRead}</button>}
-    <button type="button" class="quiet-button" data-reset-reading>{ui.clearReading}</button>
+  {source && <div class="reading-controls">
+    <button type="button" class="button button-primary" data-mark-reading={source} aria-pressed="false">
+      <Icon name="check" size={18} /><span data-mark-reading-label>{ui.markRead}</span>
+    </button>
+  </div>}
+  <p class="reading-status" data-reading-status role="status" aria-live="polite" aria-atomic="true"></p>
+  <div class="reading-bottom">
+    <a class="reading-library-link" href={`${href.library}?track=read`}>
+      <strong data-reading-count>0</strong><span>{ui.markedCountLabel}</span><Icon name="arrow" size={16} />
+    </a>
+    <span class="reading-local"><Icon name="laptop" size={16} />{ui.readingLocal}</span>
   </div>
   <p class="reading-note">{ui.readingNote}</p>
-  <p class="reading-status" data-reading-status role="status"></p>
+  <details class="reading-manage" data-reading-manage>
+    <summary>{ui.readingManage}</summary>
+    <div class="reading-manage-content">
+      <p>{ui.readingManageHint}</p>
+      <div class="reading-manage-actions">
+        <button type="button" class="button" data-retry-reading><Icon name="reset" size={16} />{ui.readingRetry}</button>
+        <button type="button" class="button reading-reset" data-reset-reading>{ui.clearReading}</button>
+      </div>
+      <div class="reading-confirm" data-reading-confirm hidden>
+        <p>{ui.clearReadingConfirm}</p>
+        <div class="reading-manage-actions">
+          <button type="button" class="button reading-reset" data-confirm-reading-reset>{ui.readingConfirmReset}</button>
+          <button type="button" class="button" data-cancel-reading-reset>{ui.readingCancel}</button>
+        </div>
+      </div>
+    </div>
+  </details>
 </aside>

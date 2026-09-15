@@ -18,6 +18,50 @@ function htmlAttributes(text) {
       [name.toLowerCase(), decodeHtml(doubleQuoted ?? singleQuoted ?? unquoted ?? '')]));
 }
 
+function footerNavigationErrors(rendered, locale) {
+  const footer = rendered.match(/<footer\b[^>]*>([\s\S]*?)<\/footer>/)?.[1];
+  if (!footer) return ['missing shared page footer'];
+  const failures = [];
+  const hasClass = (attributes, name) => (attributes.get('class') || '').split(/\s+/).includes(name);
+  const links = [...footer.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)]
+    .map(([, attributes, body]) => ({ attributes: htmlAttributes(attributes), body }));
+  const topLinks = links.filter(link => hasClass(link.attributes, 'footer-back-top'));
+  const topLink = topLinks[0];
+  const pageTopLinks = [...rendered.matchAll(/<a\b([^>]*)>/g)]
+    .filter(([, attributes]) => htmlAttributes(attributes).get('href') === '#top');
+  if (pageTopLinks.length !== 1) failures.push('back-to-top must appear only once per page, in the footer');
+  const details = [...footer.matchAll(/<details\b([^>]*)>([\s\S]*?)<\/details>/g)]
+    .find(([, attributes]) => hasClass(htmlAttributes(attributes), 'footer-details'));
+  if (!details || htmlAttributes(details[1]).has('open')
+    || !details[2].match(/<summary\b[^>]*>([\s\S]*?)<\/summary>/)?.[1].includes(labels[locale].footerDetails)) {
+    failures.push('footer credits must use a named native disclosure, initially closed');
+  }
+  if (topLinks.length !== 1 || topLink.attributes.get('href') !== '#top'
+    || ['hidden', 'disabled'].some(name => topLink.attributes.has(name))
+    || topLink.attributes.get('aria-hidden') === 'true'
+    || decodeHtml(topLink.body.replace(/<[^>]*>/g, '')).trim() !== labels[locale].backTop
+    || details?.[2].includes('footer-back-top')) {
+    failures.push('footer must end with one visible, localized native back-to-top link');
+  }
+  const target = [...rendered.matchAll(/<[a-z][\w:-]*\b([^>]*)>/gi)]
+    .map(([, attributes]) => htmlAttributes(attributes)).find(attributes => attributes.get('id') === 'top');
+  if (!target || target.get('tabindex') !== '-1' || target.has('hidden')) {
+    failures.push('back-to-top must have a focusable fragment target');
+  }
+  const languageLinks = links.filter(link => link.attributes.has('data-locale'));
+  if (languageLinks.length !== locales.length) failures.push('footer must offer each language exactly once');
+  for (const language of locales) {
+    const matches = languageLinks.filter(link => link.attributes.get('data-locale') === language);
+    const link = matches[0]?.attributes;
+    if (matches.length !== 1 || !link.get('href')?.startsWith(`${basePath}/${language}/`)
+      || link.get('lang') !== labels[language].languageTag || link.get('hreflang') !== labels[language].languageTag
+      || (language === locale ? link.get('aria-current') !== 'page' : link.has('aria-current'))) {
+      failures.push(`footer language ${language} must have a localized destination and server-rendered current state`);
+    }
+  }
+  return failures;
+}
+
 function adventureVideoErrors(rendered) {
   const videos = [...rendered.matchAll(/<video\b([^>]*)>([\s\S]*?)<\/video>/g)]
     .filter(([, attributes]) => htmlAttributes(attributes).has('data-adventure-video'));
@@ -114,6 +158,7 @@ function verifyRenderedSite(directory, selectedLocales = locales) {
       }
       for (const url of [
         maintainer.profile, maintainer.website, `${basePath}/${currentLocale}/read/notice/`,
+        `${basePath}/assets/site/fonts/OFL-Inter.txt`, `${basePath}/assets/site/fonts/OFL-JetBrains-Mono.txt`,
         'https://github.com/microsoft/CopilotAdventures',
         'https://github.com/MicrosoftLearning/mslearn-github-copilot-dev'
       ]) {
@@ -121,6 +166,10 @@ function verifyRenderedSite(directory, selectedLocales = locales) {
       }
     }
     const rendered = content.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
+    if (selectedLocales.includes(currentLocale) || name === '404.html') {
+      const footerLocale = name === '404.html' ? 'en' : currentLocale;
+      failures.push(...footerNavigationErrors(rendered, footerLocale).map(error => `${name}: ${error}`));
+    }
     if (selectedLocales.includes(currentLocale) && name === `${currentLocale}/index.html`) {
       const main = rendered.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1] || '';
       if (!main.includes(`href="${basePath}/${currentLocale}/prerequisites/"`)) {
@@ -235,4 +284,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { decodeHtml, adventureVideoErrors, verifyRenderedSite };
+module.exports = { decodeHtml, htmlAttributes, footerNavigationErrors, adventureVideoErrors, verifyRenderedSite };

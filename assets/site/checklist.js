@@ -65,6 +65,11 @@ export function enhanceChecklist(labels, storageKey) {
     }
   };
   boxes.forEach((box, index) => {
+    box.id = `evidence-check-${index}`;
+    const label = document.createElement('label');
+    label.htmlFor = box.id;
+    while (box.nextSibling) label.append(box.nextSibling);
+    box.after(label);
     box.disabled = false;
     box.checked = state.has(index);
     box.addEventListener('change', () => { save(); render(true); });

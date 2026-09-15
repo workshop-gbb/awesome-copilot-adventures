@@ -1,0 +1,58 @@
+---
+import { languageFor, type Locale } from '../lib/catalog';
+import Icon from './Icon.astro';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const { ui, href, catalog } = languageFor(locale);
+const adventure = catalog.find(document => document.source === 'adventures/00-foundations/portals-of-nexus/README.md');
+const lab = catalog.find(document => document.source === 'mslearn-github-copilot/Instructions/Labs/LAB_AK_01_examine_settings_interface.md');
+if (!adventure?.image || !lab?.image) throw new Error(`Missing learning-format covers for ${locale}.`);
+const formats = [
+  { title: ui.adventures, text: ui.adventureDescription, image: adventure.image, url: href.adventures, tone: 'blue', icon: 'map', width: 1456, height: 832 },
+  { title: ui['hands-on'], text: ui.handsOnDescription, image: lab.image, url: href.handsOn, tone: 'green', icon: 'terminal', width: 1440, height: 630 }
+] as const;
+---
+<section class="section container format-section" aria-labelledby="learning-formats-title">
+  <div class="section-heading" data-tone="blue">
+    <p class="eyebrow"><Icon name="compass" size={16} />{ui.formatEyebrow}</p>
+    <h2 id="learning-formats-title">{ui.formatTitle}</h2>
+    <p>{ui.formatDescription}</p>
+  </div>
+  <div class="format-grid">
+    {formats.map(format => (
+      <a class="format-entry" data-tone={format.tone} href={format.url}>
+        <div class="format-art">
+          <img src={format.image} width={format.width} height={format.height} alt="" loading="lazy" decoding="async" />
+        </div>
+        <div class="format-copy">
+          <Icon name={format.icon} size={24} />
+          <h3>{format.title}</h3>
+          <p>{format.text}</p>
+          <span class="format-link">{ui.formatExplore}<Icon name="arrow" size={18} /></span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .format-section { padding-top: 0; }
+  .format-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+  .format-entry { display: flex; flex-direction: column; min-width: 0; border-top: 3px solid var(--tone); text-decoration: none; }
+  .format-art { display: grid; place-items: center; aspect-ratio: 7 / 4; background: var(--bg-alt); overflow: hidden; }
+  .format-art img { display: block; width: 100%; height: auto; transition: transform var(--he-motion-base) var(--ease); }
+  .format-copy { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 14px; padding-block: 24px; flex: 1; border-bottom: 1px solid var(--rule); }
+  .format-copy > :global(.he-icon) { color: var(--tone-ink); }
+  .format-copy h3 { margin: 0; font-size: 26px; line-height: 1.25; font-weight: 550; letter-spacing: -.035em; }
+  .format-copy p { grid-column: 1 / -1; margin: 0; color: var(--ink-2); font-size: 15px; line-height: 1.7; max-width: 56ch; }
+  .format-link { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: var(--he-touch-target); color: var(--tone-ink); font-size: 14px; font-weight: 550; }
+  .format-entry:is(:hover, :focus-visible) .format-link { text-decoration: underline; text-underline-offset: .3em; }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .format-entry:hover img { transform: scale(1.025); }
+  }
+  @media (max-width: 660px) {
+    .format-grid { grid-template-columns: 1fr; gap: 32px; }
+    .format-copy { padding-block: 18px; }
+    .format-copy h3 { font-size: 24px; }
+  }
+</style>

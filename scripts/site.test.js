@@ -10,9 +10,24 @@ const {
   retainHeadingAnchors, createLinkResolver, renderDocument,   textPreview, readSource, buildArtifacts
 } = require('./build-site');
 const ui = require('./site-ui.json');
-const { decodeHtml, adventureVideoErrors } = require('./check-rendered-site');
+const { decodeHtml, footerNavigationErrors, adventureVideoErrors } = require('./check-rendered-site');
 const { markdownLinkTargets } = require('./markdown-helpers');
 const { mediaId, mediaImage, mediaImages, renderMedia, loadAdventureMedia, loadHandsOnMedia } = require('./site-media');
+require('./reading.test.js');
+test('the homepage keeps the opening focused and the workflow in its dedicated section', () => {
+  const component = fs.readFileSync(path.join(root, 'site/components/Home.astro'), 'utf8');
+  const styles = fs.readFileSync(path.join(root, 'assets/site/site.css'), 'utf8');
+  const script = fs.readFileSync(path.join(root, 'assets/site/enhancements.js'), 'utf8');
+  assert.doesNotMatch(component, /hero-panel|data-workflow-step|ACA \/ 01/);
+  assert.doesNotMatch(styles, /\.hero-panel|\.workflow-steps|@keyframes panel-arrive/);
+  assert.doesNotMatch(script, /data-workflow-step/);
+  assert.match(component, /class="hero-actions"/);
+  assert.match(component, /class="section container workflow-section"/);
+  assert.match(component, /set:html=\{workflowScene\}/);
+});
+require('./checklist.test.js');
+require('./lesson-visuals.test.js');
+require('./scenes.test.js');
 
 function assertWebPCover(cover) {
   const bytes = fs.readFileSync(path.join(root, cover.source));
@@ -479,10 +494,89 @@ test('permanently dark surfaces share one token scope instead of hand-written pa
   }
   // Those surfaces read their ink and ground from the scope, not from literals.
   const hero = styles.slice(styles.indexOf('.hero {'), styles.indexOf('.hero-aurora'));
-  const footer = styles.slice(styles.indexOf('.site-footer {'), styles.indexOf('.footer-atmosphere'));
+  const footer = styles.slice(styles.indexOf('.site-footer {'), styles.indexOf('.footer-shell'));
   for (const [name, block] of [['hero', hero], ['footer', footer]]) {
     assert.ok(block.includes('background: var(--bg)') && block.includes('color: var(--ink)'), `${name} must use the scope.`);
     assert.equal(block.match(/#[0-9a-fA-F]{3,6}\b/g), null, `${name} must not reintroduce colour literals.`);
+  }
+});
+
+test('the hero watermark uses the original logo with opacity instead of a text approximation', () => {
+  const styles = fs.readFileSync(path.join(root, 'assets/site/site.css'), 'utf8');
+  const watermark = styles.match(/\.hero::after\s*\{([^}]+)\}/)?.[1];
+  assert.ok(watermark, 'The decorative hero watermark must exist.');
+  assert.match(watermark, /content:\s*""/);
+  assert.match(watermark, /background:\s*url\("\.\.\/images\/general\/paulasilva-logo\.png"\)\s+center\s*\/\s*contain\s+no-repeat/);
+  assert.match(watermark, /aspect-ratio:\s*16\s*\/\s*9/);
+  assert.match(watermark, /pointer-events:\s*none/);
+  const opacity = Number(watermark.match(/\bopacity:\s*([\d.]+)/)?.[1]);
+  assert.ok(opacity > 0 && opacity <= 0.1, 'The logo must remain a subtle watermark.');
+  assert.doesNotMatch(watermark, /\b(?:filter|transform|font|color):/);
+  const logo = fs.readFileSync(path.join(root, 'assets/images/general/paulasilva-logo.png'));
+  assert.equal(logo.subarray(1, 4).toString('ascii'), 'PNG');
+  assert.equal(logo.readUInt32BE(16) / logo.readUInt32BE(20), 16 / 9);
+});
+
+test('the shared footer keeps navigation visible and secondary details native', () => {
+  const component = fs.readFileSync(path.join(root, 'site/components/Footer.astro'), 'utf8');
+  const layout = fs.readFileSync(path.join(root, 'site/layouts/Site.astro'), 'utf8');
+  const styles = fs.readFileSync(path.join(root, 'assets/site/site.css'), 'utf8');
+  const navigation = component.slice(0, component.indexOf('<details'));
+  for (const destination of ['simulations', 'glossary', 'status', 'design', 'support']) {
+    assert.ok(navigation.includes(`href={href.${destination}}`), `${destination} must not require opening credits.`);
+  }
+  assert.ok(navigation.includes('settings.repository'), 'The project link belongs with navigation, not languages.');
+  assert.ok(component.includes('<details class="footer-details">'), 'Credits must start closed without JavaScript.');
+  assert.ok(component.includes('<summary>{ui.footerDetails}</summary>'));
+  assert.ok(component.includes('hreflang={labelFor(locale, \'languageTag\')}'));
+  assert.ok(component.includes('aria-current={locale === page.locale ? \'page\' : undefined}'));
+  assert.ok(component.includes('<a class="footer-back-top" href="#top">{ui.backTop}'));
+  assert.ok(layout.includes('<body id="top" tabindex="-1">'), 'Returning to the top must also reset keyboard focus.');
+  assert.ok(layout.includes('<Footer page={page} />'), 'The shared layout must include the footer on every page.');
+  assert.ok(!layout.includes('href="#top"'), 'Do not duplicate the footer action in the table of contents.');
+  for (const retired of ['footer-atmosphere', 'footer-stage', 'footer-panel', 'footer-spectrum', 'ui.footerTitle']) {
+    assert.ok(!component.includes(retired) && !styles.includes(retired), `${retired} must not return to the footer.`);
+  }
+  for (const key of ['footerAbout', 'footerDetails', 'footerBuild', 'backTop']) {
+    for (const locale of locales) assert.ok(ui[locale][key]?.trim(), `${locale}: ${key}`);
+  }
+  assert.match(styles, /@media \(prefers-reduced-motion: no-preference\)\s*\{\s*html \{ scroll-behavior: smooth; \}/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\)[\s\S]*scroll-behavior: auto !important/);
+});
+
+test('rendered footer navigation is accessible without client-side enhancement in every locale', () => {
+  for (const locale of locales) {
+    const markup = `<body id="top" tabindex="-1"><footer>
+      <nav>${locales.map(language => `<a href="/awesome-copilot-adventures/${language}/start-here/"
+        data-locale="${language}" lang="${ui[language].languageTag}" hreflang="${ui[language].languageTag}"
+        ${language === locale ? 'aria-current="page"' : ''}>${ui[language].language}</a>`).join('')}</nav>
+      <details class="footer-details"><summary>${ui[locale].footerDetails}</summary><p>Credits</p></details>
+      <a class="footer-back-top" href="#top">${ui[locale].backTop}<svg aria-hidden="true"></svg></a>
+    </footer></body>`;
+    assert.deepEqual(footerNavigationErrors(markup, locale), []);
+    assert.deepEqual(footerNavigationErrors(markup.replaceAll('"', "'"), locale), []);
+    const mutations = [
+      ['missing footer', value => value.replace(/<footer>[\s\S]*<\/footer>/, '')],
+      ['missing target', value => value.replace('id="top"', 'id="other"')],
+      ['unfocusable target', value => value.replace('tabindex="-1"', '')],
+      ['hidden target', value => value.replace('id="top"', 'id="top" hidden')],
+      ['broken fragment', value => value.replace('href="#top"', 'href="#missing"')],
+      ['missing return link', value => value.replace(/<a class="footer-back-top"[\s\S]*?<\/a>/, '')],
+      ['duplicate return links', value => value.replace('</footer>', `<a class="footer-back-top" href="#top">${ui[locale].backTop}</a></footer>`)],
+      ['duplicate return link outside footer', value => value.replace('<footer>', `<aside><a href="#top">${ui[locale].backTop}</a></aside><footer>`)],
+      ['hidden return link', value => value.replace('class="footer-back-top"', 'class="footer-back-top" hidden')],
+      ['unnamed return link', value => value.replace(ui[locale].backTop, '')],
+      ['expanded credits by default', value => value.replace('<details ', '<details open ')],
+      ['unlabeled credits', value => value.replace(ui[locale].footerDetails, '')],
+      ['return link inside credits', value => value.replace('</details>', '').replace('</footer>', '</details></footer>')],
+      ['missing current language', value => value.replace('aria-current="page"', '')],
+      ['wrong language destination', value => value.replace('/en/start-here/', '/es/start-here/')],
+      ['missing language metadata', value => value.replace('hreflang="en"', '')],
+      ['missing language', value => value.replace(/<a\b[^>]*data-locale="en"[^>]*>[\s\S]*?<\/a>/, '')]
+    ];
+    for (const [reason, mutate] of mutations) {
+      assert.ok(footerNavigationErrors(mutate(markup), locale).length > 0, `${locale}: ${reason}`);
+    }
   }
 });
 
@@ -578,6 +672,35 @@ test('every current learning segment has a structurally valid translation in eac
   for (const locale of locales.filter(locale => locale !== 'en')) {
     assert.doesNotThrow(() => validateTranslations(segments, locale, loadTranslations(locale)), locale);
   }
+});
+
+test('mobile controls keep touch targets and readable input text without disabling zoom', () => {
+  const styles = fs.readFileSync(path.join(root, 'assets/site/site.css'), 'utf8');
+  const studio = fs.readFileSync(path.join(root, 'assets/site/studio.css'), 'utf8');
+  const scenes = fs.readFileSync(path.join(root, 'assets/site/scenes.css'), 'utf8');
+  const layout = fs.readFileSync(path.join(root, 'site/layouts/Site.astro'), 'utf8');
+  assert.match(styles, /\.brand\s*\{[^}]*min-height:\s*var\(--he-touch-target\)/);
+  assert.match(scenes, /\.evidence-progress \.quiet-button\s*\{[^}]*min-height:\s*var\(--he-touch-target\)/);
+  assert.match(scenes, /\.document ul\.evidence-list label\s*\{[^}]*min-height:\s*var\(--he-touch-target\)/);
+  for (const [source, selector] of [
+    [styles, 'input[type="search"]'],
+    [studio, '.he-studio-controls select']
+  ]) {
+    const mobile = source.match(/@media \(max-width: 900px\), \(pointer: coarse\)\s*\{([\s\S]*?)\n\}/)?.[1];
+    assert.ok(mobile?.includes(`${selector} { font-size: 16px; }`), `${selector} must remain readable on narrow and touch screens.`);
+  }
+  const viewport = layout.match(/<meta name="viewport" content="([^"]+)"/)?.[1];
+  assert.ok(viewport?.includes('width=device-width'));
+  assert.doesNotMatch(viewport, /user-scalable\s*=\s*no|maximum-scale\s*=/);
+});
+
+test('search results wrap long source paths and dialogs follow the mobile viewport', () => {
+  const styles = fs.readFileSync(path.join(root, 'assets/site/site.css'), 'utf8');
+  const results = styles.match(/#search-results\s*\{([^}]+)\}/)?.[1];
+  assert.match(results, /overflow-wrap:\s*anywhere/);
+  const dialog = styles.match(/(?:^|\n)dialog\s*\{([^}]+)\}/)?.[1];
+  assert.match(dialog, /max-height:\s*min\(720px,\s*85vh\);[\s\S]*max-height:\s*min\(720px,\s*85dvh\)/);
+  assert.match(dialog, /overscroll-behavior:\s*contain/);
 });
 
 test('dialog Escape dismisses the dialog without propagating to surrounding navigation', async () => {

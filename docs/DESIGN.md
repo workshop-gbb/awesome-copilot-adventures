@@ -1,7 +1,7 @@
 ---
 title: Site design system
 permalink: /design-system/
-last_verified: "2026-09-07"
+last_verified: "2026-09-15"
 ---
 
 # Site design system
@@ -42,6 +42,17 @@ semantics. Every Mermaid diagram retains the repository's white/ice/gray/black
 palette and accessible legend. The hero, the film gallery and the footer stay dark
 in both themes; they share one inverted token scope rather than three hand-written
 palettes, so their ink, rules and surfaces come from the same tokens as the rest.
+
+The hero watermark uses the original [Paula Silva logo](../assets/images/general/paulasilva-logo.png)
+at 8% opacity. Its colors and aspect ratio stay intact: no text approximation,
+rotation or color filter. It is a decorative CSS background, not an interactive
+element or accessible text.
+
+Mobile browsers retain page zoom and use 44 px navigation targets. Search fields
+and studio selectors use 16 px text on narrow screens and touch devices. Long
+source paths wrap inside search results, and dialogs follow the dynamic viewport
+with contained scrolling; wide tables and code scroll within their own regions
+instead of widening the page.
 
 ## Typography and layout
 
@@ -136,20 +147,32 @@ The language selector remains visible in the masthead at every viewport size, an
 the footer names the three languages in full. Switching language preserves the
 document, heading fragment and active library filters.
 
-The hero contains a keyboard-operable, five-stage workflow accordion. The home page
+The hero prioritizes the title and learning actions without a side panel. The home page
 shows the real adventure path: six levels built from the published catalog, each
 naming its lessons. The adventure catalog repeats that order as bands of covers, and
 the hands-on index groups its labs the way the lab catalog already groups them, with
 each card naming its stack. Every lesson opens with a briefing built from its own
 frontmatter: the capability it teaches, its level, its estimate and its status. The
-library combines topic filtering, localized search and optional reading marks. Reading marks are self-reported browser-local state, never
-proof that a lab or test passed; learners can clear only this site's marks with an
-explicit confirmation.
+library combines topic filtering, localized search and optional reading marks.
+
+The lesson ending separates marking this page from managing all reading marks.
+Marking is optional, never blocks the next lesson, and never proves that a lab or
+test passed. Management is a secondary disclosure with a cancel-first confirmation;
+reset removes only this site's reading marks, not evidence checklists or lab files.
+Storage failures show an unavailable state instead of a zero or a success message,
+with reload and reset available for recovery. Source and contribution links remain
+in a separate native disclosure that works without JavaScript.
+
+The homepage offers two illustrated entry points, adventures and professional
+hands-on labs, before the detailed progression. The full overview remains in a
+native disclosure rather than repeating the entire introduction. The footer uses a
+compact maintainer illustration and separates learning links, language choices,
+credits and font licenses; decorative diagrams do not compete with the lesson.
 
 Entrance animations, one-time section reveals, bounded count transitions, card
 feedback and a scroll progress indicator add motion without a canvas or animation
 framework. Reduced-motion preferences disable the effects. Essential content stays
-readable without JavaScript; native workflow disclosures still work.
+readable without JavaScript; native content disclosures still work.
 
 Selected lessons open with a mechanism scene: an original inline SVG that draws the
 model it teaches in reading order, followed by three short captions. The scene is
@@ -165,6 +188,14 @@ ticked during the lab; ticks live in that browser only and never stand in for a
 command that ran. A lesson closes with a card for the next lesson in the path rather
 than a bare link, and page to page navigation cross-fades where the browser supports
 it. All of this stops when the reader asks for reduced motion.
+
+Mechanism diagrams initially fit their container, including on narrow screens.
+Node labels wrap inside padded bounds, and captions stack according to the figure's
+width rather than the viewport. An explicit enlarge control reveals the diagram
+at reading size, with a named, keyboard-focusable horizontal scroll region and
+localized guidance; fitting it back resets horizontal scrolling. These manual
+controls still work with reduced motion. Without JavaScript, the complete overview
+and captions remain visible.
 
 ## Integrated practice studio
 
@@ -194,6 +225,12 @@ are decorative beside their lesson titles. Article images keep their descriptive
 alternative text, can be enlarged in a keyboard-operable dialog, and retain an
 original-image link. Closing the dialog restores focus. No image is inverted,
 stretched or recolored to simulate dark mode.
+
+Selected lessons also carry a contextual visual reference from the supplied
+collection. Each reference retains its aspect ratio and has a localized description
+of what to notice. Interface captures are snapshots, not guarantees of current
+feature or model availability. Benchmark screenshots and stock photography with
+unverified reuse rights are not promoted into lesson evidence or decorative covers.
 
 The narrow layout exposes learning navigation as a native disclosure instead of
 removing it. Primary controls use the design system's minimum touch target.

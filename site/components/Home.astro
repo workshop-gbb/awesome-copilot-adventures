@@ -2,6 +2,7 @@
 import { languageFor, counts, type Locale } from '../lib/catalog';
 import Discovery from './Discovery.astro';
 import LearningPath from './LearningPath.astro';
+import LearningFormats from './LearningFormats.astro';
 import { renderScene } from '../lib/scenes';
 import StudioPreview from './StudioPreview.astro';
 import AdventureFilms from './AdventureFilms.astro';
@@ -9,14 +10,7 @@ import Icon from './Icon.astro';
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const { ui, href } = languageFor(locale);
-const workflowScene = renderScene('evidence-workflow', locale, { kicker: ui.sceneKicker, replay: ui.sceneReplay }, 'home-workflow');
-const stages = [
-  { id: 'ask', name: 'Ask', goal: ui.askGoal, artifact: ui.askArtifact },
-  { id: 'plan', name: 'Plan', goal: ui.planGoal, artifact: ui.planArtifact },
-  { id: 'agent', name: 'Agent', goal: ui.agentGoal, artifact: ui.agentArtifact },
-  { id: 'review', name: ui.reviewStage, goal: ui.reviewGoal, artifact: ui.reviewArtifact },
-  { id: 'evidence', name: ui.evidenceStage, goal: ui.evidenceGoal, artifact: ui.evidenceArtifact }
-] as const;
+const workflowScene = renderScene('evidence-workflow', locale, { kicker: ui.sceneKicker, replay: ui.sceneReplay, scroll: ui.sceneScroll, zoom: ui.sceneZoom, fit: ui.sceneFit }, 'home-workflow');
 const pathway = [
   { tone: 'blue', icon: 'compass', label: ui.prerequisites, url: href.prerequisites },
   { tone: 'green', icon: 'spark', label: ui.start, url: href.start },
@@ -43,19 +37,6 @@ const stats = [
       </div>
       <p class="workflow-line">{ui.heroNote}</p>
     </div>
-    <aside class="hero-panel">
-      <div class="panel-top"><span class="mono">ACA / 01</span><span class="panel-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
-      <h2>{ui.workflowExplore}</h2>
-      <div class="workflow-steps">
-        {stages.map((stage, index) => (
-          <details name="workflow" data-workflow-step={stage.id} open={index === 0}>
-            <summary><span class="stage-index">0{index + 1}</span><span>{stage.name}</span><span class="stage-toggle" aria-hidden="true">+</span></summary>
-            <div class="stage-content"><p>{stage.goal}</p><small>{ui.deliverable}</small><p class="stage-artifact">{stage.artifact}</p></div>
-          </details>
-        ))}
-      </div>
-      <p class="workflow-disclaimer">{ui.workflowNote}</p>
-    </aside>
   </div>
   <div class="container hero-stats">
     {stats.map(stat => (
@@ -80,6 +61,7 @@ const stats = [
     ))}
   </nav>
 </section>
+<LearningFormats locale={locale} />
 <section class="section container workflow-section" aria-label={ui.workflowExplore}>
   <Fragment set:html={workflowScene} />
 </section>

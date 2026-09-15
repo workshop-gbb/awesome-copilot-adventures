@@ -18,7 +18,7 @@ interface SceneSpec {
   labels: Record<string, L3>;
   captions: readonly (readonly [L3, L3, SceneColor])[];
 }
-export interface SceneLabels { kicker: string; replay: string; }
+export interface SceneLabels { kicker: string; replay: string; scroll: string; zoom: string; fit: string; }
 
 const LOCALE_INDEX: Record<SceneLocale, 0 | 1 | 2> = { en: 0, 'pt-br': 1, es: 2 };
 const COLORS: Record<SceneColor, string> = {
@@ -344,15 +344,19 @@ function esc(value: string): string {
 const text = (x: number, y: number, label: string, cls = 'sc-label', anchor = 'start') =>
   `<text x="${x}" y="${y}" class="${cls}" text-anchor="${anchor}">${esc(label)}</text>`;
 const reveal = (body: string, at: number) => `<g class="sc-reveal" style="--at:${at}s">${body}</g>`;
+function labelBox(x: number, y: number, w: number, h: number, label: string, centered = false): string {
+  return `<foreignObject class="sc-copy-frame" x="${x}" y="${y}" width="${w}" height="${h}">`
+    + `<div xmlns="http://www.w3.org/1999/xhtml" class="sc-copy sc-copy--label${centered ? ' sc-copy--center' : ''}">${esc(label)}</div></foreignObject>`;
+}
 function node(x: number, y: number, w: number, h: number, label: string, sub: string, color: SceneColor, icon: IconName, at: number): string {
   const cc = COLORS[color];
-  // Text is centred on the node so the same helper works for a 62px chip and a 96px card.
-  const middle = y + h / 2;
-  const titleY = sub ? middle - 3 : middle + 8;
+  // HTML inside the SVG wraps translated labels within the node instead of crossing its wires.
   return reveal(
     `<rect class="sc-node" x="${x}" y="${y}" width="${w}" height="${h}" rx="12" style="--cc:${cc}"/>`
-    + iconSvg(icon, x + 18, titleY - 21, 28, cc) + text(x + 58, titleY, label, 'sc-title')
-    + (sub ? text(x + 18, middle + 21, sub, 'sc-sub') : ''), at);
+    + `<foreignObject class="sc-copy-frame" x="${x + 18}" y="${y + 8}" width="${w - 36}" height="${h - 16}">`
+    + `<div xmlns="http://www.w3.org/1999/xhtml" class="sc-copy"><div class="sc-copy__heading">`
+    + iconSvg(icon, 0, 0, 26, cc) + `<span class="sc-copy__title">${esc(label)}</span></div>`
+    + (sub ? `<div class="sc-copy__sub">${esc(sub)}</div>` : '') + `</div></foreignObject>`, at);
 }
 function wire(path: string, color: SceneColor, at: number, uid: string, packet = false): string {
   const cc = COLORS[color];
@@ -412,7 +416,7 @@ const DRAW: Record<SceneKind, (labels: Labels, uid: string) => string> = {
       const blocks: [number, number, string][] = [[156, 230, 'instructions'], [400, 152, 'tools'], [566, 240, 'stable'], [838, 264, row === 0 ? 'changeA' : 'changeB']];
       blocks.forEach(([x, w, key], i) => {
         const color: SceneColor = i === 3 ? 'yellow' : 'blue';
-        parts.push(reveal(`<rect class="sc-zone" x="${x}" y="${y}" width="${w}" height="64" rx="8" style="--cc:${COLORS[color]}"/>` + text(x + w / 2, y + 38, l[key], 'sc-label', 'middle'), 0.25 + row * 1.15 + i * 0.18));
+        parts.push(reveal(`<rect class="sc-zone" x="${x}" y="${y}" width="${w}" height="64" rx="8" style="--cc:${COLORS[color]}"/>` + labelBox(x + 12, y + 8, w - 24, 48, l[key], true), 0.25 + row * 1.15 + i * 0.18));
       });
     });
     parts.push(wire('M156 298 V314 H804 V298', 'green', 2.64, uid));
@@ -440,19 +444,19 @@ const DRAW: Record<SceneKind, (labels: Labels, uid: string) => string> = {
     ];
     surfaces.forEach(([key, sub, color, icon], i) => {
       const x = 20 + i * 276;
-      parts.push(node(x, 40, 252, 86, l[key], l[sub], color, icon, 0.12 + i * 0.16));
-      parts.push(wire(`M${x + 126} 126 V152`, 'blue', 0.7 + i * 0.1, uid));
+      parts.push(node(x, 40, 252, 100, l[key], l[sub], color, icon, 0.12 + i * 0.16));
+      parts.push(wire(`M${x + 126} 140 V162`, 'blue', 0.7 + i * 0.1, uid));
     });
-    parts.push(reveal(`<rect class="sc-zone" x="20" y="152" width="1080" height="116" rx="14" style="--cc:${COLORS.yellow}"/>`
-      + text(44, 180, l.harness, 'sc-kicker'), 1.2));
+    parts.push(reveal(`<rect class="sc-zone" x="20" y="162" width="1080" height="128" rx="14" style="--cc:${COLORS.yellow}"/>`
+      + text(44, 190, l.harness, 'sc-kicker'), 1.2));
     const chips = ['chip1', 'chip2', 'chip3', 'chip4'];
     chips.forEach((key, i) => {
       const x = 44 + i * 258;
-      parts.push(reveal(`<rect class="sc-node" x="${x}" y="196" width="234" height="52" rx="9" style="--cc:${COLORS.yellow}"/>`
-        + text(x + 117, 227, l[key], 'sc-label', 'middle'), 1.5 + i * 0.16));
+      parts.push(reveal(`<rect class="sc-node" x="${x}" y="206" width="234" height="62" rx="9" style="--cc:${COLORS.yellow}"/>`
+        + labelBox(x + 12, 214, 210, 46, l[key], true), 1.5 + i * 0.16));
     });
-    parts.push(wire('M560 268 V296', 'green', 2.3, uid, true));
-    parts.push(node(410, 296, 300, 62, l.model, l.modelSub, 'green', 'spark', 2.55));
+    parts.push(wire('M560 290 V318', 'green', 2.3, uid, true));
+    parts.push(node(410, 318, 300, 104, l.model, l.modelSub, 'green', 'spark', 2.55));
     return parts.join('');
   },
   'instruction-precedence': (l, uid) => {
@@ -462,9 +466,9 @@ const DRAW: Record<SceneKind, (labels: Labels, uid: string) => string> = {
       ['prompt', 'promptSub', 'yellow', 'send'], ['request', 'requestSub', 'green', 'chat']
     ];
     sources.forEach(([key, sub, color, icon], i) => {
-      const y = 44 + i * 76;
-      parts.push(node(20, y, 400, 64, l[key], l[sub], color, icon, 0.14 + i * 0.34));
-      parts.push(wire(`M420 ${y + 32} C520 ${y + 32} 540 187 620 187`, color, 0.5 + i * 0.34, uid, true));
+      const y = 44 + i * 80;
+      parts.push(node(20, y, 400, 72, l[key], l[sub], color, icon, 0.14 + i * 0.34));
+      parts.push(wire(`M420 ${y + 36} C520 ${y + 36} 540 187 620 187`, color, 0.5 + i * 0.34, uid, true));
     });
     parts.push(reveal(`<circle cx="640" cy="187" r="9" fill="${COLORS.green}"/>`, 1.9));
     parts.push(wire('M652 187 H690', 'green', 2.0, uid));
@@ -480,15 +484,15 @@ const DRAW: Record<SceneKind, (labels: Labels, uid: string) => string> = {
       const color: SceneColor = match ? 'green' : 'blue';
       parts.push(reveal(`<rect class="sc-node" x="20" y="${y}" width="300" height="58" rx="10" style="--cc:${match ? COLORS.green : 'var(--rule-2)'}"/>`
         + iconSvg('puzzle', 38, y + 17, 24, match ? COLORS.green : 'var(--ink-3)')
-        + text(74, y + 36, l[key], 'sc-label'), 0.12 + i * 0.2));
+        + labelBox(74, y + 6, 228, 46, l[key]), 0.12 + i * 0.2));
       if (match) parts.push(wire(`M320 ${y + 29} C480 ${y + 29} 560 176 700 176`, color, 1.5, uid, true));
     });
     parts.push(reveal(text(20, 356, l.resting, 'sc-sub'), 2.6));
-    parts.push(node(370, 236, 300, 84, l.task, l.taskSub, 'blue', 'target', 0.95));
-    parts.push(wire('M520 236 V206 H700', 'blue', 1.2, uid, true));
+    parts.push(node(370, 224, 300, 108, l.task, l.taskSub, 'blue', 'target', 0.95));
+    parts.push(wire('M520 224 V206 H700', 'blue', 1.2, uid, true));
     parts.push(reveal(`<rect class="sc-frame" x="700" y="44" width="400" height="264" rx="16"/>`
       + text(724, 74, l.window, 'sc-kicker'), 1.35));
-    parts.push(node(724, 132, 352, 96, l.loaded, l.loadedSub, 'green', 'check-circle', 1.95));
+    parts.push(node(724, 120, 352, 120, l.loaded, l.loadedSub, 'green', 'check-circle', 1.95));
     return parts.join('');
   },
   'agent-handoff': (l, uid) => {
@@ -504,7 +508,7 @@ const DRAW: Record<SceneKind, (labels: Labels, uid: string) => string> = {
         const artifact = i === 0 ? 'artifactOne' : 'artifactTwo';
         parts.push(reveal(`<rect class="sc-zone" x="${x + 96}" y="196" width="316" height="60" rx="10" style="--cc:${COLORS[color]}"/>`
           + iconSvg('file', x + 116, 214, 24, COLORS[color])
-          + text(x + 152, 232, l[artifact], 'sc-label'), 0.95 + i * 0.62));
+          + labelBox(x + 152, 202, 244, 48, l[artifact]), 0.95 + i * 0.62));
         parts.push(wire(`M${x + 160} 152 V196`, color, 0.85 + i * 0.62, uid));
         parts.push(wire(`M${x + 350} 256 V292 H${x + 540} V152`, color, 1.15 + i * 0.62, uid, true));
       }
@@ -516,15 +520,15 @@ const DRAW: Record<SceneKind, (labels: Labels, uid: string) => string> = {
     const parts = [text(20, 26, l.scope, 'sc-kicker')];
     parts.push(node(20, 128, 300, 96, l.harness, l.harnessSub, 'blue', 'agent', 0.14));
     parts.push(wire('M320 156 H560', 'blue', 0.7, uid, true));
-    parts.push(reveal(text(440, 146, l.discover, 'sc-label', 'middle'), 0.9));
+    parts.push(reveal(labelBox(328, 104, 224, 44, l.discover, true), 0.9));
     parts.push(wire('M560 200 H320', 'green', 1.35, uid, true));
-    parts.push(reveal(text(440, 226, l.call, 'sc-label', 'middle'), 1.5));
+    parts.push(reveal(labelBox(328, 208, 224, 44, l.call, true), 1.5));
     // The frame is the server's own boundary; the system it reaches sits outside that boundary.
     parts.push(reveal(`<rect class="sc-frame" x="560" y="44" width="336" height="272" rx="16"/>`, 0.5));
     parts.push(node(584, 68, 288, 92, l.server, l.serverSub, 'red', 'plug', 1.0));
     parts.push(node(584, 196, 288, 92, l.tools, l.toolsSub, 'yellow', 'toolkit', 1.6));
     parts.push(wire('M872 114 H884 V174 H912', 'red', 2.0, uid));
-    parts.push(node(912, 128, 196, 92, l.system, l.systemSub, 'red', 'server', 2.25));
+    parts.push(node(912, 116, 196, 120, l.system, l.systemSub, 'red', 'server', 2.25));
     return parts.join('');
   },
   'evidence-workflow': (l, uid) => {
@@ -552,15 +556,18 @@ export function renderScene(kind: SceneKind, locale: SceneLocale, ui: SceneLabel
   if (!spec) throw new Error(`Unknown mechanism scene: ${kind}`);
   const index = LOCALE_INDEX[locale];
   const uid = id || `scene-${kind}-${++counter}`;
+  const height = kind === 'harness-surfaces' ? 440 : 366;
   const labels: Labels = Object.fromEntries(Object.entries(spec.labels).map(([key, values]) => [key, values[index]]));
   const markers = (Object.keys(COLORS) as SceneColor[]).map(color =>
     `<marker id="${uid}-${color}" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 2 L10 6 L2 10" fill="none" stroke="${COLORS[color]}" stroke-width="1.8"/></marker>`).join('');
   const captions = spec.captions.map(([title, body, color], i) =>
     `<div class="he-scene__caption" style="--cc:${COLORS[color]};--i:${i}"><b>${esc(title[index])}</b><p>${esc(body[index])}</p></div>`).join('');
-  return `<figure class="he-scene" data-scene data-scene-kind="${kind}">`
+  return `<figure class="he-scene" data-scene data-scene-kind="${kind}" data-zoomed="false" aria-labelledby="${uid}-title">`
     + `<div class="he-scene__head"><div><p class="eyebrow">${esc(ui.kicker)}</p><p class="he-scene__title" id="${uid}-title">${esc(spec.title[index])}</p></div>`
-    + `<button type="button" class="quiet-button he-scene__replay" data-scene-replay data-site-control hidden>${esc(ui.replay)}</button></div>`
-    + `<div class="he-scene__stage"><svg class="scn" viewBox="0 0 1120 366" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="${uid}-title ${uid}-desc">`
+    + `<div class="he-scene__tools"><button type="button" class="quiet-button he-scene__zoom" data-scene-zoom data-zoom-label="${esc(ui.zoom)}" data-fit-label="${esc(ui.fit)}" aria-controls="${uid}-stage" aria-pressed="false" data-site-control hidden>${esc(ui.zoom)}</button>`
+    + `<button type="button" class="quiet-button he-scene__replay" data-scene-replay data-site-control hidden>${esc(ui.replay)}</button></div></div>`
+    + `<p class="he-scene__scroll" id="${uid}-scroll">${esc(ui.scroll)}</p>`
+    + `<div class="he-scene__stage" id="${uid}-stage" tabindex="0" role="region" aria-labelledby="${uid}-title" aria-describedby="${uid}-scroll"><svg class="scn" viewBox="0 0 1120 ${height}" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="${uid}-title ${uid}-desc">`
     + `<desc id="${uid}-desc">${esc(spec.description[index])}</desc><defs>${markers}</defs>${DRAW[kind](labels, uid)}</svg></div>`
     + `<figcaption class="he-scene__captions">${captions}</figcaption></figure>`;
 }

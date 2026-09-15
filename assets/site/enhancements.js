@@ -1,74 +1,14 @@
-import { readingState, toggleReading, filterLibrary } from './learning.mjs';
+import { filterLibrary } from './learning.mjs';
+import { enhanceReading } from './reading.js';
 
 export function enhanceSite(config, locationChanged) {
-  const { ui, sources, base, locale } = config;
+  const { ui, base, locale } = config;
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const format = new Intl.NumberFormat(locale);
-  const storageKey = `${base}:reading:v1`;
-  let state = { version: 1, read: [] };
-  let storageAvailable = true;
   const catalogControllers = [];
-  const trackers = [...document.querySelectorAll('[data-reading-tracker]')];
-
-  const status = message => {
-    for (const node of document.querySelectorAll('[data-reading-status]')) node.textContent = message;
-  };
-  const storageError = error => {
-    storageAvailable = false;
-    status(ui.readingStorageError);
-    for (const button of document.querySelectorAll('[data-mark-reading]')) button.disabled = true;
-    console.error('Reading progress storage failed.', error);
-  };
-  if (trackers.length) {
-    try {
-      state = readingState(localStorage.getItem(storageKey), sources);
-    } catch (error) {
-      storageError(error);
-    }
-  }
-  const renderReading = () => {
-    for (const node of document.querySelectorAll('[data-reading-count]')) node.textContent = format.format(state.read.length);
-    for (const button of document.querySelectorAll('[data-mark-reading]')) {
-      const read = state.read.includes(button.dataset.markReading);
-      button.setAttribute('aria-pressed', String(read));
-      button.textContent = read ? ui.markedRead : ui.markRead;
-    }
-    for (const badge of document.querySelectorAll('[data-read-badge]')) {
-      badge.hidden = !state.read.includes(badge.closest('[data-source]').dataset.source);
-      badge.setAttribute('aria-label', ui.markedRead);
-    }
+  const reading = enhanceReading(config, () => {
     for (const render of catalogControllers) render();
-  };
-  for (const tracker of trackers) tracker.hidden = false;
-  for (const button of document.querySelectorAll('[data-mark-reading]')) {
-    button.addEventListener('click', () => {
-      if (!storageAvailable) { status(ui.readingStorageError); return; }
-      try {
-        const next = toggleReading(state, button.dataset.markReading, sources);
-        localStorage.setItem(storageKey, JSON.stringify(next));
-        state = next;
-        renderReading();
-        status(state.read.includes(button.dataset.markReading) ? ui.readingSaved : ui.readingRemoved);
-      } catch (error) {
-        storageError(error);
-      }
-    });
-  }
-  for (const button of document.querySelectorAll('[data-reset-reading]')) {
-    button.addEventListener('click', () => {
-      if (!confirm(ui.clearReadingConfirm)) return;
-      try {
-        localStorage.removeItem(storageKey);
-        state = { version: 1, read: [] };
-        storageAvailable = true;
-        for (const mark of document.querySelectorAll('[data-mark-reading]')) mark.disabled = false;
-        renderReading();
-        status(ui.readingCleared);
-      } catch (error) {
-        storageError(error);
-      }
-    });
-  }
+  });
   for (const root of document.querySelectorAll('[data-discovery]')) {
     const input = root.querySelector('[data-library-query]');
     const filters = [...root.querySelectorAll('[data-library-filter]')];
@@ -80,7 +20,7 @@ export function enhanceSite(config, locationChanged) {
     input.value = parameters.get('q') || '';
     let timer;
     const render = (updateAddress = false) => {
-      const matches = filterLibrary(documents, { query: input.value, group, read: state.read });
+      const matches = filterLibrary(documents, { query: input.value, group, read: reading.read });
       const visible = new Set((compact ? matches.slice(0, 6) : matches).map(document => document.source));
       for (const card of cards) card.hidden = !visible.has(card.dataset.source);
       for (const band of root.querySelectorAll('[data-band]')) {
@@ -112,25 +52,6 @@ export function enhanceSite(config, locationChanged) {
     catalogControllers.push(() => render());
     render();
   }
-  renderReading();
-  const syncReading = () => {
-    if (!trackers.length) return;
-    try {
-      state = readingState(localStorage.getItem(storageKey), sources);
-      storageAvailable = true;
-      for (const button of document.querySelectorAll('[data-mark-reading]')) button.disabled = false;
-      status('');
-      renderReading();
-    } catch (error) {
-      if (!(error instanceof DOMException || error instanceof SyntaxError || error instanceof TypeError)) throw error;
-      storageError(error);
-    }
-  };
-  addEventListener('storage', event => {
-    if (event.key === storageKey || event.key === null) syncReading();
-  });
-  addEventListener('pageshow', event => { if (event.persisted) syncReading(); });
-
   const progress = document.getElementById('reading-progress');
   let scrollFrame;
   const updateScroll = () => {
@@ -210,12 +131,6 @@ export function enhanceSite(config, locationChanged) {
         revealObserver.disconnect();
         counterObserver.disconnect();
       }
-    });
-  }
-  for (const details of document.querySelectorAll('[data-workflow-step]')) {
-    details.addEventListener('toggle', () => {
-      if (!details.open) return;
-      for (const other of document.querySelectorAll('[data-workflow-step]')) if (other !== details) other.open = false;
     });
   }
 }
