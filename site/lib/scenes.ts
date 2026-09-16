@@ -510,7 +510,7 @@ const DRAW: Record<SceneKind, (labels: Labels, uid: string) => string> = {
           + iconSvg('file', x + 116, 214, 24, COLORS[color])
           + labelBox(x + 152, 202, 244, 48, l[artifact]), 0.95 + i * 0.62));
         parts.push(wire(`M${x + 160} 152 V196`, color, 0.85 + i * 0.62, uid));
-        parts.push(wire(`M${x + 350} 256 V292 H${x + 540} V152`, color, 1.15 + i * 0.62, uid, true));
+        parts.push(wire(`M${x + 350} 256 V292 H${x + 444} V152`, color, 1.15 + i * 0.62, uid, true));
       }
     });
     parts.push(reveal(text(560, 344, l.note, 'sc-kicker', 'middle'), 2.5));

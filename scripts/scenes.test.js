@@ -99,6 +99,27 @@ test('scenes: long skill, artifact and connection labels use bounded wrapping in
   assert.match(rendered, /data-fit-label="&quot;Fit&quot;"/);
 });
 
+test('scenes: handoff return connectors do not cross other artifact cards', () => {
+  const rendered = renderScene('agent-handoff', 'en', labels('en'));
+  const artifacts = [...rendered.matchAll(/<rect\b([^>]*)>/g)]
+    .map(([, attributes]) => htmlAttributes(attributes))
+    .filter(attributes => attributes.get('class') === 'sc-zone');
+  const returns = [...rendered.matchAll(/<path\b([^>]*)>/g)]
+    .map(([, attributes]) => htmlAttributes(attributes).get('d')?.match(/^M\d+ \d+ V(\d+) H(\d+) V(\d+)$/))
+    .filter(Boolean);
+  assert.equal(artifacts.length, 2);
+  assert.equal(returns.length, 2);
+  for (const [, bottom, returnX, top] of returns) {
+    for (const artifact of artifacts) {
+      const [x, y, width, height] = ['x', 'y', 'width', 'height'].map(name => Number(artifact.get(name)));
+      if (Number(top) < y + height && Number(bottom) > y) {
+        assert.ok(Number(returnX) <= x - 8 || Number(returnX) >= x + width + 8,
+          `Handoff at x=${returnX} crosses the artifact card at x=${x}.`);
+      }
+    }
+  }
+});
+
 test('scenes: the overview fits by default and only explicit enlargement enables local scrolling', () => {
   const css = fs.readFileSync(path.join(root, 'assets/site/scenes.css'), 'utf8');
   assert.match(css, /\.he-scene \.scn\s*\{[^}]*width:\s*100%;[^}]*min-width:\s*0;/);
