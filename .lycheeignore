@@ -1,0 +1,10 @@
+# Regular expressions read automatically by lychee from the repository root.
+# Each entry is a URL that answers 403 to automated checkers while still working
+# in a browser. Verify a candidate manually before adding it, and remove the
+# entry once the host accepts automated requests again.
+
+# GitHub returns 403 Forbidden for non-interactive clients on the signup page.
+^https://github\.com/signup$
+
+# The reference site sits behind a CDN that rejects link-checker requests.
+^https://agenticdevopsplatform\.ai/?$

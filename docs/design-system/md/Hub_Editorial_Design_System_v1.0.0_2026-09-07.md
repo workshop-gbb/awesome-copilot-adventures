@@ -33,7 +33,7 @@ Uma base reutilizável de cores, tipografia, componentes e composição, extraí
 
 ## 1. Qual é o design system do site?
 
-O site utiliza um **sistema visual próprio, editorial e tecnológico**, implementado principalmente em [CSS global][source-css] e no [layout Astro][source-layout]. O projeto tem Astro e React, mas não depende de Fluent UI, Material UI, Bootstrap ou shadcn/ui para esse visual, conforme o [manifesto de dependências][source-package].
+O [site de referência][source-site] utiliza um **sistema visual próprio, editorial e tecnológico**, implementado principalmente no CSS global (`src/styles/global.css`) e no layout Astro (`src/layouts/Base.astro`). O projeto tem Astro e React, mas não depende de Fluent UI, Material UI, Bootstrap ou shadcn/ui para esse visual, conforme o manifesto de dependências (`package.json`).
 
 **Hub Editorial** é o nome proposto para esta extração; não é o nome de uma biblioteca já publicada. A paleta pessoal usa quatro famílias de cor, mas seus valores não devem ser apresentados como a paleta oficial da Microsoft ou do Fluent UI.
 
@@ -68,7 +68,7 @@ Evite gradientes decorativos extensos, sombras em todos os cards, botões sempre
 
 ### 3.1 Paleta original
 
-Os valores desta tabela foram extraídos de [global.css][source-css]. Os nomes recebem o prefixo `--he-` no kit para reduzir colisões.
+Os valores desta tabela foram extraídos de `src/styles/global.css` no repositório de origem. Os nomes recebem o prefixo `--he-` no kit para reduzir colisões.
 
 | Família | 50 | 100 | 500 | 700 |
 |---|---|---|---|---|
@@ -343,16 +343,16 @@ Fora do escopo: biblioteca de componentes React publicada, arquivo Figma, backen
 ## Referências
 
 1. [Site de referência: Agentic DevOps Hub][source-site].
-2. [CSS global: tokens, componentes e breakpoints][source-css].
-3. [Layout Astro: fontes, cabeçalho e fechamento][source-layout].
-4. [Página inicial: composição e conteúdo][source-home].
-5. [Manifesto de dependências do projeto][source-package].
+2. CSS global do repositório de origem, `src/styles/global.css`: tokens, componentes e breakpoints.
+3. Layout Astro do repositório de origem, `src/layouts/Base.astro`: fontes, cabeçalho e fechamento.
+4. Página inicial do repositório de origem, `src/pages/index.astro`: composição e conteúdo.
+5. Manifesto de dependências do repositório de origem, `package.json`.
 6. [WCAG: Understanding Contrast (Minimum)][wcag-contrast].
 7. [WCAG: Understanding Target Size (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html).
 8. [Inter: licença OFL](https://github.com/google/fonts/blob/main/ofl/inter/OFL.txt).
 9. [JetBrains Mono: licença OFL](https://github.com/google/fonts/blob/main/ofl/jetbrainsmono/OFL.txt).
 
-As referências ao código apontam para o repositório original e podem evoluir. Os valores documentados representam a inspeção local e visual feita em 7 de setembro de 2026.
+As referências de código citam arquivos do repositório de origem do site, que não é público; por isso aparecem como caminhos e não como links. Os valores documentados representam a inspeção local e visual feita em 7 de setembro de 2026.
 
 [showcase]: ../hub-editorial/foundation.html
 [starter]: ../hub-editorial/starter.html
@@ -364,8 +364,4 @@ As referências ao código apontam para o repositório original e podem evoluir.
 [font-license]: ../hub-editorial/fonts/OFL.txt
 [font-sources]: ../hub-editorial/fonts/SOURCES.txt
 [source-site]: https://agenticdevopsplatform.ai
-[source-css]: https://github.com/paulanunes85/paula-site/blob/main/src/styles/global.css
-[source-layout]: https://github.com/paulanunes85/paula-site/blob/main/src/layouts/Base.astro
-[source-home]: https://github.com/paulanunes85/paula-site/blob/main/src/pages/index.astro
-[source-package]: https://github.com/paulanunes85/paula-site/blob/main/package.json
 [wcag-contrast]: https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html

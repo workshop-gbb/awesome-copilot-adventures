@@ -765,8 +765,8 @@ Why: The command bypasses toolkit registration, blocks with `JoinableTaskFactory
 - [VSIX Community Samples](https://github.com/VsixCommunity/Samples)
 - XAML presentation namespace: http://schemas.microsoft.com/winfx/2006/xaml/presentation
 - XAML namespace: http://schemas.microsoft.com/winfx/2006/xaml
-- README repository placeholder: https://github.com/user/repo
-- README build badge placeholder: https://github.com/user/repo/actions/workflows/build.yaml/badge.svg
+- README repository placeholder: `https://github.com/user/repo`
+- README build badge placeholder: `https://github.com/user/repo/actions/workflows/build.yaml/badge.svg`
 - Marketplace version badge placeholder: https://img.shields.io/visual-studio-marketplace/v/Publisher.ExtensionName
 - Marketplace downloads badge placeholder: https://img.shields.io/visual-studio-marketplace/d/Publisher.ExtensionName
-- Manifest `MoreInfo` placeholder token: https://github.com/user/repo</MoreInfo
+- Manifest `MoreInfo` placeholder token: `<MoreInfo>https://github.com/user/repo</MoreInfo>`
