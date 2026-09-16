@@ -122,6 +122,8 @@ function sceneHarness(reducedMotion) {
     setAttribute(name, value) { this.attributes.set(name, value); }
   };
   const observed = [];
+  let notifyVisibility;
+  let threshold;
   const media = { matches: reducedMotion, addEventListener() {} };
   const globals = {
     document: {
@@ -135,14 +137,27 @@ function sceneHarness(reducedMotion) {
     matchMedia: () => media,
     window: { IntersectionObserver: true },
     IntersectionObserver: class {
+      constructor(callback, options) {
+        notifyVisibility = callback;
+        threshold = options.threshold;
+      }
       observe(target) { observed.push(target); }
       disconnect() {}
     },
     addEventListener() {}
   };
   loadModule('assets/site/scenes.js', globals).enhanceScenes();
-  return { scene, stage, button, observed, click: () => listeners.get('click')() };
+  return { scene, stage, button, observed, threshold, notifyVisibility, click: () => listeners.get('click')() };
 }
+
+test('scenes: tall enlarged diagrams activate even when less than a third is visible', () => {
+  const { scene, threshold, notifyVisibility } = sceneHarness(false);
+  assert.equal(threshold, 0);
+  notifyVisibility([{ target: scene, isIntersecting: true, intersectionRatio: 0.02 }]);
+  assert.equal(scene.dataset.active, 'true');
+  notifyVisibility([{ target: scene, isIntersecting: false, intersectionRatio: 0 }]);
+  assert.equal(scene.dataset.active, 'false');
+});
 
 for (const reducedMotion of [false, true]) {
   test(`scenes: enlargement and fit remain operable with reduced motion ${reducedMotion}`, () => {

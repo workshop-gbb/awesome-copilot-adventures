@@ -17,9 +17,10 @@ export function enhanceScenes() {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const armAll = () => { for (const scene of scenes) scene.dataset.active = 'true'; };
   if (reducedMotion.matches || !('IntersectionObserver' in window)) { armAll(); return; }
+  // An enlarged figure can be taller than the viewport, so do not require a visible fraction.
   const observer = new IntersectionObserver(entries => {
     for (const entry of entries) entry.target.dataset.active = entry.isIntersecting ? 'true' : 'false';
-  }, { threshold: 0.3 });
+  }, { threshold: 0 });
   for (const scene of scenes) observer.observe(scene);
   for (const button of document.querySelectorAll('[data-scene-replay]')) {
     button.addEventListener('click', () => {
